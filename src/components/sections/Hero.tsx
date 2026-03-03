@@ -34,7 +34,7 @@ export function Hero() {
               className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold leading-[1.05] text-gray-900"
             >
               Automatiza <br className="hidden md:block" />
-              <span className="font-serif italic">el trabajo</span> <br className="hidden md:block" />
+              el trabajo <br className="hidden md:block" />
               que ralentiza <br className="hidden md:block" />
               a tu equipo
             </motion.h1>

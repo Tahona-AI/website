@@ -100,9 +100,8 @@ cn("base-class", condition && "conditional-class", className)
 
 | Class | Font | Usage |
 |-------|------|-------|
-| `font-heading` | Bricolage Grotesque | Display headings |
+| `font-heading` | Plus Jakarta Sans | Display headings (Bold/ExtraBold, -0.02em tracking) |
 | `font-body` | Geist Sans | Body text, UI |
-| `font-serif` | Fraunces | Serif accent in mixed headings |
 | `font-mono` | Geist Mono | Code, labels |
 
 ### Common Components

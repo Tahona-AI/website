@@ -24,10 +24,10 @@
 
 @theme inline {
   /* Typography - Brand Fonts */
-  --font-heading: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-body: "Geist Sans", system-ui, sans-serif;
   --font-sans: "Geist Sans", system-ui, sans-serif;
-  --font-serif: "Fraunces", Georgia, serif;
+  --font-serif: Georgia, serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
 
   /* Brand Orange Gradient System */
@@ -206,6 +206,7 @@
 @layer utilities {
   .font-heading {
     font-family: var(--font-heading);
+    letter-spacing: -0.02em;
   }
   .font-body {
     font-family: var(--font-body);
