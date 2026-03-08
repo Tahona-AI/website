@@ -1,6 +1,6 @@
 {
-  "name": "Cadly Labs - Automatización de Procesos con IA",
-  "short_name": "Cadly Labs",
+  "name": "Tahona — Automatización inteligente para la industria alimentaria",
+  "short_name": "Tahona",
   "description": "Automatiza el trabajo manual que tu sistema de gestión no puede hacer. Soluciones de IA para logística, farmacia e industria.",
   "icons": [
     {
@@ -21,7 +21,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ff8532",
+  "theme_color": "#2D6A4F",
   "background_color": "#ffffff",
   "display": "standalone",
   "start_url": "/",

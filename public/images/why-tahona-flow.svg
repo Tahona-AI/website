@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 520" width="100%" height="100%" role="img" aria-labelledby="flow-title flow-desc">
+  <title id="flow-title">Operational Flow Orchestration</title>
+  <desc id="flow-desc">An elegant animated diagram showing a single centralized origin branching into multiple structured paths, highlighting a controlled operational flow.</desc>
+  <defs>
+    <style>
+      .path-anim-1 { animation: flow-dash 10s linear infinite; animation-delay: 0s; animation-fill-mode: both; }
+      .path-anim-2 { animation: flow-dash 8.5s linear infinite; animation-delay: 1.5s; animation-fill-mode: both; }
+      .path-anim-3 { animation: flow-dash 12s linear infinite; animation-delay: 3s; animation-fill-mode: both; }
+      .path-anim-4 { animation: flow-dash 7s linear infinite; animation-delay: 0.5s; animation-fill-mode: both; }
+      .path-anim-5 { animation: flow-dash 9s linear infinite; animation-delay: 4.5s; animation-fill-mode: both; }
+      .path-anim-6 { animation: flow-dash 11s linear infinite; animation-delay: 2s; animation-fill-mode: both; }
+      .path-anim-7 { animation: flow-dash 9.5s linear infinite; animation-delay: 6s; animation-fill-mode: both; }
+      .path-anim-8 { animation: flow-dash 13s linear infinite; animation-delay: 1s; animation-fill-mode: both; }
+
+      @keyframes flow-dash {
+        0% { stroke-dashoffset: 150; }
+        100% { stroke-dashoffset: -450; }
+      }
+
+      .node-pulse { animation: pulse-anim 3.5s ease-out infinite; }
+
+      @keyframes pulse-anim {
+        0% { r: 4px; opacity: 0.8; stroke-width: 1; }
+        100% { r: 16px; opacity: 0; stroke-width: 0.5; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .path-anim-1, .path-anim-2, .path-anim-3, .path-anim-4,
+        .path-anim-5, .path-anim-6, .path-anim-7, .path-anim-8,
+        .node-pulse { animation: none !important; }
+        .path-anim-4 { stroke-dashoffset: 0; }
+        .node-pulse { opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <g id="base-tracks" fill="none" stroke="#D6DADF" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 20 256 C 65 256, 65 80, 110 80 L 140 80" />
+    <path d="M 20 257 C 65 257, 65 140, 110 140 L 140 140" />
+    <path d="M 20 259 C 65 259, 65 200, 110 200 L 140 200" />
+    <path d="M 20 260 C 65 260, 65 260, 110 260 L 140 260" />
+    <path d="M 20 261 C 65 261, 65 320, 110 320 L 140 320" />
+    <path d="M 20 263 C 65 263, 65 380, 110 380 L 140 380" />
+    <path d="M 20 264 C 65 264, 65 440, 110 440 L 140 440" />
+    <path d="M 20 265 C 65 265, 65 480, 110 480 L 140 480" />
+  </g>
+
+  <g id="inflection-nodes" fill="#FFFFFF" stroke="#98A1AE" stroke-width="1.25">
+    <circle cx="65" cy="168" r="1.5" />
+    <circle cx="65" cy="198.5" r="1.5" />
+    <circle cx="65" cy="321.5" r="1.5" />
+    <circle cx="65" cy="372.5" r="1.5" />
+  </g>
+
+  <g id="secondary-checkpoints" fill="#FFFFFF" stroke="#D6DADF" stroke-width="1.25">
+    <circle cx="110" cy="140" r="1.5" />
+    <circle cx="110" cy="200" r="1.5" />
+    <circle cx="110" cy="320" r="1.5" />
+    <circle cx="110" cy="440" r="1.5" />
+  </g>
+
+  <g id="flow-highlights" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#98A1AE" stroke-width="1.25" stroke-dasharray="35 600">
+      <path class="path-anim-1" d="M 20 256 C 65 256, 65 80, 110 80 L 140 80" />
+      <path class="path-anim-2" d="M 20 257 C 65 257, 65 140, 110 140 L 140 140" />
+      <path class="path-anim-3" d="M 20 259 C 65 259, 65 200, 110 200 L 140 200" />
+      <path class="path-anim-5" d="M 20 261 C 65 261, 65 320, 110 320 L 140 320" />
+      <path class="path-anim-6" d="M 20 263 C 65 263, 65 380, 110 380 L 140 380" />
+      <path class="path-anim-7" d="M 20 264 C 65 264, 65 440, 110 440 L 140 440" />
+      <path class="path-anim-8" d="M 20 265 C 65 265, 65 480, 110 480 L 140 480" />
+    </g>
+    <path class="path-anim-4" d="M 20 260 C 65 260, 65 260, 110 260 L 140 260" stroke="#2D6A4F" stroke-width="1.75" stroke-dasharray="60 600" />
+  </g>
+
+  <g id="flow-dots" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 600">
+    <g stroke="#6B7280" stroke-width="3">
+      <path class="path-anim-1" d="M 20 256 C 65 256, 65 80, 110 80 L 140 80" />
+      <path class="path-anim-2" d="M 20 257 C 65 257, 65 140, 110 140 L 140 140" />
+      <path class="path-anim-3" d="M 20 259 C 65 259, 65 200, 110 200 L 140 200" />
+      <path class="path-anim-5" d="M 20 261 C 65 261, 65 320, 110 320 L 140 320" />
+      <path class="path-anim-6" d="M 20 263 C 65 263, 65 380, 110 380 L 140 380" />
+      <path class="path-anim-7" d="M 20 264 C 65 264, 65 440, 110 440 L 140 440" />
+      <path class="path-anim-8" d="M 20 265 C 65 265, 65 480, 110 480 L 140 480" />
+    </g>
+    <path class="path-anim-4" d="M 20 260 C 65 260, 65 260, 110 260 L 140 260" stroke="#1B4332" stroke-width="4.5" />
+  </g>
+
+  <g id="origin-cluster">
+    <path d="M 0 260 L 14 260" stroke="#D6DADF" stroke-width="1" stroke-dasharray="2 3" />
+    <rect x="14" y="253" width="6" height="15" rx="3" fill="#FFFFFF" stroke="#98A1AE" stroke-width="1.25" />
+    <circle cx="17" cy="256" r="1" fill="#98A1AE" />
+    <circle cx="17" cy="260" r="1.25" fill="#2D6A4F" />
+    <circle cx="17" cy="264" r="1" fill="#98A1AE" />
+  </g>
+
+  <g id="destination-nodes">
+    <circle cx="140" cy="80" r="2.5" fill="#FFFFFF" stroke="#98A1AE" stroke-width="1.25" />
+    <circle cx="140" cy="140" r="2.5" fill="#FFFFFF" stroke="#98A1AE" stroke-width="1.25" />
+    <circle cx="140" cy="200" r="2.5" fill="#FFFFFF" stroke="#98A1AE" stroke-width="1.25" />
+    <circle cx="140" cy="320" r="2.5" fill="#FFFFFF" stroke="#98A1AE" stroke-width="1.25" />
+    <circle cx="140" cy="380" r="2.5" fill="#FFFFFF" stroke="#98A1AE" stroke-width="1.25" />
+    <circle cx="140" cy="440" r="2.5" fill="#FFFFFF" stroke="#98A1AE" stroke-width="1.25" />
+    <circle cx="140" cy="480" r="2.5" fill="#FFFFFF" stroke="#98A1AE" stroke-width="1.25" />
+    <g id="active-destination">
+      <circle cx="140" cy="260" r="5" fill="none" stroke="#2D6A4F" class="node-pulse" />
+      <circle cx="140" cy="260" r="3.5" fill="#2D6A4F" />
+      <circle cx="140" cy="260" r="1.5" fill="#FFFFFF" />
+    </g>
+  </g>
+</svg>

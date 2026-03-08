@@ -1,4 +1,4 @@
-# Cadly Labs Website Documentation Todo
+# Tahona Website Documentation Todo
 
 - [x] Create `docs/README.md` (Project overview, tech stack, quick start, structure, links)
 - [ ] Create `docs/ARCHITECTURE.md` (Astro Islands, hydration strategy, SSR, API structure)

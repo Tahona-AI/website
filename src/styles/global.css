@@ -4,7 +4,7 @@
 
 .scrollbar-custom {
   scrollbar-width: thin;
-  scrollbar-color: #ff8532 #ffffff;
+   scrollbar-color: #2D6A4F #ffffff;
 }
 
 .scrollbar-custom::-webkit-scrollbar {
@@ -17,7 +17,7 @@
 }
 
 .scrollbar-custom::-webkit-scrollbar-thumb {
-  background-color: #ff8532;
+   background-color: #2D6A4F;
   border-radius: 9999px;
   border: 2px solid #ffffff;
 }
@@ -30,14 +30,17 @@
   --font-serif: Georgia, serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
 
-  /* Brand Orange Gradient System */
-  --color-brand-50: rgb(255, 247, 239);
-  --color-brand-100: rgb(254, 235, 213);
-  --color-brand-500: rgb(255, 133, 50);
-  --color-brand-600: rgb(255, 98, 10);
-  --color-brand-700: rgb(255, 72, 0);
-  --color-brand-800: rgb(149, 48, 23);
-  --color-brand-900: rgb(120, 42, 22);
+  /* Brand Green System */
+  --color-brand-50: rgb(240, 247, 243);
+  --color-brand-100: rgb(212, 232, 220);
+  --color-brand-200: rgb(183, 211, 194);
+  --color-brand-300: rgb(127, 184, 158);
+  --color-brand-400: rgb(74, 139, 106);
+  --color-brand-500: rgb(45, 106, 79);
+  --color-brand-600: rgb(36, 88, 64);
+  --color-brand-700: rgb(27, 69, 48);
+  --color-brand-800: rgb(18, 52, 34);
+  --color-brand-900: rgb(10, 31, 20);
 
   /* Neutral Foundation */
   --color-surface: rgb(245, 244, 246);
@@ -178,7 +181,7 @@
 
   /* Accessibility: Focus visible styles */
   *:focus-visible {
-    outline: 3px solid #ff8532;
+    outline: 3px solid #2D6A4F;
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -186,7 +189,7 @@
   /* Accessibility: Improve button and link focus */
   a:focus-visible,
   button:focus-visible {
-    outline: 3px solid #ff8532;
+    outline: 3px solid #2D6A4F;
     outline-offset: 2px;
   }
 

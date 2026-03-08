@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /_astro/
 
-Sitemap: https://cadlylabs.com/sitemap-index.xml
+Sitemap: https://tahona.ai/sitemap-index.xml

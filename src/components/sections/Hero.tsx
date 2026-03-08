@@ -61,7 +61,7 @@ export function Hero() {
                 onClick={() => handleScrollToSection("#contacto")}
                 borderRadius="0"
                 containerClassName="h-14 w-full sm:w-fit"
-                borderClassName="bg-[radial-gradient(rgb(255,133,50)_40%,transparent_60%)]"
+                borderClassName="bg-[radial-gradient(rgb(45,106,79)_40%,transparent_60%)]"
                 className="border-brand-600/20 bg-brand-600 text-sm font-medium text-white hover:bg-brand-700 cursor-pointer px-8 py-4 flex items-center justify-center gap-2 w-full"
               >
                 Agenda una llamada

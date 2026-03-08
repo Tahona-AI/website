@@ -1,10 +1,10 @@
-# Cadly Labs Documentation
+# Tahona Documentation
 
-Welcome to the official documentation for the Cadly Labs website.
+Welcome to the official documentation for the Tahona website.
 
 ## Project Overview
 
-Cadly Labs is a Spanish B2B AI automation company dedicated to transforming business operations through cutting-edge artificial intelligence solutions. This website serves as the primary digital presence, showcasing our services, success stories, and providing a point of contact for potential partners.
+Tahona is a Spanish B2B AI automation company dedicated to transforming business operations through cutting-edge artificial intelligence solutions. This website serves as the primary digital presence, showcasing our services, success stories, and providing a point of contact for potential partners.
 
 ## Tech Stack
 

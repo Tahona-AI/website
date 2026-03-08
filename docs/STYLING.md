@@ -1,6 +1,6 @@
 # Styling Guide
 
-This document covers the styling system used in the Cadly Labs website.
+This document covers the styling system used in the Tahona website.
 
 ## Tailwind CSS v4
 

@@ -70,16 +70,16 @@ export function Navbar() {
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 md:h-20 items-center justify-between">
             <a href="/" className="flex items-center gap-3">
-              <img
-                src="/images/logos/cadly_logo.avif"
-                alt="Cadly Labs"
-                width={40}
-                height={40}
-                className="h-8 w-8 md:h-10 md:w-10"
-              />
-              <span className="font-heading text-xl font-bold text-gray-900 ">
-                Cadly Labs
-              </span>
+               <img
+                 src="/images/logos/tahona-mark-green.svg"
+                 alt="Tahona"
+                 width={40}
+                 height={40}
+                 className="h-8 w-8 md:h-10 md:w-10"
+               />
+               <span className="font-heading text-xl font-bold text-gray-900 ">
+                 Tahona
+               </span>
             </a>
 
             <div className="hidden items-center align-middle gap-8 md:flex">

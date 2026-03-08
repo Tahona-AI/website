@@ -1,6 +1,6 @@
 # Components
 
-This document catalogs all components in the Cadly Labs website.
+This document catalogs all components in the Tahona website.
 
 ## Page Sections
 
@@ -98,11 +98,11 @@ Features:
 
 Steps: Diagnostico gratuito, Propuesta y planificacion, Desarrollo e integracion, Puesta en marcha y soporte
 
-### WhyCadly
+### WhyTahona
 
 | Property | Value |
 |----------|-------|
-| File | `src/components/sections/WhyCadly.astro` |
+| File | `src/components/sections/WhyTahona.astro` |
 | Type | Astro |
 | Hydration | None (static) |
 

@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import compress from 'astro-compress';
 
 export default defineConfig({
-  site: 'https://cadlylabs.com',
+  site: 'https://tahona.ai',
   integrations: [
     react(),
     sitemap({

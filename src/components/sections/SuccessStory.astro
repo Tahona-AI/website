@@ -9,32 +9,121 @@ const results = [
   "El sistema les avisa de tareas y fechas que caducan",
   "Revisan cómo va todo desde el móvil o la tablet",
 ];
+
+const dashboardMetrics = [
+  { label: "Registros al día", value: "96%" },
+  { label: "Incidencias abiertas", value: "03" },
+  { label: "Tareas hoy", value: "14" },
+];
+
+const dashboardTasks = [
+  { title: "Control de recepción", detail: "6 lotes revisados", status: "OK" },
+  { title: "Temperaturas APPCC", detail: "2 puntos pendientes", status: "Rev." },
+  { title: "Caducidades y alertas", detail: "1 aviso crítico", status: "Act." },
+];
 ---
 
 <section id="casos" class="bg-white py-24">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <FadeInView client:visible className="text-center">
-      <span class="inline-flex items-center rounded-full bg-brand-100 px-4 py-1.5 text-sm font-medium text-brand-700">
-        Esto ya funciona
-      </span>
-      <h2 class="mt-4 font-heading text-3xl font-bold text-gray-900 sm:text-4xl md:text-5xl">
-        Mira cómo ayudamos a otros negocios como el tuyo
+    <FadeInView client:visible>
+      <div class="inline-flex items-center gap-3 text-sm text-gray-500">
+        <span class="h-px w-10 bg-brand-300" />
+        <span class="font-medium text-gray-600">Resultados en operativa real</span>
+      </div>
+      <h2 class="mt-4 max-w-4xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
+        De papeleo disperso a control operativo en semanas
       </h2>
     </FadeInView>
 
     <FadeInView client:visible delay={0.2}>
-      <div class="mt-16 overflow-hidden rounded-none bg-gradient-to-br from-gray-50 to-gray-100 shadow-lg lg:grid lg:grid-cols-2 lg:gap-0 lg:items-center">
-        <div class="relative pl-0 lg:pl-4 aspect-[4/3] lg:aspect-auto">
-          <img
-            src="/images/logos/appcc_demo.avif"
-            alt="Sistema APPCC de Montes del Acebo"
-            class="w-full h-auto object-contain"
-          />
-          <div class="absolute inset-0 " />
+      <div class="mt-16 overflow-hidden rounded-none border border-gray-200 bg-white shadow-sm lg:grid lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div class="border-b border-gray-200 bg-gray-50/50 p-6 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">
+          <div class="border border-gray-200 bg-white shadow-sm">
+            <div class="flex items-center justify-between border-b border-gray-200 px-4 py-3 sm:px-5">
+              <div>
+                <p class="text-xs font-medium uppercase text-gray-500">Centro de control</p>
+                <p class="mt-1 font-heading text-lg font-semibold text-gray-900">Operativa APPCC y trazabilidad</p>
+              </div>
+              <span class="inline-flex items-center border border-brand-200 bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700">
+                Todo al día
+              </span>
+            </div>
+
+            <div class="grid gap-3 border-b border-gray-200 p-4 sm:grid-cols-3 sm:p-5">
+              {dashboardMetrics.map((metric) => (
+                <div class="border border-gray-200 bg-gray-50 px-3 py-3">
+                  <p class="text-xs text-gray-500">{metric.label}</p>
+                  <p class="mt-2 font-heading text-2xl font-semibold text-gray-900 tabular-nums">{metric.value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div class="grid gap-4 p-4 sm:grid-cols-[1.15fr_0.85fr] sm:p-5">
+              <div class="border border-gray-200 p-4">
+                <div class="flex items-center justify-between border-b border-gray-200 pb-3">
+                  <div>
+                    <p class="text-xs uppercase text-gray-500">Checklist diario</p>
+                    <p class="mt-1 text-sm font-medium text-gray-900">Estado de puntos críticos</p>
+                  </div>
+                  <span class="text-xs font-medium text-brand-700">14/16 completos</span>
+                </div>
+
+                <div class="mt-4 space-y-3">
+                  {dashboardTasks.map((task) => (
+                    <div class="flex items-center gap-3 border border-gray-200 bg-gray-50 px-3 py-3">
+                      <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-brand-500" />
+                      <div class="min-w-0 flex-1">
+                        <p class="truncate text-sm font-medium text-gray-900">{task.title}</p>
+                        <p class="text-xs text-gray-500">{task.detail}</p>
+                      </div>
+                      <span class="text-xs font-medium text-gray-500">{task.status}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="border border-gray-200 p-4">
+                  <p class="text-xs uppercase text-gray-500">Trazabilidad</p>
+                  <div class="mt-3 space-y-3">
+                    <div class="flex items-center justify-between text-sm text-gray-700">
+                      <span>Lote activo</span>
+                      <span class="font-medium text-gray-900">LT-2408</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-700">
+                      <span>Recepciones hoy</span>
+                      <span class="font-medium text-gray-900">06</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-700">
+                      <span>Informe listo</span>
+                      <span class="font-medium text-brand-700">Auditoría PDF</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border border-gray-200 bg-gray-50 p-4">
+                  <p class="text-xs uppercase text-gray-500">Alertas y seguimiento</p>
+                  <div class="mt-3 space-y-2">
+                    <div class="flex items-center justify-between text-sm text-gray-700">
+                      <span>Temperatura cámara 2</span>
+                      <span class="font-medium text-gray-900">Revisar</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-700">
+                      <span>Caducidad próxima</span>
+                      <span class="font-medium text-gray-900">Mañana</span>
+                    </div>
+                    <div class="mt-4 h-2 w-full bg-gray-200">
+                      <div class="h-2 w-[78%] bg-brand-500" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="flex flex-col justify-center p-6 sm:p-8 lg:p-12 text-center lg:text-left">
-          <div class="flex items-center justify-center md:justify-start gap-4">
+        <div class="flex flex-col justify-center p-6 text-center sm:p-8 lg:p-12 lg:text-left">
+          <div class="flex items-center justify-center gap-4 md:justify-start">
             <img
               src="/images/logos/montes_acebo_logo.avif"
               alt="Montes del Acebo"
@@ -43,7 +132,7 @@ const results = [
               class="rounded-xl"
             />
             <div>
-              <h3 class="font-heading text-xl font-bold text-gray-900">
+              <h3 class="font-heading text-xl font-bold text-gray-900 text-balance">
                 Montes del Acebo
               </h3>
               <p class="text-sm text-gray-500">
@@ -73,8 +162,8 @@ const results = [
             ))}
           </div>
 
-          <div class="mt-8">
-            <a href="https://appcc-demo.apps.cadlylabs.com/auth/login" target="_blank" class="inline-flex items-center gap-2 rounded-none bg-brand-600 px-8 py-4 text-sm font-medium text-white transition-all duration-200 cursor-pointer hover:bg-brand-700 hover:shadow-md">
+           <div class="mt-8">
+             <a href="https://appcc-demo.apps.tahona.ai/auth/login" target="_blank" class="inline-flex items-center gap-2 rounded-none bg-brand-600 px-8 py-4 text-sm font-medium text-white transition-all duration-200 cursor-pointer hover:bg-brand-700 hover:shadow-md">
               Echa un vistazo a la demo
               <svg
                 class="h-4 w-4"

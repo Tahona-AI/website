@@ -139,9 +139,9 @@ export const FloatingPaths = memo(function FloatingPaths({
         <title>Background Paths</title>
         <defs>
           <linearGradient id="sharedGradient" x1="0%" x2="100%" y1="0%" y2="0%">
-            <stop offset="0%" stopColor="rgba(255, 133, 50, 0.5)" />
-            <stop offset="50%" stopColor="rgba(255, 98, 10, 0.5)" />
-            <stop offset="100%" stopColor="rgba(255, 72, 0, 0.5)" />
+            <stop offset="0%" stopColor="rgba(45, 106, 79, 0.5)" />
+            <stop offset="50%" stopColor="rgba(36, 88, 64, 0.5)" />
+            <stop offset="100%" stopColor="rgba(27, 69, 48, 0.5)" />
           </linearGradient>
         </defs>
 

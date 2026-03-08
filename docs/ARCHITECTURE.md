@@ -1,6 +1,6 @@
 # Architecture
 
-This document explains the technical architecture of the Cadly Labs website.
+This document explains the technical architecture of the Tahona website.
 
 ## Astro Islands Architecture
 
@@ -51,7 +51,7 @@ These Astro components render as pure HTML with no client-side JavaScript:
 |-----------|----------|
 | `SuccessStory.astro` | `src/components/sections/` |
 | `HowWeWork.astro` | `src/components/sections/` |
-| `WhyCadly.astro` | `src/components/sections/` |
+| `WhyTahona.astro` | `src/components/sections/` |
 | `Footer.astro` | `src/components/sections/` |
 
 Note: These Astro components may import React components with `client:visible` for animations.

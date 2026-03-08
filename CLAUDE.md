@@ -1,11 +1,11 @@
-# Cadly Labs Website - Agent Instructions
+# Tahona Website - Agent Instructions
 
 ## Quick Context
 
-**What**: Marketing website for Cadly Labs - AI automation agency for Spanish SMBs.  
+**What**: Marketing website for Tahona - AI automation agency for the Spanish food industry.  
 **Stack**: Astro + React + Tailwind CSS v4.  
 **Deploy**: GitHub Pages (static build).  
-**URL**: https://cadlylabs.com
+**URL**: https://tahona.ai
 
 ---
 
