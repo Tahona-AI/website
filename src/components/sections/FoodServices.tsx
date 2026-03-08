@@ -85,8 +85,8 @@ function APPCCDashboardVisual() {
           Registros del día
         </div>
         <div className="space-y-1.5 @[280px]:space-y-2">
-          {checklistItems.slice(0, 3).map((item, i) => (
-            <div key={i} className="flex items-center gap-2">
+          {checklistItems.slice(0, 3).map((item) => (
+            <div key={item.label} className="flex items-center gap-2">
               <div
                 className={cn(
                   "flex h-4 w-4 shrink-0 items-center justify-center rounded",
@@ -191,17 +191,17 @@ function DocumentScannerVisual() {
           Datos extraídos
         </div>
         <div className="space-y-0.5 text-xs @[280px]:space-y-1">
-          {extractedData.slice(0, 4).map((item, i) => (
-            <div key={i} className="flex justify-between gap-2">
+          {extractedData.slice(0, 4).map((item) => (
+            <div key={item.label} className="flex justify-between gap-2">
               <span className="shrink-0 text-gray-500">{item.label}</span>
               <span className="truncate font-medium text-gray-700">
                 {item.value}
               </span>
             </div>
           ))}
-          {extractedData.slice(4).map((item, i) => (
+          {extractedData.slice(4).map((item) => (
             <div
-              key={i + 4}
+              key={item.label}
               className="hidden justify-between gap-2 @[300px]:flex"
             >
               <span className="shrink-0 text-gray-500">{item.label}</span>
@@ -223,9 +223,9 @@ function DocumentScannerVisual() {
           Sincroniza con
         </span>
         <div className="flex items-center gap-1.5 @[320px]:gap-2">
-          {erpLogosToShow.map((erp, i) => (
+          {erpLogosToShow.map((erp) => (
             <img
-              key={i}
+              key={erp.name}
               src={erp.src}
               alt={erp.name}
               className="h-3.5 w-auto opacity-60 grayscale @[320px]:h-4"
@@ -288,9 +288,9 @@ function ServiceCard({ card }: { card: ServiceCardData }) {
         </p>
 
         <ul className="mt-4 space-y-2">
-          {card.benefits.map((benefit, i) => (
+          {card.benefits.map((benefit) => (
             <li
-              key={i}
+              key={benefit}
               className="flex items-center gap-2 text-sm text-gray-600"
             >
               <CheckIcon className="h-3.5 w-3.5 shrink-0 text-brand-500" />
@@ -314,7 +314,7 @@ function ServiceCard({ card }: { card: ServiceCardData }) {
 
 export function FoodServices() {
   return (
-    <section id="soluciones" className="bg-white py-24">
+    <section className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeInView className="text-center">
           <span className="inline-flex items-center rounded-full bg-brand-100 px-4 py-1.5 text-sm font-medium text-brand-700">
@@ -330,8 +330,8 @@ export function FoodServices() {
 
         <FadeInView delay={0.2}>
           <div className="mt-16 grid gap-8 md:grid-cols-2">
-            {SERVICE_CARDS.map((card, i) => (
-              <ServiceCard key={i} card={card} />
+            {SERVICE_CARDS.map((card) => (
+              <ServiceCard key={card.title} card={card} />
             ))}
           </div>
         </FadeInView>
