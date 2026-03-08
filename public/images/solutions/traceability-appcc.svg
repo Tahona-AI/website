@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" aria-labelledby="title desc" role="img">
+  <title id="title">Trazabilidad y APPCC</title>
+  <desc id="desc">Ilustracion isometrica de recepcion, lote, control APPCC y salida para trazabilidad alimentaria.</desc>
+  <rect width="600" height="450" fill="#FFFFFF" />
+
+  <g fill="none" stroke="#9CA3AF" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+    <polyline points="145,240 175,255 205,240" stroke-dasharray="4 4" />
+    <path d="M197 242.5 205 240 199 235" />
+    <polyline points="265,240 290,252.5 315,240" stroke-dasharray="4 4" />
+    <path d="M307 242.5 315 240 309 235" />
+    <polyline points="415,240 440,252.5 465,240" stroke-dasharray="4 4" />
+    <path d="M457 242.5 465 240 459 235" />
+  </g>
+
+  <g stroke="#9CA3AF" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M65 240 105 260 105 272 65 252Z" fill="#F3F4F6" />
+    <path d="M105 260 145 240 145 252 105 272Z" fill="#E5E7EB" />
+    <path d="M105 220 145 240 105 260 65 240Z" fill="#F9FAFB" />
+    <path d="M105 226 137 242 105 258 73 242Z" fill="none" stroke="#D1D5DB" />
+    <path d="M105 230 133 244 105 258 77 244Z" fill="#F3F4F6" />
+    <path d="M105 185V215" fill="none" />
+    <path d="M100 209 105 215 110 209" fill="none" />
+  </g>
+
+  <g stroke="#9CA3AF" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M205 240 235 255 235 261 205 246Z" fill="#F3F4F6" />
+    <path d="M235 255 265 240 265 246 235 261Z" fill="#E5E7EB" />
+    <path d="M235 225 265 240 235 255 205 240Z" fill="#F9FAFB" />
+    <path d="M205 226 235 241 235 247 205 232Z" fill="#F3F4F6" />
+    <path d="M235 241 265 226 265 232 235 247Z" fill="#E5E7EB" />
+    <path d="M235 211 265 226 235 241 205 226Z" fill="#F9FAFB" />
+    <path d="M205 212 235 227 235 233 205 218Z" fill="#F3F4F6" />
+    <path d="M235 227 265 212 265 218 235 233Z" fill="#E5E7EB" />
+    <path d="M235 197 265 212 235 227 205 212Z" fill="#F9FAFB" />
+    <path d="M215 207 240 219.5" fill="none" stroke="#D1D5DB" />
+    <path d="M221 204 246 216.5" fill="none" stroke="#D1D5DB" />
+    <path d="M227 201 252 213.5" fill="none" stroke="#D1D5DB" />
+  </g>
+
+  <g stroke="#9CA3AF" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M315 240 365 265 365 281 315 256Z" fill="#F3F4F6" />
+    <path d="M365 265 415 240 415 256 365 281Z" fill="#E5E7EB" />
+    <path d="M365 215 415 240 365 265 315 240Z" fill="#F9FAFB" />
+    <ellipse cx="365" cy="240" rx="20" ry="10" fill="none" stroke="#D1D5DB" />
+    <ellipse cx="365" cy="240" rx="14" ry="7" fill="none" stroke="#D1D5DB" />
+    <path d="M338 228.5 342 230.5 342 187.5 338 185.5Z" fill="#F3F4F6" />
+    <path d="M388 253.5 392 251.5 392 187.5 388 189.5Z" fill="#E5E7EB" />
+    <path d="M340 177.5 365 190 365 200 340 187.5Z" fill="#F3F4F6" />
+    <path d="M365 190 390 177.5 390 187.5 365 200Z" fill="#E5E7EB" />
+    <path d="M365 165 390 177.5 365 190 340 177.5Z" fill="#F9FAFB" />
+    <path d="M365 169 384 178.5 365 186 346 178.5Z" fill="none" stroke="#D1D5DB" />
+    <path d="M365 190V230" fill="none" stroke="#D1D5DB" stroke-dasharray="2 2" />
+    <circle cx="410" cy="135" r="12" fill="#2D6A4F" stroke="#FFFFFF" stroke-width="2" />
+    <path d="M404 135 408 139 416 130" fill="none" stroke="#FFFFFF" stroke-width="2" />
+  </g>
+
+  <g stroke="#9CA3AF" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M465 240 495 255 495 271 465 256Z" fill="#F3F4F6" />
+    <path d="M495 255 525 240 525 256 495 271Z" fill="#E5E7EB" />
+    <path d="M495 225 525 240 495 255 465 240Z" fill="#F9FAFB" />
+    <path d="M485 230 515 245" fill="none" stroke="#D1D5DB" />
+    <path d="M505 230 475 245" fill="none" stroke="#D1D5DB" />
+    <path d="M475 249 485 254 485 262 475 257Z" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1" />
+    <path d="M525 240 545 250" fill="none" />
+    <path d="M537 254 545 250 537 246" fill="none" />
+  </g>
+
+  <g font-family="'Geist Sans', system-ui, sans-serif" font-size="13" text-anchor="middle" letter-spacing="0.02em">
+    <text x="105" y="320" font-weight="500" fill="#6B7280">Recepcion</text>
+    <text x="235" y="320" font-weight="500" fill="#6B7280">Lote</text>
+    <text x="365" y="320" font-weight="600" fill="#4B5563">APPCC</text>
+    <text x="495" y="320" font-weight="500" fill="#6B7280">Salida</text>
+  </g>
+</svg>
