@@ -60,22 +60,22 @@ export function Hero() {
               <MovingBorderButton
                 onClick={() => handleScrollToSection("#contacto")}
                 borderRadius="0"
-                containerClassName="h-14 w-full sm:w-fit"
+                containerClassName="h-40 w-full sm:w-72"
                 borderClassName="bg-[radial-gradient(rgb(45,106,79)_40%,transparent_60%)]"
-                className="border-brand-600/20 bg-brand-600 text-sm font-medium text-white hover:bg-brand-700 cursor-pointer px-8 py-4 flex items-center justify-center gap-2 w-full"
+                className="border-brand-600/20 bg-brand-600 text-base font-medium text-white hover:bg-brand-700 cursor-pointer px-5 pt-5 pb-5 flex items-start justify-between w-full"
               >
-                Agenda una llamada
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span className="max-w-[8rem] text-left leading-snug">Agenda una llamada</span>
+                <svg className="h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
               </MovingBorderButton>
 
               <button
                 onClick={() => handleScrollToSection("#soluciones")}
-                className="flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-none border-2 border-gray-300 bg-white/80 px-8 py-4 text-sm font-medium text-gray-700 backdrop-blur-sm transition-all hover:border-brand-500 hover:text-brand-600"
+                className="flex h-40 w-full sm:w-72 items-start justify-between rounded-none border-2 border-gray-300 bg-white/80 px-5 pt-5 pb-5 text-base font-medium text-gray-700 backdrop-blur-sm transition-all hover:border-brand-500 hover:text-brand-600"
               >
-                Ver soluciones
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span className="max-w-[8rem] text-left leading-snug">Ver soluciones</span>
+                <svg className="h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
               </button>

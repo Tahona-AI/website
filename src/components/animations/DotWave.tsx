@@ -127,7 +127,7 @@ export const DotWave = memo(function DotWave({ className = "" }: DotWaveProps) {
 
           ctx.beginPath();
           ctx.arc(x + jitterX, y + jitterY, radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255, 133, 50, ${opacity})`;
+          ctx.fillStyle = `rgba(45, 106, 79, ${opacity})`;
           ctx.fill();
         }
       }

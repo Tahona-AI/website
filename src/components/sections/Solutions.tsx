@@ -40,20 +40,20 @@ function ImageVisual({
 
 const SOLUTION_CARDS: readonly SolutionCard[] = [
   {
-    title: "Trazabilidad y APPCC",
+    title: "Agentes IA a medida",
     description:
-      "Controla lotes, recepciones, registros e incidencias en un sistema preparado para auditorias y conectado con tu ERP.",
-    note: "Mas control operativo, sin cambiar la base de tu operativa.",
+      "Creamos agentes especializados para tareas de soporte, control y seguimiento en tu flujo real.",
+    note: "Con supervision y reglas de negocio claras.",
     size: "large",
-    visual: <ImageVisual size="large" src="/images/solutions/traceability-appcc.svg" alt="Ilustracion de trazabilidad y APPCC con lotes, recepciones y estados de inspeccion" />,
+    visual: <ImageVisual size="large" src="/images/solutions/agents-orchestration.svg" alt="Ilustracion de agentes IA a medida conectando soporte, control y seguimiento" />,
   },
   {
-    title: "Procesamiento documental",
+    title: "Automatizacion de procesos",
     description:
-      "Digitalizamos lectura, validacion y registro de documentos para reducir errores y tiempos de gestion.",
-    note: "Facturas, albaranes y pedidos con trazabilidad desde el dia uno.",
+      "Orquestamos tareas repetitivas entre equipos para que las operaciones avancen sin cuellos de botella.",
+    note: "Empiezas en pequeno, escalas con resultados.",
     size: "large",
-    visual: <ImageVisual size="large" src="/images/solutions/document-processing.svg" alt="Ilustracion de procesamiento documental con extraccion de datos desde facturas y albaranes" />,
+    visual: <ImageVisual size="large" src="/images/solutions/process-automation.svg" alt="Ilustracion de automatizacion de procesos con entrada, validacion, accion y confirmado" />,
   },
   {
     title: "Integracion de sistemas",
@@ -64,20 +64,20 @@ const SOLUTION_CARDS: readonly SolutionCard[] = [
     visual: <ImageVisual size="small" src="/images/solutions/systems-integration.svg" alt="Ilustracion de integracion de sistemas con ERP, correo, hojas de calculo y BI" />,
   },
   {
-    title: "Agentes IA a medida",
+    title: "Trazabilidad",
     description:
-      "Creamos agentes especializados para tareas de soporte, control y seguimiento en tu flujo real.",
-    note: "Con supervision y reglas de negocio claras.",
+      "Controla lotes, recepciones, registros e incidencias en un sistema preparado para auditorias y conectado con tu ERP.",
+    note: "Mas control operativo, sin cambiar la base de tu operativa.",
     size: "small",
-    visual: <ImageVisual size="small" src="/images/solutions/agents-orchestration.svg" alt="Ilustracion de agentes IA a medida conectando soporte, control y seguimiento" />,
+    visual: <ImageVisual size="small" src="/images/solutions/traceability-appcc.svg" alt="Ilustracion de trazabilidad con lotes, recepciones y estados de inspeccion" />,
   },
   {
-    title: "Automatizacion de procesos",
+    title: "Procesamiento documental",
     description:
-      "Orquestamos tareas repetitivas entre equipos para que las operaciones avancen sin cuellos de botella.",
-    note: "Empiezas en pequeno, escalas con resultados.",
+      "Digitalizamos lectura, validacion y registro de documentos para reducir errores y tiempos de gestion.",
+    note: "Facturas, albaranes y pedidos con trazabilidad desde el dia uno.",
     size: "small",
-    visual: <ImageVisual size="small" src="/images/solutions/process-automation.svg" alt="Ilustracion de automatizacion de procesos con entrada, validacion, accion y confirmado" />,
+    visual: <ImageVisual size="small" src="/images/solutions/document-processing.svg" alt="Ilustracion de procesamiento documental con extraccion de datos desde facturas y albaranes" />,
   },
 ];
 
@@ -88,7 +88,7 @@ export function Solutions() {
         <FadeInView>
           <div className="inline-flex items-center gap-3 text-sm text-gray-500">
             <span className="h-px w-10 bg-brand-300" />
-            <span className="font-medium text-gray-600">Donde Tahona entra en la operativa</span>
+            <span className="font-medium text-gray-600">Nuestros Servicios</span>
           </div>
         </FadeInView>
 

@@ -105,7 +105,7 @@ export function HowWeWork() {
         <FadeInView>
           <div className="inline-flex items-center gap-3 text-sm text-gray-500">
             <span className="h-px w-10 bg-brand-300" />
-            <span className="font-medium text-gray-600">Así entra Tahona en el proceso</span>
+            <span className="font-medium text-gray-600">Nuestro Proceso</span>
           </div>
           <h2 className="mt-4 max-w-5xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
             De la primera llamada al sistema en marcha
@@ -194,7 +194,7 @@ export function HowWeWork() {
                     sectionRefs.current[index] = element;
                   }}
                   data-step-index={index}
-                  className="flex min-h-[62vh] scroll-mt-28 flex-col justify-center py-8 first:pt-0 last:pb-0 lg:min-h-[68vh]"
+                  className="flex min-h-[35vh] scroll-mt-28 flex-col justify-center py-4 first:pt-0 last:pb-0 lg:min-h-[40vh]"
                 >
                   <FadeInView>
                     <p
