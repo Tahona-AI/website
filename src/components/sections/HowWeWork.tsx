@@ -17,50 +17,62 @@ const steps: readonly Step[] = [
   {
     number: "01",
     tab: "Diagnóstico",
-    title: "Diagnóstico operativo en contexto real",
+    title: "Entendemos tu operativa en 1-2 semanas",
     intro:
-      "Entramos en la operativa para entender cómo se mueve hoy la información, qué tareas dependen de alguien y dónde se acumula el trabajo invisible.",
+      "Mapeamos cómo fluye la información hoy, dónde se pierde tiempo y qué decisiones dependen de trabajo manual.",
     bullets: [
-      "Revisamos flujos, documentos, herramientas y puntos de bloqueo con quien lleva el día a día.",
-      "Priorizamos por impacto real: tiempo ahorrable, riesgo operativo y frecuencia del problema.",
+      "Entrevistas con quien opera el día a día, no solo con dirección.",
+      "Priorización por impacto: horas recuperables × frecuencia × riesgo de error.",
     ],
-    outcome: "Sales con un mapa claro de fricción, ordenado por impacto y viabilidad.",
+    outcome: "Mapa de fricción priorizado. Sabes qué automatizar primero y por qué.",
   },
   {
     number: "02",
-    tab: "Alcance y plan",
-    title: "Alcance cerrado, prioridades claras y sin ambigüedad",
+    tab: "Alcance",
+    title: "Definimos qué se hace y qué no",
     intro:
-      "Traducimos ese diagnóstico en un plan ejecutable: qué se hace primero, qué sistemas toca, qué resultados se esperan y qué no entra todavía.",
+      "Cerramos alcance, plazos y entregables antes de escribir código. Sin sorpresas, sin proyectos que crecen solos.",
     bullets: [
-      "Definimos entregables, plazos, dependencias y criterios de éxito antes de mover una pieza.",
-      "Diseñamos una primera fase pequeña pero útil, pensada para demostrar valor pronto sin romper nada.",
+      "Fase 1 pequeña pero útil: demuestra valor en semanas, no meses.",
+      "Criterios de éxito claros: qué debe pasar para considerarlo terminado.",
     ],
-    outcome: "Todo el mundo sabe qué se implementa, en qué orden y con qué resultado esperado.",
+    outcome: "Plan ejecutable firmado. Sabes exactamente qué vas a recibir y cuándo.",
   },
   {
     number: "03",
-    tab: "Implementación",
-    title: "Implementación por bloques sobre lo que ya utilizas",
+    tab: "Construcción",
+    title: "Construimos sobre lo que ya tienes",
     intro:
-      "Construimos encima de tu operativa actual: ERP, Excel, correo, trazabilidad o herramientas internas. No pedimos empezar de cero.",
+      "Integraciones, agentes y automatizaciones encima de tu ERP, Excel y herramientas actuales. Sin migraciones traumáticas.",
     bullets: [
-      "Integramos automatizaciones, paneles y agentes por capas para que el cambio sea asumible desde el primer día.",
-      "Validamos en entorno real con revisiones frecuentes, para corregir rápido y evitar soluciones bonitas pero inútiles.",
+      "Validación en tu entorno real cada 3-5 días. Ves avances, no promesas.",
+      "Capas de complejidad: empezamos simple, añadimos solo si aporta valor.",
     ],
-    outcome: "Empiezan a funcionar procesos concretos en semanas, no después de un proyecto eterno.",
+    outcome: "Sistema funcionando en producción. Procesos reales automatizados, no demos.",
   },
   {
     number: "04",
-    tab: "Despliegue y mejora",
-    title: "Despliegue guiado, adopción estable y mejora continua",
+    tab: "Puesta en marcha",
+    title: "Acompañamos el arranque real",
     intro:
-      "No soltamos el sistema al final y desaparecemos. Lo ponemos en marcha contigo, afinamos lo necesario y medimos si realmente aligera la operación.",
+      "No desaparecemos tras la entrega. Estamos contigo los primeros días, ajustando y resolviendo lo que surge.",
     bullets: [
-      "Acompañamos al equipo en el arranque, ajustamos reglas y resolvemos incidencias de adopción.",
-      "Seguimos el rendimiento con métricas simples: tiempo recuperado, errores evitados y tareas que dejan de depender de perseguir a alguien.",
+      "Soporte directo en el arranque: ajustes, dudas, casos borde que no previmos.",
+      "Métricas desde el día 1: tiempo ahorrado, errores evitados, tareas autónomas.",
     ],
-    outcome: "El sistema se integra en la rutina y mejora con uso real, no solo en una demo.",
+    outcome: "El equipo adopta el sistema. Se integra en la rutina diaria sin resistencia.",
+  },
+  {
+    number: "05",
+    tab: "Autonomía",
+    title: "Te formamos para que no dependas de nosotros",
+    intro:
+      "Transferimos el conocimiento: tu equipo aprende a operar, modificar y extender lo construido. Volvemos opcional.",
+    bullets: [
+      "Documentación adaptada a tu contexto, no manuales genéricos.",
+      "Formación práctica: prompting, orquestación, debugging de agentes.",
+    ],
+    outcome: "Tu equipo opera y evoluciona el sistema. Nos llamas por nueva funcionalidad, no por mantenimiento básico.",
   },
 ];
 

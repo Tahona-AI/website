@@ -253,7 +253,7 @@ export function Contact() {
                   <Textarea
                     id="details"
                     name="details"
-                    placeholder="¿Qué es lo que más tiempo te quita? ¿Cómo lleváis el APPCC y la documentación?"
+                    placeholder="¿Qué proceso te quita más tiempo hoy? ¿Qué información se pierde o se retrasa entre equipos?"
                     rows={4}
                     required
                     value={formData.details}

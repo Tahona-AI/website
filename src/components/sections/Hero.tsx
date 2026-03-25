@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Button as MovingBorderButton } from "@/components/ui/moving-border";
-import { DotWave } from "@/components/animations/DotWave";
+import { TahonaMill } from "@/components/animations/TahonaMill";
 
 export function Hero() {
   const handleScrollToSection = (href: string) => {
@@ -17,9 +17,8 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-screen w-full items-center overflow-hidden bg-white"
     >
-      {/* DotWave Background — full height, wave clears right column area */}
       <div className="absolute inset-0 z-0">
-        <DotWave />
+        <TahonaMill />
       </div>
 
       <div className="container relative z-10 mx-auto px-4 pt-24 pb-32 md:px-6 md:pt-28 flex flex-col min-h-screen">
@@ -31,12 +30,11 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold leading-[1.05] text-gray-900"
+              className="font-heading text-[clamp(2.5rem,5vw,6rem)] font-semibold leading-[1.05] text-gray-900"
             >
-              Automatiza <br className="hidden md:block" />
-              el trabajo <br className="hidden md:block" />
-              que ralentiza <br className="hidden md:block" />
-              a tu equipo
+              Todos experimentan <br className="hidden md:block" />
+              con IA. Pocos la hacen <br className="hidden md:block" />
+              funcionar en producción.
             </motion.h1>
           </div>
 
@@ -46,9 +44,9 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-lg md:text-xl text-gray-500 max-w-md md:text-right self-start md:self-end"
+              className="text-[clamp(1rem,1.3vw,1.25rem)] text-gray-500 max-w-md md:text-right self-start md:self-end"
             >
-              IA para la industria alimentaria. Conectamos tus sistemas, eliminamos el trabajo manual y te devolvemos horas cada semana.
+              Construimos sistemas de IA que trabajan en producción, entienden el contexto de tu empresa y se integran con tus procesos, sin reemplazar lo que ya funciona.
             </motion.p>
 
             <motion.div
@@ -60,11 +58,11 @@ export function Hero() {
               <MovingBorderButton
                 onClick={() => handleScrollToSection("#contacto")}
                 borderRadius="0"
-                containerClassName="h-40 w-full sm:w-72"
+                containerClassName="h-[clamp(5rem,12vh,10rem)] w-full sm:w-[clamp(12rem,18vw,18rem)]"
                 borderClassName="bg-[radial-gradient(rgb(45,106,79)_40%,transparent_60%)]"
                 className="border-brand-600/20 bg-brand-600 text-base font-medium text-white hover:bg-brand-700 cursor-pointer px-5 pt-5 pb-5 flex items-start justify-between w-full"
               >
-                <span className="max-w-[8rem] text-left leading-snug">Agenda una llamada</span>
+                <span className="max-w-[8rem] text-left leading-snug">Agendar llamada</span>
                 <svg className="h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                 </svg>
@@ -72,7 +70,7 @@ export function Hero() {
 
               <button
                 onClick={() => handleScrollToSection("#soluciones")}
-                className="flex h-40 w-full sm:w-72 items-start justify-between rounded-none border-2 border-gray-300 bg-white/80 px-5 pt-5 pb-5 text-base font-medium text-gray-700 backdrop-blur-sm transition-all hover:border-brand-500 hover:text-brand-600"
+                className="flex h-[clamp(5rem,12vh,10rem)] w-full sm:w-[clamp(12rem,18vw,18rem)] items-start justify-between rounded-none border-2 border-gray-300 bg-white/80 px-5 pt-5 pb-5 text-[clamp(0.8rem,1vw,1rem)] font-medium text-gray-700 backdrop-blur-sm transition-all hover:border-brand-500 hover:text-brand-600"
               >
                 <span className="max-w-[8rem] text-left leading-snug">Ver soluciones</span>
                 <svg className="h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

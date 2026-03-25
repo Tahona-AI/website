@@ -3,11 +3,12 @@ import { CheckCircleIcon } from "@phosphor-icons/react";
 import { FadeInView } from "@/components/animations/FadeInView";
 
 const results = [
-  "Ahorran un 80% de tiempo en registros y gestión diaria",
-  "Sacan informes operativos en un par de clics",
-  "Tienen trazabilidad completa sin usar papel",
-  "El sistema les avisa de tareas y fechas pendientes",
-  "Revisan cómo va todo desde el móvil o la tablet",
+  "80% menos tiempo en tareas administrativas repetitivas",
+  "Informes operativos automáticos en segundos, no horas",
+  "Cero pérdida de información: todo centralizado y accesible",
+  "Alertas automáticas de tareas, plazos y excepciones",
+  "Visibilidad completa desde cualquier dispositivo",
+  "Integración con tus herramientas actuales sin migraciones",
 ];
 ---
 
@@ -19,7 +20,7 @@ const results = [
         <span class="font-medium text-gray-600">Caso de éxito</span>
       </div>
       <h2 class="mt-4 max-w-4xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-        De papeleo disperso a control operativo en semanas
+        De procesos manuales a operativa automatizada en 6 semanas
       </h2>
     </FadeInView>
 
@@ -41,32 +42,30 @@ const results = [
               Montes del Acebo
             </h3>
             <p class="text-sm text-gray-500">
-              Sector alimentación
+              Sector alimentación · 40 empleados
             </p>
           </div>
 
           <div class="mt-6">
             <p class="text-lg font-medium text-gray-900">
-              Automatización operativa con IA
+              Producción IA que elimina el trabajo manual
             </p>
             <p class="mt-2 text-gray-600 leading-relaxed">
-              En Montes del Acebo han pasado de gestionar todo a mano a tener la operativa automatizada con nuestra herramienta. Registros, trazabilidad y seguimiento, todo en el mismo sitio y sin líos.
+              Pasaron de gestionar operaciones mediante hojas de cálculo dispersas y procesos manuales a tener agentes de IA coordinando flujos entre departamentos. Documentación, seguimiento y reportes, todo automatizado y trazable.
             </p>
             <blockquote class="mt-4 italic text-gray-700 border-l-4 border-brand-500 pl-4">
-              "Antes perdíamos horas buscando papeles para cada inspección. Ahora lo tenemos todo en 2 clics."
+              "Antes dedicábamos 15 horas semanales a consolidar datos de diferentes fuentes. Ahora el sistema lo hace solo y nos avisa solo cuando hay excepciones."
             </blockquote>
           </div>
 
-          <div class="mt-8 space-y-3">
+          <div class="mt-8 grid gap-2 sm:grid-cols-2">
             {results.map((result) => (
-              <div class="flex items-start gap-3">
-                <CheckCircleIcon className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand-500" />
+              <div class="flex items-start gap-2">
+                <CheckCircleIcon className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-500" />
                 <span class="text-sm text-gray-700">{result}</span>
               </div>
             ))}
           </div>
-
-
         </div>
       </div>
     </FadeInView>

@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { Solutions } from "@/components/sections/Solutions";
+import { Services } from "@/components/sections/Services";
 import SuccessStory from "@/components/sections/SuccessStory.astro";
 import { HowWeWork } from "@/components/sections/HowWeWork";
 import WhyTahona from "@/components/sections/WhyTahona.astro";
@@ -19,7 +19,7 @@ import Footer from "@/components/sections/Footer.astro";
   >
     <Navbar client:load />
     <Hero client:load />
-    <Solutions client:visible />
+    <Services client:visible />
     <SuccessStory />
     <HowWeWork client:visible />
     <WhyTahona />
