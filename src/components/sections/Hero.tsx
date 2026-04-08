@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Button as MovingBorderButton } from "@/components/ui/moving-border";
-import { TahonaMill } from "@/components/animations/TahonaMill";
+import { FloatingPaths } from "@/components/kokonutui/background-paths";
+
+const capabilityTags = ["ERP", "CRM", "Documentos", "Operaciones"] as const;
 
 export function Hero() {
   const handleScrollToSection = (href: string) => {
@@ -15,103 +16,130 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen w-full items-center overflow-hidden bg-white"
+      className="relative overflow-hidden bg-white pt-16 md:pt-20"
     >
-      <div className="absolute inset-0 z-0">
-        <TahonaMill />
-      </div>
-
-      <div className="container relative z-10 mx-auto px-4 pt-24 pb-32 md:px-6 md:pt-28 flex flex-col min-h-screen">
-        <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-8 md:gap-12 items-start flex-1">
-
-          {/* Left Column: Heading */}
-          <div>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-heading text-[clamp(2.5rem,5vw,6rem)] font-semibold leading-[1.05] text-gray-900"
-            >
-              Todos experimentan <br className="hidden md:block" />
-              con IA. Pocos la hacen <br className="hidden md:block" />
-              funcionar en producción.
-            </motion.h1>
+      <div className="mx-auto max-w-7xl border-x border-gray-200/80">
+        <div className="relative min-h-[62svh] overflow-hidden lg:min-h-[66svh]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(127,184,158,0.18),transparent_30%),linear-gradient(145deg,rgba(252,254,253,0.98)_0%,rgba(238,247,242,0.96)_100%)]" />
+          <div className="absolute top-[-78%] bottom-[-38%] right-[-36%] w-[152%] rotate-[24deg] opacity-90">
+            <FloatingPaths position={1} />
           </div>
+          <div className="absolute -bottom-20 right-10 h-72 w-72 rounded-full bg-brand-200/35 blur-3xl" />
 
-          {/* Right Column: Subheader + Buttons */}
-          <div className="flex flex-col items-start md:items-end gap-8 md:pb-2 md:self-end">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-[clamp(1rem,1.3vw,1.25rem)] text-gray-500 max-w-md md:text-right self-start md:self-end"
-            >
-              Construimos sistemas de IA que trabajan en producción, entienden el contexto de tu empresa y se integran con tus procesos, sin reemplazar lo que ya funciona.
-            </motion.p>
-
+          <div className="relative z-10 flex min-h-[62svh] flex-col justify-center px-6 py-10 sm:px-10 sm:py-12 lg:min-h-[66svh] lg:px-12 lg:py-14 xl:px-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center gap-4 self-start md:self-end"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mb-6 inline-flex w-fit items-center gap-3 rounded-full border border-gray-200 bg-white/90 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-gray-500 shadow-[0_18px_40px_-28px_rgba(31,31,31,0.45)]"
             >
-              <MovingBorderButton
+              <span className="h-2 w-2 rounded-full bg-brand-500" />
+              IA aplicada a operaciones reales
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[1.02] text-gray-900 lg:max-w-[52rem]"
+            >
+              Sistemas de IA que encajan en tu operativa y empiezan a producir valor pronto.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.35 }}
+              className="mt-8 max-w-3xl text-[clamp(1rem,1.35vw,1.25rem)] leading-8 text-gray-500 lg:max-w-[38rem]"
+            >
+              Diseñamos automatizaciones y agentes que entienden el contexto de tu empresa, se conectan con lo que ya usas y quitan trabajo manual sin montar un proyecto traumático.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="mt-10 flex flex-col gap-4 sm:flex-row"
+            >
+              <button
                 onClick={() => handleScrollToSection("#contacto")}
-                borderRadius="0"
-                containerClassName="h-[clamp(5rem,12vh,10rem)] w-full sm:w-[clamp(12rem,18vw,18rem)]"
-                borderClassName="bg-[radial-gradient(rgb(45,106,79)_40%,transparent_60%)]"
-                className="border-brand-600/20 bg-brand-600 text-base font-medium text-white hover:bg-brand-700 cursor-pointer px-5 pt-5 pb-5 flex items-start justify-between w-full"
+                className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-brand-600 px-7 text-base font-medium text-white shadow-[0_22px_45px_-24px_rgba(36,88,64,0.9)] transition-all hover:bg-brand-700 hover:shadow-[0_26px_55px_-24px_rgba(27,69,48,0.95)] cursor-pointer"
               >
-                <span className="max-w-[8rem] text-left leading-snug">Agendar llamada</span>
-                <svg className="h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                Empezar ahora
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
                 </svg>
-              </MovingBorderButton>
+              </button>
 
               <button
                 onClick={() => handleScrollToSection("#soluciones")}
-                className="flex h-[clamp(5rem,12vh,10rem)] w-full sm:w-[clamp(12rem,18vw,18rem)] items-start justify-between rounded-none border-2 border-gray-300 bg-white/80 px-5 pt-5 pb-5 text-[clamp(0.8rem,1vw,1rem)] font-medium text-gray-700 backdrop-blur-sm transition-all hover:border-brand-500 hover:text-brand-600"
+                className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full border border-gray-300 bg-white/90 px-7 text-base font-medium text-gray-700 shadow-[0_16px_35px_-28px_rgba(31,31,31,0.45)] transition-all hover:border-brand-300 hover:text-brand-600 cursor-pointer"
               >
-                <span className="max-w-[8rem] text-left leading-snug">Ver soluciones</span>
-                <svg className="h-6 w-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                Ver soluciones
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
                 </svg>
               </button>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.65 }}
+              className="mt-10 flex flex-wrap gap-2"
+            >
+              {capabilityTags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-500"
+                >
+                  {tag}
+                </span>
+              ))}
+            </motion.div>
+
+            <div className="mt-10 flex justify-start lg:mt-12 lg:justify-end">
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.55 }}
+                className="w-full max-w-sm rounded-[2rem] border border-white/70 bg-white/84 p-6 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md lg:mr-2"
+              >
+                <p className="text-xs font-medium uppercase tracking-[0.22em] text-brand-600">
+                  Primer impacto
+                </p>
+                <p className="mt-4 font-heading text-4xl font-semibold text-gray-900">
+                  3 semanas
+                </p>
+                <p className="mt-3 text-sm leading-6 text-gray-500">
+                  para lanzar un primer sistema útil, conectado y medible sin rehacer tu stack.
+                </p>
+                <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
+                  <div className="rounded-2xl border border-gray-200 bg-white px-4 py-3">
+                    <span className="block text-gray-400">Integración</span>
+                    <span className="mt-1 block font-medium text-gray-700">ERP + email</span>
+                  </div>
+                  <div className="rounded-2xl border border-gray-200 bg-white px-4 py-3">
+                    <span className="block text-gray-400">Gobierno</span>
+                    <span className="mt-1 block font-medium text-gray-700">Trazabilidad</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
 
+        <div className="border-t border-gray-200/80 px-6 py-3 sm:px-10 lg:px-16">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <p className="max-w-2xl text-sm leading-6 text-gray-500">
+              Capas de inteligencia sobre tus herramientas actuales: menos trabajo manual, más contexto útil y decisiones mejor trazadas.
+            </p>
+            <p className="text-sm font-medium text-gray-700">
+              Sin cambiar tu ERP. Sin proyectos interminables.
+            </p>
+          </div>
+        </div>
       </div>
-
-      <a href="#soluciones" className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.6,
-            delay: 1,
-            repeat: Infinity,
-            repeatType: "reverse",
-            repeatDelay: 0.5,
-          }}
-          className="flex flex-col items-center gap-2 text-gray-400 hover:text-brand-500 transition-colors"
-        >
-          <span className="text-sm">Descubre más</span>
-          <svg
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </motion.div>
-      </a>
     </section>
   );
 }

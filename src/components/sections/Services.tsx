@@ -299,7 +299,7 @@ export function Services() {
   const activeService = SERVICES.find((s) => s.id === activeId);
 
   return (
-    <section id="soluciones" className="bg-surface py-24 lg:py-28">
+    <section id="soluciones" className="bg-surface pt-14 pb-24 lg:pt-18 lg:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeInView>
           <div className="inline-flex items-center gap-3 text-sm text-gray-500">

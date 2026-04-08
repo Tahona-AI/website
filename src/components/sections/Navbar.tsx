@@ -17,11 +17,8 @@ export function Navbar() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const main = document.querySelector("main");
-    const scrollElement = main || window;
-
     const handleScroll = () => {
-      const scrollTop = main ? main.scrollTop : window.scrollY;
+      const scrollTop = window.scrollY;
       setIsScrolled(scrollTop > 20);
     };
 
@@ -40,11 +37,11 @@ export function Navbar() {
     const sections = document.querySelectorAll("section[id]");
     sections.forEach((section) => observer.observe(section));
 
-    scrollElement.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
     handleScroll();
 
     return () => {
-      scrollElement.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       observer.disconnect();
     };
   }, []);
@@ -61,13 +58,11 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "bg-gray-50/80 backdrop-blur-xl border-b border-gray-200/80"
-            : "bg-transparent"
+          "fixed top-0 left-0 right-0 z-50 border-b border-gray-200/80 bg-white/88 backdrop-blur-xl transition-all duration-300",
+          isScrolled && "shadow-[0_18px_40px_-28px_rgba(31,31,31,0.55)]"
         )}
       >
-        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <nav className="mx-auto max-w-7xl border-x border-gray-200/80 px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 md:h-20 items-center justify-between">
             <a href="/" className="flex items-center gap-3">
                <img
@@ -91,7 +86,7 @@ export function Navbar() {
                     "text-sm font-medium transition-colors hover:text-brand-600",
                     activeSection === item.href
                       ? "text-brand-600"
-                      : "text-gray-600"
+                      : "text-gray-500"
                   )}
                 >
                   {item.label}
@@ -99,7 +94,7 @@ export function Navbar() {
               ))}
               <button
                 onClick={() => handleNavClick("#contacto")}
-                className="rounded-none bg-brand-600 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-700 cursor-pointer "
+                className="rounded-full bg-brand-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-700 cursor-pointer"
               >
                 ¿Hablamos?
               </button>
@@ -173,7 +168,7 @@ export function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navItems.length * 0.05 }}
                   onClick={() => handleNavClick("#contacto")}
-                  className="mt-4 rounded-none bg-brand-600 px-8 py-4 text-center text-base font-medium text-white transition-colors hover:bg-brand-700"
+                  className="mt-4 rounded-full bg-brand-600 px-8 py-4 text-center text-base font-medium text-white transition-colors hover:bg-brand-700"
                 >
                    ¿Hablamos?
                 </motion.button>
