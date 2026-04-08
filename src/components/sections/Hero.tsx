@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { FloatingPaths } from "@/components/kokonutui/background-paths";
+import { WavyBackground } from "@/components/ui/wavy-background";
 
 const capabilityTags = ["ERP", "CRM", "Documentos", "Operaciones"] as const;
 
@@ -18,15 +18,36 @@ export function Hero() {
       id="hero"
       className="relative overflow-hidden bg-white pt-16 md:pt-20"
     >
-      <div className="mx-auto max-w-7xl border-x border-gray-200/80">
-        <div className="relative min-h-[62svh] overflow-hidden lg:min-h-[66svh]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(127,184,158,0.18),transparent_30%),linear-gradient(145deg,rgba(252,254,253,0.98)_0%,rgba(238,247,242,0.96)_100%)]" />
-          <div className="absolute top-[-78%] bottom-[-38%] right-[-36%] w-[152%] rotate-[24deg] opacity-90">
-            <FloatingPaths position={1} />
-          </div>
-          <div className="absolute -bottom-20 right-10 h-72 w-72 rounded-full bg-brand-200/35 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 z-10">
+        <div className="absolute top-[-76%] bottom-[-36%] left-[-8%] right-[-8%] rotate-[24deg] opacity-95">
+          <WavyBackground
+            aria-hidden="true"
+            backgroundFill="rgba(252,254,253,0)"
+            blur={18}
+            className="hidden"
+            colors={[
+              "rgba(226,240,232,0.92)",
+              "rgba(183,211,194,0.96)",
+              "rgba(127,184,158,0.98)",
+              "rgba(45,106,79,0.92)",
+            ]}
+            containerClassName="h-full w-full"
+            speed="slow"
+            waveCount={6}
+            waveOpacity={0.5}
+            waveWidth={52}
+          />
+        </div>
+      </div>
 
-          <div className="relative z-10 flex min-h-[62svh] flex-col justify-center px-6 py-10 sm:px-10 sm:py-12 lg:min-h-[66svh] lg:px-12 lg:py-14 xl:px-16">
+      <div className="relative mx-auto max-w-7xl">
+        <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-0 flex justify-between">
+          <div className="h-full w-px bg-gray-200/80" />
+          <div className="h-full w-px bg-gray-200/80" />
+        </div>
+
+        <div className="relative min-h-[62svh] overflow-hidden lg:min-h-[66svh]">
+          <div className="relative z-20 flex min-h-[62svh] flex-col justify-center px-6 py-10 sm:px-10 sm:py-12 lg:min-h-[66svh] lg:px-12 lg:py-14 xl:px-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -43,7 +64,11 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[1.02] text-gray-900 lg:max-w-[52rem]"
             >
-              Sistemas de IA que encajan en tu operativa y empiezan a producir valor pronto.
+              Ya has probado la IA.
+              <br className="hidden md:block" />
+              Ahora toca hacerla funcionar
+              <br className="hidden md:block" />
+              en producción.
             </motion.h1>
 
             <motion.p
@@ -52,7 +77,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.35 }}
               className="mt-8 max-w-3xl text-[clamp(1rem,1.35vw,1.25rem)] leading-8 text-gray-500 lg:max-w-[38rem]"
             >
-              Diseñamos automatizaciones y agentes que entienden el contexto de tu empresa, se conectan con lo que ya usas y quitan trabajo manual sin montar un proyecto traumático.
+              Construimos sistemas de IA que entienden el contexto de tu empresa, se integran con tu operativa y resuelven trabajo real sin quedarse en prompts sueltos, automatizaciones frágiles o demos bonitas.
             </motion.p>
 
             <motion.div
@@ -65,17 +90,17 @@ export function Hero() {
                 onClick={() => handleScrollToSection("#contacto")}
                 className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-brand-600 px-7 text-base font-medium text-white shadow-[0_22px_45px_-24px_rgba(36,88,64,0.9)] transition-all hover:bg-brand-700 hover:shadow-[0_26px_55px_-24px_rgba(27,69,48,0.95)] cursor-pointer"
               >
-                Empezar ahora
+                Cuéntanos tu caso
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
                 </svg>
               </button>
 
               <button
-                onClick={() => handleScrollToSection("#soluciones")}
+                onClick={() => handleScrollToSection("#proceso")}
                 className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full border border-gray-300 bg-white/90 px-7 text-base font-medium text-gray-700 shadow-[0_16px_35px_-28px_rgba(31,31,31,0.45)] transition-all hover:border-brand-300 hover:text-brand-600 cursor-pointer"
               >
-                Ver soluciones
+                Ver cómo trabajamos
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
                 </svg>
