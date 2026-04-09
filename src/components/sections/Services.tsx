@@ -15,108 +15,56 @@ interface ServiceItem {
 
 const SERVICES: readonly ServiceItem[] = [
   {
-    id: "agents",
-    title: "Agentes de IA a medida",
-    description:
-      "Creamos agentes de inteligencia artificial especializados que trabajan de forma autónoma dentro de tus procesos de negocio. Estos agentes capturan el conocimiento de tus mejores empleados y lo aplican de manera consistente, escalable y disponible las 24 horas.",
-    points: [
-      "Agentes que comprenden el contexto específico de tu industria y empresa",
-      "Supervisión humana configurable con reglas de negocio claras",
-      "Integración nativa con tus herramientas existentes (CRM, ERP, email)",
-      "Aprendizaje continuo basado en retroalimentación y casos reales",
-    ],
-    tags: ["Producción", "Escalabilidad", "Integración"],
-  },
-  {
-    id: "automations",
-    title: "Automatizaciones complejas",
-    description:
-      "Diseñamos y orquestamos flujos de trabajo automatizados que conectan múltiples departamentos, sistemas y fuentes de datos. Eliminamos los cuellos de botella donde la información se pierde o depende de intervención manual.",
-    points: [
-      "Orquestación de procesos de negocio de extremo a extremo",
-      "Manejo inteligente de excepciones y casos borde",
-      "Validaciones automáticas con reglas configurables por tu equipo",
-      "Auditoría completa de cada decisión y acción tomada",
-    ],
-    tags: ["Eficiencia", "Trazabilidad", "Conectividad"],
-  },
-  {
     id: "strategy",
-    title: "Consultoría en estrategia IA",
+    title: "Estrategia y diagnóstico",
     description:
-      "Te ayudamos a definir una hoja de ruta clara para adoptar la inteligencia artificial en tu organización. Analizamos tus procesos actuales, identificamos oportunidades de alto impacto y priorizamos iniciativas según viabilidad y retorno de inversión.",
+      "Entramos donde la operación se atasca, vemos qué merece la pena automatizar y bajamos la IA a un plan ejecutable. No entregamos una presentación bonita: salimos con prioridades, casos de uso y una ruta clara para empezar sin perder meses.",
     points: [
-      "Diagnóstico operativo para identificar dónde la IA genera valor real",
-      "Roadmap priorizado con fases de implementación y hitos medibles",
-      "Evaluación de herramientas y tecnologías según tus necesidades específicas",
-      "Acompañamiento en la toma de decisiones técnicas y de inversión",
+      "Diagnóstico operativo para detectar cuellos de botella y tareas donde la IA sí encaja",
+      "Priorización por impacto, viabilidad y dependencia de datos o integraciones",
+      "Revisión del stack actual para decidir qué se aprovecha, qué falta y qué no merece tocar",
+      "Hoja de ruta con siguiente paso claro: base de datos, agente, automatización o formación",
     ],
-    tags: ["Estrategia", "Priorización", "ROI"],
+    tags: ["Diagnóstico", "Prioridad", "Ruta"],
   },
   {
     id: "context",
-    title: "Gestión del contexto empresarial",
+    title: "Contexto y base de datos para IA",
     description:
-      "Estructuramos la información y el conocimiento de tu empresa para que los sistemas de IA puedan utilizarlos efectivamente. Sin datos bien organizados, incluso la mejor inteligencia artificial produce resultados mediocres.",
+      "Ordenamos el conocimiento y conectamos las fuentes que la IA necesita para responder bien y actuar con criterio. Si la información está rota, dispersa o atrapada en documentos y sistemas aislados, primero construimos la base para que luego todo lo demás funcione.",
     points: [
-      "Diseño de arquitectura de información para consumo por agentes de IA",
-      "Unificación de datos dispersos en diferentes sistemas y formatos",
-      "Sistemas de recuperación de información inteligente (RAG avanzado)",
-      "Actualización automática del conocimiento sin intervención manual",
+      "Arquitectura de contexto para que agentes y asistentes lean lo correcto en cada caso",
+      "Unificación de datos desde CRM, ERP, APIs, hojas de cálculo y otras fuentes ya existentes",
+      "Procesamiento documental para pasar PDFs, imágenes y escaneos a datos utilizables",
+      "Pipelines de actualización y recuperación para que la base no se quede vieja ni dependa de trabajo manual",
     ],
-    tags: ["Fundación", "Datos", "Contexto"],
+    tags: ["Contexto", "Datos", "Documentos"],
   },
   {
-    id: "architecture",
-    title: "Arquitectura de datos para IA",
+    id: "agents",
+    title: "Agentes y automatizaciones",
     description:
-      "Construimos las infraestructuras de datos que hacen posibles los proyectos de inteligencia artificial a escala. Desde pipelines de ingestión hasta vectores stores optimizados, creamos la base técnica para que tus agentes accedan a la información correcta en el momento adecuado.",
+      "Construimos sistemas que hacen trabajo real dentro de la operación: resuelven, validan, enrutan, extraen, sincronizan y dejan trazabilidad. Aquí es donde la IA deja de ser experimento y pasa a convivir con tus procesos y tus herramientas de verdad.",
     points: [
-      "Diseño de pipelines de datos eficientes y mantenibles",
-      "Implementación de vector stores y bases de datos vectoriales",
-      "Integración con múltiples fuentes de datos (SQL, NoSQL, APIs, documentos)",
-      "Monitoreo y optimización continua del rendimiento",
+      "Agentes con contexto de negocio y nivel de supervisión ajustado al riesgo de cada tarea",
+      "Automatizaciones de extremo a extremo entre equipos, sistemas y puntos de decisión",
+      "Integraciones con herramientas existentes para mover datos sin rehacer toda la operativa",
+      "Reglas, validaciones, manejo de excepciones y auditoría para operar en producción",
     ],
-    tags: ["Infraestructura", "Escalabilidad", "Rendimiento"],
+    tags: ["Agentes", "Automatización", "Integración"],
   },
   {
     id: "training",
-    title: "Formación en sistemas IA",
+    title: "Formación y autonomía",
     description:
-      "Capacitamos a tus equipos en el uso avanzado de herramientas de inteligencia artificial como Claude Cowork y Openclaw. Transferimos conocimiento técnico y metodológico para que tu organización sea autosuficiente en la operación y evolución de los sistemas implementados.",
+      "Transferimos criterio y forma de trabajo para que tu equipo pueda usar, mantener y mejorar lo que montamos. No buscamos crear dependencia: buscamos que la IA se quede dentro de la empresa y no sólo en manos del proveedor.",
     points: [
-      "Formación práctica en prompting avanzado y orquestación de agentes",
-      "Workshops específicos para equipos técnicos y de negocio",
-      "Documentación y playbooks adaptados a tus procesos internos",
-      "Programas de mentoría para roles clave de tu organización",
+      "Formación práctica para negocio y equipo técnico, sin teoría sobrante",
+      "Playbooks, documentación y criterios de operación adaptados a procesos reales",
+      "Mentoría para responsables internos que luego se quedan llevando el sistema",
+      "Acompañamiento para que el siguiente caso no dependa siempre de nosotros",
     ],
-    tags: ["Capacitación", "Autonomía", "Conocimiento"],
-  },
-  {
-    id: "integration",
-    title: "Integración de sistemas",
-    description:
-      "Conectamos tus herramientas actuales para que funcionen como un ecosistema cohesionado. ERP, CRM, hojas de cálculo, sistemas de comunicación y bases de datos operan en sincronía sin necesidad de cambiar lo que ya funciona en tu organización.",
-    points: [
-      "Conectores robustos para sistemas empresariales líderes del mercado",
-      "Sincronización bidireccional de datos en tiempo real o por lotes",
-      "Mapeo y transformación de datos entre formatos incompatibles",
-      "Manejo de errores y reintentos automáticos para garantizar integridad",
-    ],
-    tags: ["Conectividad", "ERP", "CRM"],
-  },
-  {
-    id: "documents",
-    title: "Procesamiento documental con IA",
-    description:
-      "Automatizamos la extracción, clasificación y procesamiento de documentos de cualquier formato. Facturas, contratos, informes y comunicaciones se digitalizan estructuradamente, eliminando la entrada manual de datos y reduciendo errores de transcripción.",
-    points: [
-      "Extracción inteligente de datos desde PDFs, imágenes y escaneos",
-      "Clasificación automática de documentos por tipo y contenido",
-      "Validación de datos extraídos contra reglas de negocio configurables",
-      "Archivado estructurado con búsqueda semántica habilitada",
-    ],
-    tags: ["Documentos", "Extracción", "Precisión"],
+    tags: ["Formación", "Autonomía", "Equipo"],
   },
 ];
 
@@ -200,25 +148,6 @@ function ContextIllustration() {
   );
 }
 
-function ArchitectureIllustration() {
-  return (
-    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect x="20" y="25" width="55" height="40" rx="4" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <rect x="125" y="25" width="55" height="40" rx="4" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <rect x="72" y="90" width="55" height="45" rx="4" fill="#dcfce7" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M47 65V75H72" stroke="#16a34a" strokeWidth="1.5" strokeDasharray="3 2" />
-      <path d="M152 65V75H127" stroke="#16a34a" strokeWidth="1.5" strokeDasharray="3 2" />
-      <circle cx="47" cy="45" r="8" fill="#16a34a" opacity="0.3" />
-      <circle cx="152" cy="45" r="8" fill="#16a34a" opacity="0.3" />
-      <circle cx="100" cy="112" r="10" fill="#16a34a" opacity="0.4" />
-      <rect x="28" y="35" width="40" height="4" rx="2" fill="#16a34a" opacity="0.3" />
-      <rect x="28" y="44" width="30" height="3" rx="1.5" fill="#16a34a" opacity="0.2" />
-      <rect x="133" y="35" width="40" height="4" rx="2" fill="#16a34a" opacity="0.3" />
-      <rect x="133" y="44" width="30" height="3" rx="1.5" fill="#16a34a" opacity="0.2" />
-    </svg>
-  );
-}
-
 function TrainingIllustration() {
   return (
     <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
@@ -237,56 +166,11 @@ function TrainingIllustration() {
   );
 }
 
-function IntegrationIllustration() {
-  return (
-    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect x="25" y="50" width="45" height="60" rx="6" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <rect x="77" y="50" width="45" height="60" rx="6" fill="#dcfce7" stroke="#16a34a" strokeWidth="1.5" />
-      <rect x="130" y="50" width="45" height="60" rx="6" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M70 80H77" stroke="#16a34a" strokeWidth="3" />
-      <path d="M122 80H130" stroke="#16a34a" strokeWidth="3" />
-      <circle cx="47" cy="70" r="6" fill="#16a34a" opacity="0.4" />
-      <circle cx="100" cy="70" r="6" fill="#16a34a" opacity="0.6" />
-      <circle cx="152" cy="70" r="6" fill="#16a34a" opacity="0.4" />
-      <path d="M47 80V95" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M100 80V95" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M152 80V95" stroke="#16a34a" strokeWidth="1.5" />
-      <rect x="35" y="100" width="25" height="8" rx="2" fill="#16a34a" opacity="0.3" />
-      <rect x="87" y="100" width="25" height="8" rx="2" fill="#16a34a" opacity="0.3" />
-      <rect x="140" y="100" width="25" height="8" rx="2" fill="#16a34a" opacity="0.3" />
-    </svg>
-  );
-}
-
-function DocumentIllustration() {
-  return (
-    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect x="50" y="20" width="70" height="90" rx="4" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <rect x="60" y="35" width="50" height="4" rx="2" fill="#16a34a" opacity="0.3" />
-      <rect x="60" y="45" width="40" height="3" rx="1.5" fill="#16a34a" opacity="0.2" />
-      <rect x="60" y="52" width="45" height="3" rx="1.5" fill="#16a34a" opacity="0.2" />
-      <rect x="60" y="65" width="50" height="3" rx="1.5" fill="#16a34a" opacity="0.2" />
-      <rect x="60" y="72" width="35" height="3" rx="1.5" fill="#16a34a" opacity="0.2" />
-      <rect x="60" y="85" width="30" height="3" rx="1.5" fill="#16a34a" opacity="0.15" />
-      <circle cx="130" cy="50" r="25" fill="#dcfce7" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M120 50L126 56L140 42" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="110" y="85" width="55" height="50" rx="6" fill="#dcfce7" stroke="#16a34a" strokeWidth="1" />
-      <rect x="120" y="95" width="35" height="3" rx="1.5" fill="#16a34a" opacity="0.3" />
-      <rect x="120" y="105" width="30" height="3" rx="1.5" fill="#16a34a" opacity="0.2" />
-      <rect x="120" y="115" width="25" height="3" rx="1.5" fill="#16a34a" opacity="0.15" />
-    </svg>
-  );
-}
-
 const ILLUSTRATIONS: Record<string, React.FC> = {
-  agents: AgentIllustration,
-  automations: AutomationIllustration,
   strategy: StrategyIllustration,
   context: ContextIllustration,
-  architecture: ArchitectureIllustration,
+  agents: AutomationIllustration,
   training: TrainingIllustration,
-  integration: IntegrationIllustration,
-  documents: DocumentIllustration,
 };
 
 export function Services() {
@@ -313,10 +197,10 @@ export function Services() {
               <span className="font-medium text-gray-600">Servicios</span>
             </div>
             <h2 className="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 sm:text-4xl md:text-5xl">
-              Production AI que encaja en tu operativa
+              Lo que hacemos para que la IA funcione en producción
             </h2>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-500">
-              Desde agentes que trabajan de forma autónoma hasta la arquitectura de datos que los hace posibles.
+              No vendemos piezas sueltas. Entramos donde más bloquea hoy tu operación y construimos lo que hace falta para que la IA tenga contexto, encaje en tus sistemas y genere impacto real.
             </p>
           </FadeInView>
 
@@ -443,7 +327,7 @@ export function Services() {
                     >
                       <div className="inline-flex items-center gap-3 text-sm text-gray-500">
                         <span className="h-px w-10 bg-brand-300" />
-                        <span className="font-medium text-gray-600">Caso de uso</span>
+                        <span className="font-medium text-gray-600">Pilar</span>
                       </div>
                       <h3 className="mt-4 font-heading text-xl font-bold text-gray-900 lg:text-2xl">
                         {activeService.title}
@@ -492,7 +376,7 @@ export function Services() {
                           href="#contacto"
                           className="flex items-center gap-1 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700"
                         >
-                          Solicitar información
+                          Hablar de este frente
                           <svg
                             className="h-4 w-4"
                             fill="none"
@@ -532,10 +416,10 @@ export function Services() {
                         </svg>
                       </div>
                       <h3 className="font-heading text-lg font-semibold text-gray-900">
-                        Explore nuestros servicios
+                        Elige un pilar
                       </h3>
                       <p className="mt-3 max-w-sm text-sm leading-7 text-gray-500">
-                        Haz clic en cualquiera de los servicios de la izquierda para ver los detalles, capacidades y cómo pueden aplicarse a tu negocio.
+                        Abre uno de los cuatro frentes para ver dónde entra Tahona, qué resolvemos y cómo se conecta con un sistema de IA que sí puede operar en producción.
                       </p>
                     </motion.div>
                   )}

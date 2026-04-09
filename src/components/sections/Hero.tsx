@@ -3,8 +3,6 @@
 import { motion } from "motion/react";
 import { WavyBackground } from "@/components/ui/wavy-background";
 
-const capabilityTags = ["ERP", "CRM", "Documentos", "Operaciones"] as const;
-
 export function Hero() {
   const handleScrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -59,9 +57,9 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[1.02] text-gray-900 lg:max-w-[52rem]"
             >
-              Ya has probado la IA.
+              La mayoría prueba la IA.
               <br className="hidden md:block" />
-              Ahora toca hacerla funcionar
+              Muy pocas empresas consiguen que funcione
               <br className="hidden md:block" />
               en producción.
             </motion.h1>
@@ -72,7 +70,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.35 }}
               className="mt-8 max-w-3xl text-[clamp(1rem,1.35vw,1.25rem)] leading-8 text-gray-500 lg:max-w-[38rem]"
             >
-              Construimos sistemas de IA que entienden el contexto de tu empresa, se integran con tu operativa y resuelven trabajo real sin quedarse en prompts sueltos, automatizaciones frágiles o demos bonitas.
+              Tahona convierte experimentos, procesos manuales y conocimiento disperso en agentes, automatizaciones y capas de contexto que generan impacto real en el día a día.
             </motion.p>
 
             <motion.div
@@ -102,63 +100,9 @@ export function Hero() {
               </button>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.65 }}
-              className="mt-10 flex flex-wrap gap-2"
-            >
-              {capabilityTags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-gray-200 bg-gray-50 px-4 py-2 text-sm font-medium text-gray-500"
-                >
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
-
-            <div className="mt-10 flex justify-start lg:mt-12 lg:justify-end">
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.55 }}
-                className="w-full max-w-sm rounded-[2rem] border border-white/70 bg-white/84 p-6 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md lg:mr-2"
-              >
-                <p className="text-xs font-medium uppercase tracking-[0.22em] text-brand-600">
-                  Primer impacto
-                </p>
-                <p className="mt-4 font-heading text-4xl font-semibold text-gray-900">
-                  3 semanas
-                </p>
-                <p className="mt-3 text-sm leading-6 text-gray-500">
-                  para lanzar un primer sistema útil, conectado y medible sin rehacer tu stack.
-                </p>
-                <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-2xl border border-gray-200 bg-white px-4 py-3">
-                    <span className="block text-gray-400">Integración</span>
-                    <span className="mt-1 block font-medium text-gray-700">ERP + email</span>
-                  </div>
-                  <div className="rounded-2xl border border-gray-200 bg-white px-4 py-3">
-                    <span className="block text-gray-400">Gobierno</span>
-                    <span className="mt-1 block font-medium text-gray-700">Trazabilidad</span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-200/80 px-6 py-3 sm:px-10 lg:px-16">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <p className="max-w-2xl text-sm leading-6 text-gray-500">
-              Capas de inteligencia sobre tus herramientas actuales: menos trabajo manual, más contexto útil y decisiones mejor trazadas.
-            </p>
-            <p className="text-sm font-medium text-gray-700">
-              Sin cambiar tu ERP. Sin proyectos interminables.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
