@@ -1,5 +1,6 @@
 "use client";
 
+import { ScrollArea } from "@base-ui/react/scroll-area";
 import { useEffect, useRef, useState } from "react";
 import { FadeInView } from "@/components/animations/FadeInView";
 import { cn } from "@/lib/utils";
@@ -79,36 +80,64 @@ const steps: readonly Step[] = [
 export function HowWeWork() {
   const [activeStep, setActiveStep] = useState(0);
   const sectionRefs = useRef<Array<HTMLElement | null>>([]);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const currentStep = steps[activeStep] ?? steps[0];
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    const viewport = viewportRef.current;
+    if (!viewport) return;
 
-        const current = visibleEntries[0];
-        if (!current) return;
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
 
-        const index = Number(
-          (current.target as HTMLElement).dataset.stepIndex ?? "-1",
-        );
+    const createObserver = () =>
+      new IntersectionObserver(
+        (entries) => {
+          const visibleEntries = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
 
-        if (!Number.isNaN(index) && index >= 0) {
-          setActiveStep(index);
-        }
-      },
-      {
-        rootMargin: "-18% 0px -42% 0px",
-        threshold: [0.25, 0.5, 0.75],
-      },
-    );
+          const current = visibleEntries[0];
+          if (!current) return;
 
-    sectionRefs.current.forEach((element) => {
-      if (element) observer.observe(element);
-    });
+          if (!(current.target instanceof HTMLElement)) return;
 
-    return () => observer.disconnect();
+          const index = Number(current.target.dataset.stepIndex ?? "-1");
+
+          if (!Number.isNaN(index) && index >= 0) {
+            setActiveStep(index);
+          }
+        },
+        {
+          root: desktopQuery.matches ? viewport : null,
+          rootMargin: desktopQuery.matches
+            ? "-16% 0px -40% 0px"
+            : "-18% 0px -42% 0px",
+          threshold: [0.35, 0.55, 0.75],
+        },
+      );
+
+    let observer = createObserver();
+
+    const observeSections = () => {
+      sectionRefs.current.forEach((element) => {
+        if (element) observer.observe(element);
+      });
+    };
+
+    observeSections();
+
+    const handleBreakpointChange = () => {
+      observer.disconnect();
+      observer = createObserver();
+      observeSections();
+    };
+
+    desktopQuery.addEventListener("change", handleBreakpointChange);
+
+    return () => {
+      desktopQuery.removeEventListener("change", handleBreakpointChange);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -130,6 +159,23 @@ export function HowWeWork() {
         <div className="mt-16 grid gap-10 lg:grid-cols-12 lg:gap-16">
           <FadeInView className="lg:col-span-4">
             <aside className="lg:sticky lg:top-28">
+              <div className="mb-10">
+                <p className="text-xs font-medium uppercase tracking-[0.18em] text-brand-700">
+                  Paso activo
+                </p>
+                <div
+                  aria-live="polite"
+                  className="mt-3 flex items-end gap-3 text-gray-900"
+                >
+                  <span className="font-heading text-6xl font-semibold leading-none sm:text-7xl">
+                    {currentStep.number}
+                  </span>
+                  <span className="pb-2 text-sm font-medium text-gray-500">
+                    {currentStep.tab}
+                  </span>
+                </div>
+              </div>
+
               <div className="space-y-3">
                 {steps.map((step, index) => {
                   const isActive = index === activeStep;
@@ -196,51 +242,62 @@ export function HowWeWork() {
           </FadeInView>
 
           <div className="lg:col-span-8">
-            {steps.map((step, index) => {
-              const isActive = index === activeStep;
+            <ScrollArea.Root className="relative lg:h-[42rem]">
+              <ScrollArea.Viewport
+                ref={viewportRef}
+                className="scrollbar-hidden max-h-none overflow-y-visible pr-1 lg:h-full lg:overflow-y-auto lg:pr-6"
+              >
+                <ScrollArea.Content>
+                  {steps.map((step, index) => {
+                    const isActive = index === activeStep;
 
-              return (
-                <section
-                  key={step.number}
-                  ref={(element) => {
-                    sectionRefs.current[index] = element;
-                  }}
-                  data-step-index={index}
-                  className="flex min-h-[35vh] scroll-mt-28 flex-col justify-center py-4 first:pt-0 last:pb-0 lg:min-h-[40vh]"
-                >
-                  <FadeInView>
-                    <p
-                      className={cn(
-                        "text-sm font-medium uppercase tracking-[0.12em]",
-                        isActive ? "text-brand-700" : "text-gray-400",
-                      )}
-                    >
-                      Paso {step.number}
-                    </p>
-                    <h3 className="mt-4 max-w-3xl font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl">
-                      {step.title}
-                    </h3>
-                    <p className="mt-5 max-w-3xl text-lg leading-relaxed text-gray-600 text-pretty">
-                      {step.intro}
-                    </p>
+                    return (
+                      <section
+                        key={step.number}
+                        ref={(element) => {
+                          sectionRefs.current[index] = element;
+                        }}
+                        data-step-index={index}
+                        className="flex min-h-[30rem] scroll-mt-28 flex-col justify-center py-6 first:pt-0 last:pb-0 lg:min-h-[36rem]"
+                      >
+                        <FadeInView>
+                          <div className="max-w-3xl rounded-[2rem] bg-white/92 py-1">
+                            <p
+                              className={cn(
+                                "text-sm font-medium uppercase tracking-[0.12em] transition-colors",
+                                isActive ? "text-brand-700" : "text-gray-400",
+                              )}
+                            >
+                              Paso {step.number}
+                            </p>
+                            <h3 className="mt-4 font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl">
+                              {step.title}
+                            </h3>
+                            <p className="mt-5 text-lg leading-relaxed text-gray-600 text-pretty">
+                              {step.intro}
+                            </p>
 
-                    <div className="mt-8 space-y-5">
-                      {step.bullets.map((bullet) => (
-                        <div key={bullet} className="max-w-3xl pl-5">
-                          <p className="relative text-base leading-relaxed text-gray-700 text-pretty before:absolute before:left-[-1.25rem] before:top-[0.72rem] before:h-1.5 before:w-1.5 before:rounded-full before:bg-brand-500">
-                            {bullet}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
+                            <div className="mt-8 space-y-5">
+                              {step.bullets.map((bullet) => (
+                                <div key={bullet} className="pl-5">
+                                  <p className="relative text-base leading-relaxed text-gray-700 text-pretty before:absolute before:left-[-1.25rem] before:top-[0.72rem] before:h-1.5 before:w-1.5 before:rounded-full before:bg-brand-500">
+                                    {bullet}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
 
-                    <p className="mt-8 max-w-3xl text-sm font-medium text-brand-700 text-pretty">
-                      Resultado esperado: {step.outcome}
-                    </p>
-                  </FadeInView>
-                </section>
-              );
-            })}
+                            <p className="mt-8 text-sm font-medium text-brand-700 text-pretty">
+                              Resultado esperado: {step.outcome}
+                            </p>
+                          </div>
+                        </FadeInView>
+                      </section>
+                    );
+                  })}
+                </ScrollArea.Content>
+              </ScrollArea.Viewport>
+            </ScrollArea.Root>
           </div>
         </div>
       </div>

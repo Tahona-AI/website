@@ -22,6 +22,15 @@
   border: 2px solid #ffffff;
 }
 
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
 @theme inline {
   /* Typography - Brand Fonts */
   --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
