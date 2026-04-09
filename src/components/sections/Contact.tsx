@@ -29,6 +29,25 @@ interface ContactFormData {
   details: string;
 }
 
+function LabelInputContainer({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return <div className={cn("flex w-full flex-col gap-2.5", className)}>{children}</div>;
+}
+
+function ButtonBottomGradient() {
+  return (
+    <>
+      <span className="pointer-events-none absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-brand-200/85 to-transparent opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100" />
+      <span className="pointer-events-none absolute inset-x-12 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-brand-100 to-transparent opacity-0 blur-sm transition-opacity duration-300 group-hover/btn:opacity-100" />
+    </>
+  );
+}
+
 const trustBadges = [
   { icon: ClockIcon, text: "Respuesta en 24h" },
   { icon: UserCheckIcon, text: "Hablamos de tu caso concreto" },
@@ -137,11 +156,6 @@ export function Contact() {
         <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-48 bg-[linear-gradient(180deg,rgba(255,255,255,1)_0%,rgba(249,249,249,0.94)_38%,rgba(245,244,246,0.78)_74%,rgba(245,244,246,0)_100%)]" />
 
         <div className="relative mx-auto max-w-7xl">
-          <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 hidden justify-between lg:flex">
-            <div className="h-full w-px bg-gray-200/80" />
-            <div className="h-full w-px bg-gray-200/80" />
-          </div>
-
           <div className="relative z-20 px-6 sm:px-10 lg:px-16">
             <div>
               <div className="inline-flex items-center gap-3 text-sm text-gray-500">
@@ -171,7 +185,7 @@ export function Contact() {
                 <div className="mt-6 border-t border-white/70 pt-2">
                   <a
                     href="mailto:info@tahona.ai"
-                    className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 shadow-[0_20px_50px_-42px_rgba(31,31,31,0.45)] transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700 hover:shadow-[0_28px_60px_-44px_rgba(31,31,31,0.48)]"
+                    className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700"
                   >
                     <span className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 shadow-[0_18px_40px_-30px_rgba(36,88,64,0.38)] transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
                       <EnvelopeIcon className="h-5 w-5" />
@@ -185,7 +199,7 @@ export function Contact() {
 
                   <a
                     href="tel:+34606518235"
-                    className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 shadow-[0_20px_50px_-42px_rgba(31,31,31,0.45)] transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700 hover:shadow-[0_28px_60px_-44px_rgba(31,31,31,0.48)]"
+                    className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700"
                   >
                     <span className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 shadow-[0_18px_40px_-30px_rgba(36,88,64,0.38)] transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
                       <PhoneIcon className="h-5 w-5" />
@@ -214,91 +228,114 @@ export function Contact() {
 
             <div className="relative overflow-hidden rounded-[2rem] border border-white/75 bg-white/84 p-6 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md sm:p-8 lg:col-span-7 lg:p-10">
               <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.92)_48%,rgba(240,247,243,0.78)_100%)]" aria-hidden="true" />
-              <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-gray-800">Nombre</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    placeholder="Tu nombre"
-                    required
-                     value={formData.name}
-                     onChange={handleInputChange}
-                     aria-invalid={Boolean(errors.name)}
-                     aria-describedby={errors.name ? "contact-name-error" : undefined}
-                     className={cn(
-                      "relative h-12 rounded-xl border-white/80 bg-white/92 shadow-[0_18px_40px_-34px_rgba(31,31,31,0.55)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none focus-visible:border-brand-500 focus-visible:bg-white focus-visible:ring-brand-500/20",
-                      errors.name && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30"
-                    )}
-                  />
-                  {errors.name && (
-                    <p id="contact-name-error" className="text-sm text-red-600" role="alert">{errors.name}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-gray-800">Correo Electrónico</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="tu@empresa.com"
-                    required
-                     value={formData.email}
-                     onChange={handleInputChange}
-                     aria-invalid={Boolean(errors.email)}
-                     aria-describedby={errors.email ? "contact-email-error" : undefined}
-                     className={cn(
-                      "relative h-12 rounded-xl border-white/80 bg-white/92 shadow-[0_18px_40px_-34px_rgba(31,31,31,0.55)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none focus-visible:border-brand-500 focus-visible:bg-white focus-visible:ring-brand-500/20",
-                      errors.email && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30"
-                    )}
-                  />
-                  {errors.email && (
-                    <p id="contact-email-error" className="text-sm text-red-600" role="alert">{errors.email}</p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="details" className="text-gray-800">¿Qué te quita más tiempo?</Label>
-                  <Textarea
-                    id="details"
-                    name="details"
-                    placeholder="¿Qué proceso te quita más tiempo hoy? ¿Qué información se pierde o se retrasa entre equipos?"
-                    rows={4}
-                    required
-                     value={formData.details}
-                     onChange={handleInputChange}
-                     aria-invalid={Boolean(errors.details)}
-                     aria-describedby={errors.details ? "contact-details-error" : undefined}
-                     className={cn(
-                      "relative min-h-36 rounded-[1.25rem] border-white/80 bg-white/92 shadow-[0_18px_40px_-34px_rgba(31,31,31,0.55)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none focus-visible:border-brand-500 focus-visible:bg-white focus-visible:ring-brand-500/20",
-                      errors.details && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30"
-                    )}
-                  />
-                  {errors.details && (
-                    <p id="contact-details-error" className="text-sm text-red-600" role="alert">{errors.details}</p>
-                  )}
-                </div>
-
-                <div className="relative border-t border-white/70 pt-5">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="max-w-xs text-sm text-gray-600">Te contestamos en menos de 24 horas con un siguiente paso claro.</p>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="inline-flex min-h-12 items-center justify-center rounded-xl bg-brand-600 px-8 py-3 text-sm font-medium text-white shadow-[0_22px_45px_-24px_rgba(36,88,64,0.9)] transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-[0_26px_55px_-24px_rgba(27,69,48,0.95)] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
-                    >
-                      {isSubmitting ? "Enviando..." : "Enviar mensaje"}
-                    </button>
-                  </div>
-                </div>
-
-                {errors.submit && (
-                  <p className="text-sm text-red-600" role="alert">
-                    {errors.submit}
+              <div className="relative z-10 mx-auto w-full max-w-3xl rounded-[1.75rem] bg-transparent p-5 sm:p-7">
+                <div>
+                  <h3 className="font-heading text-[1.9rem] font-semibold tracking-[-0.03em] text-gray-900 sm:text-[2.15rem]">
+                    Cuéntanos tu caso
+                  </h3>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-[0.95rem]">
+                    Si hay encaje, te respondemos con el siguiente paso más claro para tu operativa.
                   </p>
-                )}
-              </form>
+                </div>
+
+                <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <LabelInputContainer>
+                      <Label htmlFor="name" className="text-[0.95rem] font-semibold text-gray-900">Nombre</Label>
+                      <Input
+                        id="name"
+                        name="name"
+                        placeholder="Tu nombre"
+                        required
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        aria-invalid={Boolean(errors.name)}
+                        aria-describedby={errors.name ? "contact-name-error" : undefined}
+                        className={cn(
+                          "h-12 rounded-[1.1rem] border border-[#d7ddd8] bg-[#f8faf8] px-4 text-[0.98rem] text-gray-900 shadow-[0_2px_3px_-1px_rgba(0,0,0,0.08),0_1px_0_0_rgba(25,28,33,0.02),0_0_0_1px_rgba(25,28,33,0.06)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none placeholder:text-gray-400 focus-visible:border-brand-400 focus-visible:bg-white focus-visible:ring-brand-500/15",
+                          errors.name && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/25"
+                        )}
+                      />
+                      {errors.name && (
+                        <p id="contact-name-error" className="text-sm text-red-600" role="alert">{errors.name}</p>
+                      )}
+                    </LabelInputContainer>
+
+                    <LabelInputContainer>
+                      <Label htmlFor="email" className="text-[0.95rem] font-semibold text-gray-900">Correo electrónico</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="tu@empresa.com"
+                        required
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        aria-invalid={Boolean(errors.email)}
+                        aria-describedby={errors.email ? "contact-email-error" : undefined}
+                        className={cn(
+                          "h-12 rounded-[1.1rem] border border-[#d7ddd8] bg-[#f8faf8] px-4 text-[0.98rem] text-gray-900 shadow-[0_2px_3px_-1px_rgba(0,0,0,0.08),0_1px_0_0_rgba(25,28,33,0.02),0_0_0_1px_rgba(25,28,33,0.06)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none placeholder:text-gray-400 focus-visible:border-brand-400 focus-visible:bg-white focus-visible:ring-brand-500/15",
+                          errors.email && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/25"
+                        )}
+                      />
+                      {errors.email && (
+                        <p id="contact-email-error" className="text-sm text-red-600" role="alert">{errors.email}</p>
+                      )}
+                    </LabelInputContainer>
+                  </div>
+
+                  <LabelInputContainer>
+                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">¿Qué te quita más tiempo?</Label>
+                    <Textarea
+                      id="details"
+                      name="details"
+                      placeholder="¿Qué proceso se retrasa más? ¿Dónde se pierde información entre equipos?"
+                      rows={5}
+                      required
+                      value={formData.details}
+                      onChange={handleInputChange}
+                      aria-invalid={Boolean(errors.details)}
+                      aria-describedby={errors.details ? "contact-details-error" : undefined}
+                      className={cn(
+                        "min-h-40 rounded-[1.35rem] border border-[#d7ddd8] bg-[#f8faf8] px-4 py-3 text-[0.98rem] leading-relaxed text-gray-900 shadow-[0_2px_3px_-1px_rgba(0,0,0,0.08),0_1px_0_0_rgba(25,28,33,0.02),0_0_0_1px_rgba(25,28,33,0.06)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none placeholder:text-gray-400 focus-visible:border-brand-400 focus-visible:bg-white focus-visible:ring-brand-500/15",
+                        errors.details && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/25"
+                      )}
+                    />
+                    {errors.details && (
+                      <p id="contact-details-error" className="text-sm text-red-600" role="alert">{errors.details}</p>
+                    )}
+                  </LabelInputContainer>
+
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-[#cad5ce] to-transparent" aria-hidden="true" />
+
+                  <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                    <p className="max-w-sm text-sm leading-relaxed text-gray-600">
+                      Te contestamos en menos de 24 horas con una recomendación concreta, sin compromiso.
+                    </p>
+
+                    <div className="flex w-full flex-col gap-3 md:w-auto md:items-end">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="group/btn relative inline-flex min-h-12 w-full items-center justify-center overflow-hidden rounded-[1.15rem] bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 px-7 py-3 text-sm font-semibold text-white shadow-[0_1px_0_0_#ffffff30_inset,0_-1px_0_0_#ffffff12_inset,0_18px_40px_-24px_rgba(36,88,64,0.72)] transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:shadow-[0_24px_46px_-24px_rgba(36,88,64,0.78)] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 md:min-w-[220px]"
+                      >
+                        <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/30" aria-hidden="true" />
+                        <span className="relative inline-flex items-center gap-2">
+                          {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+                          {!isSubmitting && <span aria-hidden="true">→</span>}
+                        </span>
+                        <ButtonBottomGradient />
+                      </button>
+
+                      {errors.submit && (
+                        <p className="text-sm text-red-600 md:max-w-[220px]" role="alert">
+                          {errors.submit}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
