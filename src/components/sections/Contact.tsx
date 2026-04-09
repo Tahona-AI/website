@@ -133,63 +133,73 @@ export function Contact() {
 
   return (
     <>
-      <section id="contacto" className="bg-white py-24 relative">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div>
-            <div className="inline-flex items-center gap-3 text-sm text-gray-500">
-              <span className="h-px w-10 bg-brand-300" />
-              <span className="font-medium text-gray-600">Contacto directo</span>
-            </div>
-            <h2 className="mt-4 max-w-4xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-              ¿Hablamos de tu negocio?
-            </h2>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 text-pretty md:text-lg">
-              Cuéntanos qué te quita más tiempo en el día a día. Una llamada de 20 minutos para ver si podemos ayudarte.
-            </p>
+      <section id="contacto" className="relative overflow-hidden bg-surface py-24">
+        <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-48 bg-[linear-gradient(180deg,rgba(255,255,255,1)_0%,rgba(249,249,249,0.94)_38%,rgba(245,244,246,0.78)_74%,rgba(245,244,246,0)_100%)]" />
+
+        <div className="relative mx-auto max-w-7xl">
+          <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-10 hidden justify-between lg:flex">
+            <div className="h-full w-px bg-gray-200/80" />
+            <div className="h-full w-px bg-gray-200/80" />
           </div>
+
+          <div className="relative z-20 px-6 sm:px-10 lg:px-16">
+            <div>
+              <div className="inline-flex items-center gap-3 text-sm text-gray-500">
+                <span className="h-px w-10 bg-brand-300" />
+                <span className="font-medium text-gray-600">Contacto directo</span>
+              </div>
+              <h2 className="mt-4 max-w-4xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
+                ¿Hablamos de tu negocio?
+              </h2>
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 text-pretty md:text-lg">
+                Cuéntanos qué te quita más tiempo en el día a día. Una llamada de 20 minutos para ver si podemos ayudarte.
+              </p>
+            </div>
 
           <div className="mt-14 grid gap-14 lg:grid-cols-12 lg:gap-16">
             <div className="space-y-8 lg:col-span-5">
-              <div className="space-y-3">
-                <p className="text-sm font-medium uppercase tracking-[0.12em] text-brand-700">
-                  Respuesta clara, sin vueltas
-                </p>
-                <p className="max-w-lg text-base leading-relaxed text-gray-600 text-pretty">
-                  Te respondemos con un enfoque práctico: si hay encaje, te contamos por dónde empezar y qué resultado puedes esperar en primeras semanas.
-                </p>
+              <div className="rounded-[1.75rem] border border-white/75 bg-white/78 p-6 shadow-[0_24px_70px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md sm:p-7">
+                <div className="space-y-3">
+                  <p className="text-sm font-medium uppercase tracking-[0.12em] text-brand-700">
+                    Respuesta clara, sin vueltas
+                  </p>
+                  <p className="max-w-lg text-base leading-relaxed text-gray-600 text-pretty">
+                    Te respondemos con un enfoque práctico: si hay encaje, te contamos por dónde empezar y qué resultado puedes esperar en primeras semanas.
+                  </p>
+                </div>
+
+                <div className="mt-6 border-t border-white/70 pt-2">
+                  <a
+                    href="mailto:info@tahona.ai"
+                    className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 shadow-[0_20px_50px_-42px_rgba(31,31,31,0.45)] transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700 hover:shadow-[0_28px_60px_-44px_rgba(31,31,31,0.48)]"
+                  >
+                    <span className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 shadow-[0_18px_40px_-30px_rgba(36,88,64,0.38)] transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
+                      <EnvelopeIcon className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Correo</p>
+                      <p className="mt-1 font-heading text-xl font-semibold text-gray-900">info@tahona.ai</p>
+                      <p className="mt-1 text-sm text-gray-600">Ideal si quieres compartir contexto de tu operativa.</p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="tel:+34606518235"
+                    className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 shadow-[0_20px_50px_-42px_rgba(31,31,31,0.45)] transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700 hover:shadow-[0_28px_60px_-44px_rgba(31,31,31,0.48)]"
+                  >
+                    <span className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 shadow-[0_18px_40px_-30px_rgba(36,88,64,0.38)] transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
+                      <PhoneIcon className="h-5 w-5" />
+                    </span>
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Teléfono</p>
+                      <p className="mt-1 font-heading text-xl font-semibold text-gray-900">+34 606 518 235</p>
+                      <p className="mt-1 text-sm text-gray-600">Si prefieres resolverlo rápido, lo vemos en una llamada.</p>
+                    </div>
+                  </a>
+                </div>
               </div>
 
-              <div className="border-t border-gray-200">
-                <a
-                  href="mailto:info@tahona.ai"
-                  className="group flex items-start gap-4 border-b border-gray-100 py-5 transition-colors duration-200 motion-reduce:transition-none hover:text-brand-700"
-                >
-                  <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center bg-brand-50 text-brand-600 transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
-                    <EnvelopeIcon className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Correo</p>
-                    <p className="mt-1 font-heading text-xl font-semibold text-gray-900">info@tahona.ai</p>
-                    <p className="mt-1 text-sm text-gray-600">Ideal si quieres compartir contexto de tu operativa.</p>
-                  </div>
-                </a>
-
-                <a
-                  href="tel:+34606518235"
-                  className="group flex items-start gap-4 border-b border-gray-100 py-5 transition-colors duration-200 motion-reduce:transition-none hover:text-brand-700"
-                >
-                  <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center bg-brand-50 text-brand-600 transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
-                    <PhoneIcon className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Teléfono</p>
-                    <p className="mt-1 font-heading text-xl font-semibold text-gray-900">+34 606 518 235</p>
-                    <p className="mt-1 text-sm text-gray-600">Si prefieres resolverlo rápido, lo vemos en una llamada.</p>
-                  </div>
-                </a>
-              </div>
-
-              <div className="space-y-3">
+              <div className="space-y-3 rounded-[1.75rem] border border-white/70 bg-white/68 p-6 shadow-[0_22px_60px_-48px_rgba(31,31,31,0.4)] backdrop-blur-md">
                 {trustBadges.map((badge) => {
                   const Icon = badge.icon;
                   return (
@@ -202,9 +212,9 @@ export function Contact() {
               </div>
             </div>
 
-            <div className="relative bg-gray-50/70 p-6 sm:p-8 lg:col-span-7 lg:p-10">
-              <div className="pointer-events-none absolute left-0 top-0 h-full w-px bg-brand-200" aria-hidden="true" />
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/75 bg-white/84 p-6 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md sm:p-8 lg:col-span-7 lg:p-10">
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.92)_48%,rgba(240,247,243,0.78)_100%)]" aria-hidden="true" />
+              <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-gray-800">Nombre</Label>
                   <Input
@@ -212,12 +222,12 @@ export function Contact() {
                     name="name"
                     placeholder="Tu nombre"
                     required
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    aria-invalid={Boolean(errors.name)}
-                    aria-describedby={errors.name ? "contact-name-error" : undefined}
-                    className={cn(
-                      "h-11 rounded-none border-gray-300 bg-white shadow-none transition-colors duration-200 motion-reduce:transition-none focus-visible:border-brand-500 focus-visible:ring-brand-500/30",
+                     value={formData.name}
+                     onChange={handleInputChange}
+                     aria-invalid={Boolean(errors.name)}
+                     aria-describedby={errors.name ? "contact-name-error" : undefined}
+                     className={cn(
+                      "relative h-12 rounded-xl border-white/80 bg-white/92 shadow-[0_18px_40px_-34px_rgba(31,31,31,0.55)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none focus-visible:border-brand-500 focus-visible:bg-white focus-visible:ring-brand-500/20",
                       errors.name && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30"
                     )}
                   />
@@ -234,12 +244,12 @@ export function Contact() {
                     type="email"
                     placeholder="tu@empresa.com"
                     required
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    aria-invalid={Boolean(errors.email)}
-                    aria-describedby={errors.email ? "contact-email-error" : undefined}
-                    className={cn(
-                      "h-11 rounded-none border-gray-300 bg-white shadow-none transition-colors duration-200 motion-reduce:transition-none focus-visible:border-brand-500 focus-visible:ring-brand-500/30",
+                     value={formData.email}
+                     onChange={handleInputChange}
+                     aria-invalid={Boolean(errors.email)}
+                     aria-describedby={errors.email ? "contact-email-error" : undefined}
+                     className={cn(
+                      "relative h-12 rounded-xl border-white/80 bg-white/92 shadow-[0_18px_40px_-34px_rgba(31,31,31,0.55)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none focus-visible:border-brand-500 focus-visible:bg-white focus-visible:ring-brand-500/20",
                       errors.email && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30"
                     )}
                   />
@@ -256,12 +266,12 @@ export function Contact() {
                     placeholder="¿Qué proceso te quita más tiempo hoy? ¿Qué información se pierde o se retrasa entre equipos?"
                     rows={4}
                     required
-                    value={formData.details}
-                    onChange={handleInputChange}
-                    aria-invalid={Boolean(errors.details)}
-                    aria-describedby={errors.details ? "contact-details-error" : undefined}
-                    className={cn(
-                      "min-h-36 rounded-none border-gray-300 bg-white shadow-none transition-colors duration-200 motion-reduce:transition-none focus-visible:border-brand-500 focus-visible:ring-brand-500/30",
+                     value={formData.details}
+                     onChange={handleInputChange}
+                     aria-invalid={Boolean(errors.details)}
+                     aria-describedby={errors.details ? "contact-details-error" : undefined}
+                     className={cn(
+                      "relative min-h-36 rounded-[1.25rem] border-white/80 bg-white/92 shadow-[0_18px_40px_-34px_rgba(31,31,31,0.55)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none focus-visible:border-brand-500 focus-visible:bg-white focus-visible:ring-brand-500/20",
                       errors.details && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/30"
                     )}
                   />
@@ -270,13 +280,13 @@ export function Contact() {
                   )}
                 </div>
 
-                <div className="border-t border-gray-200 pt-5">
+                <div className="relative border-t border-white/70 pt-5">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <p className="max-w-xs text-sm text-gray-600">Te contestamos en menos de 24 horas con un siguiente paso claro.</p>
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="inline-flex min-h-11 items-center justify-center rounded-none bg-brand-600 px-8 py-3 text-sm font-medium text-white transition-colors duration-200 motion-reduce:transition-none hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="inline-flex min-h-12 items-center justify-center rounded-xl bg-brand-600 px-8 py-3 text-sm font-medium text-white shadow-[0_22px_45px_-24px_rgba(36,88,64,0.9)] transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-[0_26px_55px_-24px_rgba(27,69,48,0.95)] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
                     >
                       {isSubmitting ? "Enviando..." : "Enviar mensaje"}
                     </button>
@@ -292,21 +302,22 @@ export function Contact() {
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/45 p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-lg bg-white p-8 shadow-xl sm:p-10">
-            <div className="pointer-events-none absolute left-0 top-0 h-full w-px bg-brand-200" aria-hidden="true" />
+          <div className="relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/80 bg-white/92 p-8 shadow-[0_34px_90px_-38px_rgba(31,31,31,0.5)] backdrop-blur-md sm:p-10">
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.95)_52%,rgba(240,247,243,0.8)_100%)]" aria-hidden="true" />
             <button
               type="button"
               onClick={() => setShowModal(false)}
               aria-label="Cerrar"
-              className="absolute right-4 top-4 text-gray-400 transition-colors duration-200 motion-reduce:transition-none hover:text-gray-700"
+              className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/75 bg-white/78 text-gray-400 shadow-[0_16px_40px_-32px_rgba(31,31,31,0.45)] transition-colors duration-200 motion-reduce:transition-none hover:text-gray-700"
             >
               <XIcon className="h-5 w-5" />
             </button>
-            <div>
+            <div className="relative">
               <div className="inline-flex items-center gap-3 text-sm text-gray-500">
                 <span className="h-px w-8 bg-brand-300" />
                 <span className="font-medium text-gray-600">Mensaje recibido</span>
@@ -318,15 +329,15 @@ export function Contact() {
                 Te contestamos en menos de 24 horas.
               </p>
 
-              <div className="mt-6 flex items-center gap-3 border-t border-gray-200 pt-5 text-sm text-gray-600">
-                 <EnvelopeIcon className="h-4 w-4 text-brand-600" />
-                <span>Si lo prefieres, también puedes escribir a info@tahona.ai</span>
-              </div>
+                <div className="mt-6 flex items-center gap-3 border-t border-gray-200 pt-5 text-sm text-gray-600">
+                  <EnvelopeIcon className="h-4 w-4 text-brand-600" />
+                  <span>Si lo prefieres, también puedes escribir a info@tahona.ai</span>
+                </div>
 
               <button
                 type="button"
                 onClick={() => setShowModal(false)}
-                className="mt-8 inline-flex min-h-11 items-center justify-center rounded-none bg-brand-600 px-8 py-3 text-sm font-medium text-white transition-colors duration-200 motion-reduce:transition-none hover:bg-brand-700"
+                className="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl bg-brand-600 px-8 py-3 text-sm font-medium text-white shadow-[0_22px_45px_-24px_rgba(36,88,64,0.9)] transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-[0_26px_55px_-24px_rgba(27,69,48,0.95)]"
               >
                 Cerrar
               </button>
