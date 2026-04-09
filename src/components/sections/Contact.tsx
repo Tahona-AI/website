@@ -49,9 +49,9 @@ function ButtonBottomGradient() {
 }
 
 const trustBadges = [
-  { icon: ClockIcon, text: "Respuesta en 24h" },
-  { icon: UserCheckIcon, text: "Hablamos de tu caso concreto" },
-  { icon: ShieldIcon, text: "Sin compromiso" },
+  { icon: ClockIcon, text: "Respuesta en 24h laborables" },
+  { icon: UserCheckIcon, text: "Primera valoración concreta" },
+  { icon: ShieldIcon, text: "Sin compromiso ni presión comercial" },
 ];
 
 function isFormField(value: string): value is FormField {
@@ -163,10 +163,10 @@ export function Contact() {
                 <span className="font-medium text-gray-600">Contacto directo</span>
               </div>
               <h2 className="mt-4 max-w-4xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-                ¿Hablamos de tu negocio?
+                ¿Qué proceso se te está atascando?
               </h2>
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 text-pretty md:text-lg">
-                Cuéntanos qué te quita más tiempo en el día a día. Una llamada de 20 minutos para ver si podemos ayudarte.
+                Cuéntanos dónde se te va tiempo, seguimiento o información. Lo revisamos contigo y te decimos si tiene sentido abordarlo y por dónde empezar.
               </p>
             </div>
 
@@ -175,10 +175,10 @@ export function Contact() {
               <div className="rounded-[1.75rem] border border-white/75 bg-white/78 p-6 shadow-[0_24px_70px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md sm:p-7">
                 <div className="space-y-3">
                   <p className="text-sm font-medium uppercase tracking-[0.12em] text-brand-700">
-                    Respuesta clara, sin vueltas
+                    Un siguiente paso claro
                   </p>
                   <p className="max-w-lg text-base leading-relaxed text-gray-600 text-pretty">
-                    Te respondemos con un enfoque práctico: si hay encaje, te contamos por dónde empezar y qué resultado puedes esperar en primeras semanas.
+                    Te respondemos con criterio práctico: si vemos una oportunidad clara, te diremos qué revisar primero y qué cambio tendría más sentido mover antes.
                   </p>
                 </div>
 
@@ -193,7 +193,7 @@ export function Contact() {
                     <div>
                       <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Correo</p>
                       <p className="mt-1 font-heading text-xl font-semibold text-gray-900">info@tahona.ai</p>
-                      <p className="mt-1 text-sm text-gray-600">Ideal si quieres compartir contexto de tu operativa.</p>
+                      <p className="mt-1 text-sm text-gray-600">Útil si prefieres explicarlo por escrito y con algo de detalle.</p>
                     </div>
                   </a>
 
@@ -207,7 +207,7 @@ export function Contact() {
                     <div>
                       <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Teléfono</p>
                       <p className="mt-1 font-heading text-xl font-semibold text-gray-900">+34 606 518 235</p>
-                      <p className="mt-1 text-sm text-gray-600">Si prefieres resolverlo rápido, lo vemos en una llamada.</p>
+                      <p className="mt-1 text-sm text-gray-600">Si prefieres ir al grano, lo vemos en una llamada breve.</p>
                     </div>
                   </a>
                 </div>
@@ -231,10 +231,10 @@ export function Contact() {
               <div className="relative z-10 mx-auto w-full max-w-3xl rounded-[1.75rem] bg-transparent p-5 sm:p-7">
                 <div>
                   <h3 className="font-heading text-[1.9rem] font-semibold tracking-[-0.03em] text-gray-900 sm:text-[2.15rem]">
-                    Cuéntanos tu caso
+                    Describe el punto de atasco
                   </h3>
                   <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-[0.95rem]">
-                    Si hay encaje, te respondemos con el siguiente paso más claro para tu operativa.
+                    Con lo básico nos basta. Te responderemos con una valoración inicial y el siguiente paso más útil.
                   </p>
                 </div>
 
@@ -245,7 +245,7 @@ export function Contact() {
                       <Input
                         id="name"
                         name="name"
-                        placeholder="Tu nombre"
+                        placeholder="Nombre y apellidos"
                         required
                         value={formData.name}
                         onChange={handleInputChange}
@@ -267,7 +267,7 @@ export function Contact() {
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="tu@empresa.com"
+                        placeholder="nombre@empresa.com"
                         required
                         value={formData.email}
                         onChange={handleInputChange}
@@ -289,7 +289,7 @@ export function Contact() {
                     <Textarea
                       id="details"
                       name="details"
-                      placeholder="¿Qué proceso se retrasa más? ¿Dónde se pierde información entre equipos?"
+                      placeholder="Explica el proceso: qué se hace hoy a mano, dónde se atasca y qué equipo está implicado."
                       rows={5}
                       required
                       value={formData.details}
@@ -310,7 +310,7 @@ export function Contact() {
 
                   <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
                     <p className="max-w-sm text-sm leading-relaxed text-gray-600">
-                      Te contestamos en menos de 24 horas con una recomendación concreta, sin compromiso.
+                      Te contestamos en 24h laborables. Si vemos recorrido, te diremos cómo seguir sin rodeos.
                     </p>
 
                     <div className="flex w-full flex-col gap-3 md:w-auto md:items-end">
@@ -321,7 +321,7 @@ export function Contact() {
                       >
                         <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/30" aria-hidden="true" />
                         <span className="relative inline-flex items-center gap-2">
-                          {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+                          {isSubmitting ? "Enviando..." : "Enviar para revisar"}
                           {!isSubmitting && <span aria-hidden="true">→</span>}
                         </span>
                         <ButtonBottomGradient />
@@ -360,15 +360,15 @@ export function Contact() {
                 <span className="font-medium text-gray-600">Mensaje recibido</span>
               </div>
               <h3 className="mt-4 font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl">
-                ¡Recibido!
+                Mensaje recibido
               </h3>
               <p className="mt-3 max-w-md text-base leading-relaxed text-gray-600 text-pretty">
-                Te contestamos en menos de 24 horas.
+                Lo revisaremos y te responderemos en 24h laborables con el siguiente paso más útil.
               </p>
 
                 <div className="mt-6 flex items-center gap-3 border-t border-gray-200 pt-5 text-sm text-gray-600">
                   <EnvelopeIcon className="h-4 w-4 text-brand-600" />
-                  <span>Si lo prefieres, también puedes escribir a info@tahona.ai</span>
+                  <span>Si prefieres ampliarlo por correo, escríbenos a info@tahona.ai</span>
                 </div>
 
               <button
