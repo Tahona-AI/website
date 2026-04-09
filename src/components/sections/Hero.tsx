@@ -41,11 +41,6 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="pointer-events-none absolute inset-y-0 left-0 right-0 z-0 flex justify-between">
-          <div className="h-full w-px bg-gray-200/80" />
-          <div className="h-full w-px bg-gray-200/80" />
-        </div>
-
         <div className="relative min-h-[62svh] overflow-hidden lg:min-h-[66svh]">
           <div className="relative z-20 flex min-h-[62svh] flex-col justify-center px-6 py-10 sm:px-10 sm:py-12 lg:min-h-[66svh] lg:px-12 lg:py-14 xl:px-16">
             <motion.div

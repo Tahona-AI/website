@@ -12,8 +12,9 @@ const results = [
 ];
 ---
 
-<section id="casos" class="bg-white py-24">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<section id="casos" class="relative overflow-hidden bg-white py-24">
+  <div class="pointer-events-none absolute inset-x-0 top-0 z-0 h-44 bg-[linear-gradient(180deg,rgba(245,244,246,1)_0%,rgba(248,248,248,0.92)_38%,rgba(255,255,255,0.82)_72%,rgba(255,255,255,0)_100%)]"></div>
+  <div class="relative z-10 mx-auto max-w-7xl px-4 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pt-14">
     <FadeInView client:visible>
       <div class="inline-flex items-center gap-3 text-sm text-gray-500">
         <span class="h-px w-10 bg-brand-300" />
@@ -25,8 +26,8 @@ const results = [
     </FadeInView>
 
     <FadeInView client:visible delay={0.2}>
-      <div class="mt-16 overflow-hidden rounded-none border border-gray-200 bg-white shadow-sm lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <div class="flex items-center justify-center border-b border-gray-200 bg-gray-50/50 p-10 sm:p-14 lg:border-b-0 lg:border-r lg:p-16">
+      <div class="relative z-10 mt-16 overflow-hidden rounded-[2rem] border border-white/75 bg-white/84 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div class="flex items-center justify-center border-b border-white/75 bg-gradient-to-br from-gray-50/80 via-white to-gray-50/50 p-10 sm:p-14 lg:border-b-0 lg:border-r lg:p-16">
           <img
             src="/images/logos/montes_acebo_logo.avif"
             alt="Montes del Acebo"

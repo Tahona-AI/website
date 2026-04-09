@@ -62,7 +62,7 @@ export function Navbar() {
           isScrolled && "shadow-[0_18px_40px_-28px_rgba(31,31,31,0.55)]"
         )}
       >
-        <nav className="mx-auto max-w-7xl border-x border-gray-200/80 px-4 sm:px-6 lg:px-8">
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 md:h-20 items-center justify-between">
             <a href="/" className="flex items-center gap-3">
                <img

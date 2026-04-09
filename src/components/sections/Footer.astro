@@ -2,14 +2,15 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-charcoal py-12">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
-      <div class="flex flex-col items-center gap-4 md:items-start">
-         <a href="/" class="flex items-center gap-3">
-           <img
-             src="/images/logos/tahona-mark-green.svg"
-             alt="Tahona"
+<footer class="border-t border-white/8 bg-charcoal py-12 sm:py-14">
+  <div class="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+    <div class="rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-8 shadow-[0_30px_80px_-48px_rgba(0,0,0,0.65)] backdrop-blur-md sm:px-8 lg:px-10">
+      <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+        <div class="flex flex-col items-center gap-4 md:items-start">
+          <a href="/" class="flex items-center gap-3">
+            <img
+              src="/images/logos/tahona-mark-green.svg"
+              alt="Tahona"
              width="40"
              height="40"
              class="h-10 w-10"
@@ -18,40 +19,41 @@ const currentYear = new Date().getFullYear();
              Tahona
            </span>
          </a>
-        <p class="text-center text-sm text-gray-400 md:text-left">
-          Production AI para pymes que ya probaron ChatGPT.
-        </p>
-         <a
-           href="mailto:info@tahona.ai"
-           class="text-sm text-brand-500 hover:text-brand-400"
-         >
-           info@tahona.ai
-         </a>
-      </div>
-
-      <div class="flex flex-col items-center gap-4 md:items-end">
-        <a
-          href="#contacto"
-          class="inline-flex items-center gap-2 rounded-none bg-brand-600 px-8 py-4 text-sm font-medium text-white transition-colors hover:bg-brand-700"
-        >
-          ¿Hablamos?
-          <svg
-            class="h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+          <p class="text-center text-sm leading-6 text-gray-400 md:max-w-sm md:text-left">
+            Production AI para pymes que ya probaron ChatGPT.
+          </p>
+          <a
+            href="mailto:info@tahona.ai"
+            class="text-sm font-medium text-brand-400 transition-colors hover:text-brand-300"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </a>
-         <p class="text-center text-xs text-gray-500 md:text-right">
-           © {currentYear} Tahona. Todos los derechos reservados.
-         </p>
+            info@tahona.ai
+          </a>
+        </div>
+
+        <div class="flex flex-col items-center gap-4 md:items-end">
+          <a
+            href="#contacto"
+            class="inline-flex min-h-12 items-center gap-2 rounded-xl bg-brand-600 px-8 py-3 text-sm font-medium text-white shadow-[0_22px_45px_-24px_rgba(36,88,64,0.9)] transition-all hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-[0_26px_55px_-24px_rgba(27,69,48,0.95)]"
+          >
+            ¿Hablamos?
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </a>
+          <p class="text-center text-xs text-gray-500 md:text-right">
+            © {currentYear} Tahona. Todos los derechos reservados.
+          </p>
+        </div>
       </div>
     </div>
   </div>
