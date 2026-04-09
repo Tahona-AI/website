@@ -18,62 +18,54 @@ const steps: readonly Step[] = [
   {
     number: "01",
     tab: "Diagnóstico",
-    title: "Entendemos tu operativa en 1-2 semanas",
+    title: "Entendemos dónde se atasca la operación en 1-2 semanas",
     intro:
-      "Mapeamos cómo fluye la información hoy, dónde se pierde tiempo y qué decisiones dependen de trabajo manual.",
+      "Entramos en el proceso real: quién hace qué, con qué herramientas y dónde se rompe el flujo cuando hay volumen, excepciones o trabajo manual.",
     bullets: [
-      "Entrevistas con quien opera el día a día, no solo con dirección.",
-      "Priorización por impacto: horas recuperables × frecuencia × riesgo de error.",
+      "Hablamos con quien opera el día a día, no solo con dirección.",
+      "Priorizamos por impacto, frecuencia y riesgo de error; no por intuición ni por moda.",
     ],
-    outcome: "Mapa de fricción priorizado. Sabes qué automatizar primero y por qué.",
+    outcome:
+      "Un mapa de fricción priorizado. Sabes qué merece resolverse primero y qué puede esperar.",
   },
   {
     number: "02",
     tab: "Alcance",
-    title: "Definimos qué se hace y qué no",
+    title: "Cerramos qué entra, qué no y cómo se mide",
     intro:
-      "Cerramos alcance, plazos y entregables antes de escribir código. Sin sorpresas, sin proyectos que crecen solos.",
+      "Antes de construir, dejamos por escrito el alcance, las dependencias y los criterios de éxito. Así evitamos proyectos que se ensanchan solos.",
     bullets: [
-      "Fase 1 pequeña pero útil: demuestra valor en semanas, no meses.",
-      "Criterios de éxito claros: qué debe pasar para considerarlo terminado.",
+      "Definimos una primera fase corta pero útil, con entregable operativo y rango temporal creíble.",
+      "Cada entrega lleva criterios de éxito explícitos: qué debe pasar para darla por válida.",
     ],
-    outcome: "Plan ejecutable firmado. Sabes exactamente qué vas a recibir y cuándo.",
+    outcome:
+      "Un plan ejecutable y acotado. Sabes qué vas a recibir, en qué orden y bajo qué condiciones se considera hecho.",
   },
   {
     number: "03",
     tab: "Construcción",
-    title: "Construimos sobre lo que ya tienes",
+    title: "Construimos y validamos en el entorno real",
     intro:
-      "Integraciones, agentes y automatizaciones encima de tu ERP, Excel y herramientas actuales. Sin migraciones traumáticas.",
+      "Construimos la solución con ciclos cortos de validación sobre tu operativa, no en una demo separada del negocio.",
     bullets: [
-      "Validación en tu entorno real cada 3-5 días. Ves avances, no promesas.",
-      "Capas de complejidad: empezamos simple, añadimos solo si aporta valor.",
+      "Revisión en tu entorno real cada 3-5 días para ajustar decisiones, datos y excepciones mientras avanzamos.",
+      "Empezamos por el camino más corto que resuelve el problema y añadimos complejidad solo si hace falta.",
     ],
-    outcome: "Sistema funcionando en producción. Procesos reales automatizados, no demos.",
+    outcome:
+      "Una solución validada con casos reales y lista para entrar en uso sin rehacer el trabajo al final.",
   },
   {
     number: "04",
-    tab: "Puesta en marcha",
-    title: "Acompañamos el arranque real",
+    tab: "Arranque y transferencia",
+    title: "Ponemos en marcha y dejamos la operación en tus manos",
     intro:
-      "No desaparecemos tras la entrega. Estamos contigo los primeros días, ajustando y resolviendo lo que surge.",
+      "El trabajo no acaba al entregar. Acompañamos el arranque, resolvemos ajustes finos y dejamos claro cómo operar el sistema sin depender de nosotros para lo básico.",
     bullets: [
-      "Soporte directo en el arranque: ajustes, dudas, casos borde que no previmos.",
-      "Métricas desde el día 1: tiempo ahorrado, errores evitados, tareas autónomas.",
+      "Soporte directo en el arranque: ajustes, dudas y casos borde que solo aparecen con uso real.",
+      "Transferimos contexto, criterios y documentación útil para que el equipo pueda operar y seguir sin fricción.",
     ],
-    outcome: "El equipo adopta el sistema. Se integra en la rutina diaria sin resistencia.",
-  },
-  {
-    number: "05",
-    tab: "Autonomía",
-    title: "Te formamos para que no dependas de nosotros",
-    intro:
-      "Transferimos el conocimiento: tu equipo aprende a operar, modificar y extender lo construido. Volvemos opcional.",
-    bullets: [
-      "Documentación adaptada a tu contexto, no manuales genéricos.",
-      "Formación práctica: prompting, orquestación, debugging de agentes.",
-    ],
-    outcome: "Tu equipo opera y evoluciona el sistema. Nos llamas por nueva funcionalidad, no por mantenimiento básico.",
+    outcome:
+      "El sistema arranca con seguimiento real y tu equipo sabe qué hacer para operarlo desde el primer día.",
   },
 ];
 
@@ -149,10 +141,10 @@ export function HowWeWork() {
             <span className="font-medium text-gray-600">Nuestro Proceso</span>
           </div>
           <h2 className="mt-4 max-w-5xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-            De la primera llamada al sistema en marcha
+            Así pasamos de una necesidad difusa a un sistema funcionando
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 text-pretty md:text-lg">
-            Trabajamos por etapas visibles, con alcance claro y resultados que se pueden medir desde el principio. Sin proyectos eternos, sin capas innecesarias y sin cambiar lo que ya te funciona.
+            Con alcance cerrado, validación continua y un arranque real. Sin fases decorativas, sin entregables que no aterrizan en la operación.
           </p>
         </FadeInView>
 
