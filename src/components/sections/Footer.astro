@@ -1,5 +1,6 @@
 ---
 const currentYear = new Date().getFullYear();
+import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
 ---
 
 <footer class="border-t border-white/8 bg-charcoal py-12 sm:py-14">
@@ -33,22 +34,9 @@ const currentYear = new Date().getFullYear();
         <div class="flex flex-col items-center gap-4 md:items-end">
           <a
             href="#contacto"
-            class="inline-flex min-h-12 items-center gap-2 rounded-xl bg-brand-600 px-8 py-3 text-sm font-medium text-white shadow-[0_22px_45px_-24px_rgba(36,88,64,0.9)] transition-all hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-[0_26px_55px_-24px_rgba(27,69,48,0.95)]"
+            class={`${primaryCtaBaseClass} min-h-12 justify-center px-5 text-sm font-semibold sm:min-w-[190px]`}
           >
-            Ver contacto
-            <svg
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
+            <span>Ver contacto</span>
           </a>
           <p class="text-center text-xs text-gray-500 md:text-right">
             © {currentYear} Tahona. Todos los derechos reservados.

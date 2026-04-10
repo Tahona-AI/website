@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { primaryCtaArrowClass, primaryCtaBaseClass } from "@/components/ui/cta-styles";
 import { cn } from "@/lib/utils";
 
 interface FormErrors {
@@ -37,15 +38,6 @@ function LabelInputContainer({
   children: React.ReactNode;
 }) {
   return <div className={cn("flex w-full flex-col gap-2.5", className)}>{children}</div>;
-}
-
-function ButtonBottomGradient() {
-  return (
-    <>
-      <span className="pointer-events-none absolute inset-x-0 -bottom-px block h-px w-full bg-gradient-to-r from-transparent via-brand-200/85 to-transparent opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100" />
-      <span className="pointer-events-none absolute inset-x-12 -bottom-px mx-auto block h-px w-1/2 bg-gradient-to-r from-transparent via-brand-100 to-transparent opacity-0 blur-sm transition-opacity duration-300 group-hover/btn:opacity-100" />
-    </>
-  );
 }
 
 const trustBadges = [
@@ -317,14 +309,20 @@ export function Contact() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="group/btn relative inline-flex min-h-12 w-full items-center justify-center overflow-hidden rounded-[1.15rem] bg-gradient-to-br from-brand-700 via-brand-600 to-brand-500 px-7 py-3 text-sm font-semibold text-white shadow-[0_1px_0_0_#ffffff30_inset,0_-1px_0_0_#ffffff12_inset,0_18px_40px_-24px_rgba(36,88,64,0.72)] transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:shadow-[0_24px_46px_-24px_rgba(36,88,64,0.78)] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 md:min-w-[220px]"
+                        className={cn(
+                          primaryCtaBaseClass,
+                          "min-h-12 w-full px-3 pl-5 text-sm font-semibold md:min-w-[220px]"
+                        )}
                       >
-                        <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/30" aria-hidden="true" />
-                        <span className="relative inline-flex items-center gap-2">
-                          {isSubmitting ? "Enviando..." : "Enviar para revisar"}
-                          {!isSubmitting && <span aria-hidden="true">→</span>}
+                        <span>{isSubmitting ? "Enviando..." : "Enviar para revisar"}</span>
+                        <span
+                          className={cn(primaryCtaArrowClass, isSubmitting && "opacity-70")}
+                          aria-hidden="true"
+                        >
+                          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
+                          </svg>
                         </span>
-                        <ButtonBottomGradient />
                       </button>
 
                       {errors.submit && (

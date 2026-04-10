@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ListIcon, XIcon } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
+import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
 
 const navItems = [
   { label: "Soluciones", href: "#soluciones" },
@@ -94,9 +95,12 @@ export function Navbar() {
               ))}
               <button
                 onClick={() => handleNavClick("#contacto")}
-                className="rounded-full bg-brand-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-700 cursor-pointer"
+                className={cn(
+                  primaryCtaBaseClass,
+                  "min-h-11 min-w-[158px] cursor-pointer justify-center px-5 text-sm font-semibold"
+                )}
               >
-                ¿Hablamos?
+                <span>¿Hablamos?</span>
               </button>
             </div>
 
@@ -168,9 +172,12 @@ export function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navItems.length * 0.05 }}
                   onClick={() => handleNavClick("#contacto")}
-                  className="mt-4 rounded-full bg-brand-600 px-8 py-4 text-center text-base font-medium text-white transition-colors hover:bg-brand-700"
+                  className={cn(
+                    primaryCtaBaseClass,
+                    "mt-4 min-h-12 w-full cursor-pointer justify-center px-5 text-base font-semibold"
+                  )}
                 >
-                   ¿Hablamos?
+                  <span>¿Hablamos?</span>
                 </motion.button>
               </nav>
             </motion.div>

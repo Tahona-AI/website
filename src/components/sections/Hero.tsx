@@ -2,6 +2,11 @@
 
 import { motion } from "motion/react";
 import { WavyBackground } from "@/components/ui/wavy-background";
+import {
+  primaryCtaArrowClass,
+  primaryCtaBaseClass,
+  secondaryCtaBaseClass,
+} from "@/components/ui/cta-styles";
 
 export function Hero() {
   const handleScrollToSection = (href: string) => {
@@ -81,22 +86,21 @@ export function Hero() {
             >
               <button
                 onClick={() => handleScrollToSection("#contacto")}
-                className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-brand-600 px-7 text-base font-medium text-white shadow-[0_22px_45px_-24px_rgba(36,88,64,0.9)] transition-all hover:bg-brand-700 hover:shadow-[0_26px_55px_-24px_rgba(27,69,48,0.95)] cursor-pointer"
+                className={`${primaryCtaBaseClass} min-h-14 cursor-pointer px-3 pl-6 text-base font-semibold sm:min-w-[240px]`}
               >
-                Cuéntanos tu caso
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
-                </svg>
+                <span>Cuéntanos tu caso</span>
+                <span className={`${primaryCtaArrowClass} h-10 w-10`} aria-hidden="true">
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
+                  </svg>
+                </span>
               </button>
 
               <button
                 onClick={() => handleScrollToSection("#proceso")}
-                className="inline-flex min-h-14 items-center justify-center gap-3 rounded-full border border-gray-300 bg-white/90 px-7 text-base font-medium text-gray-700 shadow-[0_16px_35px_-28px_rgba(31,31,31,0.45)] transition-all hover:border-brand-300 hover:text-brand-600 cursor-pointer"
+                className={`${secondaryCtaBaseClass} min-h-14 cursor-pointer justify-center px-6 text-base font-semibold sm:min-w-[240px]`}
               >
-                Ver cómo trabajamos
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
-                </svg>
+                <span>Ver cómo trabajamos</span>
               </button>
             </motion.div>
 
