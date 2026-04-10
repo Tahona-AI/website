@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/cta-styles";
 
 export function Hero() {
+  const discoveryCallUrl = "https://cal.eu/danielkwapien/llamada-de-descubrimiento";
+
   const handleScrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -44,7 +46,7 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="relative min-h-[62svh] overflow-hidden lg:min-h-[66svh]">
+        <div className="relative min-h-[62svh] lg:min-h-[66svh]">
           <div className="relative z-20 flex min-h-[62svh] flex-col justify-center px-6 py-10 sm:px-10 sm:py-12 lg:min-h-[66svh] lg:px-12 lg:py-14 xl:px-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -103,6 +105,60 @@ export function Hero() {
                 <span>Ver cómo trabajamos</span>
               </button>
             </motion.div>
+
+            <motion.a
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.62 }}
+              href={discoveryCallUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="group relative mt-6 flex w-full max-w-md overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/82 p-4 text-left shadow-[0_14px_36px_-28px_rgba(31,31,31,0.22)] backdrop-blur-xl transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:border-brand-200/80 hover:bg-white/95 hover:shadow-[0_18px_42px_-28px_rgba(31,31,31,0.26)] lg:absolute lg:right-12 lg:bottom-14 lg:mt-0 xl:right-16"
+            >
+              <span
+                className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.24)_0%,rgba(255,255,255,0)_42%,rgba(240,247,243,0.55)_100%)] opacity-80 transition-opacity duration-200 motion-reduce:transition-none group-hover:opacity-100"
+                aria-hidden="true"
+              />
+
+              <span className="relative z-10 flex w-full items-start gap-4">
+                <span className="relative inline-flex shrink-0">
+                  <img
+                    src="/images/people/daniel-kwapien.png"
+                    alt="Daniel Kwapien"
+                    className="h-14 w-14 rounded-[1.1rem] object-cover shadow-[0_18px_36px_-24px_rgba(31,31,31,0.48)] ring-1 ring-white/90"
+                  />
+                  <span className="absolute -right-1.5 -bottom-1.5 h-4 w-4 rounded-full border-2 border-white bg-brand-500" />
+                </span>
+
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center justify-between gap-3">
+                    <span className="text-[0.68rem] font-medium uppercase tracking-[0.14em] text-brand-700">
+                      Llamada de descubrimiento
+                    </span>
+                      <span className="rounded-full border border-brand-100 bg-brand-50/90 px-2.5 py-1 text-[0.68rem] font-medium text-brand-700">
+                        30 min
+                    </span>
+                  </span>
+
+                  <span className="mt-2 block font-heading text-xl font-semibold tracking-[-0.03em] text-gray-900">
+                    Si prefieres verlo en una llamada breve, la agendamos aquí.
+                  </span>
+
+                  <span className="mt-2 block max-w-[24rem] text-sm leading-relaxed text-gray-600">
+                    Sin presión comercial. Revisamos tu caso, vemos si encaja y te digo por dónde empezaría.
+                  </span>
+
+                  <span className="mt-4 flex items-center justify-between gap-4 border-t border-white/80 pt-3 text-sm font-medium text-gray-700">
+                    <span>Reservar una conversación</span>
+                    <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700 shadow-[0_14px_28px_-22px_rgba(36,88,64,0.42)] transition-transform duration-200 motion-reduce:transition-none group-hover:translate-x-0.5">
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17 17 7m0 0H8.5M17 7v8.5" />
+                      </svg>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </motion.a>
 
           </div>
         </div>
