@@ -67,11 +67,11 @@ export function Navbar() {
           <div className="flex h-16 md:h-20 items-center justify-between">
             <a href="/" className="flex items-center gap-3">
                <img
-                 src="/images/logos/tahona-mark-green.svg"
+                 src="/images/logos/tahona-favicon.svg"
                  alt="Tahona"
                  width={40}
                  height={40}
-                 className="h-8 w-8 md:h-10 md:w-10"
+                 className="h-6 w-6 md:h-7 md:w-7"
                />
                <span className="font-heading text-xl font-bold text-gray-900 ">
                  Tahona
