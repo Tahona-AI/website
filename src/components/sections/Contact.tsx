@@ -42,7 +42,7 @@ function LabelInputContainer({
 
 const trustBadges = [
   { icon: ClockIcon, text: "Respuesta en 24h laborables" },
-  { icon: UserCheckIcon, text: "Primera valoración concreta" },
+  { icon: UserCheckIcon, text: "Primera oportunidad clara" },
   { icon: ShieldIcon, text: "Sin compromiso ni presión comercial" },
 ];
 
@@ -152,13 +152,13 @@ export function Contact() {
             <div>
               <div className="inline-flex items-center gap-3 text-sm text-gray-500">
                 <span className="h-px w-10 bg-brand-300" />
-                <span className="font-medium text-gray-600">Contacto directo</span>
+                <span className="font-medium text-gray-600">Siguiente paso</span>
               </div>
               <h2 className="mt-4 max-w-4xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-                ¿Qué proceso se te está atascando?
+                Contacta con nosotros
               </h2>
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 text-pretty md:text-lg">
-                Cuéntanos dónde se te va tiempo, seguimiento o información. Lo revisamos contigo y te decimos si tiene sentido abordarlo y por dónde empezar.
+                ¿Quieres saber dónde puede aportar valor la IA en tu empresa? Cuéntanos cómo trabajáis y vemos juntos si tiene sentido explorar una primera oportunidad.
               </p>
             </div>
 
@@ -167,16 +167,16 @@ export function Contact() {
               <div className="rounded-[1.75rem] border border-white/75 bg-white/78 p-6 shadow-[0_24px_70px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md sm:p-7">
                 <div className="space-y-3">
                   <p className="text-sm font-medium uppercase tracking-[0.12em] text-brand-700">
-                    Un siguiente paso claro
+                    Contacta con nosotros
                   </p>
                   <p className="max-w-lg text-base leading-relaxed text-gray-600 text-pretty">
-                    Te respondemos con criterio práctico: si vemos una oportunidad clara, te diremos qué revisar primero y qué cambio tendría más sentido mover antes.
+                    Revisamos tu contexto con criterio práctico. Si vemos una oportunidad real, te diremos por dónde empezar y qué conviene validar primero.
                   </p>
                 </div>
 
                 <div className="mt-6 border-t border-white/70 pt-2">
                   <a
-                    href="mailto:info@tahona.ai"
+                    href="mailto:hola@tahona.ai"
                     className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700"
                   >
                     <span className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 shadow-[0_18px_40px_-30px_rgba(36,88,64,0.38)] transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
@@ -184,13 +184,13 @@ export function Contact() {
                     </span>
                     <div>
                       <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Correo</p>
-                      <p className="mt-1 font-heading text-xl font-semibold text-gray-900">info@tahona.ai</p>
-                      <p className="mt-1 text-sm text-gray-600">Útil si prefieres explicarlo por escrito y con algo de detalle.</p>
+                      <p className="mt-1 font-heading text-xl font-semibold text-gray-900">hola@tahona.ai</p>
+                      <p className="mt-1 text-sm text-gray-600">Escríbenos y vemos cómo podemos colaborar.</p>
                     </div>
                   </a>
 
                   <a
-                    href="tel:+34606518235"
+                    href="tel:+34684006043"
                     className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700"
                   >
                     <span className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 shadow-[0_18px_40px_-30px_rgba(36,88,64,0.38)] transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
@@ -198,7 +198,7 @@ export function Contact() {
                     </span>
                     <div>
                       <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Teléfono</p>
-                      <p className="mt-1 font-heading text-xl font-semibold text-gray-900">+34 606 518 235</p>
+                      <p className="mt-1 font-heading text-xl font-semibold text-gray-900">+34 684 006 043</p>
                       <p className="mt-1 text-sm text-gray-600">Si prefieres ir al grano, lo vemos en una llamada breve.</p>
                     </div>
                   </a>
@@ -223,7 +223,7 @@ export function Contact() {
               <div className="relative z-10 mx-auto w-full max-w-3xl rounded-[1.75rem] bg-transparent p-5 sm:p-7">
                 <div>
                   <h3 className="font-heading text-[1.9rem] font-semibold tracking-[-0.03em] text-gray-900 sm:text-[2.15rem]">
-                    Describe el punto de atasco
+                    Cuéntanos cómo trabajáis
                   </h3>
                   <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-[0.95rem]">
                     Con lo básico nos basta. Te responderemos con una valoración inicial y el siguiente paso más útil.
@@ -277,11 +277,11 @@ export function Contact() {
                   </div>
 
                   <LabelInputContainer>
-                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">¿Qué te quita más tiempo?</Label>
+                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">¿Dónde crees que puede aportar valor la IA?</Label>
                     <Textarea
                       id="details"
                       name="details"
-                      placeholder="Explica el proceso: qué se hace hoy a mano, dónde se atasca y qué equipo está implicado."
+                      placeholder="Explica el proceso, qué se hace hoy a mano, dónde se atasca y qué equipo está implicado."
                       rows={5}
                       required
                       value={formData.details}
@@ -314,7 +314,7 @@ export function Contact() {
                           "min-h-12 w-full px-3 pl-5 text-sm font-semibold md:min-w-[220px]"
                         )}
                       >
-                        <span>{isSubmitting ? "Enviando..." : "Enviar para revisar"}</span>
+                        <span>{isSubmitting ? "Enviando..." : "Contacta con nosotros"}</span>
                         <span
                           className={cn(primaryCtaArrowClass, isSubmitting && "opacity-70")}
                           aria-hidden="true"
@@ -366,7 +366,7 @@ export function Contact() {
 
                 <div className="mt-6 flex items-center gap-3 border-t border-gray-200 pt-5 text-sm text-gray-600">
                   <EnvelopeIcon className="h-4 w-4 text-brand-600" />
-                  <span>Si prefieres ampliarlo por correo, escríbenos a info@tahona.ai</span>
+                  <span>Si prefieres ampliarlo por correo, escríbenos a hola@tahona.ai</span>
                 </div>
 
               <button

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/cta-styles";
 
 export function Hero() {
-  const discoveryCallUrl = "https://cal.eu/danielkwapien/llamada-de-descubrimiento";
+  const discoveryCallUrl = "#contacto";
 
   const handleScrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -55,7 +55,7 @@ export function Hero() {
               className="mb-6 inline-flex w-fit items-center gap-3 rounded-full border border-gray-200 bg-white/90 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-gray-500 shadow-[0_18px_40px_-28px_rgba(31,31,31,0.45)]"
             >
               <span className="h-2 w-2 rounded-full bg-brand-500" />
-              IA aplicada a operaciones reales
+              Inteligencia Artificial para PYMEs
             </motion.div>
 
             <motion.h1
@@ -64,11 +64,9 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[1.02] text-gray-900 lg:max-w-[52rem]"
             >
-              La mayoría prueba la IA.
+              La tecnología ya existe.
               <br className="hidden md:block" />
-              Muy pocas empresas consiguen que funcione
-              <br className="hidden md:block" />
-              en producción.
+              Falta la implementación adecuada.
             </motion.h1>
 
             <motion.p
@@ -77,7 +75,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.35 }}
               className="mt-8 max-w-3xl text-[clamp(1rem,1.35vw,1.25rem)] leading-8 text-gray-500 lg:max-w-[38rem]"
             >
-              Tahona convierte experimentos, procesos manuales y conocimiento disperso en agentes, automatizaciones y capas de contexto que generan impacto real en el día a día.
+              Equipo pequeño de alto rendimiento que implementa IA en procesos reales de tu empresa. Ingeniería de contexto, agentes de IA y automatización a medida. Sin cambiar lo que ya funciona.
             </motion.p>
 
             <motion.div
@@ -90,7 +88,7 @@ export function Hero() {
                 onClick={() => handleScrollToSection("#contacto")}
                 className={`${primaryCtaBaseClass} min-h-14 cursor-pointer px-3 pl-6 text-base font-semibold sm:min-w-[240px]`}
               >
-                <span>Cuéntanos tu caso</span>
+                <span>Hablemos sin compromiso</span>
                 <span className={`${primaryCtaArrowClass} h-10 w-10`} aria-hidden="true">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
@@ -111,8 +109,6 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.62 }}
               href={discoveryCallUrl}
-              target="_blank"
-              rel="noreferrer"
               className="group relative mt-6 flex w-full max-w-md overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/82 p-4 text-left shadow-[0_14px_36px_-28px_rgba(31,31,31,0.22)] backdrop-blur-xl transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:border-brand-200/80 hover:bg-white/95 hover:shadow-[0_18px_42px_-28px_rgba(31,31,31,0.26)] lg:absolute lg:right-12 lg:bottom-14 lg:mt-0 xl:right-16"
             >
               <span
@@ -122,11 +118,12 @@ export function Hero() {
 
               <span className="relative z-10 flex w-full items-start gap-4">
                 <span className="relative inline-flex shrink-0">
-                  <img
-                    src="/images/people/daniel-kwapien.png"
-                    alt="Daniel Kwapien"
-                    className="h-14 w-14 rounded-[1.1rem] object-cover shadow-[0_18px_36px_-24px_rgba(31,31,31,0.48)] ring-1 ring-white/90"
-                  />
+                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-[1.1rem] bg-brand-50 text-brand-700 shadow-[0_18px_36px_-24px_rgba(31,31,31,0.48)] ring-1 ring-white/90">
+                    <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 10h8M8 14h5m8-2a9 9 0 1 1-4.46-7.77" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M21 4v5h-5" />
+                    </svg>
+                  </span>
                   <span className="absolute -right-1.5 -bottom-1.5 h-4 w-4 rounded-full border-2 border-white bg-brand-500" />
                 </span>
 
@@ -141,15 +138,15 @@ export function Hero() {
                   </span>
 
                   <span className="mt-2 block font-heading text-xl font-semibold tracking-[-0.03em] text-gray-900">
-                    Si prefieres verlo en una llamada breve, la agendamos aquí.
+                    Si quieres verlo en una llamada breve, deja tu caso aquí.
                   </span>
 
                   <span className="mt-2 block max-w-[24rem] text-sm leading-relaxed text-gray-600">
-                    Sin presión comercial. Revisamos tu caso, vemos si encaja y te digo por dónde empezaría.
+                    Sin presión comercial. Revisamos tu contexto, vemos si encaja y preparamos una conversación útil.
                   </span>
 
                   <span className="mt-4 flex items-center justify-between gap-4 border-t border-white/80 pt-3 text-sm font-medium text-gray-700">
-                    <span>Reservar una conversación</span>
+                    <span>Reservar una llamada</span>
                     <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-700 shadow-[0_14px_28px_-22px_rgba(36,88,64,0.42)] transition-transform duration-200 motion-reduce:transition-none group-hover:translate-x-0.5">
                       <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17 17 7m0 0H8.5M17 7v8.5" />

@@ -8,8 +8,8 @@ import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
 
 const navItems = [
   { label: "Soluciones", href: "#soluciones" },
-  { label: "Casos de éxito", href: "#casos" },
-  { label: "Cómo trabajamos", href: "#proceso" },
+  { label: "Proceso", href: "#proceso" },
+  { label: "Contacto", href: "#contacto" },
 ];
 
 export function Navbar() {
@@ -100,7 +100,7 @@ export function Navbar() {
                   "min-h-11 min-w-[158px] cursor-pointer justify-center px-5 text-sm font-semibold"
                 )}
               >
-                <span>¿Hablamos?</span>
+                <span>Hablemos</span>
               </button>
             </div>
 
@@ -177,7 +177,7 @@ export function Navbar() {
                     "mt-4 min-h-12 w-full cursor-pointer justify-center px-5 text-base font-semibold"
                   )}
                 >
-                  <span>¿Hablamos?</span>
+                  <span>Hablemos</span>
                 </motion.button>
               </nav>
             </motion.div>

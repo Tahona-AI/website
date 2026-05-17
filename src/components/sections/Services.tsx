@@ -1,187 +1,128 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import {
+  BrainIcon,
+  GearIcon,
+  UsersIcon,
+  ChartLineUpIcon,
+  RobotIcon,
+  NetworkIcon,
+} from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { FadeInView } from "@/components/animations/FadeInView";
 
-interface ServiceItem {
-  readonly id: string;
+interface BentoCard {
   readonly title: string;
   readonly description: string;
-  readonly points: readonly string[];
-  readonly tags: readonly string[];
+  readonly icon: React.ElementType;
+  readonly span?: boolean;
+  readonly gradient: string;
+  readonly accent: string;
 }
 
-const SERVICES: readonly ServiceItem[] = [
+const CARDS: readonly BentoCard[] = [
   {
-    id: "strategy",
-    title: "Estrategia y diagnóstico",
+    title: "Equipo pequeño de alto rendimiento",
     description:
-      "Entramos donde la operación se atasca, vemos qué merece la pena automatizar y bajamos la IA a un plan ejecutable. No entregamos una presentación bonita: salimos con prioridades, casos de uso y una ruta clara para empezar sin perder meses.",
-    points: [
-      "Diagnóstico operativo para detectar cuellos de botella y tareas donde la IA sí encaja",
-      "Priorización por impacto, viabilidad y dependencia de datos o integraciones",
-      "Revisión del stack actual para decidir qué se aprovecha, qué falta y qué no merece tocar",
-      "Hoja de ruta con siguiente paso claro: base de datos, agente, automatización o formación",
-    ],
-    tags: ["Diagnóstico", "Prioridad", "Ruta"],
+      "Equipos pequeños, ágiles, cercanos y altamente cualificados para conocer a fondo tu negocio y optimizar sus procesos.",
+    icon: UsersIcon,
+    span: true,
+    gradient:
+      "radial-gradient(circle at 90% 10%, rgba(22,163,74,0.08) 0%, transparent 50%), radial-gradient(circle at 10% 90%, rgba(22,163,74,0.05) 0%, transparent 40%)",
+    accent: "bg-brand-50 text-brand-600",
   },
   {
-    id: "context",
-    title: "Contexto y base de datos para IA",
+    title: "Tecnología punta al alcance",
     description:
-      "Ordenamos el conocimiento y conectamos las fuentes que la IA necesita para responder bien y actuar con criterio. Si la información está rota, dispersa o atrapada en documentos y sistemas aislados, primero construimos la base para que luego todo lo demás funcione.",
-    points: [
-      "Arquitectura de contexto para que agentes y asistentes lean lo correcto en cada caso",
-      "Unificación de datos desde CRM, ERP, APIs, hojas de cálculo y otras fuentes ya existentes",
-      "Procesamiento documental para pasar PDFs, imágenes y escaneos a datos utilizables",
-      "Pipelines de actualización y recuperación para que la base no se quede vieja ni dependa de trabajo manual",
-    ],
-    tags: ["Contexto", "Datos", "Documentos"],
+      "Hemos estudiado y trabajado en China, Estados Unidos, México, Portugal y España. Acercamos lo último a las provincias españolas.",
+    icon: BrainIcon,
+    gradient:
+      "radial-gradient(circle at 80% 80%, rgba(22,163,74,0.07) 0%, transparent 50%), linear-gradient(135deg, rgba(240,253,244,0.6) 0%, transparent 60%)",
+    accent: "bg-brand-50 text-brand-600",
   },
   {
-    id: "agents",
-    title: "Agentes y automatizaciones",
+    title: "Reducción de costes operativos",
     description:
-      "Construimos sistemas que hacen trabajo real dentro de la operación: resuelven, validan, enrutan, extraen, sincronizan y dejan trazabilidad. Aquí es donde la IA deja de ser experimento y pasa a convivir con tus procesos y tus herramientas de verdad.",
-    points: [
-      "Agentes con contexto de negocio y nivel de supervisión ajustado al riesgo de cada tarea",
-      "Automatizaciones de extremo a extremo entre equipos, sistemas y puntos de decisión",
-      "Integraciones con herramientas existentes para mover datos sin rehacer toda la operativa",
-      "Reglas, validaciones, manejo de excepciones y auditoría para operar en producción",
-    ],
-    tags: ["Agentes", "Automatización", "Integración"],
+      "Cuando se optimizan procesos mediante la tecnología, se reducen los costes operativos y se aumenta la facturación del negocio.",
+    icon: ChartLineUpIcon,
+    gradient:
+      "radial-gradient(circle at 20% 20%, rgba(22,163,74,0.06) 0%, transparent 50%), linear-gradient(225deg, rgba(220,252,231,0.5) 0%, transparent 60%)",
+    accent: "bg-brand-50 text-brand-600",
   },
   {
-    id: "training",
-    title: "Formación y autonomía",
+    title: "Ingeniería de Contexto",
     description:
-      "Transferimos criterio y forma de trabajo para que tu equipo pueda usar, mantener y mejorar lo que montamos. No buscamos crear dependencia: buscamos que la IA se quede dentro de la empresa y no sólo en manos del proveedor.",
-    points: [
-      "Formación práctica para negocio y equipo técnico, sin teoría sobrante",
-      "Playbooks, documentación y criterios de operación adaptados a procesos reales",
-      "Mentoría para responsables internos que luego se quedan llevando el sistema",
-      "Acompañamiento para que el siguiente caso no dependa siempre de nosotros",
-    ],
-    tags: ["Formación", "Autonomía", "Equipo"],
+      "No solo desarrollamos herramientas. Implementamos ingeniería de contexto a los agentes de IA para que trabajen en los procesos de tu empresa de manera óptima.",
+    icon: NetworkIcon,
+    span: true,
+    gradient:
+      "radial-gradient(circle at 50% 50%, rgba(22,163,74,0.06) 0%, transparent 60%), radial-gradient(circle at 0% 100%, rgba(22,163,74,0.08) 0%, transparent 40%)",
+    accent: "bg-brand-50 text-brand-600",
+  },
+  {
+    title: "Soluciones a medida",
+    description:
+      "Diseñamos implementaciones adaptadas a tu contexto, no demostraciones genéricas. Construimos sobre tus datos, tus herramientas y tus restricciones reales.",
+    icon: GearIcon,
+    gradient:
+      "radial-gradient(circle at 10% 10%, rgba(22,163,74,0.07) 0%, transparent 45%), linear-gradient(45deg, rgba(240,253,244,0.5) 0%, transparent 55%)",
+    accent: "bg-brand-50 text-brand-600",
+  },
+  {
+    title: "Resultados en semanas",
+    description:
+      "Nos movemos rápido, iteramos contigo y buscamos impacto operativo desde las primeras fases del proyecto.",
+    icon: RobotIcon,
+    gradient:
+      "radial-gradient(circle at 90% 90%, rgba(22,163,74,0.07) 0%, transparent 45%), linear-gradient(315deg, rgba(220,252,231,0.5) 0%, transparent 55%)",
+    accent: "bg-brand-50 text-brand-600",
   },
 ];
 
-function AgentIllustration() {
+function BentoCardComponent({
+  card,
+  index,
+}: {
+  card: BentoCard;
+  index: number;
+}) {
+  const Icon = card.icon;
+
   return (
-    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect x="40" y="20" width="120" height="100" rx="8" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <circle cx="70" cy="55" r="12" fill="#dcfce7" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M65 55L68 58L75 51" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="90" y="45" width="55" height="6" rx="3" fill="#16a34a" opacity="0.3" />
-      <rect x="90" y="58" width="40" height="6" rx="3" fill="#16a34a" opacity="0.2" />
-      <rect x="55" y="85" width="90" height="25" rx="4" fill="#dcfce7" stroke="#16a34a" strokeWidth="1" />
-      <circle cx="70" cy="97" r="6" fill="#16a34a" opacity="0.3" />
-      <rect x="82" y="93" width="50" height="4" rx="2" fill="#16a34a" opacity="0.3" />
-      <rect x="82" y="100" width="35" height="3" rx="1.5" fill="#16a34a" opacity="0.2" />
-      <circle cx="160" cy="40" r="20" fill="#dcfce7" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M152 40L157 45L168 34" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <FadeInView delay={0.1 + index * 0.08}>
+      <div
+        className={cn(
+          "group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/75 bg-white/84 p-6 backdrop-blur-md shadow-[0_22px_60px_-46px_rgba(31,31,31,0.42)] transition-all duration-300 hover:border-brand-200 hover:bg-white/90 hover:shadow-[0_28px_70px_-44px_rgba(31,31,31,0.48)] sm:p-8",
+          card.span && "md:col-span-2"
+        )}
+        style={{ backgroundImage: card.gradient }}
+      >
+        <div className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 rounded-full bg-gradient-to-br from-brand-100/40 to-transparent opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+
+        <div className="relative z-10 flex h-full flex-col">
+          <div
+            className={cn(
+              "mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/75 shadow-sm transition-transform duration-300 group-hover:scale-105",
+              card.accent
+            )}
+          >
+            <Icon weight="duotone" className="h-6 w-6" />
+          </div>
+
+          <h3 className="font-heading text-lg font-semibold text-gray-900 sm:text-xl">
+            {card.title}
+          </h3>
+
+          <p className="mt-3 text-sm leading-relaxed text-gray-500 sm:text-base sm:leading-7">
+            {card.description}
+          </p>
+        </div>
+      </div>
+    </FadeInView>
   );
 }
-
-function AutomationIllustration() {
-  return (
-    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect x="20" y="60" width="50" height="40" rx="6" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <rect x="75" y="60" width="50" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" strokeWidth="1.5" />
-      <rect x="130" y="60" width="50" height="40" rx="6" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M70 80H75" stroke="#16a34a" strokeWidth="2" />
-      <path d="M125 80H130" stroke="#16a34a" strokeWidth="2" />
-      <circle cx="45" cy="80" r="8" fill="#16a34a" opacity="0.3" />
-      <circle cx="100" cy="80" r="8" fill="#16a34a" opacity="0.5" />
-      <circle cx="155" cy="80" r="8" fill="#16a34a" opacity="0.3" />
-      <path d="M100 40V60" stroke="#16a34a" strokeWidth="1.5" strokeDasharray="4 2" />
-      <path d="M45 100V120" stroke="#16a34a" strokeWidth="1.5" strokeDasharray="4 2" />
-      <path d="M155 100V120" stroke="#16a34a" strokeWidth="1.5" strokeDasharray="4 2" />
-      <rect x="75" y="25" width="50" height="20" rx="4" fill="#dcfce7" stroke="#16a34a" strokeWidth="1" />
-      <rect x="20" y="125" width="50" height="20" rx="4" fill="#dcfce7" stroke="#16a34a" strokeWidth="1" />
-      <rect x="130" y="125" width="50" height="20" rx="4" fill="#dcfce7" stroke="#16a34a" strokeWidth="1" />
-    </svg>
-  );
-}
-
-function StrategyIllustration() {
-  return (
-    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <circle cx="100" cy="60" r="35" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <circle cx="100" cy="60" r="25" fill="none" stroke="#16a34a" strokeWidth="1" strokeDasharray="4 2" />
-      <circle cx="100" cy="60" r="15" fill="#dcfce7" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M95 60L98 63L105 56" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <rect x="30" y="110" width="45" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1" />
-      <rect x="77" y="110" width="45" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" strokeWidth="1" />
-      <rect x="125" y="110" width="45" height="30" rx="4" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1" />
-      <path d="M52 110V95H100" stroke="#16a34a" strokeWidth="1" strokeDasharray="3 2" />
-      <path d="M100 95V110" stroke="#16a34a" strokeWidth="1" strokeDasharray="3 2" />
-      <path d="M147 110V95H100" stroke="#16a34a" strokeWidth="1" strokeDasharray="3 2" />
-      <circle cx="52" cy="125" r="5" fill="#16a34a" opacity="0.4" />
-      <circle cx="100" cy="125" r="5" fill="#16a34a" opacity="0.6" />
-      <circle cx="147" cy="125" r="5" fill="#16a34a" opacity="0.4" />
-    </svg>
-  );
-}
-
-function ContextIllustration() {
-  return (
-    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect x="70" y="20" width="60" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" strokeWidth="1.5" />
-      <circle cx="100" cy="40" r="10" fill="#16a34a" opacity="0.3" />
-      <rect x="30" y="75" width="50" height="35" rx="4" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1" />
-      <rect x="120" y="75" width="50" height="35" rx="4" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1" />
-      <rect x="75" y="75" width="50" height="35" rx="4" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1" />
-      <path d="M85 60V75" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M100 60V75" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M115 60V75" stroke="#16a34a" strokeWidth="1.5" />
-      <circle cx="55" cy="92" r="6" fill="#16a34a" opacity="0.3" />
-      <circle cx="100" cy="92" r="6" fill="#16a34a" opacity="0.5" />
-      <circle cx="145" cy="92" r="6" fill="#16a34a" opacity="0.3" />
-      <rect x="55" y="125" width="90" height="25" rx="4" fill="#dcfce7" stroke="#16a34a" strokeWidth="1" />
-      <circle cx="70" cy="137" r="5" fill="#16a34a" opacity="0.4" />
-      <rect x="82" y="134" width="50" height="3" rx="1.5" fill="#16a34a" opacity="0.3" />
-    </svg>
-  );
-}
-
-function TrainingIllustration() {
-  return (
-    <svg viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <rect x="40" y="30" width="120" height="100" rx="8" fill="#f0fdf4" stroke="#16a34a" strokeWidth="1.5" />
-      <rect x="55" y="45" width="90" height="25" rx="4" fill="#dcfce7" stroke="#16a34a" strokeWidth="1" />
-      <circle cx="70" cy="57" r="6" fill="#16a34a" opacity="0.4" />
-      <rect x="82" y="53" width="50" height="3" rx="1.5" fill="#16a34a" opacity="0.3" />
-      <rect x="82" y="60" width="35" height="3" rx="1.5" fill="#16a34a" opacity="0.2" />
-      <rect x="55" y="80" width="90" height="40" rx="4" fill="#dcfce7" stroke="#16a34a" strokeWidth="1" />
-      <rect x="65" y="90" width="70" height="4" rx="2" fill="#16a34a" opacity="0.3" />
-      <rect x="65" y="100" width="55" height="4" rx="2" fill="#16a34a" opacity="0.2" />
-      <rect x="65" y="110" width="40" height="4" rx="2" fill="#16a34a" opacity="0.15" />
-      <circle cx="165" cy="45" r="15" fill="#dcfce7" stroke="#16a34a" strokeWidth="1.5" />
-      <path d="M160 45L163 48L170 41" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-const ILLUSTRATIONS: Record<string, React.FC> = {
-  strategy: StrategyIllustration,
-  context: ContextIllustration,
-  agents: AutomationIllustration,
-  training: TrainingIllustration,
-};
 
 export function Services() {
-  const [activeId, setActiveId] = useState<string | null>(null);
-
-  const handleToggle = (id: string) => {
-    setActiveId(activeId === id ? null : id);
-  };
-
-  const activeService = SERVICES.find((s) => s.id === activeId);
-
   return (
     <section
       id="soluciones"
@@ -194,238 +135,22 @@ export function Services() {
           <FadeInView>
             <div className="inline-flex items-center gap-3 text-sm text-gray-500">
               <span className="h-px w-10 bg-brand-300" />
-              <span className="font-medium text-gray-600">Servicios</span>
+              <span className="font-medium text-gray-600">Solución</span>
             </div>
             <h2 className="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 sm:text-4xl md:text-5xl">
-              Lo que hacemos para que la IA funcione en producción
+              La tecnología ya existe. Falta la implementación adecuada.
             </h2>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-500">
-              No vendemos piezas sueltas. Entramos donde más bloquea hoy tu operación y construimos lo que hace falta para que la IA tenga contexto, encaje en tus sistemas y genere impacto real.
+              Los modelos de Inteligencia Artificial han llegado a la capacidad
+              suficiente para delegar procesos cognitivos humanos en la
+              operativa de las empresas.
             </p>
           </FadeInView>
 
-          <div className="mt-16 grid gap-8 lg:grid-cols-2 lg:gap-12">
-            <FadeInView delay={0.1}>
-              <div className="space-y-4">
-                {SERVICES.map((service) => {
-                  const isActive = activeId === service.id;
-
-                  return (
-                    <div
-                      key={service.id}
-                      className={cn(
-                        "overflow-hidden rounded-[1.75rem] border backdrop-blur-md transition-all duration-200",
-                        isActive
-                          ? "border-white/75 bg-white/88 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.48)]"
-                          : "border-white/65 bg-white/72 shadow-[0_22px_60px_-46px_rgba(31,31,31,0.42)] hover:border-brand-200/70 hover:bg-white/84 hover:shadow-[0_28px_70px_-44px_rgba(31,31,31,0.45)]"
-                      )}
-                    >
-                      <button
-                        onClick={() => handleToggle(service.id)}
-                        className="flex w-full cursor-pointer items-center justify-between px-5 py-5 text-left sm:px-6"
-                        aria-expanded={isActive}
-                      >
-                        <div>
-                          <span
-                            className={cn(
-                              "font-heading text-base font-semibold sm:text-lg",
-                              isActive ? "text-brand-700" : "text-gray-900"
-                            )}
-                          >
-                            {service.title}
-                          </span>
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            {service.tags.map((tag) => (
-                              <span
-                                key={tag}
-                                className={cn(
-                                  "rounded-full border px-3 py-1 text-[11px] font-medium tracking-[0.02em]",
-                                  isActive
-                                    ? "border-brand-100 bg-brand-50/90 text-brand-700"
-                                    : "border-gray-200 bg-white/78 text-gray-500"
-                                )}
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                        <span
-                          className={cn(
-                            "ml-4 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors",
-                            isActive
-                              ? "border-brand-100 bg-brand-50 text-brand-600"
-                              : "border-gray-200 bg-white/86 text-gray-500"
-                          )}
-                        >
-                          {isActive ? (
-                            <svg
-                              className="h-5 w-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M6 18L18 6M6 6l12 12"
-                              />
-                            </svg>
-                          ) : (
-                            <svg
-                              className="h-5 w-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                              />
-                            </svg>
-                          )}
-                        </span>
-                      </button>
-
-                      <AnimatePresence>
-                        {isActive && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="border-t border-white/70 bg-gradient-to-b from-white/34 to-white/12 px-5 pb-5 pt-4 sm:px-6">
-                              <p className="text-sm leading-7 text-gray-600">
-                                {service.description}
-                              </p>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
-              </div>
-            </FadeInView>
-
-            <FadeInView delay={0.2}>
-              <div className="sticky top-28">
-                <AnimatePresence mode="wait">
-                  {activeService ? (
-                    <motion.div
-                      key={activeService.id}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="rounded-[2rem] border border-white/75 bg-white/84 p-6 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md lg:p-8"
-                    >
-                      <div className="inline-flex items-center gap-3 text-sm text-gray-500">
-                        <span className="h-px w-10 bg-brand-300" />
-                        <span className="font-medium text-gray-600">Pilar</span>
-                      </div>
-                      <h3 className="mt-4 font-heading text-xl font-bold text-gray-900 lg:text-2xl">
-                        {activeService.title}
-                      </h3>
-
-                      <p className="mt-4 text-base leading-8 text-gray-500">
-                        {activeService.description}
-                      </p>
-
-                      <div className="mt-7 space-y-2.5">
-                        {activeService.points.map((point, index) => (
-                          <div
-                            key={index}
-                            className="flex items-start gap-3 rounded-2xl border border-white/75 bg-white/74 px-4 py-2.5 shadow-[0_22px_55px_-46px_rgba(31,31,31,0.48)]"
-                          >
-                            <div className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-500" />
-                            <p className="text-sm leading-6 text-gray-700">
-                              {point}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="mt-8 rounded-[1.75rem] border border-white/75 bg-gradient-to-br from-white via-white/86 to-brand-50/70 p-6">
-                        <div className="mx-auto h-32 w-full max-w-[200px]">
-                          {(() => {
-                            const Illustration =
-                              ILLUSTRATIONS[activeService.id] || AgentIllustration;
-                            return <Illustration />;
-                          })()}
-                        </div>
-                      </div>
-
-                      <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                        <div className="flex flex-wrap gap-2">
-                          {activeService.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded-full border border-brand-100 bg-brand-50/90 px-3 py-1 text-xs font-medium text-brand-700"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <a
-                          href="#contacto"
-                          className="flex items-center gap-1 text-sm font-medium text-brand-600 transition-colors hover:text-brand-700"
-                        >
-                          Hablar de este frente
-                          <svg
-                            className="h-4 w-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="flex h-full min-h-[400px] flex-col items-center justify-center rounded-[2rem] border border-white/75 bg-white/78 p-8 text-center shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md"
-                    >
-                      <div className="mb-5 rounded-full border border-brand-100 bg-brand-50 p-4 shadow-[0_18px_40px_-28px_rgba(36,88,64,0.35)]">
-                        <svg
-                          className="h-8 w-8 text-brand-600"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M4 6h16M4 12h16M4 18h7"
-                          />
-                        </svg>
-                      </div>
-                      <h3 className="font-heading text-lg font-semibold text-gray-900">
-                        Elige un pilar
-                      </h3>
-                      <p className="mt-3 max-w-sm text-sm leading-7 text-gray-500">
-                        Abre uno de los cuatro frentes para ver dónde entra Tahona, qué resolvemos y cómo se conecta con un sistema de IA que sí puede operar en producción.
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </FadeInView>
+          <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+            {CARDS.map((card, index) => (
+              <BentoCardComponent key={card.title} card={card} index={index} />
+            ))}
           </div>
         </div>
       </div>
