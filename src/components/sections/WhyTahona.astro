@@ -33,7 +33,7 @@ const differentiators = [
       <span class="h-px w-10 bg-brand-300" />
       <span class="font-medium text-gray-600">A quién buscamos</span>
     </div>
-    <div class="mt-4 grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(280px,0.85fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
+    <div class="mt-4 grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(280px,0.85fr)_minmax(0,1fr)] lg:items-stretch lg:gap-12">
       <div>
         <h2 class="max-w-lg font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
           Buscamos empresas que quieran aplicar IA con sentido.
@@ -43,18 +43,18 @@ const differentiators = [
         </p>
       </div>
 
-      <div class="mx-auto hidden w-full max-w-[320px] lg:block self-center">
+      <div class="mx-auto hidden h-full w-full max-w-[320px] lg:block">
         <img
           src="/images/why-tahona-flow.svg"
           alt=""
           aria-hidden="true"
-          class="h-auto w-full opacity-[0.98]"
+          class="h-full w-full object-contain opacity-[0.98]"
           loading="lazy"
           decoding="async"
         />
       </div>
 
-      <div class="space-y-8 lg:space-y-10">
+      <div class="flex h-full flex-col justify-between">
         {differentiators.map((item) => (
           <div>
             <p class="font-heading text-3xl font-semibold text-brand-600 tabular-nums sm:text-4xl">
