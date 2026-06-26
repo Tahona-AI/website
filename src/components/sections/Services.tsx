@@ -50,9 +50,9 @@ const CARDS: readonly BentoCard[] = [
     accent: "bg-brand-50 text-brand-600",
   },
   {
-    title: "Ingeniería de Contexto",
+    title: "Implementación con contexto",
     description:
-      "No solo desarrollamos herramientas. Implementamos ingeniería de contexto a los agentes de IA para que trabajen en los procesos de tu empresa de manera óptima.",
+      "No solo desarrollamos herramientas. Entendemos tus procesos, datos y restricciones para que la solución encaje en la operativa real de tu empresa.",
     icon: NetworkIcon,
     span: true,
     gradient:

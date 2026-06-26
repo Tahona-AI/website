@@ -55,7 +55,7 @@ export function Hero() {
               className="mb-6 inline-flex w-fit items-center gap-3 rounded-full border border-gray-200 bg-white/90 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-gray-500 shadow-[0_18px_40px_-28px_rgba(31,31,31,0.45)]"
             >
               <span className="h-2 w-2 rounded-full bg-brand-500" />
-              Inteligencia Artificial para PYMEs
+              Automatización inteligente para PYMEs
             </motion.div>
 
             <motion.h1
@@ -75,7 +75,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.35 }}
               className="mt-8 max-w-3xl text-[clamp(1rem,1.35vw,1.25rem)] leading-8 text-gray-500 lg:max-w-[38rem]"
             >
-              Equipo pequeño de alto rendimiento que implementa IA en procesos reales de tu empresa. Ingeniería de contexto, agentes de IA y automatización a medida. Sin cambiar lo que ya funciona.
+              Equipo pequeño de alto rendimiento que implementa automatización inteligente en procesos reales de tu empresa. Soluciones a medida, integradas con criterio práctico. Sin cambiar lo que ya funciona.
             </motion.p>
 
             <motion.div

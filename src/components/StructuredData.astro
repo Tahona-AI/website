@@ -2,11 +2,11 @@
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Tahona AI",
+  name: "Tahona",
   url: "https://tahona.ai",
-  logo: "https://tahona.ai/favicon.svg",
+  logo: "https://tahona.ai/images/logos/tahona-favicon.svg",
   description:
-    "Equipo técnico de alto rendimiento especializado en implementar Inteligencia Artificial en procesos reales de PYMEs españolas. Ingeniería de contexto, agentes de IA y automatización a medida.",
+    "Equipo técnico de alto rendimiento especializado en implementar automatización inteligente en procesos reales de PYMEs españolas.",
   address: {
     "@type": "PostalAddress",
     addressCountry: "ES",
@@ -17,10 +17,10 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Tahona AI",
+  name: "Tahona",
   url: "https://tahona.ai",
   description:
-    "Implementación de Inteligencia Artificial para PYMEs en España. Equipo pequeño, técnico y de alto rendimiento. Resultados en semanas, sin hype.",
+    "Automatización inteligente para PYMEs en España. Equipo pequeño, técnico y de alto rendimiento. Resultados en semanas, sin hype.",
   inLanguage: "es-ES",
 };
 
@@ -39,11 +39,17 @@ const breadcrumbSchema = {
 ---
 
 <script
+  is:inline
   type="application/ld+json"
   set:html={JSON.stringify(organizationSchema)}
 />
-<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 <script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(websiteSchema)}
+/>
+<script
+  is:inline
   type="application/ld+json"
   set:html={JSON.stringify(breadcrumbSchema)}
 />

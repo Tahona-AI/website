@@ -1,161 +1,70 @@
 # Architecture
 
-This document explains the technical architecture of the Tahona website.
+Tahona is a static Astro marketing site deployed to GitHub Pages.
 
-## Astro Islands Architecture
+## Runtime Model
 
-The website uses Astro's Islands architecture, which allows for partial hydration of interactive components while keeping the majority of the page as static HTML.
+- Astro builds the site to static files in `dist/`.
+- React is used only for hydrated islands where interaction is needed.
+- There are no server routes in this repo.
+- The contact form posts from the browser to the configured external webhook.
 
-### How It Works
+## Build Configuration
 
-1. **Static by default**: Astro renders all components to static HTML at build time
-2. **Selective hydration**: Only components with `client:*` directives are hydrated with JavaScript
-3. **Framework-agnostic**: React components coexist with native Astro components
-
-### Benefits
-
-- Faster initial page load (less JavaScript shipped)
-- Better Core Web Vitals scores
-- Progressive enhancement - page works without JavaScript
-- Reduced Time to Interactive (TTI)
-
-## Component Hydration Strategy
-
-Components are hydrated based on their interactivity requirements:
-
-### `client:load` - Immediate Hydration
-
-Used for components that need to be interactive immediately on page load.
-
-| Component | Reason |
-|-----------|--------|
-| `Navbar` | User interaction expected immediately (scroll detection, mobile menu) |
-| `Hero` | Animations should start on page load |
-
-### `client:visible` - Lazy Hydration
-
-Used for below-the-fold components that can wait until they enter the viewport.
-
-| Component | Reason |
-|-----------|--------|
-| `Services` | Card flip interactions, but not immediately visible |
-| `ValueProps` | 3D tilt effects, below the fold |
-| `Contact` | Form submission, near page bottom |
-| `FadeInView` (in Astro sections) | Scroll-triggered animations |
-
-### No Hydration - Static Components
-
-These Astro components render as pure HTML with no client-side JavaScript:
-
-| Component | Location |
-|-----------|----------|
-| `SuccessStory.astro` | `src/components/sections/` |
-| `HowWeWork.astro` | `src/components/sections/` |
-| `WhyTahona.astro` | `src/components/sections/` |
-| `Footer.astro` | `src/components/sections/` |
-
-Note: These Astro components may import React components with `client:visible` for animations.
-
-## SSR Setup
-
-The website runs in SSR (Server-Side Rendering) mode using the `@astrojs/node` adapter.
-
-### Configuration
+`astro.config.mjs` keeps the site static:
 
 ```javascript
-// astro.config.mjs
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwindcss from '@tailwindcss/vite';
-import node from '@astrojs/node';
-
 export default defineConfig({
-  integrations: [react()],
-  output: 'server',
+  site: "https://tahona.ai",
+  integrations: [react(), sitemap(), compress()],
+  output: "static",
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
-  adapter: node({
-    mode: 'standalone'
-  })
 });
 ```
 
-### Why SSR?
+Do not change `output: "static"` unless the deployment target changes.
 
-1. **API Endpoints**: The contact form requires a server-side endpoint
-2. **Dynamic Content**: Future features may require server-side data fetching
-3. **Flexibility**: Easy to add authenticated routes or personalization
+## Rendered Page Structure
 
-### Running the Server
+`src/pages/index.astro` renders the landing page in this order:
 
-After building, the server can be started with:
+1. `SkipLink`
+2. `Navbar` with `client:load`
+3. `Hero` with `client:load`
+4. `Services` with `client:visible`
+5. `HowWeWork` with `client:visible`
+6. `WhyTahona`
+7. `Contact` with `client:load`
+8. `Footer`
 
-```bash
-node ./dist/server/entry.mjs
-```
+## Hydration Strategy
 
-Or with Bun:
+| Pattern | Current use |
+| --- | --- |
+| `client:load` | Above-the-fold or immediately interactive components: `Navbar`, `Hero`, `Contact` |
+| `client:visible` | Below-the-fold interactive sections: `Services`, `HowWeWork` |
+| No directive | Static Astro sections: `WhyTahona`, `Footer`, `SkipLink` |
 
-```bash
-bun ./dist/server/entry.mjs
-```
+## Assets
 
-## API Endpoints
+Public assets live under `public/` and are referenced directly by path.
+Keep only assets referenced by the rendered site, metadata, manifest, or active documentation.
 
-API routes are located in `src/pages/api/`.
+Important public assets:
 
-### POST /api/contact
-
-Handles contact form submissions.
-
-**Request**: `FormData` with fields:
-- `nombre` (string, required, min 2 chars)
-- `email` (string, required, valid email)
-- `detalles` (string, required, min 10 chars)
-
-**Response**: JSON
-```typescript
-{
-  success: boolean;
-  message: string;
-  errors?: {
-    nombre?: string[];
-    email?: string[];
-    detalles?: string[];
-  };
-}
-```
-
-## Build Output
-
-The build produces two directories in `dist/`:
-
-```
-dist/
-├── client/           # Static assets (JS, CSS, images)
-│   └── _astro/       # Hashed asset files
-└── server/           # Node.js server entry point
-    └── entry.mjs     # Start server with this file
-```
+- `/images/logos/tahona-favicon.svg`
+- `/images/logos/tahona-mark-green.svg`
+- `/images/why-tahona-flow.svg`
+- `/og-image.png`
+- `/site.webmanifest`
+- `/favicon/*.png`
 
 ## Path Aliases
 
-The project uses TypeScript path aliases for cleaner imports:
+The project uses `@/*` for imports from `src/*`.
 
-```typescript
-// tsconfig.json
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-}
-```
-
-Usage:
 ```typescript
 import { cn } from "@/lib/utils";
 import { FadeInView } from "@/components/animations/FadeInView";

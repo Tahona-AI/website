@@ -1,7 +1,7 @@
 {
-  "name": "Tahona — Automatización inteligente para la industria alimentaria",
+  "name": "Tahona — Automatización inteligente para PYMEs",
   "short_name": "Tahona",
-  "description": "Automatiza el trabajo manual que tu sistema de gestión no puede hacer. Soluciones de IA para logística, farmacia e industria.",
+  "description": "Automatización inteligente para procesos reales de PYMEs españolas, integrada con las herramientas que ya usan.",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png",
