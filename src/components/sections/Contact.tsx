@@ -158,7 +158,7 @@ export function Contact() {
                 Contacta con nosotros
               </h2>
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 text-pretty md:text-lg">
-                ¿Quieres saber dónde puede aportar valor la IA en tu empresa? Cuéntanos cómo trabajáis y vemos juntos si tiene sentido explorar una primera oportunidad.
+                Cuéntanos cómo trabajáis y vemos juntos si hay una mejora operativa clara que merezca la pena explorar.
               </p>
             </div>
 
@@ -277,7 +277,7 @@ export function Contact() {
                   </div>
 
                   <LabelInputContainer>
-                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">¿Dónde crees que puede aportar valor la IA?</Label>
+                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">¿Qué proceso quieres mejorar?</Label>
                     <Textarea
                       id="details"
                       name="details"

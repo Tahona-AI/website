@@ -9,6 +9,7 @@ const activePublicFiles = [
   "public/site.webmanifest",
   "src/components/SEO.astro",
   "src/components/StructuredData.astro",
+  "src/components/sections/Contact.tsx",
   "src/components/sections/Footer.astro",
   "src/components/sections/Hero.tsx",
   "src/components/sections/Services.tsx",
@@ -30,6 +31,7 @@ const stalePublicCopyPatterns = [
   /aumenta la facturación/i,
   /APPCC/i,
   /industria alimentaria/i,
+  /aportar valor la IA/i,
 ];
 
 function readProjectFile(path) {
