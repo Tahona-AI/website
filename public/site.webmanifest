@@ -1,7 +1,7 @@
 {
-  "name": "Tahona — Automatización inteligente para PYMEs",
+  "name": "Tahona — Procesos y herramientas internas",
   "short_name": "Tahona",
-  "description": "Automatización inteligente para procesos reales de PYMEs españolas, integrada con las herramientas que ya usan.",
+  "description": "Mejora de procesos, datos y herramientas internas con implementación técnica práctica.",
   "icons": [
     {
       "src": "/favicon/web-app-manifest-192x192.png",

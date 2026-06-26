@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  BrainIcon,
+  ClipboardTextIcon,
+  DatabaseIcon,
   GearIcon,
   UsersIcon,
-  ChartLineUpIcon,
-  RobotIcon,
   NetworkIcon,
+  PlugsConnectedIcon,
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { FadeInView } from "@/components/animations/FadeInView";
@@ -22,9 +22,9 @@ interface BentoCard {
 
 const CARDS: readonly BentoCard[] = [
   {
-    title: "Equipo pequeño de alto rendimiento",
+    title: "Diagnóstico operativo",
     description:
-      "Equipos pequeños, ágiles, cercanos y altamente cualificados para conocer a fondo tu negocio y optimizar sus procesos.",
+      "Mapeamos cómo se trabaja hoy, dónde se bloquea la operación y qué cambios técnicos tienen sentido antes de construir.",
     icon: UsersIcon,
     span: true,
     gradient:
@@ -32,19 +32,19 @@ const CARDS: readonly BentoCard[] = [
     accent: "bg-brand-50 text-brand-600",
   },
   {
-    title: "Tecnología punta al alcance",
+    title: "Implementación técnica",
     description:
-      "Hemos estudiado y trabajado en China, Estados Unidos, México, Portugal y España. Acercamos lo último a las provincias españolas.",
-    icon: BrainIcon,
+      "Conectamos datos, documentos y herramientas internas para que la solución encaje con la forma real de trabajar del equipo.",
+    icon: PlugsConnectedIcon,
     gradient:
       "radial-gradient(circle at 80% 80%, rgba(22,163,74,0.07) 0%, transparent 50%), linear-gradient(135deg, rgba(240,253,244,0.6) 0%, transparent 60%)",
     accent: "bg-brand-50 text-brand-600",
   },
   {
-    title: "Reducción de costes operativos",
+    title: "Datos, documentos y reporting",
     description:
-      "Cuando se optimizan procesos mediante la tecnología, se reducen los costes operativos y se aumenta la facturación del negocio.",
-    icon: ChartLineUpIcon,
+      "Ordenamos flujos de información, reportes y tareas repetitivas para reducir trabajo manual y mejorar la visibilidad operativa.",
+    icon: DatabaseIcon,
     gradient:
       "radial-gradient(circle at 20% 20%, rgba(22,163,74,0.06) 0%, transparent 50%), linear-gradient(225deg, rgba(220,252,231,0.5) 0%, transparent 60%)",
     accent: "bg-brand-50 text-brand-600",
@@ -60,19 +60,19 @@ const CARDS: readonly BentoCard[] = [
     accent: "bg-brand-50 text-brand-600",
   },
   {
-    title: "Soluciones a medida",
+    title: "Herramientas internas a medida",
     description:
       "Diseñamos implementaciones adaptadas a tu contexto, no demostraciones genéricas. Construimos sobre tus datos, tus herramientas y tus restricciones reales.",
-    icon: GearIcon,
+    icon: ClipboardTextIcon,
     gradient:
       "radial-gradient(circle at 10% 10%, rgba(22,163,74,0.07) 0%, transparent 45%), linear-gradient(45deg, rgba(240,253,244,0.5) 0%, transparent 55%)",
     accent: "bg-brand-50 text-brand-600",
   },
   {
-    title: "Resultados en semanas",
+    title: "Adopción por el equipo",
     description:
-      "Nos movemos rápido, iteramos contigo y buscamos impacto operativo desde las primeras fases del proyecto.",
-    icon: RobotIcon,
+      "Acompañamos la puesta en marcha, ajustamos con uso real y dejamos criterios claros para medir si la mejora funciona.",
+    icon: GearIcon,
     gradient:
       "radial-gradient(circle at 90% 90%, rgba(22,163,74,0.07) 0%, transparent 45%), linear-gradient(315deg, rgba(220,252,231,0.5) 0%, transparent 55%)",
     accent: "bg-brand-50 text-brand-600",
@@ -141,9 +141,9 @@ export function Services() {
               La tecnología ya existe. Falta la implementación adecuada.
             </h2>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-500">
-              Los modelos de Inteligencia Artificial han llegado a la capacidad
-              suficiente para delegar procesos cognitivos humanos en la
-              operativa de las empresas.
+              Mejoramos operaciones internas con diagnóstico operativo,
+              implementación técnica y automatización solo cuando encaja con el
+              trabajo real.
             </p>
           </FadeInView>
 
