@@ -1,5 +1,6 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -38,6 +39,12 @@ function readProjectFile(path) {
   return readFileSync(join(repoRoot, path), "utf8");
 }
 
+function sha256(path) {
+  return createHash("sha256")
+    .update(readFileSync(join(repoRoot, path)))
+    .digest("hex");
+}
+
 describe("public copy hygiene", () => {
   test("active public files do not contain stale positioning terms", () => {
     const offenders = activePublicFiles.flatMap((file) => {
@@ -73,6 +80,16 @@ describe("public copy hygiene", () => {
     assert.deepEqual(
       [...positions].sort((a, b) => a - b),
       positions,
+    );
+  });
+
+  test("active Open Graph image is the neutral public-copy asset", () => {
+    const seoSource = readProjectFile("src/components/SEO.astro");
+
+    assert.equal(seoSource.includes('image = "/og-image.png"'), true);
+    assert.equal(
+      sha256("public/og-image.png"),
+      "c7f43dc0db630892e8373fb93fd027a9de566c9613267d9cda48a11af55cab65",
     );
   });
 });
