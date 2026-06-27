@@ -2,7 +2,7 @@
 
 ## Quick Context
 
-**What**: Marketing website for Tahona - AI automation agency for the Spanish food industry.  
+**What**: Marketing website for Tahona - technical consulting and implementation for internal operations, processes, data, documents, tools, and practical automation when useful.
 **Stack**: Astro + React + Tailwind CSS v4.  
 **Deploy**: GitHub Pages (static build).  
 **URL**: https://tahona.ai
@@ -123,25 +123,28 @@ cn("base-class", condition && "conditional-class", className)
 ## Content Guidelines (Spanish)
 
 ### Voice
-- **Direct**: No fluff, get to the point
-- **Practical**: Benefits over features
-- **Confident**: We know what we're doing
-- **Human**: Real language, not corporate
+- **Direct**: no fluff, get to the point
+- **Practical**: operational clarity before technology
+- **Confident**: technical expertise without hype
+- **Corporate/professional**: serious, clear, and human, but not casual
 
 ### DO
-- Use "tú" not "usted"
-- Speak in benefits: "Ahorra 10 horas/semana"
-- Be specific: "3 semanas" not "rápidamente"
+- Use neutral corporate Spanish. Avoid addressing the visitor directly as "tú" or "usted" unless explicitly approved for a specific CTA.
+- Lead with operations: processes, data, documents, internal tools, adoption, and measurable control.
+- Be specific when evidence exists, but do not invent timelines, savings, metrics, sectors, clients, or guarantees.
 
 ### DON'T
 - Corporate buzzwords: "sinergia", "transformación digital"
 - Tech jargon: "arquitectura transformer", "modelos de deep learning"
 - Startup speak: "disruptivo", "escalable", "game-changer"
+- Generic AI-agency/autobro positioning: "agentes de IA", "ingeniería de contexto", "automatiza con IA en 30 días", "Sistemas de IA que operan en producción desde el primer día"
+- Money-first claims without proof: "ahorra X horas", "reduce costes", "aumenta la facturación"
 
 ### Key Messages
-- "Automatización inteligente sin cambiar lo que ya funciona"
-- "Añadimos capas de inteligencia a lo que ya usas"
-- "Sin cambiar de ERP, sin proyectos traumáticos"
+- "Procesos, datos y herramientas internas"
+- "La tecnología ya existe. Falta la implementación adecuada."
+- "Mejoramos operaciones internas con diagnóstico operativo, implementación técnica y automatización solo cuando encaja con el trabajo real."
+- "Para equipos con procesos reales que quieren mejorar su operación."
 
 ---
 

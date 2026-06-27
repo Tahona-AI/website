@@ -4,18 +4,20 @@ Welcome to the official documentation for the Tahona website.
 
 ## Project Overview
 
-Tahona is a Spanish B2B AI automation company dedicated to transforming business operations through cutting-edge artificial intelligence solutions. This website serves as the primary digital presence, showcasing our services, success stories, and providing a point of contact for potential partners.
+Tahona is a technical consulting and implementation studio focused on internal operations: processes, data, documents, reporting, internal tools, adoption, and practical automation when it is useful. The website is the public marketing surface for that horizontal operations offer.
+
+The public positioning is deliberately not a generic AI-agency pitch. AI is treated as a tool when it helps the operation, not as the headline.
 
 ## Tech Stack
 
 The website is built using a modern, high-performance stack:
 
-- **Framework**: [Astro 5](https://astro.build/) (Static Site Generation with SSR for API routes)
+- **Framework**: [Astro 5](https://astro.build/) (static site generation)
 - **UI Library**: [React 19](https://react.dev/) (used via Astro Islands)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **Runtime**: [Bun](https://bun.sh/)
 - **Animations**: [Motion](https://motion.dev/) (formerly Framer Motion)
-- **Icons**: [Lucide React](https://lucide.dev/)
+- **Icons**: [Phosphor Icons](https://phosphoricons.com/) via `@phosphor-icons/react`
 
 ## Quick Start
 
@@ -64,7 +66,6 @@ website/
 ├── src/
 │   ├── components/
 │   │   ├── animations/     # Animation-wrapper components (React/Motion)
-│   │   ├── kokonutui/      # Specialized UI components (SVG animations, etc.)
 │   │   ├── sections/       # Major landing page sections (Astro & React)
 │   │   └── ui/             # Reusable UI primitives (Button, Input, etc.)
 │   ├── layouts/            # Base Astro layouts
@@ -77,6 +78,6 @@ website/
 
 ## Documentation Index
 
-- [Architecture](./ARCHITECTURE.md) - Deep dive into Astro Islands, hydration, and SSR.
+- [Architecture](./ARCHITECTURE.md) - Astro Islands, hydration, static output, and deployment.
 - [Components](./COMPONENTS.md) - Documentation for sections, UI primitives, and animations.
 - [Styling](./STYLING.md) - Brand colors, typography, and Tailwind v4 configuration.
