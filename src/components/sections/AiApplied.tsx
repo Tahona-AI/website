@@ -5,20 +5,11 @@ import { FadeInView } from "@/components/animations/FadeInView";
 function AiValueCurve() {
   return (
     <svg
-      aria-labelledby="ai-value-curve-title ai-value-curve-desc"
+      aria-label="Curva de valor de la IA aplicada"
       className="h-full w-full"
       role="img"
       viewBox="0 0 620 440"
     >
-      <title id="ai-value-curve-title">
-        Curva de valor de la IA aplicada
-      </title>
-      <desc id="ai-value-curve-desc">
-        Gráfico con cuatro niveles de automatización: uso con criterio,
-        asistentes específicos, automatización supervisada y agentes e
-        ingeniería de contexto.
-      </desc>
-
       <defs>
         <linearGradient id="ai-curve-fill" x1="0" x2="1" y1="1" y2="0">
           <stop offset="0%" stopColor="rgb(45, 106, 79)" stopOpacity="0.06" />
@@ -27,43 +18,33 @@ function AiValueCurve() {
         </linearGradient>
       </defs>
 
-      <rect
-        fill="rgb(245, 244, 246)"
-        height="404"
-        rx="24"
-        stroke="rgb(230, 230, 230)"
-        width="590"
-        x="15"
-        y="18"
-      />
-
       <g transform="translate(62 50)">
-        <line stroke="rgb(214, 214, 214)" strokeDasharray="2 8" x1="120" x2="120" y1="0" y2="324" />
-        <line stroke="rgb(214, 214, 214)" strokeDasharray="2 8" x1="280" x2="280" y1="0" y2="324" />
-        <line stroke="rgb(214, 214, 214)" strokeDasharray="2 8" x1="390" x2="390" y1="0" y2="324" />
-        <line stroke="rgb(214, 214, 214)" strokeDasharray="2 8" x1="500" x2="500" y1="0" y2="324" />
+        <line stroke="rgb(218, 218, 218)" strokeDasharray="2 8" x1="162" x2="162" y1="0" y2="324" />
+        <line stroke="rgb(218, 218, 218)" strokeDasharray="2 8" x1="280" x2="280" y1="0" y2="324" />
+        <line stroke="rgb(218, 218, 218)" strokeDasharray="2 8" x1="408" x2="408" y1="0" y2="324" />
+        <line stroke="rgb(218, 218, 218)" strokeDasharray="2 8" x1="516" x2="516" y1="0" y2="324" />
 
         <path
           d="M58 324 L58 0"
           fill="none"
-          stroke="rgb(167, 167, 167)"
+          stroke="rgb(154, 154, 154)"
           strokeLinecap="round"
           strokeWidth="1.5"
         />
-        <path d="M52 10 L58 0 L64 10 Z" fill="rgb(167, 167, 167)" />
+        <path d="M52 10 L58 0 L64 10 Z" fill="rgb(154, 154, 154)" />
         <path
           d="M58 324 L536 324"
           fill="none"
-          stroke="rgb(167, 167, 167)"
+          stroke="rgb(154, 154, 154)"
           strokeLinecap="round"
           strokeWidth="1.5"
         />
-        <path d="M526 318 L536 324 L526 330 Z" fill="rgb(167, 167, 167)" />
+        <path d="M526 318 L536 324 L526 330 Z" fill="rgb(154, 154, 154)" />
 
         <text
           className="font-mono"
-          fill="rgb(107, 107, 107)"
-          fontSize="13"
+          fill="rgb(72, 72, 72)"
+          fontSize="14"
           letterSpacing="0.08em"
           textAnchor="middle"
           transform="rotate(-90 20 165)"
@@ -74,8 +55,8 @@ function AiValueCurve() {
         </text>
         <text
           className="font-mono"
-          fill="rgb(107, 107, 107)"
-          fontSize="13"
+          fill="rgb(72, 72, 72)"
+          fontSize="14"
           letterSpacing="0.08em"
           textAnchor="middle"
           x="298"
@@ -97,49 +78,37 @@ function AiValueCurve() {
         />
 
         <g className="font-sans" fill="rgb(31, 31, 31)">
-          <g transform="translate(60 206)">
-            <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="600" letterSpacing="0.08em">
+          <g transform="translate(60 244)">
+            <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="700" letterSpacing="0.08em">
               NIVEL 01
             </text>
-            <text fontSize="13" fontWeight="700" y="17">Uso con criterio</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="34">Separar dónde un modelo</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="48">ayuda de lo que necesita</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="62">reglas, datos o decisión</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="76">humana.</text>
+            <text fontSize="13" fontWeight="800" y="17">Uso con criterio</text>
+            <text fill="rgb(74, 74, 74)" fontSize="11" y="33">Decisión humana.</text>
           </g>
 
-          <g transform="translate(180 136)">
-            <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="600" letterSpacing="0.08em">
+          <g transform="translate(174 178)">
+            <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="700" letterSpacing="0.08em">
               NIVEL 02
             </text>
-            <text fontSize="13" fontWeight="700" y="17">Asistentes</text>
-            <text fontSize="13" fontWeight="700" y="31">específicos</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="48">Lectura documental,</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="62">informes, clasificación,</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="76">búsqueda interna o</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="90">revisión.</text>
+            <text fontSize="13" fontWeight="800" y="17">Asistentes específicos</text>
+            <text fill="rgb(74, 74, 74)" fontSize="11" y="33">Lectura y revisión.</text>
           </g>
 
-          <g transform="translate(300 66)">
-            <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="600" letterSpacing="0.08em">
+          <g transform="translate(306 112)">
+            <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="700" letterSpacing="0.08em">
               NIVEL 03
             </text>
-            <text fontSize="13" fontWeight="700" y="17">Automatización</text>
-            <text fontSize="13" fontWeight="700" y="31">supervisada</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="48">Pasos repetibles con</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="62">reglas, revisión humana y</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="76">trazabilidad.</text>
+            <text fontSize="13" fontWeight="800" y="17">Automatización</text>
+            <text fontSize="13" fontWeight="800" y="31">supervisada</text>
+            <text fill="rgb(74, 74, 74)" fontSize="11" y="47">Reglas y trazabilidad.</text>
           </g>
 
-          <g transform="translate(414 18)">
-            <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="600" letterSpacing="0.08em">
+          <g transform="translate(368 8)">
+            <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="700" letterSpacing="0.08em">
               NIVEL 04
             </text>
-            <text fontSize="13" fontWeight="700" y="17">Agentes e ingeniería</text>
-            <text fontSize="13" fontWeight="700" y="31">de contexto</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="48">Agentes y workflows</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="62">enterprise con fuentes,</text>
-            <text fill="rgb(107, 107, 107)" fontSize="11" y="76">permisos y límites claros.</text>
+            <text fontSize="13" fontWeight="800" y="17">Agentes con contexto</text>
+            <text fill="rgb(74, 74, 74)" fontSize="11" y="33">Permisos y límites.</text>
           </g>
         </g>
 
@@ -175,8 +144,8 @@ export function AiApplied() {
         </FadeInView>
 
         <FadeInView delay={0.12}>
-          <div className="relative overflow-hidden rounded-[2rem] border border-gray-200/90 bg-surface shadow-[0_28px_80px_-52px_rgba(31,31,31,0.5)]">
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0)_44%,rgba(240,247,243,0.55)_100%)]" />
+          <div className="relative overflow-hidden rounded-[2rem] border border-gray-200/90 bg-[#f8f8f8] shadow-[0_28px_80px_-52px_rgba(31,31,31,0.5)]">
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0)_52%,rgba(240,247,243,0.5)_100%)]" />
             <div className="relative aspect-[1.34] min-h-[22rem] p-4 sm:p-6">
               <AiValueCurve />
             </div>
