@@ -13,6 +13,10 @@ import {
   primaryCtaArrowClass,
   primaryCtaBaseClass,
 } from "@/components/ui/cta-styles";
+import { AiWorkflowVisual } from "@/components/sections/services/AiWorkflowVisual";
+import { FoundationsAuditVisual } from "@/components/sections/services/FoundationsAuditVisual";
+import { GenericServiceVisual } from "@/components/sections/services/GenericServiceVisual";
+import { IntegrationsHubVisual } from "@/components/sections/services/IntegrationsHubVisual";
 
 interface ServiceFamily {
   readonly marker: string;
@@ -22,6 +26,7 @@ interface ServiceFamily {
   readonly icon: ElementType;
   readonly gradient: string;
   readonly accent: string;
+  readonly visual?: "ai" | "audit" | "integrations";
 }
 
 const SERVICE_FAMILIES: readonly ServiceFamily[] = [
@@ -39,6 +44,7 @@ const SERVICE_FAMILIES: readonly ServiceFamily[] = [
     gradient:
       "radial-gradient(circle at 90% 10%, rgba(22,163,74,0.08) 0%, transparent 50%), radial-gradient(circle at 10% 90%, rgba(22,163,74,0.05) 0%, transparent 40%)",
     accent: "bg-brand-50 text-brand-600",
+    visual: "audit",
   },
   {
     marker: "02",
@@ -54,6 +60,7 @@ const SERVICE_FAMILIES: readonly ServiceFamily[] = [
     gradient:
       "radial-gradient(circle at 80% 80%, rgba(22,163,74,0.07) 0%, transparent 50%), linear-gradient(135deg, rgba(240,253,244,0.6) 0%, transparent 60%)",
     accent: "bg-brand-50 text-brand-600",
+    visual: "ai",
   },
   {
     marker: "03",
@@ -69,6 +76,7 @@ const SERVICE_FAMILIES: readonly ServiceFamily[] = [
     gradient:
       "radial-gradient(circle at 20% 20%, rgba(22,163,74,0.06) 0%, transparent 50%), linear-gradient(225deg, rgba(220,252,231,0.5) 0%, transparent 60%)",
     accent: "bg-brand-50 text-brand-600",
+    visual: "integrations",
   },
 ];
 
@@ -79,39 +87,41 @@ function ServiceFamilyCard({
   family: ServiceFamily;
   index: number;
 }) {
+  const isReversed = index % 2 === 1;
   const Icon = family.icon;
 
   return (
     <FadeInView delay={0.1 + index * 0.08}>
       <article
-        className="group relative flex h-full min-h-[34rem] flex-col overflow-hidden rounded-[1.75rem] border border-gray-200/80 bg-white/84 p-6 shadow-[0_22px_60px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:bg-white/92 hover:shadow-[0_30px_72px_-44px_rgba(31,31,31,0.5)] sm:p-8 lg:p-9"
+        className={cn(
+          "group relative grid min-h-[26rem] overflow-hidden rounded-[1.75rem] border border-gray-200/80 bg-white/84 p-6 shadow-[0_22px_60px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:bg-white/92 hover:shadow-[0_30px_72px_-44px_rgba(31,31,31,0.5)] sm:p-8 md:items-stretch md:gap-10 lg:min-h-[28rem] lg:p-9",
+          isReversed
+            ? "md:grid-cols-[minmax(18rem,22rem)_minmax(0,1fr)]"
+            : "md:grid-cols-[minmax(0,1fr)_minmax(18rem,22rem)]"
+        )}
         style={{ backgroundImage: family.gradient }}
       >
         <div className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 rounded-full bg-gradient-to-br from-brand-100/40 to-transparent opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
-        <div className="relative z-10 flex h-full flex-col">
-          <div
-            className={cn(
-              "mb-10 inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-white/75 shadow-sm transition-transform duration-300 group-hover:scale-105",
-              family.accent
-            )}
-          >
-            <Icon weight="duotone" className="h-8 w-8" />
-          </div>
-
+        <div
+          className={cn(
+            "relative z-10 flex h-full flex-col py-1",
+            isReversed ? "md:order-2" : "md:order-1"
+          )}
+        >
           <p className="text-sm font-semibold tracking-[0.04em] text-brand-700">
             {family.marker}
           </p>
 
-          <h3 className="mt-4 font-heading text-2xl font-semibold tracking-[-0.02em] text-gray-900">
+          <h3 className="mt-4 font-heading text-2xl font-semibold tracking-[-0.02em] text-gray-900 sm:text-3xl">
             {family.title}
           </h3>
 
-          <p className="mt-4 text-base leading-7 text-gray-600 md:min-h-[8.75rem]">
+          <p className="mt-4 max-w-2xl text-base leading-7 text-gray-600">
             {family.description}
           </p>
 
-          <ol className="mt-7 space-y-3">
+          <ol className="mt-8 space-y-3 md:mt-auto md:pt-8">
             {family.services.map((service, serviceIndex) => (
               <li
                 className="grid grid-cols-[1.75rem_1fr] items-start gap-3 text-sm leading-6 text-gray-700"
@@ -124,6 +134,31 @@ function ServiceFamilyCard({
               </li>
             ))}
           </ol>
+        </div>
+
+        <div
+          className={cn(
+            "relative z-10 mt-8 flex items-center justify-center md:mt-0",
+            isReversed ? "md:order-1" : "md:order-2"
+          )}
+        >
+          <div className="relative aspect-square w-full max-w-[21rem] overflow-hidden rounded-[1.5rem] border border-white/70 bg-[radial-gradient(circle_at_22%_18%,rgba(45,106,79,0.18),transparent_31%),radial-gradient(circle_at_78%_74%,rgba(64,145,108,0.14),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.72),rgba(255,255,255,0.18))] shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-sm">
+            {family.visual === "audit" ? (
+              <FoundationsAuditVisual />
+            ) : family.visual === "ai" ? (
+              <AiWorkflowVisual />
+            ) : family.visual === "integrations" ? (
+              <IntegrationsHubVisual />
+            ) : (
+              <GenericServiceVisual
+                Icon={Icon}
+                accent={family.accent}
+                marker={family.marker}
+                services={family.services}
+                title={family.title}
+              />
+            )}
+          </div>
         </div>
       </article>
     </FadeInView>
@@ -157,10 +192,7 @@ export function Services() {
             </div>
           </FadeInView>
 
-          <div
-            className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6"
-            id="servicios-grid"
-          >
+          <div className="mt-16 grid grid-cols-1 gap-6" id="servicios-grid">
             {SERVICE_FAMILIES.map((family, index) => (
               <ServiceFamilyCard
                 family={family}
