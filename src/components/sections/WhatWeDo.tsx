@@ -32,7 +32,9 @@ function FlowDiagram() {
 export function WhatWeDo() {
   return (
     <section id="que-hacemos" className="relative overflow-hidden bg-surface py-24 lg:py-28">
-      <div className="mx-auto grid max-w-7xl gap-14 px-6 sm:px-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16 lg:px-16">
+      <div className="section-fade-white-to-surface" />
+
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-6 sm:px-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16 lg:px-16">
         <FadeInView>
           <div>
             <div className="inline-flex items-center gap-3 text-sm text-gray-500">

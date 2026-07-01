@@ -142,7 +142,9 @@ function IndustryCard({
 export function Industries() {
   return (
     <section id="industrias" className="relative overflow-hidden bg-white py-24 lg:py-28">
-      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+      <div className="section-fade-surface-to-white" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <FadeInView>
           <div>
             <div className="inline-flex items-center gap-3 text-sm text-gray-500">

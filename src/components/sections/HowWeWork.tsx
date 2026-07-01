@@ -44,8 +44,10 @@ const steps: readonly Step[] = [
 
 export function HowWeWork() {
   return (
-    <section id="proceso" className="bg-white py-24 lg:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="proceso" className="relative overflow-hidden bg-white py-24 lg:py-28">
+      <div className="section-fade-surface-to-white" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <FadeInView>
           <div className="inline-flex items-center gap-3 text-sm text-gray-500">
             <span className="h-px w-10 bg-brand-300" />

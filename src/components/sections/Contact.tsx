@@ -145,7 +145,7 @@ export function Contact() {
   return (
     <>
       <section id="contacto" className="relative overflow-hidden bg-surface py-24">
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-48 bg-[linear-gradient(180deg,rgba(255,255,255,1)_0%,rgba(249,249,249,0.94)_38%,rgba(245,244,246,0.78)_74%,rgba(245,244,246,0)_100%)]" />
+        <div className="section-fade-white-to-surface" />
 
         <div className="relative mx-auto max-w-7xl">
           <div className="relative z-20 px-6 sm:px-10 lg:px-16">

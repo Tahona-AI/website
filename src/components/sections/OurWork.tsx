@@ -105,9 +105,9 @@ export function OurWork() {
 
   return (
     <section id="trabajo" className="relative overflow-hidden bg-surface py-24 lg:py-28">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[linear-gradient(180deg,rgba(255,255,255,1)_0%,rgba(245,244,246,0)_100%)]" />
+      <div className="section-fade-white-to-surface" />
 
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <FadeInView>
           <div>
             <div className="inline-flex items-center gap-3 text-sm text-gray-500">

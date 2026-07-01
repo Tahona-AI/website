@@ -125,8 +125,10 @@ function AiValueCurve() {
 
 export function AiApplied() {
   return (
-    <section className="relative overflow-hidden bg-white py-24 lg:py-28">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 sm:px-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16 lg:px-16">
+    <section className="relative overflow-hidden bg-surface py-24 lg:py-28">
+      <div className="section-fade-white-to-surface" />
+
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-6 sm:px-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-16 lg:px-16">
         <FadeInView>
           <div className="inline-flex items-center gap-3 text-sm text-gray-500">
             <span className="h-px w-10 bg-brand-300" />
