@@ -26,7 +26,7 @@ interface ServiceFamily {
 
 const SERVICE_FAMILIES: readonly ServiceFamily[] = [
   {
-    marker: "01 · Servicios",
+    marker: "01",
     title: "Fundaciones",
     description:
       "Antes de construir se ordena el problema. Diagnóstico, estrategia y conocimiento interno para tomar decisiones técnicas con contexto.",
@@ -41,7 +41,7 @@ const SERVICE_FAMILIES: readonly ServiceFamily[] = [
     accent: "bg-brand-50 text-brand-600",
   },
   {
-    marker: "02 · Servicios",
+    marker: "02",
     title: "Desarrollo de IA",
     description:
       "La IA entra cuando mejora un flujo concreto. El diseño incluye límites, supervisión, fuentes, trazabilidad y adopción.",
@@ -56,7 +56,7 @@ const SERVICE_FAMILIES: readonly ServiceFamily[] = [
     accent: "bg-brand-50 text-brand-600",
   },
   {
-    marker: "03 · Servicios",
+    marker: "03",
     title: "Otros desarrollos",
     description:
       "Muchas mejoras no necesitan solo IA. Necesitan una herramienta clara, una integración fiable o una plataforma interna que encaje con la forma real de trabajar.",
