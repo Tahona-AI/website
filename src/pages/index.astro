@@ -4,6 +4,7 @@ import SkipLink from "@/components/SkipLink.astro";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
+import { AiApplied } from "@/components/sections/AiApplied";
 import { HowWeWork } from "@/components/sections/HowWeWork";
 import WhyTahona from "@/components/sections/WhyTahona.astro";
 import { Contact } from "@/components/sections/Contact";
@@ -19,6 +20,7 @@ import Footer from "@/components/sections/Footer.astro";
     <Navbar client:load />
     <Hero client:load />
     <Services client:visible />
+    <AiApplied client:visible />
     <HowWeWork client:visible />
     <WhyTahona />
     <Contact client:load />
