@@ -21,7 +21,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-white pt-16 md:pt-20"
+      className="relative min-h-[100svh] overflow-hidden bg-white pt-16 md:pt-20"
     >
       <div className="pointer-events-none absolute inset-0 z-10">
         <div className="absolute top-[-76%] bottom-[-36%] left-[-8%] right-[-8%] rotate-[24deg] opacity-95">
@@ -46,33 +46,23 @@ export function Hero() {
       </div>
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="relative min-h-[62svh] lg:min-h-[66svh]">
-          <div className="relative z-20 flex min-h-[62svh] flex-col justify-center px-6 py-10 sm:px-10 sm:py-12 lg:min-h-[66svh] lg:px-12 lg:py-14 xl:px-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-6 inline-flex w-fit items-center gap-3 rounded-full border border-gray-200 bg-white/90 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-gray-500 shadow-[0_18px_40px_-28px_rgba(31,31,31,0.45)]"
-            >
-              <span className="h-2 w-2 rounded-full bg-brand-500" />
-              Procesos, datos y herramientas internas
-            </motion.div>
-
+        <div className="relative min-h-[calc(100svh-4rem)] md:min-h-[calc(100svh-5rem)]">
+          <div className="relative z-20 flex min-h-[calc(100svh-4rem)] flex-col justify-center px-6 py-12 sm:px-10 md:min-h-[calc(100svh-5rem)] lg:px-12 lg:py-16 xl:px-16">
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
               className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[1.02] text-gray-900 lg:max-w-[52rem]"
             >
               La tecnología ya existe.
-              <br className="hidden md:block" />
+              <br className="hidden md:block" />{" "}
               Falta la implementación adecuada.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.35 }}
+              transition={{ duration: 0.7, delay: 0.25 }}
               className="mt-8 max-w-3xl text-[clamp(1rem,1.35vw,1.25rem)] leading-8 text-gray-500 lg:max-w-[38rem]"
             >
               Equipo técnico que mejora operaciones internas con diagnóstico, implementación práctica y automatización cuando aporta. Sin cambiar lo que ya funciona.
@@ -81,7 +71,7 @@ export function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
               className="mt-10 flex flex-col gap-4 sm:flex-row"
             >
               <button
@@ -107,7 +97,7 @@ export function Hero() {
             <motion.a
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.62 }}
+              transition={{ duration: 0.6, delay: 0.52 }}
               href={discoveryCallUrl}
               className="group relative mt-6 flex w-full max-w-md overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/82 p-4 text-left shadow-[0_14px_36px_-28px_rgba(31,31,31,0.22)] backdrop-blur-xl transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:border-brand-200/80 hover:bg-white/95 hover:shadow-[0_18px_42px_-28px_rgba(31,31,31,0.26)] lg:absolute lg:right-12 lg:bottom-14 lg:mt-0 xl:right-16"
             >
