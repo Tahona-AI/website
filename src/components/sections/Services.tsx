@@ -1,32 +1,21 @@
 "use client";
 
-import type { ElementType } from "react";
-import {
-  ArrowRightIcon,
-  ClipboardTextIcon,
-  NetworkIcon,
-  PlugsConnectedIcon,
-} from "@phosphor-icons/react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { FadeInView } from "@/components/animations/FadeInView";
 import {
   primaryCtaArrowClass,
   primaryCtaBaseClass,
 } from "@/components/ui/cta-styles";
-import { AiWorkflowVisual } from "@/components/sections/services/AiWorkflowVisual";
-import { FoundationsAuditVisual } from "@/components/sections/services/FoundationsAuditVisual";
-import { GenericServiceVisual } from "@/components/sections/services/GenericServiceVisual";
-import { IntegrationsHubVisual } from "@/components/sections/services/IntegrationsHubVisual";
 
 interface ServiceFamily {
   readonly marker: string;
   readonly title: string;
   readonly description: string;
   readonly services: readonly string[];
-  readonly icon: ElementType;
   readonly gradient: string;
-  readonly accent: string;
-  readonly visual?: "ai" | "audit" | "integrations";
+  readonly visualSrc: string;
+  readonly visualScaleClass: string;
 }
 
 const SERVICE_FAMILIES: readonly ServiceFamily[] = [
@@ -40,11 +29,10 @@ const SERVICE_FAMILIES: readonly ServiceFamily[] = [
       "Estrategia técnica y operativa",
       "Bases de conocimiento enterprise",
     ],
-    icon: ClipboardTextIcon,
     gradient:
       "radial-gradient(circle at 90% 10%, rgba(22,163,74,0.08) 0%, transparent 50%), radial-gradient(circle at 10% 90%, rgba(22,163,74,0.05) 0%, transparent 40%)",
-    accent: "bg-brand-50 text-brand-600",
-    visual: "audit",
+    visualSrc: "/images/service1-illustration.png",
+    visualScaleClass: "scale-[1.08]",
   },
   {
     marker: "02",
@@ -56,11 +44,10 @@ const SERVICE_FAMILIES: readonly ServiceFamily[] = [
       "Agentes de IA",
       "Procesamiento documental",
     ],
-    icon: NetworkIcon,
     gradient:
       "radial-gradient(circle at 80% 80%, rgba(22,163,74,0.07) 0%, transparent 50%), linear-gradient(135deg, rgba(240,253,244,0.6) 0%, transparent 60%)",
-    accent: "bg-brand-50 text-brand-600",
-    visual: "ai",
+    visualSrc: "/images/service2-illustration.png",
+    visualScaleClass: "scale-[1.1]",
   },
   {
     marker: "03",
@@ -72,11 +59,10 @@ const SERVICE_FAMILIES: readonly ServiceFamily[] = [
       "Herramientas internas",
       "Integraciones y plataformas operativas",
     ],
-    icon: PlugsConnectedIcon,
     gradient:
       "radial-gradient(circle at 20% 20%, rgba(22,163,74,0.06) 0%, transparent 50%), linear-gradient(225deg, rgba(220,252,231,0.5) 0%, transparent 60%)",
-    accent: "bg-brand-50 text-brand-600",
-    visual: "integrations",
+    visualSrc: "/images/service3-illustration.png",
+    visualScaleClass: "scale-[1.12]",
   },
 ];
 
@@ -88,7 +74,6 @@ function ServiceFamilyCard({
   index: number;
 }) {
   const isReversed = index % 2 === 1;
-  const Icon = family.icon;
 
   return (
     <FadeInView delay={0.1 + index * 0.08}>
@@ -143,21 +128,17 @@ function ServiceFamilyCard({
           )}
         >
           <div className="relative aspect-square w-full max-w-[21rem] overflow-hidden rounded-[1.5rem] border border-white/70 bg-[radial-gradient(circle_at_22%_18%,rgba(45,106,79,0.18),transparent_31%),radial-gradient(circle_at_78%_74%,rgba(64,145,108,0.14),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.72),rgba(255,255,255,0.18))] shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-sm">
-            {family.visual === "audit" ? (
-              <FoundationsAuditVisual />
-            ) : family.visual === "ai" ? (
-              <AiWorkflowVisual />
-            ) : family.visual === "integrations" ? (
-              <IntegrationsHubVisual />
-            ) : (
-              <GenericServiceVisual
-                Icon={Icon}
-                accent={family.accent}
-                marker={family.marker}
-                services={family.services}
-                title={family.title}
-              />
-            )}
+            <img
+              src={family.visualSrc}
+              alt=""
+              aria-hidden="true"
+              className={cn(
+                "h-full w-full object-contain p-2 sm:p-3",
+                family.visualScaleClass
+              )}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       </article>

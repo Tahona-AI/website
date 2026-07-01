@@ -12,17 +12,19 @@ const BULLETS: readonly string[] = [
 
 function FlowDiagram() {
   return (
-    <div className="relative min-h-[43rem] overflow-hidden rounded-[2rem] border border-gray-200/90 bg-white/78 shadow-[0_28px_80px_-52px_rgba(31,31,31,0.55)] backdrop-blur-md">
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.74)_0%,rgba(255,255,255,0)_44%,rgba(240,247,243,0.72)_100%)]" />
+    <div className="relative mx-auto min-h-[43rem] w-full max-w-[34rem]">
+      <div className="pointer-events-none absolute -inset-10 rounded-[2.75rem] bg-[radial-gradient(circle_at_8%_10%,rgba(45,106,79,0.08),transparent_32%),radial-gradient(circle_at_92%_90%,rgba(64,145,108,0.1),transparent_36%)] blur-xl" />
 
-      <img
-        src="/images/why-tahona-flow.svg"
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-contain p-6 opacity-[0.98] sm:p-8 lg:p-10"
-        loading="lazy"
-        decoding="async"
-      />
+      <div className="relative min-h-[43rem] overflow-hidden rounded-[2rem] border border-gray-200/75 bg-white shadow-[0_28px_80px_-52px_rgba(31,31,31,0.55)]">
+        <img
+          src="/images/whatwedo-illustration.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-contain p-3 sm:p-5 lg:p-6"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
     </div>
   );
 }
