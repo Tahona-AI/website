@@ -33,19 +33,21 @@ Do not change `output: "static"` unless the deployment target changes.
 1. `SkipLink`
 2. `Navbar` with `client:load`
 3. `Hero` with `client:load`
-4. `Services` with `client:visible`
-5. `HowWeWork` with `client:visible`
-6. `WhyTahona`
-7. `Contact` with `client:load`
-8. `Footer`
+4. `WhatWeDo` with `client:visible`
+5. `Services` with `client:visible`
+6. `AiApplied` with `client:visible`
+7. `Industries` with `client:visible`
+8. `HowWeWork` with `client:visible`
+9. `Contact` with `client:load`
+10. `Footer`
 
 ## Hydration Strategy
 
 | Pattern | Current use |
 | --- | --- |
 | `client:load` | Above-the-fold or immediately interactive components: `Navbar`, `Hero`, `Contact` |
-| `client:visible` | Below-the-fold interactive sections: `Services`, `HowWeWork` |
-| No directive | Static Astro sections: `WhyTahona`, `Footer`, `SkipLink` |
+| `client:visible` | Below-the-fold interactive sections: `WhatWeDo`, `Services`, `AiApplied`, `Industries`, `HowWeWork` |
+| No directive | Static Astro sections: `Footer`, `SkipLink` |
 
 ## Assets
 

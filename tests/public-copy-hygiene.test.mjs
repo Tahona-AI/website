@@ -13,14 +13,13 @@ const activePublicFiles = [
   "src/components/sections/Contact.tsx",
   "src/components/sections/Footer.astro",
   "src/components/sections/Hero.tsx",
+  "src/components/sections/WhatWeDo.tsx",
   "src/components/sections/Services.tsx",
-  "src/components/sections/WhyTahona.astro",
 ];
 
 const stalePublicCopyPatterns = [
   /Tahona AI/i,
   /ingeniería de contexto/i,
-  /agentes de IA/i,
   /revolución de la IA/i,
   /procesos cognitivos/i,
   /Inteligencia Artificial han llegado/i,
@@ -64,9 +63,11 @@ describe("public copy hygiene", () => {
       "<SkipLink />",
       "<Navbar client:load />",
       "<Hero client:load />",
+      "<WhatWeDo client:visible />",
       "<Services client:visible />",
+      "<AiApplied client:visible />",
+      "<Industries client:visible />",
       "<HowWeWork client:visible />",
-      "<WhyTahona />",
       "<Contact client:load />",
       "<Footer />",
     ];
