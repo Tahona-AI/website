@@ -145,20 +145,20 @@ export function Contact() {
   return (
     <>
       <section id="contacto" className="relative overflow-hidden bg-surface py-24">
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-48 bg-[linear-gradient(180deg,rgba(255,255,255,1)_0%,rgba(249,249,249,0.94)_38%,rgba(245,244,246,0.78)_74%,rgba(245,244,246,0)_100%)]" />
+        <div className="section-fade-white-to-surface" />
 
         <div className="relative mx-auto max-w-7xl">
           <div className="relative z-20 px-6 sm:px-10 lg:px-16">
             <div>
               <div className="inline-flex items-center gap-3 text-sm text-gray-500">
                 <span className="h-px w-10 bg-brand-300" />
-                <span className="font-medium text-gray-600">Siguiente paso</span>
+                <span className="font-medium text-gray-600">Contacto</span>
               </div>
-              <h2 className="mt-4 max-w-4xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-                Contacta con nosotros
+              <h2 className="mt-4 max-w-6xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
+                Una primera conversación para entender el contexto.
               </h2>
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 text-pretty md:text-lg">
-                Cuéntanos cómo trabajáis y vemos juntos si hay una mejora operativa clara que merezca la pena explorar.
+                Una primera conversación permite revisar la operación, detectar si existe una oportunidad real de mejora y decidir el siguiente paso con claridad.
               </p>
             </div>
 
@@ -167,10 +167,10 @@ export function Contact() {
               <div className="rounded-[1.75rem] border border-white/75 bg-white/78 p-6 shadow-[0_24px_70px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md sm:p-7">
                 <div className="space-y-3">
                   <p className="text-sm font-medium uppercase tracking-[0.12em] text-brand-700">
-                    Contacta con nosotros
+                    Contacto
                   </p>
                   <p className="max-w-lg text-base leading-relaxed text-gray-600 text-pretty">
-                    Revisamos tu contexto con criterio práctico. Si vemos una oportunidad real, te diremos por dónde empezar y qué conviene validar primero.
+                    Revisamos el contexto con criterio práctico. Si hay una oportunidad real, indicamos por dónde empezar y qué conviene validar primero.
                   </p>
                 </div>
 
@@ -185,7 +185,7 @@ export function Contact() {
                     <div>
                       <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Correo</p>
                       <p className="mt-1 font-heading text-xl font-semibold text-gray-900">hola@tahona.ai</p>
-                      <p className="mt-1 text-sm text-gray-600">Escríbenos y vemos cómo podemos colaborar.</p>
+                      <p className="mt-1 text-sm text-gray-600">Un correo basta para empezar a valorar el encaje.</p>
                     </div>
                   </a>
 
@@ -199,7 +199,7 @@ export function Contact() {
                     <div>
                       <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Teléfono</p>
                       <p className="mt-1 font-heading text-xl font-semibold text-gray-900">+34 684 006 043</p>
-                      <p className="mt-1 text-sm text-gray-600">Si prefieres ir al grano, lo vemos en una llamada breve.</p>
+                      <p className="mt-1 text-sm text-gray-600">Si se prefiere ir al grano, se puede ver en una llamada breve.</p>
                     </div>
                   </a>
                 </div>
@@ -223,10 +223,10 @@ export function Contact() {
               <div className="relative z-10 mx-auto w-full max-w-3xl rounded-[1.75rem] bg-transparent p-5 sm:p-7">
                 <div>
                   <h3 className="font-heading text-[1.9rem] font-semibold tracking-[-0.03em] text-gray-900 sm:text-[2.15rem]">
-                    Cuéntanos cómo trabajáis
+                    Punto de partida
                   </h3>
                   <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-[0.95rem]">
-                    Con lo básico nos basta. Te responderemos con una valoración inicial y el siguiente paso más útil.
+                    Con lo básico basta. Respondemos con una valoración inicial y el siguiente paso más útil.
                   </p>
                 </div>
 
@@ -277,11 +277,11 @@ export function Contact() {
                   </div>
 
                   <LabelInputContainer>
-                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">¿Qué proceso quieres mejorar?</Label>
+                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">¿Dónde puede aportar valor la IA?</Label>
                     <Textarea
                       id="details"
                       name="details"
-                      placeholder="Explica el proceso, qué se hace hoy a mano, dónde se atasca y qué equipo está implicado."
+                      placeholder="Proceso actual, qué se hace hoy a mano, dónde se atasca y qué equipo está implicado."
                       rows={5}
                       required
                       value={formData.details}
@@ -302,7 +302,7 @@ export function Contact() {
 
                   <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
                     <p className="max-w-sm text-sm leading-relaxed text-gray-600">
-                      Te contestamos en 24h laborables. Si vemos recorrido, te diremos cómo seguir sin rodeos.
+                      Respondemos en 24h laborables. Sin presión comercial: si el encaje no es claro, se dirá con la misma claridad.
                     </p>
 
                     <div className="flex w-full flex-col gap-3 md:w-auto md:items-end">
@@ -311,10 +311,10 @@ export function Contact() {
                         disabled={isSubmitting}
                         className={cn(
                           primaryCtaBaseClass,
-                          "min-h-12 w-full px-3 pl-5 text-sm font-semibold md:min-w-[220px]"
+                          "min-h-12 w-full px-3 pl-5 text-sm font-semibold md:min-w-[292px]"
                         )}
                       >
-                        <span>{isSubmitting ? "Enviando..." : "Contacta con nosotros"}</span>
+                        <span className="leading-tight">{isSubmitting ? "Enviando..." : "Solicitar una primera conversación"}</span>
                         <span
                           className={cn(primaryCtaArrowClass, isSubmitting && "opacity-70")}
                           aria-hidden="true"
