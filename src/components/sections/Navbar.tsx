@@ -1,26 +1,39 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { ListIcon, XIcon } from "@phosphor-icons/react";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import type { FocusEvent, MouseEvent } from "react";
+import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
-import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
+import { CONTACT_HREF, PAGE_NAV_ITEMS } from "@/components/sections/navbar-data";
+import { MobileNavMenu } from "@/components/sections/navbar/MobileNavMenu";
+import { NavLink } from "@/components/sections/navbar/NavLink";
+import { ServicesMegaMenu } from "@/components/sections/navbar/ServicesMegaMenu";
 
-const navItems = [
-  { label: "Soluciones", href: "#soluciones" },
-  { label: "Proceso", href: "#proceso" },
-  { label: "Contacto", href: "#contacto" },
-];
+const SERVICES_SECTION_HREF = "#soluciones";
+
+function scrollToHash(href: string) {
+  if (!href.startsWith("#") || href.length <= 1) {
+    return;
+  }
+
+  const element = document.querySelector(href);
+  element?.scrollIntoView({ behavior: "smooth" });
+}
+
+function isPlaceholderHref(href: string) {
+  return href === "#";
+}
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 20);
+      setIsScrolled(window.scrollY > 20);
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -47,143 +60,150 @@ export function Navbar() {
     };
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavSelect = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    setIsMobileServicesOpen(false);
+    setIsServicesMenuOpen(false);
+    scrollToHash(href);
+  };
+
+  const handlePlaceholderLinkClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (isPlaceholderHref(href)) {
+      event.preventDefault();
+      return;
+    }
+
+    if (href.startsWith("#")) {
+      event.preventDefault();
+      handleNavSelect(href);
     }
   };
+
+  const handleServicesBlur = (event: FocusEvent<HTMLDivElement>) => {
+    const nextTarget = event.relatedTarget;
+    if (nextTarget instanceof Node && event.currentTarget.contains(nextTarget)) {
+      return;
+    }
+
+    setIsServicesMenuOpen(false);
+  };
+
+  const servicesIsActive =
+    activeSection === SERVICES_SECTION_HREF || isServicesMenuOpen;
 
   return (
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 border-b border-gray-200/80 bg-white/88 backdrop-blur-xl transition-all duration-300",
-          isScrolled && "shadow-[0_18px_40px_-28px_rgba(31,31,31,0.55)]"
+          "fixed inset-x-0 top-0 z-50 border-b border-gray-200/80 bg-white/94 pt-[env(safe-area-inset-top)] backdrop-blur-xl transition-shadow duration-200",
+          isScrolled && "shadow-[0_18px_40px_-30px_rgba(31,31,31,0.55)]"
         )}
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 md:h-20 items-center justify-between">
-            <a href="/" className="flex items-center gap-3">
-               <img
-                 src="/images/logos/tahona-favicon.svg"
-                 alt="Tahona"
-                 width={40}
-                 height={40}
-                 className="h-6 w-6 md:h-7 md:w-7"
-               />
-               <span className="font-heading text-xl font-bold text-gray-900 ">
-                 Tahona
-               </span>
+          <div className="flex h-14 items-center justify-between">
+            <a
+              className="font-heading text-xl font-bold text-gray-900"
+              href="#hero"
+              onClick={(event) => {
+                event.preventDefault();
+                handleNavSelect("#hero");
+              }}
+            >
+              Tahona
             </a>
 
-            <div className="hidden items-center align-middle gap-8 md:flex">
-              {navItems.map((item) => (
-                <a
-                  href={item.href}
-                  key={item.href}
-                  className={cn(
-                    "text-sm font-medium transition-colors hover:text-brand-600",
-                    activeSection === item.href
-                      ? "text-brand-600"
-                      : "text-gray-500"
-                  )}
-                >
-                  {item.label}
-                </a>
-              ))}
-              <button
-                onClick={() => handleNavClick("#contacto")}
-                className={cn(
-                  primaryCtaBaseClass,
-                  "min-h-11 min-w-[158px] cursor-pointer justify-center px-5 text-sm font-semibold"
-                )}
+            <div className="hidden items-center gap-7 md:flex">
+              <NavLink
+                isActive={activeSection === PAGE_NAV_ITEMS[0].href}
+                item={PAGE_NAV_ITEMS[0]}
+                onSelect={handleNavSelect}
+              />
+
+              <div
+                onBlur={handleServicesBlur}
+                onMouseEnter={() => setIsServicesMenuOpen(true)}
+                onMouseLeave={() => setIsServicesMenuOpen(false)}
               >
-                <span>Hablemos</span>
-              </button>
+                <button
+                  aria-controls="services-mega-menu"
+                  aria-expanded={isServicesMenuOpen}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 border-b-2 border-transparent py-1 text-sm font-medium text-gray-600 transition-colors duration-200 hover:border-brand-700 hover:text-brand-800",
+                    servicesIsActive && "border-brand-700 text-brand-800"
+                  )}
+                  onClick={() => setIsServicesMenuOpen((isOpen) => !isOpen)}
+                  onFocus={() => setIsServicesMenuOpen(true)}
+                  type="button"
+                >
+                  <span>Servicios</span>
+                  <CaretDownIcon
+                    aria-hidden="true"
+                    className={cn(
+                      "size-3 transition-transform duration-200",
+                      isServicesMenuOpen && "rotate-180"
+                    )}
+                  />
+                </button>
+
+                <ServicesMegaMenu
+                  isOpen={isServicesMenuOpen}
+                  onLinkClick={handlePlaceholderLinkClick}
+                />
+              </div>
+
+              {PAGE_NAV_ITEMS.slice(1).map((item) => (
+                <NavLink
+                  isActive={activeSection === item.href}
+                  item={item}
+                  key={item.href}
+                  onSelect={handleNavSelect}
+                />
+              ))}
+
+              <a
+                className="inline-flex min-h-10 min-w-36 items-center justify-center rounded-full bg-brand-600 px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-700"
+                href={CONTACT_HREF}
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleNavSelect(CONTACT_HREF);
+                }}
+              >
+                Contacto
+              </a>
             </div>
 
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="rounded-lg p-2 text-gray-600 hover:bg-gray-100 md:hidden"
-              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+              aria-label="Abrir menú"
+              className="rounded-lg p-2 text-gray-700 transition-colors duration-200 hover:bg-gray-100 md:hidden"
+              onClick={() => {
+                setIsMobileMenuOpen((isOpen) => !isOpen);
+                setIsServicesMenuOpen(false);
+              }}
+              type="button"
             >
               {isMobileMenuOpen ? (
-                <XIcon className="h-6 w-6" />
+                <XIcon className="size-6" />
               ) : (
-                <ListIcon className="h-6 w-6" />
+                <ListIcon className="size-6" />
               )}
             </button>
           </div>
         </nav>
       </header>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm md:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-80 max-w-[85vw] bg-white shadow-xl md:hidden"
-            >
-              <div className="flex h-16 items-center justify-between border-b px-4">
-                <span className="font-heading text-lg font-bold text-gray-900">
-                  Menú
-                </span>
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="rounded-lg p-2 text-gray-600 hover:bg-gray-100"
-                  aria-label="Close menu"
-                >
-                  <XIcon className="h-6 w-6" />
-                </button>
-              </div>
-              <nav className="flex flex-col p-4">
-                {navItems.map((item, index) => (
-                  <motion.button
-                    key={item.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    onClick={() => handleNavClick(item.href)}
-                    className={cn(
-                      "py-3 text-left text-lg font-medium transition-colors",
-                      activeSection === item.href
-                        ? "text-brand-600"
-                        : "text-gray-700 hover:text-brand-600"
-                    )}
-                  >
-                    {item.label}
-                  </motion.button>
-                ))}
-                <motion.button
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navItems.length * 0.05 }}
-                  onClick={() => handleNavClick("#contacto")}
-                  className={cn(
-                    primaryCtaBaseClass,
-                    "mt-4 min-h-12 w-full cursor-pointer justify-center px-5 text-base font-semibold"
-                  )}
-                >
-                  <span>Hablemos</span>
-                </motion.button>
-              </nav>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      <MobileNavMenu
+        activeSection={activeSection}
+        isOpen={isMobileMenuOpen}
+        isServicesOpen={isMobileServicesOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        onNavSelect={handleNavSelect}
+        onServiceLinkClick={handlePlaceholderLinkClick}
+        onServicesToggle={() => setIsMobileServicesOpen((isOpen) => !isOpen)}
+      />
     </>
   );
 }
