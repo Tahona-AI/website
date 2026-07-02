@@ -20,7 +20,7 @@ import ServicesFAQ from "@/components/services/ServicesFAQ.astro";
     id="main-content"
     class="relative flex min-h-screen flex-col overflow-x-hidden"
   >
-    <Navbar client:load />
+    <Navbar client:load initialPath={Astro.url.pathname} />
     <Hero
       client:load
       title="Servicios para ordenar, construir e integrar operaciones internas."

@@ -19,7 +19,7 @@ import Footer from "@/components/sections/Footer.astro";
     id="main-content"
     class="relative flex min-h-screen flex-col overflow-x-hidden"
   >
-    <Navbar client:load />
+    <Navbar client:load initialPath={Astro.url.pathname} />
     <Hero client:load />
     <WhatWeDo client:visible />
     <Services client:visible />

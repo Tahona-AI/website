@@ -1,5 +1,30 @@
 ---
+import {
+  BooksIcon,
+  ChartLineUpIcon,
+  FileTextIcon,
+  GitBranchIcon,
+  PlugsConnectedIcon,
+  RobotIcon,
+  WrenchIcon,
+} from "@phosphor-icons/react";
 import { IMPLEMENTATION_EXAMPLES } from "@/components/services/implementation-examples";
+
+const EXAMPLE_ICONS = [
+  BooksIcon,
+  WrenchIcon,
+  PlugsConnectedIcon,
+  FileTextIcon,
+  RobotIcon,
+  ChartLineUpIcon,
+  GitBranchIcon,
+] as const;
+
+const EXAMPLE_BACKGROUNDS = [
+  "radial-gradient(circle at 90% 12%, rgba(45,106,79,0.12), transparent 32%), linear-gradient(135deg, rgba(255,255,255,0.92), rgba(241,248,244,0.72))",
+  "radial-gradient(circle at 12% 12%, rgba(64,145,108,0.12), transparent 34%), linear-gradient(135deg, rgba(255,255,255,0.92), rgba(247,250,248,0.8))",
+  "radial-gradient(circle at 82% 78%, rgba(45,106,79,0.11), transparent 34%), linear-gradient(135deg, rgba(255,255,255,0.94), rgba(241,248,244,0.7))",
+] as const;
 ---
 
 <section class="relative overflow-hidden bg-white py-24 lg:py-28">
@@ -17,23 +42,36 @@ import { IMPLEMENTATION_EXAMPLES } from "@/components/services/implementation-ex
       </p>
     </div>
 
-    <div class="mt-14 grid auto-rows-fr gap-4 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-      {IMPLEMENTATION_EXAMPLES.map((example) => (
+    <div class="mt-14 grid auto-rows-fr gap-5 md:grid-cols-2 lg:grid-cols-6">
+      {IMPLEMENTATION_EXAMPLES.map((example, exampleIndex) => {
+        const Icon = EXAMPLE_ICONS[exampleIndex % EXAMPLE_ICONS.length];
+
+        return (
         <article
           class:list={[
-            "group min-h-40 rounded-[1.35rem] border border-gray-200 bg-white p-6 shadow-sm transition-[border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+            "group relative min-h-56 overflow-hidden rounded-[1.5rem] border border-gray-200/80 bg-white/88 p-6 shadow-[0_20px_54px_-46px_rgba(31,31,31,0.45)] backdrop-blur-md transition-[border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-1 hover:border-brand-200 hover:bg-white hover:shadow-[0_30px_68px_-44px_rgba(31,31,31,0.5)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:p-7",
             example.className,
           ]}
+          style={`background-image: ${EXAMPLE_BACKGROUNDS[exampleIndex % EXAMPLE_BACKGROUNDS.length]};`}
         >
-          <p class="text-sm font-semibold text-brand-700">{example.marker}</p>
-          <h3 class="mt-6 font-heading text-xl font-semibold text-gray-900 text-balance">
+          <div class="pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full bg-brand-100/45 opacity-0 blur-2xl transition-opacity duration-200 group-hover:opacity-100"></div>
+
+          <div class="relative z-10 flex items-start justify-between gap-4">
+            <p class="text-sm font-semibold text-brand-700">{example.marker}</p>
+            <span class="flex size-11 items-center justify-center rounded-2xl border border-white/80 bg-white/70 text-brand-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.86)]">
+              <Icon aria-hidden="true" className="size-5" weight="duotone" />
+            </span>
+          </div>
+
+          <h3 class="relative z-10 mt-8 max-w-xl font-heading text-xl font-semibold text-gray-900 text-balance">
             {example.title}
           </h3>
-          <p class="mt-3 max-w-xl text-sm leading-6 text-gray-600 text-pretty">
+          <p class="relative z-10 mt-3 max-w-xl text-sm leading-6 text-gray-600 text-pretty">
             {example.description}
           </p>
         </article>
-      ))}
+        );
+      })}
     </div>
   </div>
 </section>

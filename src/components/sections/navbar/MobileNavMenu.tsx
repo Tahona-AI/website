@@ -10,10 +10,11 @@ import { NavLink } from "@/components/sections/navbar/NavLink";
 import { ServiceColumn } from "@/components/sections/navbar/ServiceColumn";
 import type { ServiceMenuLinkHandler } from "@/components/sections/navbar/types";
 
-const SERVICES_SECTION_HREF = "#soluciones";
+const HOME_PATH = "/";
+const SERVICES_PATH = "/services";
 
 export function MobileNavMenu({
-  activeSection,
+  currentPath,
   isOpen,
   isServicesOpen,
   onClose,
@@ -21,7 +22,7 @@ export function MobileNavMenu({
   onServiceLinkClick,
   onServicesToggle,
 }: {
-  readonly activeSection: string;
+  readonly currentPath: string;
   readonly isOpen: boolean;
   readonly isServicesOpen: boolean;
   readonly onClose: () => void;
@@ -29,6 +30,10 @@ export function MobileNavMenu({
   readonly onServiceLinkClick: ServiceMenuLinkHandler;
   readonly onServicesToggle: () => void;
 }) {
+  const isHomePath = currentPath === HOME_PATH;
+  const isServicesPath =
+    currentPath === SERVICES_PATH || currentPath === `${SERVICES_PATH}/`;
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -66,7 +71,7 @@ export function MobileNavMenu({
 
             <nav className="flex flex-col gap-1 p-4">
               <NavLink
-                isActive={activeSection === PAGE_NAV_ITEMS[0].activeHref}
+                isActive={isHomePath}
                 item={PAGE_NAV_ITEMS[0]}
                 onSelect={onNavSelect}
                 variant="mobile"
@@ -76,7 +81,7 @@ export function MobileNavMenu({
                 aria-expanded={isServicesOpen}
                 className={cn(
                   "flex items-center justify-between border-b-2 border-transparent py-3 text-left text-lg font-medium text-gray-700 transition-colors duration-200 hover:text-brand-700",
-                  activeSection === SERVICES_SECTION_HREF &&
+                  (isServicesPath || isServicesOpen) &&
                     "border-brand-700 text-brand-800"
                 )}
                 onClick={onServicesToggle}
@@ -114,7 +119,7 @@ export function MobileNavMenu({
 
               {PAGE_NAV_ITEMS.slice(1).map((item) => (
                 <NavLink
-                  isActive={activeSection === item.activeHref}
+                  isActive={false}
                   item={item}
                   key={item.href}
                   onSelect={onNavSelect}

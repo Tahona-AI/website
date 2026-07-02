@@ -9,7 +9,8 @@ import { MobileNavMenu } from "@/components/sections/navbar/MobileNavMenu";
 import { NavLink } from "@/components/sections/navbar/NavLink";
 import { ServicesMegaMenu } from "@/components/sections/navbar/ServicesMegaMenu";
 
-const SERVICES_SECTION_HREF = "#soluciones";
+const HOME_PATH = "/";
+const SERVICES_PATH = "/services";
 
 function scrollToHash(href: string) {
   if (!href.startsWith("#") || href.length <= 1) {
@@ -24,39 +25,34 @@ function isPlaceholderHref(href: string) {
   return href === "#";
 }
 
-export function Navbar() {
+export function Navbar({
+  initialPath = HOME_PATH,
+}: {
+  readonly initialPath?: string;
+}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [currentPath, setCurrentPath] = useState(initialPath || HOME_PATH);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(`#${entry.target.id}`);
-        }
-      });
+    const handlePathChange = () => {
+      setCurrentPath(window.location.pathname || HOME_PATH);
     };
 
-    const observer = new IntersectionObserver(observerCallback, {
-      rootMargin: "-50% 0px -50% 0px",
-    });
-
-    const sections = document.querySelectorAll("section[id]");
-    sections.forEach((section) => observer.observe(section));
-
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("popstate", handlePathChange);
     handleScroll();
+    handlePathChange();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
+      window.removeEventListener("popstate", handlePathChange);
     };
   }, []);
 
@@ -91,8 +87,10 @@ export function Navbar() {
     setIsServicesMenuOpen(false);
   };
 
-  const servicesIsActive =
-    activeSection === SERVICES_SECTION_HREF || isServicesMenuOpen;
+  const isHomePath = currentPath === HOME_PATH;
+  const isServicesPath =
+    currentPath === SERVICES_PATH || currentPath === `${SERVICES_PATH}/`;
+  const servicesIsActive = isServicesPath || isServicesMenuOpen;
 
   return (
     <>
@@ -106,8 +104,12 @@ export function Navbar() {
           <div className="flex h-14 items-center justify-between">
             <a
               className="font-heading text-xl font-bold text-gray-900"
-              href="#hero"
+              href="/"
               onClick={(event) => {
+                if (!isHomePath) {
+                  return;
+                }
+
                 event.preventDefault();
                 handleNavSelect("#hero");
               }}
@@ -117,7 +119,7 @@ export function Navbar() {
 
             <div className="hidden items-center gap-7 md:flex">
               <NavLink
-                isActive={activeSection === PAGE_NAV_ITEMS[0].activeHref}
+                isActive={isHomePath}
                 item={PAGE_NAV_ITEMS[0]}
                 onSelect={handleNavSelect}
               />
@@ -156,7 +158,7 @@ export function Navbar() {
 
               {PAGE_NAV_ITEMS.slice(1).map((item) => (
                 <NavLink
-                  isActive={activeSection === item.activeHref}
+                  isActive={false}
                   item={item}
                   key={item.href}
                   onSelect={handleNavSelect}
@@ -196,7 +198,7 @@ export function Navbar() {
       </header>
 
       <MobileNavMenu
-        activeSection={activeSection}
+        currentPath={currentPath}
         isOpen={isMobileMenuOpen}
         isServicesOpen={isMobileServicesOpen}
         onClose={() => setIsMobileMenuOpen(false)}
