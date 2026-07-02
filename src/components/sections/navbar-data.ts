@@ -1,6 +1,7 @@
 export type PageNavItem = {
   readonly label: string;
   readonly href: string;
+  readonly activeHref: string;
 };
 
 export type ServiceMenuItem = {
@@ -15,31 +16,31 @@ export type ServiceMenuColumn = {
 };
 
 export const PAGE_NAV_ITEMS = [
-  { label: "Inicio", href: "#hero" },
-  { label: "Industrias", href: "#industrias" },
-  { label: "Casos", href: "#trabajo" },
+  { label: "Inicio", href: "/", activeHref: "#hero" },
+  { label: "Industrias", href: "/#industrias", activeHref: "#industrias" },
+  { label: "Casos", href: "/#trabajo", activeHref: "#trabajo" },
 ] as const satisfies readonly PageNavItem[];
 
 export const SERVICE_MENU_COLUMNS = [
   {
-    title: "Fundaciones",
+    title: "Fundamentos",
     items: [
       {
         label: "Consultoría",
         description:
           "Auditoría operativa y diagnóstico de procesos, datos y herramientas.",
-        href: "#",
+        href: "/services#consultoria-auditoria-operativa",
       },
       {
         label: "Estrategia",
         description: "Hoja de ruta técnica y operativa antes de construir.",
-        href: "#",
+        href: "/services#estrategia-tecnica-operativa",
       },
       {
         label: "Bases de conocimiento",
         description:
           "Conocimiento interno con fuentes, permisos y revisión humana.",
-        href: "#",
+        href: "/services#bases-conocimiento-enterprise",
       },
     ],
   },
@@ -50,18 +51,18 @@ export const SERVICE_MENU_COLUMNS = [
         label: "Optimización de procesos",
         description:
           "Menos pasos manuales sobre las herramientas existentes.",
-        href: "#",
+        href: "/services#optimizacion-procesos",
       },
       {
         label: "Agentes de IA",
         description:
           "Tareas acotadas con límites, supervisión y trazabilidad.",
-        href: "#",
+        href: "/services#agentes-ia",
       },
       {
         label: "Procesamiento documental",
         description: "Extracción, validación y clasificación de documentos.",
-        href: "#",
+        href: "/services#procesamiento-documental",
       },
     ],
   },
@@ -72,21 +73,21 @@ export const SERVICE_MENU_COLUMNS = [
         label: "Herramientas a medida",
         description:
           "Software alrededor de un proceso concreto, con la complejidad justa.",
-        href: "#",
+        href: "/services#herramientas-medida",
       },
       {
         label: "Herramientas internas",
         description: "Backoffice, paneles y workflows para el día a día.",
-        href: "#",
+        href: "/services#herramientas-internas",
       },
       {
         label: "Integraciones / plataformas",
         description: "Drive, CRM, ERP, hojas de cálculo y APIs conectados.",
-        href: "#",
+        href: "/services#integraciones-plataformas-operativas",
       },
     ],
   },
 ] as const satisfies readonly ServiceMenuColumn[];
 
-export const SERVICES_OVERVIEW_HREF = "#";
+export const SERVICES_OVERVIEW_HREF = "/services";
 export const CONTACT_HREF = "#contacto";

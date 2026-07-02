@@ -66,7 +66,7 @@ export function MobileNavMenu({
 
             <nav className="flex flex-col gap-1 p-4">
               <NavLink
-                isActive={activeSection === PAGE_NAV_ITEMS[0].href}
+                isActive={activeSection === PAGE_NAV_ITEMS[0].activeHref}
                 item={PAGE_NAV_ITEMS[0]}
                 onSelect={onNavSelect}
                 variant="mobile"
@@ -114,7 +114,7 @@ export function MobileNavMenu({
 
               {PAGE_NAV_ITEMS.slice(1).map((item) => (
                 <NavLink
-                  isActive={activeSection === item.href}
+                  isActive={activeSection === item.activeHref}
                   item={item}
                   key={item.href}
                   onSelect={onNavSelect}

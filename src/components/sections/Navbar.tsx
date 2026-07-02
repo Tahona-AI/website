@@ -117,7 +117,7 @@ export function Navbar() {
 
             <div className="hidden items-center gap-7 md:flex">
               <NavLink
-                isActive={activeSection === PAGE_NAV_ITEMS[0].href}
+                isActive={activeSection === PAGE_NAV_ITEMS[0].activeHref}
                 item={PAGE_NAV_ITEMS[0]}
                 onSelect={handleNavSelect}
               />
@@ -156,7 +156,7 @@ export function Navbar() {
 
               {PAGE_NAV_ITEMS.slice(1).map((item) => (
                 <NavLink
-                  isActive={activeSection === item.href}
+                  isActive={activeSection === item.activeHref}
                   item={item}
                   key={item.href}
                   onSelect={handleNavSelect}

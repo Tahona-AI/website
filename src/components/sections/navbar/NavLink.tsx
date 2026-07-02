@@ -21,6 +21,8 @@ export function NavLink({
   readonly onSelect: (href: string) => void;
   readonly variant?: NavLinkVariant;
 }) {
+  const shouldScrollCurrentPage = item.href.startsWith("#");
+
   return (
     <a
       className={cn(
@@ -30,6 +32,10 @@ export function NavLink({
       )}
       href={item.href}
       onClick={(event) => {
+        if (!shouldScrollCurrentPage) {
+          return;
+        }
+
         event.preventDefault();
         onSelect(item.href);
       }}
