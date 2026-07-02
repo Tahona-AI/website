@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import {
   primaryCtaArrowClass,
@@ -36,7 +36,19 @@ export function Hero({
   const discoveryCallUrl = "#contacto";
   const showDiscoveryCallCard = false;
 
-  const handleScrollToSection = (href: string) => {
+  const handleHeroLinkClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (!href.startsWith("#")) {
+      return;
+    }
+
+    event.preventDefault();
+    if (href.length <= 1) {
+      return;
+    }
+
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -97,8 +109,9 @@ export function Hero({
               transition={{ duration: 0.7, delay: 0.4 }}
               className="mt-10 flex flex-col gap-4 sm:flex-row"
             >
-              <button
-                onClick={() => handleScrollToSection(primaryHref)}
+              <a
+                href={primaryHref}
+                onClick={(event) => handleHeroLinkClick(event, primaryHref)}
                 className={`${primaryCtaBaseClass} min-h-14 cursor-pointer px-3 pl-6 text-base font-semibold sm:min-w-[240px]`}
               >
                 <span>{primaryLabel}</span>
@@ -107,14 +120,15 @@ export function Hero({
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
                   </svg>
                 </span>
-              </button>
+              </a>
 
-              <button
-                onClick={() => handleScrollToSection(secondaryHref)}
+              <a
+                href={secondaryHref}
+                onClick={(event) => handleHeroLinkClick(event, secondaryHref)}
                 className={`${secondaryCtaBaseClass} min-h-14 cursor-pointer justify-center px-6 text-base font-semibold sm:min-w-[240px]`}
               >
                 <span>{secondaryLabel}</span>
-              </button>
+              </a>
             </motion.div>
 
             {showDiscoveryCallCard && (

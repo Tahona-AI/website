@@ -11,6 +11,7 @@ import { ServicesMegaMenu } from "@/components/sections/navbar/ServicesMegaMenu"
 
 const HOME_PATH = "/";
 const SERVICES_PATH = "/services";
+const INDUSTRIES_PATH = "/industries";
 
 function scrollToHash(href: string) {
   if (!href.startsWith("#") || href.length <= 1) {
@@ -90,6 +91,8 @@ export function Navbar({
   const isHomePath = currentPath === HOME_PATH;
   const isServicesPath =
     currentPath === SERVICES_PATH || currentPath === `${SERVICES_PATH}/`;
+  const isIndustriesPath =
+    currentPath === INDUSTRIES_PATH || currentPath === `${INDUSTRIES_PATH}/`;
   const servicesIsActive = isServicesPath || isServicesMenuOpen;
 
   return (
@@ -158,7 +161,7 @@ export function Navbar({
 
               {PAGE_NAV_ITEMS.slice(1).map((item) => (
                 <NavLink
-                  isActive={false}
+                  isActive={item.href === INDUSTRIES_PATH && isIndustriesPath}
                   item={item}
                   key={item.href}
                   onSelect={handleNavSelect}

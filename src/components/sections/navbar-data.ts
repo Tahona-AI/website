@@ -17,7 +17,7 @@ export type ServiceMenuColumn = {
 
 export const PAGE_NAV_ITEMS = [
   { label: "Inicio", href: "/", activeHref: "#hero" },
-  { label: "Industrias", href: "/#industrias", activeHref: "#industrias" },
+  { label: "Industrias", href: "/industries", activeHref: "#industrias" },
   { label: "Casos", href: "/#trabajo", activeHref: "#trabajo" },
 ] as const satisfies readonly PageNavItem[];
 

@@ -12,6 +12,7 @@ import type { ServiceMenuLinkHandler } from "@/components/sections/navbar/types"
 
 const HOME_PATH = "/";
 const SERVICES_PATH = "/services";
+const INDUSTRIES_PATH = "/industries";
 
 export function MobileNavMenu({
   currentPath,
@@ -33,6 +34,8 @@ export function MobileNavMenu({
   const isHomePath = currentPath === HOME_PATH;
   const isServicesPath =
     currentPath === SERVICES_PATH || currentPath === `${SERVICES_PATH}/`;
+  const isIndustriesPath =
+    currentPath === INDUSTRIES_PATH || currentPath === `${INDUSTRIES_PATH}/`;
 
   return (
     <AnimatePresence>
@@ -119,7 +122,7 @@ export function MobileNavMenu({
 
               {PAGE_NAV_ITEMS.slice(1).map((item) => (
                 <NavLink
-                  isActive={false}
+                  isActive={item.href === INDUSTRIES_PATH && isIndustriesPath}
                   item={item}
                   key={item.href}
                   onSelect={onNavSelect}

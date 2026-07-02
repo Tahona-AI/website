@@ -112,7 +112,7 @@ function IndustryCard({
             </span>
           </div>
 
-          <h3 className="font-heading text-xl font-semibold tracking-[-0.02em] text-gray-900">
+          <h3 className="font-heading text-xl font-semibold text-gray-900">
             {industry.title}
           </h3>
 
@@ -172,9 +172,9 @@ export function Industries() {
           <div className="mt-10 flex justify-center lg:justify-start">
             <a
               className={`${primaryCtaBaseClass} min-h-14 w-full px-3 pl-6 text-base font-semibold sm:w-fit sm:min-w-[224px]`}
-              href="#contacto"
+              href="/industries"
             >
-              <span>Ver todas las industrias</span>
+              <span>Ver industrias</span>
               <span className={primaryCtaArrowClass} aria-hidden="true">
                 <ArrowRightIcon className="h-4 w-4" />
               </span>
