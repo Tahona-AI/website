@@ -8,6 +8,7 @@ import { CONTACT_HREF, PAGE_NAV_ITEMS } from "@/components/sections/navbar-data"
 import { MobileNavMenu } from "@/components/sections/navbar/MobileNavMenu";
 import { NavLink } from "@/components/sections/navbar/NavLink";
 import { ServicesMegaMenu } from "@/components/sections/navbar/ServicesMegaMenu";
+import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
 
 const HOME_PATH = "/";
 const SERVICES_PATH = "/services";
@@ -169,7 +170,10 @@ export function Navbar({
               ))}
 
               <a
-                className="inline-flex min-h-10 min-w-36 items-center justify-center rounded-full bg-brand-600 px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-700"
+                className={cn(
+                  primaryCtaBaseClass,
+                  "min-h-10 min-w-36 justify-center rounded-full px-6 text-sm font-semibold"
+                )}
                 href={CONTACT_HREF}
                 onClick={(event) => {
                   event.preventDefault();
