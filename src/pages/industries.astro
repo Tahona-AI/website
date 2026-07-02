@@ -5,7 +5,8 @@ import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
 import { Contact } from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer.astro";
-import IndustriesShowcase from "@/components/industries/IndustriesShowcase.astro";
+import IndustriesGrid from "@/components/industries/IndustriesGrid.astro";
+import IndustryDetailSections from "@/components/industries/IndustryDetailSections.astro";
 import IndustriesFAQ from "@/components/industries/IndustriesFAQ.astro";
 ---
 
@@ -28,7 +29,8 @@ import IndustriesFAQ from "@/components/industries/IndustriesFAQ.astro";
       secondaryLabel="Ver servicios"
       secondaryHref="/services"
     />
-    <IndustriesShowcase />
+    <IndustriesGrid />
+    <IndustryDetailSections />
     <IndustriesFAQ />
     <Contact client:load />
     <Footer />
