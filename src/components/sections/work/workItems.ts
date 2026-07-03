@@ -22,7 +22,7 @@ export const DOCUMENT_PLATFORM_WORK: WorkItem = {
     "Tareas internas",
     "Seguimiento",
   ],
-  imageSrc: "/images/legal-project-illustration.png",
+  imageSrc: "/images/visual-case-legal-document-platform.png",
 };
 
 export const LOGISTICS_PLANNING_WORK: WorkItem = {
@@ -38,7 +38,7 @@ export const LOGISTICS_PLANNING_WORK: WorkItem = {
     "Eventos",
     "Reporting",
   ],
-  imageSrc: "/images/logistics-project-illustration.png",
+  imageSrc: "/images/visual-logistics.png",
 };
 
 export const WORK_ITEMS: readonly WorkItem[] = [
