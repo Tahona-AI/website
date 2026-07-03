@@ -14,6 +14,7 @@ import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
 const HOME_PATH = "/";
 const SERVICES_PATH = "/services";
 const INDUSTRIES_PATH = "/industries";
+const CASES_PATH = "/cases";
 
 export function MobileNavMenu({
   currentPath,
@@ -37,6 +38,8 @@ export function MobileNavMenu({
     currentPath === SERVICES_PATH || currentPath === `${SERVICES_PATH}/`;
   const isIndustriesPath =
     currentPath === INDUSTRIES_PATH || currentPath === `${INDUSTRIES_PATH}/`;
+  const isCasesPath =
+    currentPath === CASES_PATH || currentPath === `${CASES_PATH}/`;
 
   return (
     <AnimatePresence>
@@ -123,7 +126,10 @@ export function MobileNavMenu({
 
               {PAGE_NAV_ITEMS.slice(1).map((item) => (
                 <NavLink
-                  isActive={item.href === INDUSTRIES_PATH && isIndustriesPath}
+                  isActive={
+                    (item.href === INDUSTRIES_PATH && isIndustriesPath) ||
+                    (item.href === CASES_PATH && isCasesPath)
+                  }
                   item={item}
                   key={item.href}
                   onSelect={onNavSelect}

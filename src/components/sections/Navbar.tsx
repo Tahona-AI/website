@@ -13,6 +13,7 @@ import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
 const HOME_PATH = "/";
 const SERVICES_PATH = "/services";
 const INDUSTRIES_PATH = "/industries";
+const CASES_PATH = "/cases";
 
 function scrollToHash(href: string) {
   if (!href.startsWith("#") || href.length <= 1) {
@@ -94,6 +95,8 @@ export function Navbar({
     currentPath === SERVICES_PATH || currentPath === `${SERVICES_PATH}/`;
   const isIndustriesPath =
     currentPath === INDUSTRIES_PATH || currentPath === `${INDUSTRIES_PATH}/`;
+  const isCasesPath =
+    currentPath === CASES_PATH || currentPath === `${CASES_PATH}/`;
   const servicesIsActive = isServicesPath || isServicesMenuOpen;
 
   return (
@@ -162,7 +165,10 @@ export function Navbar({
 
               {PAGE_NAV_ITEMS.slice(1).map((item) => (
                 <NavLink
-                  isActive={item.href === INDUSTRIES_PATH && isIndustriesPath}
+                  isActive={
+                    (item.href === INDUSTRIES_PATH && isIndustriesPath) ||
+                    (item.href === CASES_PATH && isCasesPath)
+                  }
                   item={item}
                   key={item.href}
                   onSelect={handleNavSelect}

@@ -49,7 +49,7 @@ function WorkAccordionItem({
               <span className="font-medium text-gray-500">{item.sector}</span>
             </div>
 
-            <h3 className="mt-4 max-w-3xl font-heading text-2xl font-semibold tracking-[-0.02em] text-gray-900 text-balance">
+            <h3 className="mt-4 max-w-3xl font-heading text-2xl font-semibold text-gray-900 text-balance">
               {item.title}
             </h3>
           </div>
@@ -162,9 +162,9 @@ export function OurWork() {
           <div className="mt-12 flex justify-center lg:justify-start">
             <a
               className={`${primaryCtaBaseClass} min-h-14 w-full px-3 pl-6 text-base font-semibold sm:w-fit sm:min-w-[220px]`}
-              href="/proyectos/"
+              href="/cases"
             >
-              <span>Ver más proyectos</span>
+              <span>Ver casos</span>
               <span className={primaryCtaArrowClass} aria-hidden="true">
                 <ArrowRightIcon className="h-4 w-4" />
               </span>
