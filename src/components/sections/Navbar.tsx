@@ -110,7 +110,7 @@ export function Navbar({
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-14 items-center justify-between">
             <a
-              className="font-heading text-xl font-bold text-gray-900"
+              className="flex items-center gap-2.5"
               href="/"
               onClick={(event) => {
                 if (!isHomePath) {
@@ -121,7 +121,17 @@ export function Navbar({
                 handleNavSelect("#hero");
               }}
             >
-              Tahona
+              <img
+                alt="Tahona"
+                className="size-8"
+                decoding="async"
+                height={32}
+                src="/images/logos/tahona-mark-green.svg"
+                width={32}
+              />
+              <span className="font-heading text-xl font-bold text-gray-900">
+                Tahona
+              </span>
             </a>
 
             <div className="hidden items-center gap-7 md:flex">
