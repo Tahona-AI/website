@@ -53,8 +53,8 @@ export const SERVICE_FAMILIES = [
         ],
       },
       {
-        id: "bases-conocimiento-enterprise",
-        title: "Bases de conocimiento enterprise",
+        id: "bases-conocimiento-empresarial",
+        title: "Bases de conocimiento empresarial",
         menuLabel: "Bases de conocimiento",
         summary:
           "Infraestructura de conocimiento y contexto interno para consultar documentos, datos y contexto de empresa con fuentes, permisos, evaluación y revisión humana.",
@@ -72,7 +72,7 @@ export const SERVICE_FAMILIES = [
     marker: "02",
     title: "Desarrollo de IA",
     description:
-      "La IA entra cuando mejora un flujo concreto. El diseño incluye límites, supervisión, fuentes, trazabilidad y adopción.",
+      "Implementación de IA a nivel interno. El diseño de estos sistemas incluye límites, supervisión, fuentes, trazabilidad y adopción.",
     visualSrc: "/images/service2-illustration.png",
     visualScaleClass: "scale-[1.1]",
     services: [
@@ -81,7 +81,7 @@ export const SERVICE_FAMILIES = [
         title: "Optimización de procesos",
         menuLabel: "Optimización de procesos",
         summary:
-          "Mejora de flujos operativos con reglas, automatización, modelos o software cuando reducen pasos manuales y encajan con las herramientas existentes.",
+          "Mejora de flujos operativos con reglas, automatización, modelos o software, reduciendo pasos manuales e integración con las herramientas existentes.",
         bullets: [
           "Simplificación del flujo antes de automatizar",
           "Automatizaciones con revisión donde haga falta",
@@ -94,7 +94,7 @@ export const SERVICE_FAMILIES = [
         title: "Agentes de IA",
         menuLabel: "Agentes de IA",
         summary:
-          "Agentes conectados a herramientas internas para tareas acotadas: buscar información, preparar trabajo, ejecutar pasos repetibles o coordinar un flujo con supervisión.",
+          "Agentes conectados a herramientas internas para tareas acotadas como buscar información, preparar borradores, ejecutar pasos repetibles o coordinar un flujo con supervisión.",
         bullets: [
           "Definición de tarea, límites y permisos",
           "Herramientas y fuentes disponibles",
@@ -107,7 +107,7 @@ export const SERVICE_FAMILIES = [
         title: "Procesamiento documental",
         menuLabel: "Procesamiento documental",
         summary:
-          "Extracción, clasificación, validación y revisión asistida de documentos para convertir información dispersa en flujos operativos útiles.",
+          "Extracción, clasificación, validación y revisión asistida de documentos para convertir información dispersa en información estructurada y flujos operativos útiles.",
         bullets: [
           "Ingesta de PDFs, hojas, correos o formularios",
           "Extracción de campos y validación con reglas",
@@ -131,7 +131,7 @@ export const SERVICE_FAMILIES = [
         title: "Herramientas a medida",
         menuLabel: "Herramientas a medida",
         summary:
-          "Software construido alrededor de un proceso concreto, con la complejidad justa y sobre los datos y restricciones reales de la operación.",
+          "Software construido alrededor de un proceso concreto, sobre los datos y restricciones reales de la operación.",
         bullets: [
           "Aplicaciones internas",
           "Paneles operativos",
@@ -144,11 +144,11 @@ export const SERVICE_FAMILIES = [
         title: "Herramientas internas",
         menuLabel: "Herramientas internas",
         summary:
-          "Sistemas para centralizar tareas, información y decisiones que hoy viven en Excel, correo, Drive, WhatsApp o herramientas inconexas.",
+          "Sistemas para centralizar tareas, información y decisiones que hoy están en Excel, correos, Drive, WhatsApp o herramientas inconexas.",
         bullets: [
           "Backoffice operativo",
-          "Panel de seguimiento",
-          "Formularios y workflows internos",
+          "Panel de seguimiento y dashboards",
+          "Workflows internos",
           "Control de estado, alertas y reporting",
         ],
       },

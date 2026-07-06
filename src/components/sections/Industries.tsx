@@ -29,7 +29,7 @@ const INDUSTRIES: readonly Industry[] = [
   {
     title: "Logística",
     description:
-      "Planificación, rutas, documentación logística, eventos operativos, reporting e integración con herramientas de operación.",
+      "Planificación, optimización de rutas, documentación logística, eventos operativos, reporting e integración con herramientas de operación.",
     tags: ["Rutas", "Flota", "Documentación", "Reporting"],
     icon: TruckIcon,
     gradient:
@@ -38,7 +38,7 @@ const INDUSTRIES: readonly Industry[] = [
   {
     title: "Industria",
     description:
-      "Calidad, documentación, trazabilidad, procesos internos, reporting y herramientas para coordinar el trabajo operativo.",
+      "Control de calidad, documentación, trazabilidad, procesos internos, reporting y herramientas para coordinar el trabajo operativo.",
     tags: ["Calidad", "Documentación", "Trazabilidad", "Reporting"],
     icon: FactoryIcon,
     gradient:
@@ -74,7 +74,7 @@ const INDUSTRIES: readonly Industry[] = [
   {
     title: "Salud",
     description:
-      "Soporte operativo, documentación, conocimiento interno y PoCs no clínicos, sin claims diagnósticos, regulatorios o de dispositivo médico.",
+      "Soporte operativo, documentación, conocimiento interno y sistemas no clínicos.",
     tags: ["Soporte", "Documentación", "Conocimiento", "PoC"],
     icon: FirstAidIcon,
     gradient:
@@ -141,7 +141,10 @@ function IndustryCard({
 
 export function Industries() {
   return (
-    <section id="industrias" className="relative overflow-hidden bg-white py-24 lg:py-28">
+    <section
+      id="industrias"
+      className="relative overflow-hidden bg-white py-24 lg:py-28"
+    >
       <div className="section-fade-surface-to-white" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
@@ -164,7 +167,11 @@ export function Industries() {
 
         <div className="mt-14 grid auto-rows-fr grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
           {INDUSTRIES.map((industry, index) => (
-            <IndustryCard industry={industry} index={index} key={industry.title} />
+            <IndustryCard
+              industry={industry}
+              index={index}
+              key={industry.title}
+            />
           ))}
         </div>
 

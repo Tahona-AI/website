@@ -277,7 +277,7 @@ export function Contact() {
                   </div>
 
                   <LabelInputContainer>
-                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">¿Dónde puede aportar valor la IA?</Label>
+                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">Proceso o problema a revisar</Label>
                     <Textarea
                       id="details"
                       name="details"

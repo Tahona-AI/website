@@ -60,12 +60,12 @@ export const CASE_STUDIES = [
     ],
   },
   {
-    id: "base-conocimiento-enterprise",
+    id: "base-conocimiento-empresarial",
     marker: "03",
     sector: "Transversal",
-    title: "Base de conocimiento enterprise",
+    title: "Base de conocimiento empresarial",
     summary:
-      "Capa de conocimiento interno con ingesta documental, normalización, fuentes citables, metadatos, permisos, evaluación, revisión humana e integración con herramientas internas.",
+      "Capa de conocimiento interno agéntica con ingesta documental, procesamiento, fuentes citables, metadatos, permisos, evaluación, revisión humana e integración con herramientas internas.",
     visualSrc: "/images/visual-case-enterprise-knowledge.png",
     visualAlt: "Visual 3D de base de conocimiento enterprise",
     bullets: [
@@ -89,11 +89,12 @@ export const CASE_STUDIES = [
     sector: "Industria",
     title: "Documentación, calidad y trazabilidad",
     summary:
-      "Flujos para ordenar documentación, validar información, mantener trazabilidad y generar reporting en procesos de calidad. APPCC puede aparecer como patrón dentro de industria alimentaria cuando el contexto lo justifica.",
+      "Flujos para ordenar documentación, validar información, mantener trazabilidad y generar reporting en procesos de calidad.",
     visualSrc: "/images/visual-case-appcc-quality.png",
     visualAlt: "Visual 3D de calidad y trazabilidad industrial",
     bullets: [
       "Orden documental",
+      "APPCC",
       "Validación de información",
       "Trazabilidad de procesos",
       "Reporting de calidad",

@@ -14,10 +14,9 @@ export const DOCUMENT_PLATFORM_WORK: WorkItem = {
   sector: "Legal",
   title: "Plataforma documental y operativa",
   description:
-    "Diseño e implementación de una plataforma interna para coordinar procesos documentales, generación de borradores, validación humana, tareas repetibles y seguimiento operativo.",
+    "Diseño e implementación de una herramienta interna para coordinar procesos documentales, extracción de datos de documentos complejos, generación de borradores, validación humana, RPA, tareas repetibles y seguimiento operativo.",
   tags: [
-    "Documentación",
-    "Borradores",
+    "Procesamiento documental",
     "Validación humana",
     "Tareas internas",
     "Seguimiento",
@@ -28,16 +27,10 @@ export const DOCUMENT_PLATFORM_WORK: WorkItem = {
 export const LOGISTICS_PLANNING_WORK: WorkItem = {
   id: "logistics-planning",
   sector: "Logística",
-  title: "Planificación logística y reporting",
+  title: "Plataforma de optimización logística",
   description:
-    "Sistemas para planificar rutas, importar datos operativos, coordinar eventos, revisar documentación logística y generar reporting útil para la operación.",
-  tags: [
-    "Planificación",
-    "Rutas",
-    "Datos operativos",
-    "Eventos",
-    "Reporting",
-  ],
+    "Plataforma para planificar rutas, importar pedidos, coordinar eventos, revisar documentación logística y generar reporting útil para la operación.",
+  tags: ["Planificación", "Optimización de rutas", "Reporting"],
   imageSrc: "/images/visual-logistics.png",
 };
 

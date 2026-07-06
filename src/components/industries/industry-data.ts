@@ -16,9 +16,9 @@ export const INDUSTRY_ITEMS = [
     marker: "01",
     title: "Logística",
     summary:
-      "Planificación, rutas, documentación logística, eventos operativos, reporting e integración con herramientas de operación.",
+      "Planificación, optimización de rutas, documentación logística, eventos operativos, reporting e integración con herramientas de operación.",
     description:
-      "En logística aparecen rutas, planificación, eventos, documentación de transporte, datos de operación, reporting y coordinación entre herramientas. Trabajamos sobre ingesta de datos, optimización operativa, procesamiento documental, mapas, reporting e integración con los sistemas existentes.",
+      "En logística encontramos rutas, planificación, eventos, documentación de transporte, datos de operación, reporting y coordinación entre herramientas. Trabajamos sobre ingesta de datos, optimización operativa, optimización de rutas, procesamiento documental, reporting e integración con los sistemas existentes.",
     visualSrc: "/images/visual-logistics.png",
     visualAlt: "Visual 3D de operación logística",
     bullets: [
@@ -27,10 +27,11 @@ export const INDUSTRY_ITEMS = [
       "Reporting de servicio",
       "Gestión de flotas",
       "Eventos operativos y seguimiento",
-      "Integración con herramientas, APIs y hojas",
+      "Integración con herramientas, APIs y hojas de cálculo",
     ],
     relatedServices: [
       "Optimización de procesos",
+      "Optimización de rutas",
       "Herramientas a medida",
       "Integraciones / plataformas",
       "Procesamiento documental",
@@ -41,7 +42,7 @@ export const INDUSTRY_ITEMS = [
     marker: "02",
     title: "Industria",
     summary:
-      "Calidad, documentación, trazabilidad, procesos internos, reporting y herramientas para coordinar el trabajo operativo.",
+      "Control de calidad, documentación, trazabilidad, procesos internos, reporting y herramientas para coordinar el trabajo operativo.",
     description:
       "En entornos industriales y de operación aparecen controles de calidad, documentación recurrente, trazabilidad, coordinación entre equipos y reporting. Trabajamos sobre herramientas internas, flujos documentales, bases de conocimiento, integraciones y automatización.",
     visualSrc: "/images/visual-industry-manufacturing.png",
@@ -74,6 +75,7 @@ export const INDUSTRY_ITEMS = [
     bullets: [
       "Generación y revisión de documentos",
       "Procesamiento documental",
+      "Contabilidad",
       "Herramientas internas para seguimiento",
       "Flujos administrativos",
       "Validación humana",
@@ -131,7 +133,7 @@ export const INDUSTRY_ITEMS = [
     ],
     relatedServices: [
       "Optimización de procesos",
-      "Integraciones / plataformas",
+      "Integraciones y plataformas",
       "Herramientas internas",
       "Agentes de IA",
     ],
@@ -141,16 +143,16 @@ export const INDUSTRY_ITEMS = [
     marker: "06",
     title: "Salud",
     summary:
-      "Soporte operativo, documentación, conocimiento interno y PoCs no clínicos, sin claims diagnósticos o regulatorios.",
+      "Soporte operativo, documentación, conocimiento interno y sistemas no clínicos.",
     description:
-      "En salud solo trabajamos sobre capas operativas no clínicas: documentación, conocimiento interno, coordinación, reporting y PoCs de apoyo administrativo. No planteamos claims diagnósticos, regulatorios ni de dispositivo médico.",
+      "En salud solo trabajamos sobre capas operativas no clínicas: documentación, conocimiento interno, coordinación, reporting y apoyo administrativo.",
     visualSrc: "/images/visual-industry-health.png",
     visualAlt: "Visual 3D de operación de salud no clínica",
     bullets: [
       "Documentación operativa",
       "Conocimiento interno",
       "Coordinación administrativa",
-      "PoCs no clínicos",
+      "Sistemas no clínicos",
       "Reporting interno",
       "Validación y revisión humana",
     ],
