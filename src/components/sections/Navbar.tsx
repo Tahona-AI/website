@@ -108,9 +108,9 @@ export function Navbar({
         )}
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-14 items-center justify-between">
+          <div className="flex h-16 items-center justify-between md:h-20">
             <a
-              className="flex items-center gap-2.5"
+              className="flex items-center gap-3"
               href="/"
               onClick={(event) => {
                 if (!isHomePath) {
@@ -123,11 +123,11 @@ export function Navbar({
             >
               <img
                 alt="Tahona"
-                className="size-8"
+                className="h-6 w-6 md:h-7 md:w-7"
                 decoding="async"
-                height={32}
-                src="/images/logos/tahona-mark-green.svg"
-                width={32}
+                height={40}
+                src="/images/logos/tahona-favicon.svg"
+                width={40}
               />
               <span className="font-heading text-xl font-bold text-gray-900">
                 Tahona
