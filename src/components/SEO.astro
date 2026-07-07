@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = "Tahona — Procesos, datos y herramientas internas",
-  description = "Equipo técnico que mejora operaciones internas con diagnóstico operativo, implementación práctica y automatización cuando aporta.",
+  title = "Tahona | Procesos, datos y herramientas internas",
+  description = "Mejoramos operaciones internas con diagnóstico operativo, implementación técnica y automatización solo cuando encaja con el trabajo real.",
   image = "/og-image.png",
   canonical,
   noindex = false,
@@ -19,7 +19,18 @@ const {
   type = "website",
 } = Astro.props;
 
-const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site).href;
+const normalizeCanonicalPath = (pathname: string) => {
+  const pathOnly = pathname.split("?")[0]?.split("#")[0] ?? "/";
+
+  if (pathOnly === "/") {
+    return "/";
+  }
+
+  return `${pathOnly.replace(/\/$/, "")}/`;
+};
+
+const canonicalPath = normalizeCanonicalPath(Astro.url.pathname);
+const canonicalURL = canonical || new URL(canonicalPath, Astro.site).href;
 const imageURL = new URL(image, Astro.site).href;
 
 const robotsContent = `${noindex ? "noindex" : "index"}, ${nofollow ? "nofollow" : "follow"}`;

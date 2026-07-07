@@ -1,39 +1,249 @@
 ---
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Tahona",
-  url: "https://tahona.ai",
-  logo: "https://tahona.ai/images/logos/tahona-favicon.svg",
+import { CASE_STUDIES } from "@/components/cases/cases-data";
+import { INDUSTRIES_FAQ } from "@/components/industries/industries-faq";
+import { INDUSTRY_ITEMS } from "@/components/industries/industry-data";
+import { SERVICE_FAMILIES } from "@/components/services/service-families";
+import { SERVICES_FAQ } from "@/components/services/services-faq";
+
+const SITE_ORIGIN = "https://tahona.ai";
+
+const normalizeCanonicalPath = (pathname: string) => {
+  const pathOnly = pathname.split("?")[0]?.split("#")[0] ?? "/";
+
+  if (pathOnly === "/") {
+    return "/";
+  }
+
+  return `${pathOnly.replace(/\/$/, "")}/`;
+};
+
+const pageUrl = (path: string) => new URL(path, SITE_ORIGIN).href;
+
+const homePage = {
+  path: "/",
+  name: "Inicio",
+  title: "Tahona | Procesos, datos y herramientas internas",
   description:
-    "Equipo técnico que mejora operaciones internas con diagnóstico operativo, implementación práctica y automatización cuando aporta.",
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "ES",
+    "Mejoramos operaciones internas con diagnóstico operativo, implementación técnica y automatización solo cuando encaja con el trabajo real.",
+} as const;
+
+const pageEntries = [
+  homePage,
+  {
+    path: "/services/",
+    name: "Servicios",
+    title: "Servicios Tahona | Operaciones, IA e integraciones",
+    description:
+      "Servicios para ordenar procesos, datos, documentos, herramientas internas, desarrollo de IA e integraciones alrededor de la operación real.",
   },
-  sameAs: [],
+  {
+    path: "/industries/",
+    name: "Industrias",
+    title: "Industrias Tahona | Software e IA por sector",
+    description:
+      "Aplicamos software, IA e integraciones en logística, industria, legal, seguros, marketing y salud con foco en procesos y herramientas internas.",
+  },
+  {
+    path: "/cases/",
+    name: "Casos",
+    title: "Casos Tahona | Proyectos operativos anonimizados",
+    description:
+      "Proyectos anonimizados sobre documentación, planificación, conocimiento, reporting e integraciones, explicados desde el problema operativo y la solución.",
+  },
+] as const;
+
+const normalizedPath = normalizeCanonicalPath(Astro.url.pathname);
+const pageData =
+  pageEntries.find((entry) => entry.path === normalizedPath) ?? homePage;
+const canonicalURL = pageUrl(pageData.path);
+
+const organizationId = `${SITE_ORIGIN}/#organization`;
+const websiteId = `${SITE_ORIGIN}/#website`;
+const breadcrumbId = `${canonicalURL}#breadcrumb`;
+const webpageId = `${canonicalURL}#webpage`;
+
+const organizationSchema = {
+  "@type": "Organization",
+  "@id": organizationId,
+  name: "Tahona",
+  url: pageUrl("/"),
+  logo: pageUrl("/images/logos/tahona-favicon.svg"),
+  description:
+    "Estudio técnico de consultoría e implementación para mejorar operaciones internas, procesos, datos, documentos, herramientas e integraciones.",
+  knowsAbout: [
+    "diagnóstico operativo",
+    "implementación técnica",
+    "automatización de procesos",
+    "herramientas internas",
+    "procesamiento documental",
+    "integraciones operativas",
+  ],
 };
 
 const websiteSchema = {
-  "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": websiteId,
   name: "Tahona",
-  url: "https://tahona.ai",
-  description:
-    "Procesos, datos y herramientas internas. Diagnóstico operativo, implementación técnica y mejoras medibles en operación real.",
+  url: pageUrl("/"),
+  description: homePage.description,
   inLanguage: "es-ES",
+  publisher: {
+    "@id": organizationId,
+  },
 };
 
+const breadcrumbItems =
+  pageData.path === "/"
+    ? [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: homePage.name,
+          item: pageUrl(homePage.path),
+        },
+      ]
+    : [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: homePage.name,
+          item: pageUrl(homePage.path),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: pageData.name,
+          item: canonicalURL,
+        },
+      ];
+
 const breadcrumbSchema = {
-  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Inicio",
-      item: "https://tahona.ai",
-    },
+  "@id": breadcrumbId,
+  itemListElement: breadcrumbItems,
+};
+
+const webPageSchema = {
+  "@type": "WebPage",
+  "@id": webpageId,
+  url: canonicalURL,
+  name: pageData.title,
+  description: pageData.description,
+  inLanguage: "es-ES",
+  isPartOf: {
+    "@id": websiteId,
+  },
+  publisher: {
+    "@id": organizationId,
+  },
+  breadcrumb: {
+    "@id": breadcrumbId,
+  },
+};
+
+const servicesSchema =
+  pageData.path === "/services/"
+    ? [
+        {
+          "@type": "Service",
+          "@id": `${canonicalURL}#services`,
+          name: "Servicios de implementación técnica para operaciones internas",
+          description: pageData.description,
+          provider: {
+            "@id": organizationId,
+          },
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Familias de servicios Tahona",
+            itemListElement: SERVICE_FAMILIES.map((family) => ({
+              "@type": "OfferCatalog",
+              name: family.title,
+              description: family.description,
+              itemListElement: family.services.map((service) => ({
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: service.title,
+                  description: service.summary,
+                  url: `${canonicalURL}#${service.id}`,
+                },
+              })),
+            })),
+          },
+        },
+        {
+          "@type": "FAQPage",
+          "@id": `${canonicalURL}#faq`,
+          mainEntity: SERVICES_FAQ.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        },
+      ]
+    : [];
+
+const industriesSchema =
+  pageData.path === "/industries/"
+    ? [
+        {
+          "@type": "ItemList",
+          "@id": `${canonicalURL}#industries`,
+          name: "Sectores y patrones operativos",
+          itemListElement: INDUSTRY_ITEMS.map((industry, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: industry.title,
+            description: industry.summary,
+            url: `${canonicalURL}#${industry.id}`,
+          })),
+        },
+        {
+          "@type": "FAQPage",
+          "@id": `${canonicalURL}#faq`,
+          mainEntity: INDUSTRIES_FAQ.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
+        },
+      ]
+    : [];
+
+const casesSchema =
+  pageData.path === "/cases/"
+    ? [
+        {
+          "@type": "ItemList",
+          "@id": `${canonicalURL}#cases`,
+          name: "Casos anonimizados de trabajo operativo",
+          itemListElement: CASE_STUDIES.map((caseStudy, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: caseStudy.title,
+            description: caseStudy.summary,
+            url: `${canonicalURL}#${caseStudy.id}`,
+          })),
+        },
+      ]
+    : [];
+
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    organizationSchema,
+    websiteSchema,
+    webPageSchema,
+    breadcrumbSchema,
+    ...servicesSchema,
+    ...industriesSchema,
+    ...casesSchema,
   ],
 };
 ---
@@ -41,15 +251,5 @@ const breadcrumbSchema = {
 <script
   is:inline
   type="application/ld+json"
-  set:html={JSON.stringify(organizationSchema)}
-/>
-<script
-  is:inline
-  type="application/ld+json"
-  set:html={JSON.stringify(websiteSchema)}
-/>
-<script
-  is:inline
-  type="application/ld+json"
-  set:html={JSON.stringify(breadcrumbSchema)}
+  set:html={JSON.stringify(schemaGraph)}
 />
