@@ -1,0 +1,79 @@
+---
+import {
+  ArrowUpRightIcon,
+  ChartLineUpIcon,
+  FactoryIcon,
+  FirstAidIcon,
+  GavelIcon,
+  ShieldCheckIcon,
+  TruckIcon,
+} from "@phosphor-icons/react";
+import { INDUSTRY_ITEMS } from "@/components/industries/industry-data";
+
+const INDUSTRY_ICONS = [
+  TruckIcon,
+  FactoryIcon,
+  GavelIcon,
+  ShieldCheckIcon,
+  ChartLineUpIcon,
+  FirstAidIcon,
+] as const;
+
+const CARD_BACKGROUNDS = [
+  "radial-gradient(circle at 88% 12%, rgba(45,106,79,0.12), transparent 34%), linear-gradient(135deg, rgba(255,255,255,0.96), rgba(241,248,244,0.7))",
+  "radial-gradient(circle at 12% 12%, rgba(64,145,108,0.12), transparent 34%), linear-gradient(135deg, rgba(255,255,255,0.96), rgba(247,250,248,0.78))",
+  "radial-gradient(circle at 82% 78%, rgba(45,106,79,0.11), transparent 34%), linear-gradient(135deg, rgba(255,255,255,0.96), rgba(241,248,244,0.68))",
+] as const;
+---
+
+<section id="industrias" class="relative overflow-hidden bg-white py-24 lg:py-28">
+  <div class="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+    <div class="max-w-4xl">
+      <div class="inline-flex items-center gap-3 text-sm text-gray-500">
+        <span class="h-px w-10 bg-brand-300"></span>
+        <span class="font-medium text-gray-600">Industrias</span>
+      </div>
+      <h2 class="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl md:text-5xl">
+        Sectores que trabajamos.
+      </h2>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-gray-500 text-pretty">
+        No nos encerramos en un vertical. El patrón común son operaciones con información dispersa, tareas repetibles, documentación e integraciones entre herramientas.
+      </p>
+    </div>
+
+    <div class="mt-14 grid auto-rows-fr gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+      {INDUSTRY_ITEMS.map((industry, industryIndex) => {
+        const Icon = INDUSTRY_ICONS[industryIndex % INDUSTRY_ICONS.length];
+
+        return (
+          <a
+            href={`#${industry.id}`}
+            class="group relative flex min-h-72 flex-col overflow-hidden rounded-[1.65rem] border border-gray-200/85 bg-white/90 p-6 shadow-[0_22px_60px_-48px_rgba(31,31,31,0.42)] transition-[border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-1 hover:border-brand-200 hover:bg-white hover:shadow-[0_30px_72px_-46px_rgba(31,31,31,0.5)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:p-7"
+            style={`background-image: ${CARD_BACKGROUNDS[industryIndex % CARD_BACKGROUNDS.length]};`}
+          >
+            <span class="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-brand-100/45 opacity-0 blur-2xl transition-opacity duration-200 group-hover:opacity-100"></span>
+
+            <span class="relative z-10 mb-7 flex items-start justify-between gap-4">
+              <span class="inline-flex size-12 items-center justify-center rounded-2xl border border-white/80 bg-white/72 text-brand-700 shadow-sm">
+                <Icon aria-hidden="true" className="size-6" weight="duotone" />
+              </span>
+              <span class="inline-flex size-9 items-center justify-center rounded-full text-gray-700 transition-[background-color,color,transform] duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:bg-brand-50 group-hover:text-brand-700 motion-reduce:transition-none">
+                <ArrowUpRightIcon aria-hidden="true" className="size-4" />
+              </span>
+            </span>
+
+            <span class="relative z-10 text-sm font-semibold text-brand-700">
+              {industry.marker}
+            </span>
+            <span class="relative z-10 mt-4 block font-heading text-2xl font-semibold text-gray-900 text-balance">
+              {industry.title}
+            </span>
+            <span class="relative z-10 mt-4 block text-sm leading-6 text-gray-600 text-pretty">
+              {industry.summary}
+            </span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>

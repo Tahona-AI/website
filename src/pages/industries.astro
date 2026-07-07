@@ -1,0 +1,38 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SkipLink from "@/components/SkipLink.astro";
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { Contact } from "@/components/sections/Contact";
+import Footer from "@/components/sections/Footer.astro";
+import IndustriesGrid from "@/components/industries/IndustriesGrid.astro";
+import IndustryDetailSections from "@/components/industries/IndustryDetailSections.astro";
+import IndustriesFAQ from "@/components/industries/IndustriesFAQ.astro";
+---
+
+<Layout
+  title="Industrias Tahona — Software, IA e integraciones por sector"
+  description="Software, IA e integraciones para sectores con procesos, documentos, datos, reporting y herramientas que necesitan funcionar mejor juntos."
+>
+  <SkipLink />
+  <main
+    id="main-content"
+    class="relative flex min-h-screen flex-col overflow-x-hidden"
+  >
+    <Navbar client:load initialPath={Astro.url.pathname} />
+    <Hero
+      client:load
+      title="Software, IA e integraciones para cada sector."
+      description="En cada sector hay procesos, documentos, datos, reporting y herramientas que necesitan funcionar mejor juntos. La forma de operar es la misma: entender, implementar y mejorar."
+      primaryLabel="Solicitar una primera conversación"
+      primaryHref="#contacto"
+      secondaryLabel="Ver servicios"
+      secondaryHref="/services"
+    />
+    <IndustriesGrid />
+    <IndustryDetailSections />
+    <IndustriesFAQ />
+    <Contact client:load />
+    <Footer />
+  </main>
+</Layout>

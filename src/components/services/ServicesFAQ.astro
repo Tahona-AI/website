@@ -1,0 +1,36 @@
+---
+import { SERVICES_FAQ } from "@/components/services/services-faq";
+---
+
+<section class="relative overflow-hidden bg-white py-24 lg:py-28">
+  <div class="mx-auto grid max-w-7xl gap-12 px-6 sm:px-10 lg:grid-cols-[minmax(16rem,0.85fr)_minmax(0,1.2fr)] lg:px-16">
+    <div>
+      <div class="inline-flex items-center gap-3 text-sm text-gray-500">
+        <span class="h-px w-10 bg-brand-300"></span>
+        <span class="font-medium text-gray-600">Preguntas frecuentes</span>
+      </div>
+      <h2 class="mt-4 max-w-xl font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl md:text-5xl">
+        Preguntas frecuentes sobre los servicios.
+      </h2>
+      <p class="mt-5 max-w-md text-base leading-7 text-gray-500 text-pretty">
+        Lo que más nos preguntan antes de empezar.
+      </p>
+    </div>
+
+    <div class="border-t border-gray-200">
+      {SERVICES_FAQ.map((item, index) => (
+        <details class="group border-b border-gray-200 py-6" open={index === 0}>
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-heading text-lg font-semibold text-gray-900 text-balance">
+            <span>{item.question}</span>
+            <span class="mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-full border border-gray-200 text-brand-700 transition-[background-color,color,transform] duration-200 group-open:rotate-45 group-open:border-brand-700 group-open:bg-brand-700 group-open:text-white motion-reduce:transition-none">
+              +
+            </span>
+          </summary>
+          <p class="mt-5 max-w-2xl text-base leading-8 text-gray-600 text-pretty">
+            {item.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

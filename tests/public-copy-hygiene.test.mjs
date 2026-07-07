@@ -61,14 +61,15 @@ describe("public copy hygiene", () => {
     const source = readProjectFile("src/pages/index.astro");
     const expectedOrder = [
       "<SkipLink />",
-      "<Navbar client:load />",
+      "<Navbar client:load initialPath={Astro.url.pathname} />",
       "<Hero client:load />",
       "<WhatWeDo client:visible />",
       "<Services client:visible />",
       "<AiApplied client:visible />",
       "<Industries client:visible />",
+      "<OurWork client:visible />",
       "<HowWeWork client:visible />",
-      "<Contact client:load />",
+      "<Contact client:visible />",
       "<Footer />",
     ];
 

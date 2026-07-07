@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import type { MouseEvent, ReactNode } from "react";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import {
   primaryCtaArrowClass,
@@ -8,11 +9,46 @@ import {
   secondaryCtaBaseClass,
 } from "@/components/ui/cta-styles";
 
-export function Hero() {
+type HeroProps = {
+  readonly title?: ReactNode;
+  readonly description?: string;
+  readonly primaryLabel?: string;
+  readonly primaryHref?: string;
+  readonly secondaryLabel?: string;
+  readonly secondaryHref?: string;
+};
+
+const DEFAULT_TITLE = (
+  <>
+    <span>La tecnología ya existe.</span>
+    <span className="block">Falta la implementación adecuada.</span>
+  </>
+);
+
+export function Hero({
+  title = DEFAULT_TITLE,
+  description = "Equipo técnico que mejora operaciones internas con diagnóstico, implementación práctica y automatización cuando aporta. Sin cambiar lo que ya funciona.",
+  primaryLabel = "Hablemos sin compromiso",
+  primaryHref = "#contacto",
+  secondaryLabel = "Ver cómo trabajamos",
+  secondaryHref = "#proceso",
+}: HeroProps) {
   const discoveryCallUrl = "#contacto";
   const showDiscoveryCallCard = false;
 
-  const handleScrollToSection = (href: string) => {
+  const handleHeroLinkClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (!href.startsWith("#")) {
+      return;
+    }
+
+    event.preventDefault();
+    if (href.length <= 1) {
+      return;
+    }
+
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -55,9 +91,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[1.02] text-gray-900 lg:max-w-[52rem]"
             >
-              La tecnología ya existe.
-              <br className="hidden md:block" />{" "}
-              Falta la implementación adecuada.
+              {title}
             </motion.h1>
 
             <motion.p
@@ -66,7 +100,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.25 }}
               className="mt-8 max-w-3xl text-[clamp(1rem,1.35vw,1.25rem)] leading-8 text-gray-500 lg:max-w-[38rem]"
             >
-              Equipo técnico que mejora operaciones internas con diagnóstico, implementación práctica y automatización cuando aporta. Sin cambiar lo que ya funciona.
+              {description}
             </motion.p>
 
             <motion.div
@@ -75,24 +109,26 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="mt-10 flex flex-col gap-4 sm:flex-row"
             >
-              <button
-                onClick={() => handleScrollToSection("#contacto")}
+              <a
+                href={primaryHref}
+                onClick={(event) => handleHeroLinkClick(event, primaryHref)}
                 className={`${primaryCtaBaseClass} min-h-14 cursor-pointer px-3 pl-6 text-base font-semibold sm:min-w-[240px]`}
               >
-                <span>Hablemos sin compromiso</span>
+                <span>{primaryLabel}</span>
                 <span className={`${primaryCtaArrowClass} h-10 w-10`} aria-hidden="true">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
                   </svg>
                 </span>
-              </button>
+              </a>
 
-              <button
-                onClick={() => handleScrollToSection("#proceso")}
+              <a
+                href={secondaryHref}
+                onClick={(event) => handleHeroLinkClick(event, secondaryHref)}
                 className={`${secondaryCtaBaseClass} min-h-14 cursor-pointer justify-center px-6 text-base font-semibold sm:min-w-[240px]`}
               >
-                <span>Ver cómo trabajamos</span>
-              </button>
+                <span>{secondaryLabel}</span>
+              </a>
             </motion.div>
 
             {showDiscoveryCallCard && (
@@ -121,7 +157,7 @@ export function Hero() {
 
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center justify-between gap-3">
-                      <span className="text-[0.68rem] font-medium uppercase tracking-[0.14em] text-brand-700">
+                      <span className="text-[0.68rem] font-medium uppercase text-brand-700">
                         Llamada de descubrimiento
                       </span>
                         <span className="rounded-full border border-brand-100 bg-brand-50/90 px-2.5 py-1 text-[0.68rem] font-medium text-brand-700">
@@ -129,7 +165,7 @@ export function Hero() {
                       </span>
                     </span>
 
-                    <span className="mt-2 block font-heading text-xl font-semibold tracking-[-0.03em] text-gray-900">
+                    <span className="mt-2 block font-heading text-xl font-semibold text-gray-900">
                       Si quieres verlo en una llamada breve, deja tu caso aquí.
                     </span>
 

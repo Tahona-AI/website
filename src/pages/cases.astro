@@ -1,0 +1,34 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SkipLink from "@/components/SkipLink.astro";
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { Contact } from "@/components/sections/Contact";
+import Footer from "@/components/sections/Footer.astro";
+import CasesDetailSections from "@/components/cases/CasesDetailSections.astro";
+---
+
+<Layout
+  title="Casos Tahona — Trabajo aplicado a operaciones reales"
+  description="Trabajo aplicado a operaciones reales: proyectos anonimizados y patrones reutilizables sobre documentación, planificación, conocimiento, reporting e integraciones."
+>
+  <SkipLink />
+  <main
+    id="main-content"
+    class="relative flex min-h-screen flex-col overflow-x-hidden"
+  >
+    <Navbar client:load initialPath={Astro.url.pathname} />
+    <Hero
+      client:load
+      title="Nuestro trabajo aplicado a operaciones reales."
+      description="Proyectos y patrones abordados por Tahona, presentados de forma anonimizada y sin métricas, testimonios ni logos inventados. El foco está en qué problema operativo se ordena y qué se construye alrededor."
+      primaryLabel="Solicitar una primera conversación"
+      primaryHref="#contacto"
+      secondaryLabel="Ver servicios"
+      secondaryHref="/services"
+    />
+    <CasesDetailSections />
+    <Contact client:load />
+    <Footer />
+  </main>
+</Layout>

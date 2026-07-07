@@ -3,68 +3,18 @@
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { FadeInView } from "@/components/animations/FadeInView";
+import { SERVICE_FAMILIES } from "@/components/services/service-families";
+import type { ServiceFamily } from "@/components/services/service-families";
 import {
   primaryCtaArrowClass,
   primaryCtaBaseClass,
 } from "@/components/ui/cta-styles";
 
-interface ServiceFamily {
-  readonly marker: string;
-  readonly title: string;
-  readonly description: string;
-  readonly services: readonly string[];
-  readonly gradient: string;
-  readonly visualSrc: string;
-  readonly visualScaleClass: string;
-}
-
-const SERVICE_FAMILIES: readonly ServiceFamily[] = [
-  {
-    marker: "01",
-    title: "Fundaciones",
-    description:
-      "Antes de construir se ordena el problema. Diagnóstico, estrategia y conocimiento interno para tomar decisiones técnicas con contexto.",
-    services: [
-      "Consultoría y auditoría operativa",
-      "Estrategia técnica y operativa",
-      "Bases de conocimiento enterprise",
-    ],
-    gradient:
-      "radial-gradient(circle at 90% 10%, rgba(22,163,74,0.08) 0%, transparent 50%), radial-gradient(circle at 10% 90%, rgba(22,163,74,0.05) 0%, transparent 40%)",
-    visualSrc: "/images/service1-illustration.png",
-    visualScaleClass: "scale-[1.08]",
-  },
-  {
-    marker: "02",
-    title: "Desarrollo de IA",
-    description:
-      "La IA entra cuando mejora un flujo concreto. El diseño incluye límites, supervisión, fuentes, trazabilidad y adopción.",
-    services: [
-      "Optimización de procesos",
-      "Agentes de IA",
-      "Procesamiento documental",
-    ],
-    gradient:
-      "radial-gradient(circle at 80% 80%, rgba(22,163,74,0.07) 0%, transparent 50%), linear-gradient(135deg, rgba(240,253,244,0.6) 0%, transparent 60%)",
-    visualSrc: "/images/service2-illustration.png",
-    visualScaleClass: "scale-[1.1]",
-  },
-  {
-    marker: "03",
-    title: "Otros desarrollos",
-    description:
-      "Muchas mejoras no necesitan solo IA. Necesitan una herramienta clara, una integración fiable o una plataforma interna que encaje con la forma real de trabajar.",
-    services: [
-      "Herramientas a medida",
-      "Herramientas internas",
-      "Integraciones y plataformas operativas",
-    ],
-    gradient:
-      "radial-gradient(circle at 20% 20%, rgba(22,163,74,0.06) 0%, transparent 50%), linear-gradient(225deg, rgba(220,252,231,0.5) 0%, transparent 60%)",
-    visualSrc: "/images/service3-illustration.png",
-    visualScaleClass: "scale-[1.12]",
-  },
-];
+const FAMILY_GRADIENTS = [
+  "radial-gradient(circle at 90% 10%, rgba(22,163,74,0.08) 0%, transparent 50%), radial-gradient(circle at 10% 90%, rgba(22,163,74,0.05) 0%, transparent 40%)",
+  "radial-gradient(circle at 80% 80%, rgba(22,163,74,0.07) 0%, transparent 50%), linear-gradient(135deg, rgba(240,253,244,0.6) 0%, transparent 60%)",
+  "radial-gradient(circle at 20% 20%, rgba(22,163,74,0.06) 0%, transparent 50%), linear-gradient(225deg, rgba(220,252,231,0.5) 0%, transparent 60%)",
+] as const;
 
 function ServiceFamilyCard({
   family,
@@ -84,7 +34,7 @@ function ServiceFamilyCard({
             ? "md:grid-cols-[minmax(18rem,22rem)_minmax(0,1fr)]"
             : "md:grid-cols-[minmax(0,1fr)_minmax(18rem,22rem)]"
         )}
-        style={{ backgroundImage: family.gradient }}
+        style={{ backgroundImage: FAMILY_GRADIENTS[index] }}
       >
         <div className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 rounded-full bg-gradient-to-br from-brand-100/40 to-transparent opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -94,11 +44,11 @@ function ServiceFamilyCard({
             isReversed ? "md:order-2" : "md:order-1"
           )}
         >
-          <p className="text-sm font-semibold tracking-[0.04em] text-brand-700">
+          <p className="text-sm font-semibold text-brand-700">
             {family.marker}
           </p>
 
-          <h3 className="mt-4 font-heading text-2xl font-semibold tracking-[-0.02em] text-gray-900 sm:text-3xl">
+          <h3 className="mt-4 font-heading text-2xl font-semibold text-gray-900 sm:text-3xl">
             {family.title}
           </h3>
 
@@ -110,12 +60,12 @@ function ServiceFamilyCard({
             {family.services.map((service, serviceIndex) => (
               <li
                 className="grid grid-cols-[1.75rem_1fr] items-start gap-3 text-sm leading-6 text-gray-700"
-                key={service}
+                key={service.id}
               >
                 <span className="text-sm font-semibold text-brand-700">
                   {String(serviceIndex + 1).padStart(2, "0")}
                 </span>
-                <span>{service}</span>
+                <span>{service.title}</span>
               </li>
             ))}
           </ol>
@@ -187,7 +137,7 @@ export function Services() {
             <div className="mt-12 flex justify-center lg:justify-start">
               <a
                 className={`${primaryCtaBaseClass} min-h-14 w-full px-3 pl-6 text-base font-semibold sm:w-fit sm:min-w-[188px]`}
-                href="#servicios-grid"
+                href="/services"
               >
                 <span>Ver servicios</span>
                 <span className={primaryCtaArrowClass} aria-hidden="true">

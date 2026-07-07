@@ -137,7 +137,8 @@ cn("base-class", condition && "conditional-class", className)
 - Corporate buzzwords: "sinergia", "transformación digital"
 - Tech jargon: "arquitectura transformer", "modelos de deep learning"
 - Startup speak: "disruptivo", "escalable", "game-changer"
-- Generic AI-agency/autobro positioning: "agentes de IA", "ingeniería de contexto", "automatiza con IA en 30 días", "Sistemas de IA que operan en producción desde el primer día"
+- Generic AI-agency/autobro positioning: do not use "agentes de IA" or "ingeniería de contexto" as generic hero language or hype. They are valid service terms when the page context justifies them, especially under AI development or technical implementation.
+- Hype claims: "automatiza con IA en 30 días", "Sistemas de IA que operan en producción desde el primer día"
 - Money-first claims without proof: "ahorra X horas", "reduce costes", "aumenta la facturación"
 
 ### Key Messages
@@ -145,6 +146,18 @@ cn("base-class", condition && "conditional-class", className)
 - "La tecnología ya existe. Falta la implementación adecuada."
 - "Mejoramos operaciones internas con diagnóstico operativo, implementación técnica y automatización solo cuando encaja con el trabajo real."
 - "Para equipos con procesos reales que quieren mejorar su operación."
+
+### Service Taxonomy
+
+Use this service grouping unless Dani changes it:
+
+1. **Fundaciones**: Consultoría / auditoría operativa, Estrategia, Bases de conocimiento.
+2. **Desarrollo de IA**: Optimización de procesos, Agentes de IA, Procesamiento documental.
+3. **Otros desarrollos**: Herramientas a medida, Herramientas internas, Integraciones / plataformas operativas.
+
+### Industry Taxonomy
+
+Initial public industries to explore: Logística, Legal, Seguros, Industria, Marketing / growth operations, and Salud if there is enough careful non-regulatory framing. APPCC or food-safety material can appear as a case/pattern inside Industria, not as the main Tahona positioning.
 
 ---
 

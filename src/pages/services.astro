@@ -1,0 +1,40 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SkipLink from "@/components/SkipLink.astro";
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { Contact } from "@/components/sections/Contact";
+import Footer from "@/components/sections/Footer.astro";
+import ServicesPillars from "@/components/services/ServicesPillars.astro";
+import ServiceDetailSections from "@/components/services/ServiceDetailSections.astro";
+import ImplementationExamples from "@/components/services/ImplementationExamples.astro";
+import ServicesFAQ from "@/components/services/ServicesFAQ.astro";
+---
+
+<Layout
+  title="Servicios Tahona — Operaciones internas, IA e integraciones"
+  description="Servicios para ordenar, construir e integrar operaciones internas: fundamentos operativos, desarrollo de IA, herramientas internas e integraciones."
+>
+  <SkipLink />
+  <main
+    id="main-content"
+    class="relative flex min-h-screen flex-col overflow-x-hidden"
+  >
+    <Navbar client:load initialPath={Astro.url.pathname} />
+    <Hero
+      client:load
+      title="Servicios para ordenar, construir e integrar operaciones internas."
+      description="Trabajamos desde la operación real de cada empresa. El objetivo es entender procesos, datos, documentos y herramientas para decidir qué conviene construir, integrar o automatizar."
+      primaryLabel="Solicitar una primera conversación"
+      primaryHref="#contacto"
+      secondaryLabel="Ver cómo trabajamos"
+      secondaryHref="#familias-servicios"
+    />
+    <ServicesPillars />
+    <ServiceDetailSections />
+    <ImplementationExamples />
+    <ServicesFAQ />
+    <Contact client:load />
+    <Footer />
+  </main>
+</Layout>
