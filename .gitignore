@@ -26,3 +26,13 @@ pnpm-lock.yaml
 
 # jetbrains setting folder
 .idea/
+
+# local agent/design-sync state
+.hermes/
+.omc/
+.omo/
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules/
