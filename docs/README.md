@@ -81,3 +81,6 @@ website/
 - [Architecture](./ARCHITECTURE.md) - Astro Islands, hydration, static output, and deployment.
 - [Components](./COMPONENTS.md) - Documentation for sections, UI primitives, and animations.
 - [Styling](./STYLING.md) - Brand colors, typography, and Tailwind v4 configuration.
+- [Claude Design System Context](./CLAUDE_DESIGN_SYSTEM.md) - Design-system brief for Claude Design sync.
+- [Claude Code Design Sync Runbook](./CLAUDE_CODE_DESIGN_SYNC.md) - How to run `/design-sync` from Claude Code.
+- [Prompt After Claude Design Sync](./CLAUDE_DESIGN_AFTER_SYNC_PROMPT.md) - Prompt to use after the design system is synced.
