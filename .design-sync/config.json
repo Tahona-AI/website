@@ -1,0 +1,27 @@
+{
+  "projectId": "1d101f91-444e-431a-9977-63cbc825a9ae",
+  "shape": "package",
+  "readmeHeader": ".design-sync/conventions.md",
+  "pkg": "website",
+  "globalName": "Tahona",
+  "tsconfig": "./tsconfig.json",
+  "cssEntry": ".design-sync/tahona-compiled.css",
+  "extraEntries": ["./.design-sync/ds-preview-provider.tsx", "./.design-sync/tahona-icons.ts"],
+  "provider": { "component": "DsPreviewProvider" },
+  "overrides": {
+    "ServicesMegaMenu": { "cardMode": "single", "viewport": "1200x560" },
+    "MobileNavMenu": { "cardMode": "single", "primaryStory": "Open", "viewport": "420x760" },
+    "Navbar": { "cardMode": "single", "primaryStory": "Default", "viewport": "1280x200" }
+  },
+  "extraFonts": [
+    "node_modules/@fontsource/plus-jakarta-sans/600.css",
+    "node_modules/@fontsource/plus-jakarta-sans/700.css",
+    "node_modules/@fontsource/plus-jakarta-sans/800.css",
+    "node_modules/@fontsource/geist-sans/400.css",
+    "node_modules/@fontsource/geist-sans/500.css",
+    "node_modules/@fontsource/geist-sans/600.css",
+    "node_modules/@fontsource/geist-sans/700.css",
+    "node_modules/@fontsource/geist-mono/400.css",
+    "node_modules/@fontsource/geist-mono/500.css"
+  ]
+}
