@@ -17,13 +17,14 @@ export const CASE_STUDIES = [
     sector: "Legal",
     title: "Plataforma documental y operativa",
     summary:
-      "Diseño e implementación de una plataforma interna para coordinar procesos documentales, generación de borradores, validación humana, tareas repetibles y seguimiento operativo.",
+      "Diseño e implementación de una plataforma interna para coordinar procesos documentales, extracción de información, generación de borradores, validación humana, tareas repetibles y seguimiento operativo.",
     visualSrc: "/images/visual-case-legal-document-platform.png",
     visualAlt: "Visual 3D de plataforma documental",
     bullets: [
       "Flujos documentales con estados",
+      "Sistema agéntico",
       "Generación de borradores",
-      "Validación humana antes de cierre",
+      "Validación humana antes",
       "Tareas repetibles y seguimiento",
       "Trazabilidad de cambios",
       "Base operativa para documentación interna",
@@ -39,12 +40,13 @@ export const CASE_STUDIES = [
     id: "planificacion-logistica-reporting",
     marker: "02",
     sector: "Logística",
-    title: "Planificación logística y reporting",
+    title: "Plataforma de planificación logística",
     summary:
-      "Sistemas para planificar rutas, importar datos operativos, coordinar eventos, revisar documentación logística y generar reporting útil para la operación.",
+      "Plataforma para planificar rutas, importar datos operativos, coordinar eventos, revisar documentación logística y generar reporting útil para la operación.",
     visualSrc: "/images/visual-logistics.png",
     visualAlt: "Visual 3D de planificación logística",
     bullets: [
+      "Optimización de rutas",
       "Planificación de rutas",
       "Importación de datos operativos",
       "Coordinación de eventos",
@@ -87,19 +89,20 @@ export const CASE_STUDIES = [
     id: "documentacion-calidad-trazabilidad",
     marker: "04",
     sector: "Industria",
-    title: "Documentación, calidad y trazabilidad",
+    title:
+      "Plataforma de documentación, calidad y trazabilidad para sector alimenticio",
     summary:
-      "Flujos para ordenar documentación, validar información, mantener trazabilidad y generar reporting en procesos de calidad.",
+      "Plataforma de flujos para ordenar documentación, validar información, mantener trazabilidad y generar reporting en procesos de calidad en el sector alimenticio.",
     visualSrc: "/images/visual-case-appcc-quality.png",
     visualAlt: "Visual 3D de calidad y trazabilidad industrial",
     bullets: [
-      "Orden documental",
+      "Procesamiento documental",
       "APPCC",
       "Validación de información",
       "Trazabilidad de procesos",
       "Reporting de calidad",
       "Controles operativos",
-      "Integración con sistemas existentes",
+      "Integración de sistemas",
     ],
     tags: [
       "Herramientas internas",
