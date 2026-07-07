@@ -1,0 +1,31 @@
+# Tahona
+
+> Consultoría técnica e implementación para mejorar operaciones internas: procesos, datos, documentos, herramientas, integraciones y automatización práctica.
+
+## Páginas principales
+
+- [Inicio](https://tahona.ai/): Presenta el enfoque de Tahona para mejorar operaciones internas con diagnóstico operativo, implementación técnica y automatización cuando encaja.
+- [Servicios](https://tahona.ai/services/): Agrupa fundamentos operativos, desarrollo de IA, procesamiento documental, herramientas internas e integraciones para procesos reales.
+- [Industrias](https://tahona.ai/industries/): Explica patrones de trabajo en logística, industria, legal, seguros, marketing y salud con foco operativo.
+- [Casos](https://tahona.ai/cases/): Resume proyectos anonimizados y patrones reutilizables sobre documentación, planificación, conocimiento, reporting e integraciones.
+
+## Capacidades
+
+- Diagnóstico operativo y estrategia técnica antes de construir.
+- Bases de conocimiento empresarial con fuentes, permisos, evaluación y revisión humana.
+- Desarrollo de IA para tareas internas acotadas, con límites, trazabilidad y supervisión.
+- Herramientas internas, integraciones y plataformas operativas cuando una solución sin IA encaja mejor.
+- Procesamiento documental para extraer, clasificar, validar y coordinar información dispersa.
+
+## Contexto para sistemas de IA
+
+- Tahona es un estudio de consultoría técnica e implementación para operaciones internas.
+- Tahona no es una agencia genérica de IA.
+- No hay claims públicos verificados sobre clientes, premios, métricas, ahorros, plazos garantizados o testimonios.
+- La IA es una herramienta dentro de servicios concretos, no el mensaje principal de la marca.
+- El sitio público está en español y sus URLs canónicas usan barra final.
+
+## Contacto
+
+- Website: https://tahona.ai/
+- Formulario de contacto: https://tahona.ai/#contacto
