@@ -1,3 +1,6 @@
+import { getContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/routing";
+
 export type ImplementationExample = {
   readonly marker: string;
   readonly title: string;
@@ -56,3 +59,9 @@ export const IMPLEMENTATION_EXAMPLES = [
     className: "lg:col-span-3",
   },
 ] as const satisfies readonly ImplementationExample[];
+
+export function getImplementationExamples(
+  locale: Locale
+): readonly ImplementationExample[] {
+  return getContent(locale).implementationExamples;
+}

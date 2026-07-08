@@ -10,14 +10,29 @@ const activePublicFiles = [
   "public/llms.txt",
   "public/robots.txt",
   "public/site.webmanifest",
+  "docs/I18N_COPY_REVIEW.md",
   "src/layouts/Layout.astro",
   "src/components/SEO.astro",
   "src/components/StructuredData.astro",
+  "src/i18n/routing.ts",
+  "src/i18n/content.ts",
+  "src/components/pages/HomePage.astro",
+  "src/components/pages/ServicesPage.astro",
+  "src/components/pages/IndustriesPage.astro",
+  "src/components/pages/CasesPage.astro",
   "src/pages/index.astro",
   "src/pages/services.astro",
   "src/pages/industries.astro",
   "src/pages/cases.astro",
+  "src/pages/[locale]/index.astro",
+  "src/pages/[locale]/services.astro",
+  "src/pages/[locale]/industries.astro",
+  "src/pages/[locale]/cases.astro",
   "src/components/sections/Contact.tsx",
+  "src/components/sections/contact-content.ts",
+  "src/components/sections/contact/ContactForm.tsx",
+  "src/components/sections/contact/ContactModal.tsx",
+  "src/components/sections/contact/ContactSidebar.tsx",
   "src/components/sections/Footer.astro",
   "src/components/sections/Hero.tsx",
   "src/components/sections/WhatWeDo.tsx",
@@ -55,6 +70,18 @@ const canonicalRoutes = [
   "https://tahona.ai/services/",
   "https://tahona.ai/industries/",
   "https://tahona.ai/cases/",
+];
+
+const localizedCanonicalRoutes = [
+  ...canonicalRoutes,
+  "https://tahona.ai/en/",
+  "https://tahona.ai/en/services/",
+  "https://tahona.ai/en/industries/",
+  "https://tahona.ai/en/cases/",
+  "https://tahona.ai/pl/",
+  "https://tahona.ai/pl/services/",
+  "https://tahona.ai/pl/industries/",
+  "https://tahona.ai/pl/cases/",
 ];
 
 function readProjectFile(path) {
@@ -123,7 +150,7 @@ describe("public copy hygiene", () => {
     assert.equal(firstLines[0], "# Tahona");
     assert.match(firstLines[2], /^> .{40,200}$/);
 
-    for (const route of canonicalRoutes) {
+    for (const route of localizedCanonicalRoutes) {
       assert.equal(
         llmsSource.includes(`](${route})`),
         true,
@@ -138,34 +165,53 @@ describe("public copy hygiene", () => {
 
   test("metadata defaults and route titles avoid duplicate generic SERP copy", () => {
     const seoSource = readProjectFile("src/components/SEO.astro");
-    const servicesSource = readProjectFile("src/pages/services.astro");
-    const industriesSource = readProjectFile("src/pages/industries.astro");
-    const casesSource = readProjectFile("src/pages/cases.astro");
+    const i18nSource = readProjectFile("src/i18n/content.ts");
 
     assert.equal(
-      seoSource.includes(
-        'title = "Tahona | Procesos, datos y herramientas internas"',
+      seoSource.includes("hreflang"),
+      true,
+    );
+    assert.match(
+      i18nSource,
+      /Tahona \| Internal processes, data and tools/,
+    );
+    assert.match(
+      i18nSource,
+      /Tahona \| Procesy, dane i narzędzia wewnętrzne/,
+    );
+    assert.equal(
+      i18nSource.includes(
+        "Servicios Tahona | Operaciones, IA e integraciones",
       ),
       true,
     );
     assert.equal(
-      servicesSource.includes(
-        'title="Servicios Tahona | Operaciones, IA e integraciones"',
-      ),
+      i18nSource.includes("Tahona Services | Operations, AI and integrations"),
       true,
     );
     assert.equal(
-      industriesSource.includes(
-        'title="Industrias Tahona | Software e IA por sector"',
-      ),
+      i18nSource.includes("Usługi Tahona | Procesy, AI i integracje"),
       true,
     );
-    assert.equal(
-      casesSource.includes(
-        'title="Casos Tahona | Proyectos operativos anonimizados"',
-      ),
-      true,
+  });
+
+  test("i18n routing maps every page family across Spanish, English and Polish", () => {
+    const routingSource = readProjectFile("src/i18n/routing.ts");
+    const navbarSource = readProjectFile("src/components/sections/Navbar.tsx");
+    const mobileNavSource = readProjectFile(
+      "src/components/sections/navbar/MobileNavMenu.tsx",
     );
+
+    for (const locale of ["es", "en", "pl"]) {
+      assert.match(routingSource, new RegExp(`hreflang: "${locale}"`));
+    }
+
+    for (const route of ["/", "/services/", "/industries/", "/cases/"]) {
+      assert.match(routingSource, new RegExp(`"${route.replace("/", "\\/")}`));
+    }
+
+    assert.match(navbarSource, /LanguageSelector/);
+    assert.match(mobileNavSource, /LanguageSelector/);
   });
 
   test("structured data is route-aware and backed by visible page data", () => {
@@ -174,36 +220,35 @@ describe("public copy hygiene", () => {
       "src/components/StructuredData.astro",
     );
 
-    assert.equal(layoutSource.includes("<StructuredData />"), true);
-    assert.match(structuredDataSource, /SERVICES_FAQ/);
-    assert.match(structuredDataSource, /INDUSTRIES_FAQ/);
-    assert.match(structuredDataSource, /SERVICE_FAMILIES/);
-    assert.match(structuredDataSource, /INDUSTRY_ITEMS/);
-    assert.match(structuredDataSource, /CASE_STUDIES/);
-
-    for (const route of ["/", "/services/", "/industries/", "/cases/"]) {
-      assert.equal(
-        structuredDataSource.includes(`path: "${route}"`),
-        true,
-        `missing structured data route ${route}`,
-      );
-    }
+    assert.equal(
+      layoutSource.includes(
+        "<StructuredData locale={locale} pageKey={pageKey} />",
+      ),
+      true,
+    );
+    assert.match(structuredDataSource, /getServicesFaq/);
+    assert.match(structuredDataSource, /getIndustriesFaq/);
+    assert.match(structuredDataSource, /getServiceFamilies/);
+    assert.match(structuredDataSource, /getIndustryItems/);
+    assert.match(structuredDataSource, /getCaseStudies/);
+    assert.match(structuredDataSource, /schemaLanguage/);
+    assert.match(structuredDataSource, /LOCALE_DETAILS\[locale\]/);
   });
 
   test("landing page keeps the canonical rendered section order", () => {
-    const source = readProjectFile("src/pages/index.astro");
+    const source = readProjectFile("src/components/pages/HomePage.astro");
     const expectedOrder = [
-      "<SkipLink />",
-      "<Navbar client:load initialPath={Astro.url.pathname} />",
-      "<Hero client:load />",
-      "<WhatWeDo client:visible />",
-      "<Services client:visible />",
-      "<AiApplied client:visible />",
-      "<Industries client:visible />",
-      "<OurWork client:visible />",
-      "<HowWeWork client:visible />",
-      "<Contact client:visible />",
-      "<Footer />",
+      "<SkipLink locale={locale} />",
+      '<Navbar client:load initialPath={Astro.url.pathname} locale={locale} />',
+      "<Hero client:load locale={locale} />",
+      "<WhatWeDo client:visible locale={locale} />",
+      "<Services client:visible locale={locale} />",
+      "<AiApplied client:visible locale={locale} />",
+      "<Industries client:visible locale={locale} />",
+      "<OurWork client:visible locale={locale} />",
+      "<HowWeWork client:visible locale={locale} />",
+      "<Contact client:visible locale={locale} />",
+      "<Footer locale={locale} />",
     ];
 
     const positions = expectedOrder.map((marker) => source.indexOf(marker));

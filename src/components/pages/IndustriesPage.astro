@@ -1,0 +1,47 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SkipLink from "@/components/SkipLink.astro";
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { Contact } from "@/components/sections/Contact";
+import Footer from "@/components/sections/Footer.astro";
+import IndustriesGrid from "@/components/industries/IndustriesGrid.astro";
+import IndustryDetailSections from "@/components/industries/IndustryDetailSections.astro";
+import IndustriesFAQ from "@/components/industries/IndustriesFAQ.astro";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const hero = getContent(locale).industriesPage.hero;
+const heroTitle = hero.titleLines.join(" ");
+---
+
+<Layout locale={locale} pageKey="industries">
+  <SkipLink locale={locale} />
+  <main
+    id="main-content"
+    class="relative flex min-h-screen flex-col overflow-x-hidden"
+  >
+    <Navbar client:load initialPath={Astro.url.pathname} locale={locale} />
+    <Hero
+      client:load
+      locale={locale}
+      title={heroTitle}
+      description={hero.description}
+      primaryLabel={hero.primaryLabel}
+      primaryHref={hero.primaryHref}
+      secondaryLabel={hero.secondaryLabel}
+      secondaryHref={hero.secondaryHref}
+    />
+    <IndustriesGrid locale={locale} />
+    <IndustryDetailSections locale={locale} />
+    <IndustriesFAQ locale={locale} />
+    <Contact client:load locale={locale} />
+    <Footer locale={locale} />
+  </main>
+</Layout>

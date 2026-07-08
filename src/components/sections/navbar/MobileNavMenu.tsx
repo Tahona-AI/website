@@ -2,24 +2,24 @@ import { CaretDownIcon, XIcon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
-  CONTACT_HREF,
-  PAGE_NAV_ITEMS,
-  SERVICE_MENU_COLUMNS,
+  getContactHref,
+  getPageNavItems,
+  getServiceMenuColumns,
 } from "@/components/sections/navbar-data";
+import { getContent } from "@/i18n/content";
+import { getRouteKeyFromPath } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+import { LanguageSelector } from "@/components/sections/navbar/LanguageSelector";
 import { NavLink } from "@/components/sections/navbar/NavLink";
 import { ServiceColumn } from "@/components/sections/navbar/ServiceColumn";
 import type { ServiceMenuLinkHandler } from "@/components/sections/navbar/types";
 import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
 
-const HOME_PATH = "/";
-const SERVICES_PATH = "/services";
-const INDUSTRIES_PATH = "/industries";
-const CASES_PATH = "/cases";
-
 export function MobileNavMenu({
   currentPath,
   isOpen,
   isServicesOpen,
+  locale,
   onClose,
   onNavSelect,
   onServiceLinkClick,
@@ -28,25 +28,24 @@ export function MobileNavMenu({
   readonly currentPath: string;
   readonly isOpen: boolean;
   readonly isServicesOpen: boolean;
+  readonly locale: Locale;
   readonly onClose: () => void;
   readonly onNavSelect: (href: string) => void;
   readonly onServiceLinkClick: ServiceMenuLinkHandler;
   readonly onServicesToggle: () => void;
 }) {
-  const isHomePath = currentPath === HOME_PATH;
-  const isServicesPath =
-    currentPath === SERVICES_PATH || currentPath === `${SERVICES_PATH}/`;
-  const isIndustriesPath =
-    currentPath === INDUSTRIES_PATH || currentPath === `${INDUSTRIES_PATH}/`;
-  const isCasesPath =
-    currentPath === CASES_PATH || currentPath === `${CASES_PATH}/`;
+  const content = getContent(locale);
+  const currentRouteKey = getRouteKeyFromPath(currentPath);
+  const contactHref = getContactHref();
+  const pageNavItems = getPageNavItems(locale);
+  const serviceMenuColumns = getServiceMenuColumns(locale);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
           <motion.button
-            aria-label="Cerrar menú"
+            aria-label={content.navigation.closeMenuLabel}
             animate={{ opacity: 1 }}
             className="fixed inset-0 z-40 bg-black/20 md:hidden"
             exit={{ opacity: 0 }}
@@ -64,10 +63,10 @@ export function MobileNavMenu({
           >
             <div className="flex h-16 items-center justify-between border-b border-gray-200 px-4">
               <span className="font-heading text-lg font-bold text-gray-900">
-                Menú
+                {content.navigation.menuTitle}
               </span>
               <button
-                aria-label="Cerrar menú"
+                aria-label={content.navigation.closeMenuLabel}
                 className="rounded-lg p-2 text-gray-700 transition-colors duration-200 hover:bg-gray-100"
                 onClick={onClose}
                 type="button"
@@ -78,8 +77,8 @@ export function MobileNavMenu({
 
             <nav className="flex flex-col gap-1 p-4">
               <NavLink
-                isActive={isHomePath}
-                item={PAGE_NAV_ITEMS[0]}
+                isActive={currentRouteKey === "home"}
+                item={pageNavItems[0]}
                 onSelect={onNavSelect}
                 variant="mobile"
               />
@@ -88,13 +87,13 @@ export function MobileNavMenu({
                 aria-expanded={isServicesOpen}
                 className={cn(
                   "flex items-center justify-between border-b-2 border-transparent py-3 text-left text-lg font-medium text-gray-700 transition-colors duration-200 hover:text-brand-700",
-                  (isServicesPath || isServicesOpen) &&
+                  (currentRouteKey === "services" || isServicesOpen) &&
                     "border-brand-700 text-brand-800"
                 )}
                 onClick={onServicesToggle}
                 type="button"
               >
-                <span>Servicios</span>
+                <span>{content.navigation.servicesLabel}</span>
                 <CaretDownIcon
                   aria-hidden="true"
                   className={cn(
@@ -113,7 +112,7 @@ export function MobileNavMenu({
                     initial={{ opacity: 0, y: -4 }}
                     transition={{ duration: 0.16, ease: "easeOut" }}
                   >
-                    {SERVICE_MENU_COLUMNS.map((column) => (
+                    {serviceMenuColumns.map((column) => (
                       <ServiceColumn
                         column={column}
                         key={column.title}
@@ -124,12 +123,9 @@ export function MobileNavMenu({
                 )}
               </AnimatePresence>
 
-              {PAGE_NAV_ITEMS.slice(1).map((item) => (
+              {pageNavItems.slice(1).map((item) => (
                 <NavLink
-                  isActive={
-                    (item.href === INDUSTRIES_PATH && isIndustriesPath) ||
-                    (item.href === CASES_PATH && isCasesPath)
-                  }
+                  isActive={item.routeKey === currentRouteKey}
                   item={item}
                   key={item.href}
                   onSelect={onNavSelect}
@@ -137,18 +133,29 @@ export function MobileNavMenu({
                 />
               ))}
 
+              <div className="mt-4 border-t border-gray-200 pt-4">
+                <p className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-gray-500">
+                  {content.navigation.languageLabel}
+                </p>
+                <LanguageSelector
+                  currentPath={currentPath}
+                  label={content.navigation.languageLabel}
+                  variant="mobile"
+                />
+              </div>
+
               <a
                 className={cn(
                   primaryCtaBaseClass,
                   "mt-4 min-h-12 w-full justify-center rounded-full px-6 text-base font-semibold"
                 )}
-                href={CONTACT_HREF}
+                href={contactHref}
                 onClick={(event) => {
                   event.preventDefault();
-                  onNavSelect(CONTACT_HREF);
+                  onNavSelect(contactHref);
                 }}
               >
-                Contacto
+                {content.navigation.contactLabel}
               </a>
             </nav>
           </motion.div>

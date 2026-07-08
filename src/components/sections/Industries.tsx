@@ -12,90 +12,49 @@ import {
   TruckIcon,
 } from "@phosphor-icons/react";
 import { FadeInView } from "@/components/animations/FadeInView";
+import { getIndustryItems } from "@/components/industries/industry-data";
+import type { IndustryItem } from "@/components/industries/industry-data";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE, getLocalizedPath } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 import {
   primaryCtaArrowClass,
   primaryCtaBaseClass,
 } from "@/components/ui/cta-styles";
 
-interface Industry {
-  readonly title: string;
-  readonly description: string;
-  readonly tags: readonly string[];
-  readonly icon: ElementType;
-  readonly gradient: string;
-}
+const INDUSTRY_ICONS = [
+  TruckIcon,
+  FactoryIcon,
+  GavelIcon,
+  ShieldCheckIcon,
+  ChartLineUpIcon,
+  FirstAidIcon,
+] as const satisfies readonly ElementType[];
 
-const INDUSTRIES: readonly Industry[] = [
-  {
-    title: "Logística",
-    description:
-      "Planificación, optimización de rutas, documentación logística, eventos operativos, reporting e integración con herramientas de operación.",
-    tags: ["Rutas", "Flota", "Documentación", "Reporting"],
-    icon: TruckIcon,
-    gradient:
-      "radial-gradient(circle at 88% 12%, rgba(22,163,74,0.08) 0%, transparent 46%), linear-gradient(135deg, rgba(240,253,244,0.42) 0%, transparent 58%)",
-  },
-  {
-    title: "Industria",
-    description:
-      "Control de calidad, documentación, trazabilidad, procesos internos, reporting y herramientas para coordinar el trabajo operativo.",
-    tags: ["Calidad", "Documentación", "Trazabilidad", "Reporting"],
-    icon: FactoryIcon,
-    gradient:
-      "radial-gradient(circle at 16% 18%, rgba(22,163,74,0.07) 0%, transparent 44%), linear-gradient(225deg, rgba(220,252,231,0.38) 0%, transparent 60%)",
-  },
-  {
-    title: "Legal",
-    description:
-      "Flujos documentales, generación y revisión de documentos, automatización administrativa y validación humana.",
-    tags: ["Documentos", "Validación", "Flujos", "Seguimiento"],
-    icon: GavelIcon,
-    gradient:
-      "radial-gradient(circle at 92% 82%, rgba(22,163,74,0.075) 0%, transparent 48%), linear-gradient(135deg, rgba(240,253,244,0.36) 0%, transparent 62%)",
-  },
-  {
-    title: "Seguros",
-    description:
-      "Captación, cualificación, CRM, cotización, seguimiento, documentación y reporting comercial.",
-    tags: ["Captación", "CRM", "Cotización", "Reporting"],
-    icon: ShieldCheckIcon,
-    gradient:
-      "radial-gradient(circle at 12% 88%, rgba(22,163,74,0.07) 0%, transparent 48%), linear-gradient(45deg, rgba(220,252,231,0.36) 0%, transparent 58%)",
-  },
-  {
-    title: "Marketing y growth",
-    description:
-      "Lead ops, captación, cualificación, reporting, CRM, herramientas internas y coordinación comercial.",
-    tags: ["Lead ops", "Cualificación", "CRM", "Reporting"],
-    icon: ChartLineUpIcon,
-    gradient:
-      "radial-gradient(circle at 86% 16%, rgba(22,163,74,0.08) 0%, transparent 45%), linear-gradient(180deg, rgba(240,253,244,0.4) 0%, transparent 64%)",
-  },
-  {
-    title: "Salud",
-    description:
-      "Soporte operativo, documentación, conocimiento interno y sistemas no clínicos.",
-    tags: ["Soporte", "Documentación", "Conocimiento", "PoC"],
-    icon: FirstAidIcon,
-    gradient:
-      "radial-gradient(circle at 18% 18%, rgba(22,163,74,0.075) 0%, transparent 46%), linear-gradient(225deg, rgba(220,252,231,0.4) 0%, transparent 62%)",
-  },
-];
+const INDUSTRY_GRADIENTS = [
+  "radial-gradient(circle at 88% 12%, rgba(22,163,74,0.08) 0%, transparent 46%), linear-gradient(135deg, rgba(240,253,244,0.42) 0%, transparent 58%)",
+  "radial-gradient(circle at 16% 18%, rgba(22,163,74,0.07) 0%, transparent 44%), linear-gradient(225deg, rgba(220,252,231,0.38) 0%, transparent 60%)",
+  "radial-gradient(circle at 92% 82%, rgba(22,163,74,0.075) 0%, transparent 48%), linear-gradient(135deg, rgba(240,253,244,0.36) 0%, transparent 62%)",
+  "radial-gradient(circle at 12% 88%, rgba(22,163,74,0.07) 0%, transparent 48%), linear-gradient(45deg, rgba(220,252,231,0.36) 0%, transparent 58%)",
+  "radial-gradient(circle at 86% 16%, rgba(22,163,74,0.08) 0%, transparent 45%), linear-gradient(180deg, rgba(240,253,244,0.4) 0%, transparent 64%)",
+  "radial-gradient(circle at 18% 18%, rgba(22,163,74,0.075) 0%, transparent 46%), linear-gradient(225deg, rgba(220,252,231,0.4) 0%, transparent 62%)",
+] as const;
 
 function IndustryCard({
   industry,
   index,
 }: {
-  industry: Industry;
+  industry: IndustryItem;
   index: number;
 }) {
-  const Icon = industry.icon;
+  const Icon = INDUSTRY_ICONS[index % INDUSTRY_ICONS.length] ?? TruckIcon;
+  const gradient = INDUSTRY_GRADIENTS[index % INDUSTRY_GRADIENTS.length] ?? "";
 
   return (
     <FadeInView delay={0.08 + index * 0.06}>
       <article
         className="group relative flex h-full min-h-[15rem] flex-col overflow-hidden rounded-[1.65rem] border border-gray-200/85 bg-white/88 p-6 shadow-[0_22px_60px_-48px_rgba(31,31,31,0.42)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:bg-white/94 hover:shadow-[0_30px_72px_-46px_rgba(31,31,31,0.5)] sm:p-7"
-        style={{ backgroundImage: industry.gradient }}
+        style={{ backgroundImage: gradient }}
       >
         <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-brand-100/42 to-transparent opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -117,7 +76,7 @@ function IndustryCard({
           </h3>
 
           <p className="mt-3 text-sm leading-6 text-gray-600">
-            {industry.description}
+            {industry.summary}
           </p>
 
           <div className="mt-auto pt-6">
@@ -139,7 +98,14 @@ function IndustryCard({
   );
 }
 
-export function Industries() {
+export function Industries({
+  locale = DEFAULT_LOCALE,
+}: {
+  readonly locale?: Locale;
+}) {
+  const copy = getContent(locale).home.industries;
+  const industries = getIndustryItems(locale);
+
   return (
     <section
       id="industrias"
@@ -152,21 +118,19 @@ export function Industries() {
           <div>
             <div className="inline-flex items-center gap-3 text-sm text-gray-500">
               <span className="h-px w-10 bg-brand-300" />
-              <span className="font-medium text-gray-600">Industrias</span>
+              <span className="font-medium text-gray-600">{copy.eyebrow}</span>
             </div>
             <h2 className="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 sm:text-4xl md:text-5xl">
-              Sectores que trabajamos.
+              {copy.title}
             </h2>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-500">
-              No nos encerramos en un vertical. El patrón común son operaciones
-              con información dispersa, tareas repetibles, documentación e
-              integraciones entre herramientas.
+              {copy.description}
             </p>
           </div>
         </FadeInView>
 
         <div className="mt-14 grid auto-rows-fr grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-          {INDUSTRIES.map((industry, index) => (
+          {industries.map((industry, index) => (
             <IndustryCard
               industry={industry}
               index={index}
@@ -179,9 +143,9 @@ export function Industries() {
           <div className="mt-10 flex justify-center lg:justify-start">
             <a
               className={`${primaryCtaBaseClass} min-h-14 w-full px-3 pl-6 text-base font-semibold sm:w-fit sm:min-w-[224px]`}
-              href="/industries"
+              href={getLocalizedPath(locale, "industries")}
             >
-              <span>Ver industrias</span>
+              <span>{copy.ctaLabel}</span>
               <span className={primaryCtaArrowClass} aria-hidden="true">
                 <ArrowRightIcon className="h-4 w-4" />
               </span>

@@ -1,13 +1,22 @@
+import { getContent } from "@/i18n/content";
+import {
+  DEFAULT_LOCALE,
+  getLocalizedHashPath,
+  getLocalizedPath,
+} from "@/i18n/routing";
+import type { Locale, RouteKey } from "@/i18n/routing";
+
 export type PageNavItem = {
-  readonly label: string;
-  readonly href: string;
   readonly activeHref: string;
+  readonly href: string;
+  readonly label: string;
+  readonly routeKey: RouteKey;
 };
 
 export type ServiceMenuItem = {
-  readonly label: string;
   readonly description: string;
   readonly href: string;
+  readonly label: string;
 };
 
 export type ServiceMenuColumn = {
@@ -16,9 +25,14 @@ export type ServiceMenuColumn = {
 };
 
 export const PAGE_NAV_ITEMS = [
-  { label: "Inicio", href: "/", activeHref: "#hero" },
-  { label: "Industrias", href: "/industries", activeHref: "#industrias" },
-  { label: "Casos", href: "/cases", activeHref: "#trabajo" },
+  { label: "Inicio", href: "/", activeHref: "#hero", routeKey: "home" },
+  {
+    label: "Industrias",
+    href: "/industries/",
+    activeHref: "#industrias",
+    routeKey: "industries",
+  },
+  { label: "Casos", href: "/cases/", activeHref: "#trabajo", routeKey: "cases" },
 ] as const satisfies readonly PageNavItem[];
 
 export const SERVICE_MENU_COLUMNS = [
@@ -91,3 +105,37 @@ export const SERVICE_MENU_COLUMNS = [
 
 export const SERVICES_OVERVIEW_HREF = "/services";
 export const CONTACT_HREF = "#contacto";
+
+export function getPageNavItems(locale: Locale): readonly PageNavItem[] {
+  return getContent(locale).navigation.pageItems.map((item) => ({
+    activeHref: item.activeHref,
+    href: getLocalizedPath(locale, item.routeKey),
+    label: item.label,
+    routeKey: item.routeKey,
+  }));
+}
+
+export function getServiceMenuColumns(
+  locale: Locale
+): readonly ServiceMenuColumn[] {
+  return getContent(locale).navigation.serviceColumns.map((column) => ({
+    title: column.title,
+    items: column.items.map((item) => ({
+      description: item.description,
+      href: getLocalizedHashPath(locale, "services", item.href),
+      label: item.label,
+    })),
+  }));
+}
+
+export function getServicesOverviewHref(locale: Locale): string {
+  return getLocalizedPath(locale, "services");
+}
+
+export function getContactHref(): string {
+  return CONTACT_HREF;
+}
+
+export function getDefaultPageNavItems(): readonly PageNavItem[] {
+  return getPageNavItems(DEFAULT_LOCALE);
+}

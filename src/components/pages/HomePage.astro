@@ -1,0 +1,41 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SkipLink from "@/components/SkipLink.astro";
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { WhatWeDo } from "@/components/sections/WhatWeDo";
+import { Services } from "@/components/sections/Services";
+import { AiApplied } from "@/components/sections/AiApplied";
+import { Industries } from "@/components/sections/Industries";
+import { OurWork } from "@/components/sections/OurWork";
+import { HowWeWork } from "@/components/sections/HowWeWork";
+import { Contact } from "@/components/sections/Contact";
+import Footer from "@/components/sections/Footer.astro";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+---
+
+<Layout locale={locale} pageKey="home">
+  <SkipLink locale={locale} />
+  <main
+    id="main-content"
+    class="relative flex min-h-screen flex-col overflow-x-hidden"
+  >
+    <Navbar client:load initialPath={Astro.url.pathname} locale={locale} />
+    <Hero client:load locale={locale} />
+    <WhatWeDo client:visible locale={locale} />
+    <Services client:visible locale={locale} />
+    <AiApplied client:visible locale={locale} />
+    <Industries client:visible locale={locale} />
+    <OurWork client:visible locale={locale} />
+    <HowWeWork client:visible locale={locale} />
+    <Contact client:visible locale={locale} />
+    <Footer locale={locale} />
+  </main>
+</Layout>

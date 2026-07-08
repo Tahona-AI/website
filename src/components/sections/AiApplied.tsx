@@ -1,11 +1,29 @@
 "use client";
 
 import { FadeInView } from "@/components/animations/FadeInView";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 
-function AiValueCurve() {
+const EMPTY_LEVEL = {
+  body: "",
+  label: "",
+  title: [""],
+} as const;
+
+function AiValueCurve({
+  curve,
+}: {
+  readonly curve: ReturnType<typeof getContent>["aiApplied"]["curve"];
+}) {
+  const levelOne = curve.levels[0] ?? EMPTY_LEVEL;
+  const levelTwo = curve.levels[1] ?? EMPTY_LEVEL;
+  const levelThree = curve.levels[2] ?? EMPTY_LEVEL;
+  const levelFour = curve.levels[3] ?? EMPTY_LEVEL;
+
   return (
     <svg
-      aria-label="Curva de valor de la IA aplicada"
+      aria-label={curve.ariaLabel}
       className="h-full w-full"
       role="img"
       viewBox="0 0 620 440"
@@ -51,7 +69,7 @@ function AiValueCurve() {
           x="20"
           y="165"
         >
-          Valor
+          {curve.valueLabel}
         </text>
         <text
           className="font-mono"
@@ -62,7 +80,7 @@ function AiValueCurve() {
           x="298"
           y="358"
         >
-          Automatización
+          {curve.automationLabel}
         </text>
 
         <path
@@ -80,35 +98,35 @@ function AiValueCurve() {
         <g className="font-sans" fill="rgb(31, 31, 31)">
           <g transform="translate(60 244)">
             <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="700" letterSpacing="0.08em">
-              NIVEL 01
+              {levelOne.label}
             </text>
-            <text fontSize="13" fontWeight="800" y="17">Uso con criterio</text>
-            <text fill="rgb(74, 74, 74)" fontSize="11" y="33">Decisión humana.</text>
+            <text fontSize="13" fontWeight="800" y="17">{levelOne.title[0]}</text>
+            <text fill="rgb(74, 74, 74)" fontSize="11" y="33">{levelOne.body}</text>
           </g>
 
           <g transform="translate(174 178)">
             <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="700" letterSpacing="0.08em">
-              NIVEL 02
+              {levelTwo.label}
             </text>
-            <text fontSize="13" fontWeight="800" y="17">Asistentes específicos</text>
-            <text fill="rgb(74, 74, 74)" fontSize="11" y="33">Lectura y revisión.</text>
+            <text fontSize="13" fontWeight="800" y="17">{levelTwo.title[0]}</text>
+            <text fill="rgb(74, 74, 74)" fontSize="11" y="33">{levelTwo.body}</text>
           </g>
 
           <g transform="translate(306 112)">
             <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="700" letterSpacing="0.08em">
-              NIVEL 03
+              {levelThree.label}
             </text>
-            <text fontSize="13" fontWeight="800" y="17">Automatización</text>
-            <text fontSize="13" fontWeight="800" y="31">supervisada</text>
-            <text fill="rgb(74, 74, 74)" fontSize="11" y="47">Reglas y trazabilidad.</text>
+            <text fontSize="13" fontWeight="800" y="17">{levelThree.title[0]}</text>
+            <text fontSize="13" fontWeight="800" y="31">{levelThree.title[1]}</text>
+            <text fill="rgb(74, 74, 74)" fontSize="11" y="47">{levelThree.body}</text>
           </g>
 
           <g transform="translate(368 8)">
             <text fill="rgb(27, 69, 48)" fontSize="11" fontWeight="700" letterSpacing="0.08em">
-              NIVEL 04
+              {levelFour.label}
             </text>
-            <text fontSize="13" fontWeight="800" y="17">Agentes con contexto</text>
-            <text fill="rgb(74, 74, 74)" fontSize="11" y="33">Permisos y límites.</text>
+            <text fontSize="13" fontWeight="800" y="17">{levelFour.title[0]}</text>
+            <text fill="rgb(74, 74, 74)" fontSize="11" y="33">{levelFour.body}</text>
           </g>
         </g>
 
@@ -123,7 +141,13 @@ function AiValueCurve() {
   );
 }
 
-export function AiApplied() {
+export function AiApplied({
+  locale = DEFAULT_LOCALE,
+}: {
+  readonly locale?: Locale;
+}) {
+  const copy = getContent(locale).aiApplied;
+
   return (
     <section className="relative overflow-hidden bg-surface py-24 lg:py-28">
       <div className="section-fade-white-to-surface" />
@@ -132,16 +156,13 @@ export function AiApplied() {
         <FadeInView>
           <div className="inline-flex items-center gap-3 text-sm text-gray-500">
             <span className="h-px w-10 bg-brand-300" />
-            <span className="font-medium text-gray-600">IA aplicada</span>
+            <span className="font-medium text-gray-600">{copy.eyebrow}</span>
           </div>
           <h2 className="mt-5 max-w-2xl font-heading text-3xl font-semibold leading-tight text-gray-900 text-balance sm:text-4xl md:text-5xl">
-            IA cuando mejora un proceso, no cuando solo añade ruido.
+            {copy.title}
           </h2>
           <p className="mt-6 max-w-xl text-lg leading-8 text-gray-500">
-            Trabajamos con modelos, asistentes y agentes cuando ayudan a leer
-            documentos, preparar información, ejecutar pasos repetibles, revisar
-            resultados o conectar herramientas internas. Cada sistema debe
-            tener límites, trazabilidad y un punto claro de supervisión.
+            {copy.description}
           </p>
         </FadeInView>
 
@@ -149,7 +170,7 @@ export function AiApplied() {
           <div className="relative overflow-hidden rounded-[2rem] border border-gray-200/90 bg-[#f8f8f8] shadow-[0_28px_80px_-52px_rgba(31,31,31,0.5)]">
             <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0)_52%,rgba(240,247,243,0.5)_100%)]" />
             <div className="relative aspect-[1.34] min-h-[22rem] p-4 sm:p-6">
-              <AiValueCurve />
+              <AiValueCurve curve={copy.curve} />
             </div>
           </div>
         </FadeInView>

@@ -1,3 +1,6 @@
+import { getContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/routing";
+
 export type WorkId = "document-platform" | "logistics-planning";
 
 export interface WorkItem {
@@ -38,3 +41,7 @@ export const WORK_ITEMS: readonly WorkItem[] = [
   DOCUMENT_PLATFORM_WORK,
   LOGISTICS_PLANNING_WORK,
 ];
+
+export function getWorkItems(locale: Locale): readonly WorkItem[] {
+  return getContent(locale).workItems;
+}

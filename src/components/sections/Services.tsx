@@ -3,8 +3,11 @@
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { FadeInView } from "@/components/animations/FadeInView";
-import { SERVICE_FAMILIES } from "@/components/services/service-families";
+import { getServiceFamilies } from "@/components/services/service-families";
 import type { ServiceFamily } from "@/components/services/service-families";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE, getLocalizedPath } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 import {
   primaryCtaArrowClass,
   primaryCtaBaseClass,
@@ -96,7 +99,14 @@ function ServiceFamilyCard({
   );
 }
 
-export function Services() {
+export function Services({
+  locale = DEFAULT_LOCALE,
+}: {
+  readonly locale?: Locale;
+}) {
+  const copy = getContent(locale).home.services;
+  const serviceFamilies = getServiceFamilies(locale);
+
   return (
     <section
       id="soluciones"
@@ -110,21 +120,19 @@ export function Services() {
             <div>
               <div className="inline-flex items-center gap-3 text-sm text-gray-500">
                 <span className="h-px w-10 bg-brand-300" />
-                <span className="font-medium text-gray-600">Servicios</span>
+                <span className="font-medium text-gray-600">{copy.eyebrow}</span>
               </div>
               <h2 className="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 sm:text-4xl md:text-5xl">
-                Tres familias de trabajo.
+                {copy.title}
               </h2>
               <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-500">
-                Primero se entiende la operación. Después se decide si hace
-                falta estrategia, software, IA, integraciones, acompañamiento de
-                adopción o formación.
+                {copy.description}
               </p>
             </div>
           </FadeInView>
 
           <div className="mt-16 grid grid-cols-1 gap-6" id="servicios-grid">
-            {SERVICE_FAMILIES.map((family, index) => (
+            {serviceFamilies.map((family, index) => (
               <ServiceFamilyCard
                 family={family}
                 index={index}
@@ -137,9 +145,9 @@ export function Services() {
             <div className="mt-12 flex justify-center lg:justify-start">
               <a
                 className={`${primaryCtaBaseClass} min-h-14 w-full px-3 pl-6 text-base font-semibold sm:w-fit sm:min-w-[188px]`}
-                href="/services"
+                href={getLocalizedPath(locale, "services")}
               >
-                <span>Ver servicios</span>
+                <span>{copy.ctaLabel}</span>
                 <span className={primaryCtaArrowClass} aria-hidden="true">
                   <ArrowRightIcon className="h-4 w-4" />
                 </span>

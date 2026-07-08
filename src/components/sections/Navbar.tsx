@@ -4,16 +4,24 @@ import { useEffect, useState } from "react";
 import type { FocusEvent, MouseEvent } from "react";
 import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
-import { CONTACT_HREF, PAGE_NAV_ITEMS } from "@/components/sections/navbar-data";
+import {
+  getContactHref,
+  getPageNavItems,
+} from "@/components/sections/navbar-data";
+import { getContent } from "@/i18n/content";
+import {
+  DEFAULT_LOCALE,
+  getLocalizedPath,
+  getRouteKeyFromPath,
+} from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+import { LanguageSelector } from "@/components/sections/navbar/LanguageSelector";
 import { MobileNavMenu } from "@/components/sections/navbar/MobileNavMenu";
 import { NavLink } from "@/components/sections/navbar/NavLink";
 import { ServicesMegaMenu } from "@/components/sections/navbar/ServicesMegaMenu";
 import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
 
 const HOME_PATH = "/";
-const SERVICES_PATH = "/services";
-const INDUSTRIES_PATH = "/industries";
-const CASES_PATH = "/cases";
 
 function scrollToHash(href: string) {
   if (!href.startsWith("#") || href.length <= 1) {
@@ -30,14 +38,20 @@ function isPlaceholderHref(href: string) {
 
 export function Navbar({
   initialPath = HOME_PATH,
+  locale = DEFAULT_LOCALE,
 }: {
   readonly initialPath?: string;
+  readonly locale?: Locale;
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState(initialPath || HOME_PATH);
+  const content = getContent(locale);
+  const contactHref = getContactHref();
+  const homeHref = getLocalizedPath(locale, "home");
+  const pageNavItems = getPageNavItems(locale);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,14 +104,9 @@ export function Navbar({
     setIsServicesMenuOpen(false);
   };
 
-  const isHomePath = currentPath === HOME_PATH;
-  const isServicesPath =
-    currentPath === SERVICES_PATH || currentPath === `${SERVICES_PATH}/`;
-  const isIndustriesPath =
-    currentPath === INDUSTRIES_PATH || currentPath === `${INDUSTRIES_PATH}/`;
-  const isCasesPath =
-    currentPath === CASES_PATH || currentPath === `${CASES_PATH}/`;
-  const servicesIsActive = isServicesPath || isServicesMenuOpen;
+  const currentRouteKey = getRouteKeyFromPath(currentPath);
+  const isHomePath = currentRouteKey === "home";
+  const servicesIsActive = currentRouteKey === "services" || isServicesMenuOpen;
 
   return (
     <>
@@ -111,7 +120,7 @@ export function Navbar({
           <div className="flex h-16 items-center justify-between md:h-20">
             <a
               className="flex items-center gap-3"
-              href="/"
+              href={homeHref}
               onClick={(event) => {
                 if (!isHomePath) {
                   return;
@@ -137,7 +146,7 @@ export function Navbar({
             <div className="hidden items-center gap-7 md:flex">
               <NavLink
                 isActive={isHomePath}
-                item={PAGE_NAV_ITEMS[0]}
+                item={pageNavItems[0]}
                 onSelect={handleNavSelect}
               />
 
@@ -157,7 +166,7 @@ export function Navbar({
                   onFocus={() => setIsServicesMenuOpen(true)}
                   type="button"
                 >
-                  <span>Servicios</span>
+                  <span>{content.navigation.servicesLabel}</span>
                   <CaretDownIcon
                     aria-hidden="true"
                     className={cn(
@@ -169,40 +178,43 @@ export function Navbar({
 
                 <ServicesMegaMenu
                   isOpen={isServicesMenuOpen}
+                  locale={locale}
                   onLinkClick={handlePlaceholderLinkClick}
                 />
               </div>
 
-              {PAGE_NAV_ITEMS.slice(1).map((item) => (
+              {pageNavItems.slice(1).map((item) => (
                 <NavLink
-                  isActive={
-                    (item.href === INDUSTRIES_PATH && isIndustriesPath) ||
-                    (item.href === CASES_PATH && isCasesPath)
-                  }
+                  isActive={item.routeKey === currentRouteKey}
                   item={item}
                   key={item.href}
                   onSelect={handleNavSelect}
                 />
               ))}
 
+              <LanguageSelector
+                currentPath={currentPath}
+                label={content.navigation.languageLabel}
+              />
+
               <a
                 className={cn(
                   primaryCtaBaseClass,
                   "min-h-10 min-w-36 justify-center rounded-full px-6 text-sm font-semibold"
                 )}
-                href={CONTACT_HREF}
+                href={contactHref}
                 onClick={(event) => {
                   event.preventDefault();
-                  handleNavSelect(CONTACT_HREF);
+                  handleNavSelect(contactHref);
                 }}
               >
-                Contacto
+                {content.navigation.contactLabel}
               </a>
             </div>
 
             <button
               aria-expanded={isMobileMenuOpen}
-              aria-label="Abrir menú"
+              aria-label={content.navigation.openMenuLabel}
               className="rounded-lg p-2 text-gray-700 transition-colors duration-200 hover:bg-gray-100 md:hidden"
               onClick={() => {
                 setIsMobileMenuOpen((isOpen) => !isOpen);
@@ -224,6 +236,7 @@ export function Navbar({
         currentPath={currentPath}
         isOpen={isMobileMenuOpen}
         isServicesOpen={isMobileServicesOpen}
+        locale={locale}
         onClose={() => setIsMobileMenuOpen(false)}
         onNavSelect={handleNavSelect}
         onServiceLinkClick={handlePlaceholderLinkClick}

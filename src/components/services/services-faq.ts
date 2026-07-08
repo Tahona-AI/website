@@ -1,3 +1,6 @@
+import { getContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/routing";
+
 export type ServicesFaqItem = {
   readonly question: string;
   readonly answer: string;
@@ -30,3 +33,7 @@ export const SERVICES_FAQ = [
       "Cuando existe una tarea operativa concreta, fuentes fiables, límites claros, herramientas controladas, trazabilidad y un punto de supervisión. Si esas condiciones no existen, conviene resolver primero el proceso.",
   },
 ] as const satisfies readonly ServicesFaqItem[];
+
+export function getServicesFaq(locale: Locale): readonly ServicesFaqItem[] {
+  return getContent(locale).servicesFaq;
+}

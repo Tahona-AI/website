@@ -1,19 +1,27 @@
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
 import {
-  SERVICE_MENU_COLUMNS,
-  SERVICES_OVERVIEW_HREF,
+  getServiceMenuColumns,
+  getServicesOverviewHref,
 } from "@/components/sections/navbar-data";
 import { ServiceColumn } from "@/components/sections/navbar/ServiceColumn";
 import type { ServiceMenuLinkHandler } from "@/components/sections/navbar/types";
+import { getContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/routing";
 
 export function ServicesMegaMenu({
   isOpen,
+  locale,
   onLinkClick,
 }: {
   readonly isOpen: boolean;
+  readonly locale: Locale;
   readonly onLinkClick: ServiceMenuLinkHandler;
 }) {
+  const navigation = getContent(locale).navigation;
+  const serviceColumns = getServiceMenuColumns(locale);
+  const servicesOverviewHref = getServicesOverviewHref(locale);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -27,7 +35,7 @@ export function ServicesMegaMenu({
         >
           <div className="rounded-[1.5rem] border border-gray-200 bg-white px-8 py-8 shadow-[0_28px_72px_-52px_rgba(31,31,31,0.58)]">
             <div className="grid grid-cols-3 gap-8">
-              {SERVICE_MENU_COLUMNS.map((column) => (
+              {serviceColumns.map((column) => (
                 <ServiceColumn
                   column={column}
                   key={column.title}
@@ -39,10 +47,10 @@ export function ServicesMegaMenu({
             <div className="mt-8 border-t border-gray-200 pt-5 text-center">
               <a
                 className="inline-flex items-center gap-3 text-sm font-semibold text-brand-700 transition-colors duration-200 hover:text-brand-900"
-                href={SERVICES_OVERVIEW_HREF}
-                onClick={(event) => onLinkClick(event, SERVICES_OVERVIEW_HREF)}
+                href={servicesOverviewHref}
+                onClick={(event) => onLinkClick(event, servicesOverviewHref)}
               >
-                <span>Ver todos los servicios</span>
+                <span>{navigation.servicesOverviewLabel}</span>
                 <ArrowRightIcon className="size-4" aria-hidden="true" />
               </a>
             </div>

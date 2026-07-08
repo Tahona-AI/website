@@ -1,61 +1,38 @@
 ---
-import { CASE_STUDIES } from "@/components/cases/cases-data";
-import { INDUSTRIES_FAQ } from "@/components/industries/industries-faq";
-import { INDUSTRY_ITEMS } from "@/components/industries/industry-data";
-import { SERVICE_FAMILIES } from "@/components/services/service-families";
-import { SERVICES_FAQ } from "@/components/services/services-faq";
+import { getCaseStudies } from "@/components/cases/cases-data";
+import { getIndustriesFaq } from "@/components/industries/industries-faq";
+import { getIndustryItems } from "@/components/industries/industry-data";
+import { getServiceFamilies } from "@/components/services/service-families";
+import { getServicesFaq } from "@/components/services/services-faq";
+import { getContent } from "@/i18n/content";
+import {
+  DEFAULT_LOCALE,
+  getAbsoluteUrl,
+  getRouteKeyFromPath,
+  LOCALE_DETAILS,
+} from "@/i18n/routing";
+import type { Locale, RouteKey } from "@/i18n/routing";
 
 const SITE_ORIGIN = "https://tahona.ai";
 
-const normalizeCanonicalPath = (pathname: string) => {
-  const pathOnly = pathname.split("?")[0]?.split("#")[0] ?? "/";
+interface Props {
+  locale?: Locale;
+  pageKey?: RouteKey;
+}
 
-  if (pathOnly === "/") {
-    return "/";
-  }
-
-  return `${pathOnly.replace(/\/$/, "")}/`;
-};
-
-const pageUrl = (path: string) => new URL(path, SITE_ORIGIN).href;
-
-const homePage = {
-  path: "/",
-  name: "Inicio",
-  title: "Tahona | Procesos, datos y herramientas internas",
-  description:
-    "Mejoramos operaciones internas con diagnóstico operativo, implementación técnica y automatización solo cuando encaja con el trabajo real.",
-} as const;
-
-const pageEntries = [
-  homePage,
-  {
-    path: "/services/",
-    name: "Servicios",
-    title: "Servicios Tahona | Operaciones, IA e integraciones",
-    description:
-      "Servicios para ordenar procesos, datos, documentos, herramientas internas, desarrollo de IA e integraciones alrededor de la operación real.",
-  },
-  {
-    path: "/industries/",
-    name: "Industrias",
-    title: "Industrias Tahona | Software e IA por sector",
-    description:
-      "Aplicamos software, IA e integraciones en logística, industria, legal, seguros, marketing y salud con foco en procesos y herramientas internas.",
-  },
-  {
-    path: "/cases/",
-    name: "Casos",
-    title: "Casos Tahona | Proyectos operativos anonimizados",
-    description:
-      "Proyectos anonimizados sobre documentación, planificación, conocimiento, reporting e integraciones, explicados desde el problema operativo y la solución.",
-  },
-] as const;
-
-const normalizedPath = normalizeCanonicalPath(Astro.url.pathname);
-const pageData =
-  pageEntries.find((entry) => entry.path === normalizedPath) ?? homePage;
-const canonicalURL = pageUrl(pageData.path);
+const { locale = DEFAULT_LOCALE, pageKey } = Astro.props;
+const routeKey = pageKey ?? getRouteKeyFromPath(Astro.url.pathname);
+const content = getContent(locale);
+const pageData = content.metadata[routeKey];
+const homePage = content.metadata.home;
+const canonicalURL = getAbsoluteUrl(locale, routeKey);
+const homeURL = getAbsoluteUrl(locale, "home");
+const schemaLanguage = LOCALE_DETAILS[locale].schemaLanguage;
+const serviceFamilies = getServiceFamilies(locale);
+const servicesFaq = getServicesFaq(locale);
+const industryItems = getIndustryItems(locale);
+const industriesFaq = getIndustriesFaq(locale);
+const caseStudies = getCaseStudies(locale);
 
 const organizationId = `${SITE_ORIGIN}/#organization`;
 const websiteId = `${SITE_ORIGIN}/#website`;
@@ -66,40 +43,32 @@ const organizationSchema = {
   "@type": "Organization",
   "@id": organizationId,
   name: "Tahona",
-  url: pageUrl("/"),
-  logo: pageUrl("/images/logos/tahona-favicon.svg"),
-  description:
-    "Estudio técnico de consultoría e implementación para mejorar operaciones internas, procesos, datos, documentos, herramientas e integraciones.",
-  knowsAbout: [
-    "diagnóstico operativo",
-    "implementación técnica",
-    "automatización de procesos",
-    "herramientas internas",
-    "procesamiento documental",
-    "integraciones operativas",
-  ],
+  url: getAbsoluteUrl(DEFAULT_LOCALE, "home"),
+  logo: new URL("/images/logos/tahona-favicon.svg", SITE_ORIGIN).href,
+  description: content.structuredData.organizationDescription,
+  knowsAbout: content.structuredData.knowsAbout,
 };
 
 const websiteSchema = {
   "@type": "WebSite",
   "@id": websiteId,
   name: "Tahona",
-  url: pageUrl("/"),
+  url: homeURL,
   description: homePage.description,
-  inLanguage: "es-ES",
+  inLanguage: schemaLanguage,
   publisher: {
     "@id": organizationId,
   },
 };
 
 const breadcrumbItems =
-  pageData.path === "/"
+  routeKey === "home"
     ? [
         {
           "@type": "ListItem",
           position: 1,
           name: homePage.name,
-          item: pageUrl(homePage.path),
+          item: homeURL,
         },
       ]
     : [
@@ -107,7 +76,7 @@ const breadcrumbItems =
           "@type": "ListItem",
           position: 1,
           name: homePage.name,
-          item: pageUrl(homePage.path),
+          item: homeURL,
         },
         {
           "@type": "ListItem",
@@ -129,7 +98,7 @@ const webPageSchema = {
   url: canonicalURL,
   name: pageData.title,
   description: pageData.description,
-  inLanguage: "es-ES",
+  inLanguage: schemaLanguage,
   isPartOf: {
     "@id": websiteId,
   },
@@ -142,20 +111,20 @@ const webPageSchema = {
 };
 
 const servicesSchema =
-  pageData.path === "/services/"
+  routeKey === "services"
     ? [
         {
           "@type": "Service",
           "@id": `${canonicalURL}#services`,
-          name: "Servicios de implementación técnica para operaciones internas",
+          name: content.structuredData.serviceSchemaName,
           description: pageData.description,
           provider: {
             "@id": organizationId,
           },
           hasOfferCatalog: {
             "@type": "OfferCatalog",
-            name: "Familias de servicios Tahona",
-            itemListElement: SERVICE_FAMILIES.map((family) => ({
+            name: content.structuredData.serviceCatalogName,
+            itemListElement: serviceFamilies.map((family) => ({
               "@type": "OfferCatalog",
               name: family.title,
               description: family.description,
@@ -174,7 +143,7 @@ const servicesSchema =
         {
           "@type": "FAQPage",
           "@id": `${canonicalURL}#faq`,
-          mainEntity: SERVICES_FAQ.map((item) => ({
+          mainEntity: servicesFaq.map((item) => ({
             "@type": "Question",
             name: item.question,
             acceptedAnswer: {
@@ -187,13 +156,13 @@ const servicesSchema =
     : [];
 
 const industriesSchema =
-  pageData.path === "/industries/"
+  routeKey === "industries"
     ? [
         {
           "@type": "ItemList",
           "@id": `${canonicalURL}#industries`,
-          name: "Sectores y patrones operativos",
-          itemListElement: INDUSTRY_ITEMS.map((industry, index) => ({
+          name: content.structuredData.industryListName,
+          itemListElement: industryItems.map((industry, index) => ({
             "@type": "ListItem",
             position: index + 1,
             name: industry.title,
@@ -204,7 +173,7 @@ const industriesSchema =
         {
           "@type": "FAQPage",
           "@id": `${canonicalURL}#faq`,
-          mainEntity: INDUSTRIES_FAQ.map((item) => ({
+          mainEntity: industriesFaq.map((item) => ({
             "@type": "Question",
             name: item.question,
             acceptedAnswer: {
@@ -217,13 +186,13 @@ const industriesSchema =
     : [];
 
 const casesSchema =
-  pageData.path === "/cases/"
+  routeKey === "cases"
     ? [
         {
           "@type": "ItemList",
           "@id": `${canonicalURL}#cases`,
-          name: "Casos anonimizados de trabajo operativo",
-          itemListElement: CASE_STUDIES.map((caseStudy, index) => ({
+          name: content.structuredData.casesListName,
+          itemListElement: caseStudies.map((caseStudy, index) => ({
             "@type": "ListItem",
             position: index + 1,
             name: caseStudy.title,

@@ -8,7 +8,18 @@ import {
   ShieldCheckIcon,
   TruckIcon,
 } from "@phosphor-icons/react";
-import { INDUSTRY_ITEMS } from "@/components/industries/industry-data";
+import { getIndustryItems } from "@/components/industries/industry-data";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const industryItems = getIndustryItems(locale);
+const copy = getContent(locale).industriesPage.gridSection;
 
 const INDUSTRY_ICONS = [
   TruckIcon,
@@ -31,18 +42,18 @@ const CARD_BACKGROUNDS = [
     <div class="max-w-4xl">
       <div class="inline-flex items-center gap-3 text-sm text-gray-500">
         <span class="h-px w-10 bg-brand-300"></span>
-        <span class="font-medium text-gray-600">Industrias</span>
+        <span class="font-medium text-gray-600">{copy.eyebrow}</span>
       </div>
       <h2 class="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-        Sectores que trabajamos.
+        {copy.title}
       </h2>
       <p class="mt-5 max-w-3xl text-lg leading-8 text-gray-500 text-pretty">
-        No nos encerramos en un vertical. El patrón común son operaciones con información dispersa, tareas repetibles, documentación e integraciones entre herramientas.
+        {copy.description}
       </p>
     </div>
 
     <div class="mt-14 grid auto-rows-fr gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-      {INDUSTRY_ITEMS.map((industry, industryIndex) => {
+      {industryItems.map((industry, industryIndex) => {
         const Icon = INDUSTRY_ICONS[industryIndex % INDUSTRY_ICONS.length];
 
         return (

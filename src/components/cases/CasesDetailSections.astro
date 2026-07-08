@@ -1,5 +1,16 @@
 ---
-import { CASE_STUDIES } from "@/components/cases/cases-data";
+import { getCaseStudies } from "@/components/cases/cases-data";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const caseStudies = getCaseStudies(locale);
+const copy = getContent(locale).casesPage.section;
 ---
 
 <section id="casos" class="relative overflow-hidden bg-white py-24 lg:py-28">
@@ -7,18 +18,18 @@ import { CASE_STUDIES } from "@/components/cases/cases-data";
     <div class="max-w-4xl">
       <div class="inline-flex items-center gap-3 text-sm text-gray-500">
         <span class="h-px w-10 bg-brand-300"></span>
-        <span class="font-medium text-gray-600">Casos</span>
+        <span class="font-medium text-gray-600">{copy.eyebrow}</span>
       </div>
       <h2 class="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-        Trabajo aplicado a operaciones reales.
+        {copy.title}
       </h2>
       <p class="mt-5 max-w-3xl text-lg leading-8 text-gray-500 text-pretty">
-        Proyectos y patrones abordados desde operaciones internas: documentación, planificación, conocimiento, reporting e integraciones.
+        {copy.text}
       </p>
     </div>
 
     <div class="mt-16 space-y-16">
-      {CASE_STUDIES.map((caseStudy, caseIndex) => {
+      {caseStudies.map((caseStudy, caseIndex) => {
         const imageFirst = caseIndex % 2 === 1;
 
         return (
@@ -59,7 +70,7 @@ import { CASE_STUDIES } from "@/components/cases/cases-data";
 
                 <div class="mt-8">
                   <p class="text-xs font-medium uppercase text-gray-400">
-                    Áreas relacionadas
+                    {copy.relatedAreasLabel}
                   </p>
                   <div class="mt-3 flex flex-wrap gap-2">
                     {caseStudy.tags.map((tag) => (

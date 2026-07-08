@@ -10,9 +10,12 @@ import {
 } from "@/components/ui/cta-styles";
 import {
   DOCUMENT_PLATFORM_WORK,
-  WORK_ITEMS,
+  getWorkItems,
 } from "@/components/sections/work/workItems";
 import type { WorkId, WorkItem } from "@/components/sections/work/workItems";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE, getLocalizedPath } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 
 function WorkAccordionItem({
   index,
@@ -95,12 +98,19 @@ function WorkAccordionItem({
   );
 }
 
-export function OurWork() {
+export function OurWork({
+  locale = DEFAULT_LOCALE,
+}: {
+  readonly locale?: Locale;
+}) {
+  const copy = getContent(locale).home.ourWork;
+  const workItems = getWorkItems(locale);
   const [activeWorkId, setActiveWorkId] = useState<WorkId>(
     DOCUMENT_PLATFORM_WORK.id
   );
   const activeWork =
-    WORK_ITEMS.find((item) => item.id === activeWorkId) ??
+    workItems.find((item) => item.id === activeWorkId) ??
+    workItems[0] ??
     DOCUMENT_PLATFORM_WORK;
 
   return (
@@ -112,22 +122,20 @@ export function OurWork() {
           <div>
             <div className="inline-flex items-center gap-3 text-sm text-gray-500">
               <span className="h-px w-10 bg-brand-300" />
-              <span className="font-medium text-gray-600">Nuestro Trabajo</span>
+              <span className="font-medium text-gray-600">{copy.eyebrow}</span>
             </div>
             <h2 className="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-              Proyectos reales en los que hemos trabajado.
+              {copy.title}
             </h2>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-gray-500">
-              Algunos ejemplos de trabajo aplicado en operaciones reales:
-              plataformas internas, planificación, documentación, datos e
-              integraciones construidas alrededor de cómo trabaja cada equipo.
+              {copy.description}
             </p>
           </div>
         </FadeInView>
 
         <div className="mt-14 grid gap-6 lg:grid-cols-[minmax(0,2.1fr)_minmax(18rem,0.9fr)] lg:items-start">
           <div className="space-y-4">
-            {WORK_ITEMS.map((item, index) => (
+            {workItems.map((item, index) => (
               <WorkAccordionItem
                 index={index}
                 isActive={item.id === activeWork.id}
@@ -162,9 +170,9 @@ export function OurWork() {
           <div className="mt-12 flex justify-center lg:justify-start">
             <a
               className={`${primaryCtaBaseClass} min-h-14 w-full px-3 pl-6 text-base font-semibold sm:w-fit sm:min-w-[220px]`}
-              href="/cases"
+              href={getLocalizedPath(locale, "cases")}
             >
-              <span>Ver casos</span>
+              <span>{copy.ctaLabel}</span>
               <span className={primaryCtaArrowClass} aria-hidden="true">
                 <ArrowRightIcon className="h-4 w-4" />
               </span>

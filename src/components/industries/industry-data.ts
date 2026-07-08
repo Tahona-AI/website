@@ -1,9 +1,13 @@
+import { getContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/routing";
+
 export type IndustryItem = {
   readonly id: string;
   readonly marker: string;
   readonly title: string;
   readonly summary: string;
   readonly description: string;
+  readonly tags: readonly string[];
   readonly visualSrc: string;
   readonly visualAlt: string;
   readonly bullets: readonly string[];
@@ -17,6 +21,7 @@ export const INDUSTRY_ITEMS = [
     title: "Logística",
     summary:
       "Planificación, optimización de rutas, documentación logística, eventos operativos, reporting e integración con herramientas de operación.",
+    tags: ["Rutas", "Flota", "Documentación", "Reporting"],
     description:
       "En logística encontramos rutas, planificación, eventos, documentación de transporte, datos de operación, reporting y coordinación entre herramientas. Trabajamos sobre ingesta de datos, optimización operativa, optimización de rutas, procesamiento documental, reporting e integración con los sistemas existentes.",
     visualSrc: "/images/visual-logistics.png",
@@ -43,6 +48,7 @@ export const INDUSTRY_ITEMS = [
     title: "Industria",
     summary:
       "Control de calidad, documentación, trazabilidad, procesos internos, reporting y herramientas para coordinar el trabajo operativo.",
+    tags: ["Calidad", "Documentación", "Trazabilidad", "Reporting"],
     description:
       "En entornos industriales y de operación aparecen controles de calidad, documentación recurrente, trazabilidad, coordinación entre equipos y reporting. Trabajamos sobre herramientas internas, flujos documentales, bases de conocimiento, integraciones y automatización.",
     visualSrc: "/images/visual-industry-manufacturing.png",
@@ -68,6 +74,7 @@ export const INDUSTRY_ITEMS = [
     title: "Legal",
     summary:
       "Flujos documentales, generación y revisión de documentos, automatización administrativa y validación humana.",
+    tags: ["Documentos", "Validación", "Flujos", "Seguimiento"],
     description:
       "Muchos procesos legales y administrativos combinan documentos, datos, plantillas, revisión, comunicación y seguimiento. Podemos construir flujos para generar, revisar, clasificar y coordinar documentos sin eliminar los puntos de validación humana.",
     visualSrc: "/images/visual-industry-legal.png",
@@ -94,6 +101,7 @@ export const INDUSTRY_ITEMS = [
     title: "Seguros",
     summary:
       "Captación, cualificación, CRM, cotización, seguimiento, documentación y reporting comercial.",
+    tags: ["Captación", "CRM", "Cotización", "Reporting"],
     description:
       "En seguros, la operación comercial depende de captación, cualificación, documentación, cotización, CRM, seguimiento y reporting. Podemos conectar esas piezas con herramientas internas, automatización supervisada y flujos de información más claros.",
     visualSrc: "/images/visual-industry-insurance.png",
@@ -119,6 +127,7 @@ export const INDUSTRY_ITEMS = [
     title: "Marketing y growth",
     summary:
       "Lead ops, captación, cualificación, reporting, CRM, herramientas internas y coordinación comercial.",
+    tags: ["Lead ops", "Cualificación", "CRM", "Reporting"],
     description:
       "No prestamos servicios de agencia de marketing. El encaje está en la operación: captación, lead ops, cualificación, CRM, reporting, herramientas internas y coordinación de campañas o procesos comerciales.",
     visualSrc: "/images/visual-industry-marketing.png",
@@ -144,6 +153,7 @@ export const INDUSTRY_ITEMS = [
     title: "Salud",
     summary:
       "Soporte operativo, documentación, conocimiento interno y sistemas no clínicos.",
+    tags: ["Soporte", "Documentación", "Conocimiento", "PoC"],
     description:
       "En salud solo trabajamos sobre capas operativas no clínicas: documentación, conocimiento interno, coordinación, reporting y apoyo administrativo.",
     visualSrc: "/images/visual-industry-health.png",
@@ -164,3 +174,7 @@ export const INDUSTRY_ITEMS = [
     ],
   },
 ] as const satisfies readonly IndustryItem[];
+
+export function getIndustryItems(locale: Locale): readonly IndustryItem[] {
+  return getContent(locale).industryItems;
+}

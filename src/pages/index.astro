@@ -1,33 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import SkipLink from "@/components/SkipLink.astro";
-import { Navbar } from "@/components/sections/Navbar";
-import { Hero } from "@/components/sections/Hero";
-import { WhatWeDo } from "@/components/sections/WhatWeDo";
-import { Services } from "@/components/sections/Services";
-import { AiApplied } from "@/components/sections/AiApplied";
-import { Industries } from "@/components/sections/Industries";
-import { OurWork } from "@/components/sections/OurWork";
-import { HowWeWork } from "@/components/sections/HowWeWork";
-import { Contact } from "@/components/sections/Contact";
-import Footer from "@/components/sections/Footer.astro";
+import HomePage from "@/components/pages/HomePage.astro";
 ---
 
-<Layout>
-  <SkipLink />
-  <main
-    id="main-content"
-    class="relative flex min-h-screen flex-col overflow-x-hidden"
-  >
-    <Navbar client:load initialPath={Astro.url.pathname} />
-    <Hero client:load />
-    <WhatWeDo client:visible />
-    <Services client:visible />
-    <AiApplied client:visible />
-    <Industries client:visible />
-    <OurWork client:visible />
-    <HowWeWork client:visible />
-    <Contact client:visible />
-    <Footer />
-  </main>
-</Layout>
+<HomePage locale="es" />

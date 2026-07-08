@@ -2,47 +2,17 @@
 
 import { FadeInView } from "@/components/animations/FadeInView";
 import { cn } from "@/lib/utils";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 
-interface Step {
-  readonly number: string;
-  readonly title: string;
-  readonly description: string;
-}
+export function HowWeWork({
+  locale = DEFAULT_LOCALE,
+}: {
+  readonly locale?: Locale;
+}) {
+  const copy = getContent(locale).home.howWeWork;
 
-const steps: readonly Step[] = [
-  {
-    number: "01",
-    title: "Contexto",
-    description:
-      "Primera lectura de la operación, prioridades y fricciones principales.",
-  },
-  {
-    number: "02",
-    title: "Diagnóstico",
-    description:
-      "Revisión de procesos, datos, documentos, herramientas y dependencias internas.",
-  },
-  {
-    number: "03",
-    title: "Priorización",
-    description:
-      "Selección de oportunidades por valor operativo, complejidad, riesgo y adopción.",
-  },
-  {
-    number: "04",
-    title: "Construcción",
-    description:
-      "Diseño e implementación de software, IA, integraciones o automatización según el caso.",
-  },
-  {
-    number: "05",
-    title: "Adopción",
-    description:
-      "Ajustes, documentación y handoff para que el sistema entre en el trabajo diario.",
-  },
-];
-
-export function HowWeWork() {
   return (
     <section id="proceso" className="relative overflow-hidden bg-white py-24 lg:py-28">
       <div className="section-fade-surface-to-white" />
@@ -51,21 +21,18 @@ export function HowWeWork() {
         <FadeInView>
           <div className="inline-flex items-center gap-3 text-sm text-gray-500">
             <span className="h-px w-10 bg-brand-300" />
-            <span className="font-medium text-gray-600">Cómo trabajamos</span>
+            <span className="font-medium text-gray-600">{copy.eyebrow}</span>
           </div>
           <h2 className="mt-4 max-w-4xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-            Entender la operación antes de cambiarla.
+            {copy.title}
           </h2>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-gray-500">
-            Cada empresa tiene una forma distinta de trabajar. El proceso
-            empieza leyendo procesos, datos, herramientas, documentos y
-            restricciones reales. Después se priorizan mejoras con sentido
-            práctico y se implementan de forma que el equipo pueda adoptarlas.
+            {copy.description}
           </p>
         </FadeInView>
 
         <div className="mt-14 space-y-4">
-          {steps.map((step, index) => (
+          {copy.steps.map((step, index) => (
             <FadeInView key={step.number} delay={index * 0.1}>
               <div
                 className={cn(

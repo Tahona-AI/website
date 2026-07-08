@@ -9,6 +9,20 @@
 - [Industrias](https://tahona.ai/industries/): Explica patrones de trabajo en logística, industria, legal, seguros, marketing y salud con foco operativo.
 - [Casos](https://tahona.ai/cases/): Resume proyectos anonimizados y patrones reutilizables sobre documentación, planificación, conocimiento, reporting e integraciones.
 
+## English pages
+
+- [Home](https://tahona.ai/en/): Presents Tahona's approach to improving internal operations with operational diagnosis, technical implementation and automation when it fits.
+- [Services](https://tahona.ai/en/services/): Groups foundations, AI development, document processing, internal tools and integrations for real processes.
+- [Industries](https://tahona.ai/en/industries/): Explains work patterns in logistics, industry, legal, insurance, marketing and healthcare with an operational focus.
+- [Cases](https://tahona.ai/en/cases/): Summarizes anonymized projects and reusable patterns around documentation, planning, knowledge, reporting and integrations.
+
+## Strony po polsku
+
+- [Start](https://tahona.ai/pl/): Przedstawia podejście Tahona do usprawniania operacji wewnętrznych przez diagnozę operacyjną, wdrożenie techniczne i automatyzację wtedy, gdy pasuje.
+- [Usługi](https://tahona.ai/pl/services/): Grupuje fundamenty, rozwój rozwiązań AI, przetwarzanie dokumentów, narzędzia wewnętrzne i integracje dla realnych procesów.
+- [Branże](https://tahona.ai/pl/industries/): Wyjaśnia wzorce pracy w logistyce, przemyśle, prawie, ubezpieczeniach, marketingu i zdrowiu z naciskiem operacyjnym.
+- [Przykłady](https://tahona.ai/pl/cases/): Podsumowuje zanonimizowane projekty i wzorce dotyczące dokumentacji, planowania, wiedzy, raportowania i integracji.
+
 ## Capacidades
 
 - Diagnóstico operativo y estrategia técnica antes de construir.
@@ -23,7 +37,7 @@
 - Tahona no es una agencia genérica de IA.
 - No hay claims públicos verificados sobre clientes, premios, métricas, ahorros, plazos garantizados o testimonios.
 - La IA es una herramienta dentro de servicios concretos, no el mensaje principal de la marca.
-- El sitio público está en español y sus URLs canónicas usan barra final.
+- El sitio público tiene versiones en español, inglés y polaco; las URLs canónicas usan barra final.
 
 ## Contacto
 

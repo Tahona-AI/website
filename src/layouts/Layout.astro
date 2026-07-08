@@ -11,21 +11,38 @@ import "@fontsource/geist-mono/500.css";
 import "../styles/global.css";
 import SEO from "../components/SEO.astro";
 import StructuredData from "../components/StructuredData.astro";
+import {
+  DEFAULT_LOCALE,
+  getRouteKeyFromPath,
+  LOCALE_DETAILS,
+} from "@/i18n/routing";
+import type { Locale, RouteKey } from "@/i18n/routing";
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   canonical?: string;
+  locale?: Locale;
   noindex?: boolean;
   nofollow?: boolean;
+  pageKey?: RouteKey;
 }
 
-const { title, description, image, canonical, noindex, nofollow } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  canonical,
+  locale = DEFAULT_LOCALE,
+  noindex,
+  nofollow,
+  pageKey = getRouteKeyFromPath(Astro.url.pathname),
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={LOCALE_DETAILS[locale].htmlLang}>
   <head>
     <meta charset="utf-8" />
 
@@ -46,12 +63,14 @@ const { title, description, image, canonical, noindex, nofollow } = Astro.props;
       description={description}
       image={image}
       canonical={canonical}
+      locale={locale}
       noindex={noindex}
       nofollow={nofollow}
+      pageKey={pageKey}
     />
 
     <!-- Structured Data -->
-    <StructuredData />
+    <StructuredData locale={locale} pageKey={pageKey} />
   </head>
   <body class="font-body antialiased">
     <slot />
