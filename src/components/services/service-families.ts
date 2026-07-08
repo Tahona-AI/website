@@ -1,3 +1,6 @@
+import { getContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/routing";
+
 export type ServiceItem = {
   readonly id: string;
   readonly title: string;
@@ -168,3 +171,7 @@ export const SERVICE_FAMILIES = [
     ],
   },
 ] as const satisfies readonly ServiceFamily[];
+
+export function getServiceFamilies(locale: Locale): readonly ServiceFamily[] {
+  return getContent(locale).serviceFamilies;
+}

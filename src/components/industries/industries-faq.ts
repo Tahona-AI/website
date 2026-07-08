@@ -1,3 +1,6 @@
+import { getContent } from "@/i18n/content";
+import type { Locale } from "@/i18n/routing";
+
 export type IndustriesFaqItem = {
   readonly question: string;
   readonly answer: string;
@@ -35,3 +38,7 @@ export const INDUSTRIES_FAQ = [
       "Sí. Tiene sentido empezar por un flujo concreto cuando hay suficiente información, responsables definidos y un criterio claro para saber si la mejora funciona antes de extenderla.",
   },
 ] as const satisfies readonly IndustriesFaqItem[];
+
+export function getIndustriesFaq(locale: Locale): readonly IndustriesFaqItem[] {
+  return getContent(locale).industriesFaq;
+}

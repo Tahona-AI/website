@@ -1,0 +1,20 @@
+---
+import IndustriesPage from "@/components/pages/IndustriesPage.astro";
+import { NON_DEFAULT_LOCALES } from "@/i18n/routing";
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map((locale) => ({
+    params: { locale },
+  }));
+}
+
+const localeParam = Astro.params.locale;
+
+if (localeParam !== "en" && localeParam !== "pl") {
+  throw new Error(`Unsupported locale route: ${localeParam}`);
+}
+
+const locale = localeParam;
+---
+
+<IndustriesPage locale={locale} />

@@ -1,63 +1,76 @@
 ---
+import { getContent } from "@/i18n/content";
+import {
+  DEFAULT_LOCALE,
+  getAbsoluteUrl,
+  getLanguageAlternates,
+  getRouteKeyFromPath,
+  LOCALE_DETAILS,
+} from "@/i18n/routing";
+import type { Locale, RouteKey } from "@/i18n/routing";
+
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   canonical?: string;
+  locale?: Locale;
   noindex?: boolean;
   nofollow?: boolean;
+  pageKey?: RouteKey;
   type?: "website" | "article" | "product";
 }
 
 const {
-  title = "Tahona | Procesos, datos y herramientas internas",
-  description = "Mejoramos operaciones internas con diagnóstico operativo, implementación técnica y automatización solo cuando encaja con el trabajo real.",
+  title,
+  description,
   image = "/og-image.png",
   canonical,
+  locale = DEFAULT_LOCALE,
   noindex = false,
   nofollow = false,
+  pageKey,
   type = "website",
 } = Astro.props;
 
-const normalizeCanonicalPath = (pathname: string) => {
-  const pathOnly = pathname.split("?")[0]?.split("#")[0] ?? "/";
-
-  if (pathOnly === "/") {
-    return "/";
-  }
-
-  return `${pathOnly.replace(/\/$/, "")}/`;
-};
-
-const canonicalPath = normalizeCanonicalPath(Astro.url.pathname);
-const canonicalURL = canonical || new URL(canonicalPath, Astro.site).href;
+const routeKey = pageKey ?? getRouteKeyFromPath(Astro.url.pathname);
+const content = getContent(locale);
+const pageMeta = content.metadata[routeKey];
+const resolvedTitle = title ?? pageMeta.title;
+const resolvedDescription = description ?? pageMeta.description;
+const canonicalURL = canonical || getAbsoluteUrl(locale, routeKey);
 const imageURL = new URL(image, Astro.site).href;
+const alternates = getLanguageAlternates(routeKey);
 
 const robotsContent = `${noindex ? "noindex" : "index"}, ${nofollow ? "nofollow" : "follow"}`;
 ---
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+<title>{resolvedTitle}</title>
+<meta name="title" content={resolvedTitle} />
+<meta name="description" content={resolvedDescription} />
 <link rel="canonical" href={canonicalURL} />
+{alternates.map((alternate) => (
+  <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+))}
+<link rel="alternate" hreflang="x-default" href={getAbsoluteUrl(DEFAULT_LOCALE, routeKey)} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={resolvedTitle} />
+<meta property="og:description" content={resolvedDescription} />
 <meta property="og:image" content={imageURL} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:locale" content="es_ES" />
+<meta property="og:locale" content={LOCALE_DETAILS[locale].ogLocale} />
 <meta property="og:site_name" content="Tahona" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={canonicalURL} />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:title" content={resolvedTitle} />
+<meta name="twitter:description" content={resolvedDescription} />
 <meta name="twitter:image" content={imageURL} />
 
 <!-- Robots -->
@@ -67,5 +80,5 @@ const robotsContent = `${noindex ? "noindex" : "index"}, ${nofollow ? "nofollow"
 <meta name="author" content="Tahona" />
 <meta
   name="keywords"
-  content="diagnóstico operativo, implementación técnica, automatización de procesos, herramientas internas, datos documentos reporting, eficiencia operativa"
+  content={content.metadata.keywords}
 />

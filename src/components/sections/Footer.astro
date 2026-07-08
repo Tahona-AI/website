@@ -1,6 +1,17 @@
 ---
 const currentYear = new Date().getFullYear();
 import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE, getLocalizedPath } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const content = getContent(locale);
+const footer = content.footer;
 ---
 
 <footer class="border-t border-white/8 bg-charcoal py-12 sm:py-14">
@@ -8,7 +19,7 @@ import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
     <div class="rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-8 shadow-[0_30px_80px_-48px_rgba(0,0,0,0.65)] backdrop-blur-md sm:px-8 lg:px-10">
       <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
         <div class="flex flex-col items-center gap-4 md:items-start">
-          <a href="/" class="flex items-center gap-3">
+          <a href={getLocalizedPath(locale, "home")} class="flex items-center gap-3">
             <img
               src="/images/logos/tahona-mark-green.svg"
               alt="Tahona"
@@ -21,7 +32,7 @@ import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
            </span>
           </a>
           <p class="text-center text-sm leading-6 text-gray-400 md:max-w-sm md:text-left">
-            Equipo técnico que mejora procesos, datos y herramientas internas con criterio práctico.
+            {footer.description}
           </p>
           <a
             href="mailto:hola@tahona.ai"
@@ -36,10 +47,10 @@ import { primaryCtaBaseClass } from "@/components/ui/cta-styles";
             href="#contacto"
             class={`${primaryCtaBaseClass} min-h-12 justify-center px-5 text-sm font-semibold sm:min-w-[190px]`}
           >
-            <span>Contacta con nosotros</span>
+            <span>{footer.contactLabel}</span>
           </a>
           <p class="text-center text-xs text-gray-500 md:text-right">
-            © {currentYear} Tahona. Todos los derechos reservados.
+            © {currentYear} Tahona. {footer.copyright}
           </p>
         </div>
       </div>

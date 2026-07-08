@@ -3,6 +3,9 @@
 import { motion } from "motion/react";
 import type { MouseEvent, ReactNode } from "react";
 import { WavyBackground } from "@/components/ui/wavy-background";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 import {
   primaryCtaArrowClass,
   primaryCtaBaseClass,
@@ -12,27 +15,35 @@ import {
 type HeroProps = {
   readonly title?: ReactNode;
   readonly description?: string;
+  readonly locale?: Locale;
   readonly primaryLabel?: string;
   readonly primaryHref?: string;
   readonly secondaryLabel?: string;
   readonly secondaryHref?: string;
 };
 
-const DEFAULT_TITLE = (
-  <>
-    <span>La tecnología ya existe.</span>
-    <span className="block">Falta la implementación adecuada.</span>
-  </>
-);
-
 export function Hero({
-  title = DEFAULT_TITLE,
-  description = "Equipo técnico que mejora operaciones internas con diagnóstico, implementación práctica y automatización cuando aporta. Sin cambiar lo que ya funciona.",
-  primaryLabel = "Hablemos sin compromiso",
-  primaryHref = "#contacto",
-  secondaryLabel = "Ver cómo trabajamos",
-  secondaryHref = "#proceso",
+  title,
+  description,
+  locale = DEFAULT_LOCALE,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
 }: HeroProps) {
+  const homeHero = getContent(locale).home.hero;
+  const resolvedDescription = description ?? homeHero.description;
+  const resolvedPrimaryHref = primaryHref ?? homeHero.primaryHref;
+  const resolvedPrimaryLabel = primaryLabel ?? homeHero.primaryLabel;
+  const resolvedSecondaryHref = secondaryHref ?? homeHero.secondaryHref;
+  const resolvedSecondaryLabel = secondaryLabel ?? homeHero.secondaryLabel;
+  const resolvedTitle =
+    title ??
+    homeHero.titleLines.map((line, index) => (
+      <span className={index > 0 ? "block" : undefined} key={line}>
+        {line}
+      </span>
+    ));
   const discoveryCallUrl = "#contacto";
   const showDiscoveryCallCard = false;
 
@@ -91,7 +102,7 @@ export function Hero({
               transition={{ duration: 0.7, delay: 0.1 }}
               className="max-w-5xl font-heading text-[clamp(2rem,4vw,3.9rem)] font-semibold leading-[1.02] text-gray-900 lg:max-w-[52rem]"
             >
-              {title}
+              {resolvedTitle}
             </motion.h1>
 
             <motion.p
@@ -100,7 +111,7 @@ export function Hero({
               transition={{ duration: 0.7, delay: 0.25 }}
               className="mt-8 max-w-3xl text-[clamp(1rem,1.35vw,1.25rem)] leading-8 text-gray-500 lg:max-w-[38rem]"
             >
-              {description}
+              {resolvedDescription}
             </motion.p>
 
             <motion.div
@@ -110,11 +121,11 @@ export function Hero({
               className="mt-10 flex flex-col gap-4 sm:flex-row"
             >
               <a
-                href={primaryHref}
-                onClick={(event) => handleHeroLinkClick(event, primaryHref)}
+                href={resolvedPrimaryHref}
+                onClick={(event) => handleHeroLinkClick(event, resolvedPrimaryHref)}
                 className={`${primaryCtaBaseClass} min-h-14 cursor-pointer px-3 pl-6 text-base font-semibold sm:min-w-[240px]`}
               >
-                <span>{primaryLabel}</span>
+                <span>{resolvedPrimaryLabel}</span>
                 <span className={`${primaryCtaArrowClass} h-10 w-10`} aria-hidden="true">
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
@@ -123,11 +134,11 @@ export function Hero({
               </a>
 
               <a
-                href={secondaryHref}
-                onClick={(event) => handleHeroLinkClick(event, secondaryHref)}
+                href={resolvedSecondaryHref}
+                onClick={(event) => handleHeroLinkClick(event, resolvedSecondaryHref)}
                 className={`${secondaryCtaBaseClass} min-h-14 cursor-pointer justify-center px-6 text-base font-semibold sm:min-w-[240px]`}
               >
-                <span>{secondaryLabel}</span>
+                <span>{resolvedSecondaryLabel}</span>
               </a>
             </motion.div>
 

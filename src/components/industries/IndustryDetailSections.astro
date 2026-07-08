@@ -1,5 +1,16 @@
 ---
-import { INDUSTRY_ITEMS } from "@/components/industries/industry-data";
+import { getIndustryItems } from "@/components/industries/industry-data";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const industryItems = getIndustryItems(locale);
+const copy = getContent(locale).industriesPage.detailSection;
 ---
 
 <section id="industrias-detalle" class="relative overflow-hidden bg-surface py-24 lg:py-28">
@@ -9,15 +20,15 @@ import { INDUSTRY_ITEMS } from "@/components/industries/industry-data";
     <div class="max-w-4xl">
       <div class="inline-flex items-center gap-3 text-sm text-gray-500">
         <span class="h-px w-10 bg-brand-300"></span>
-        <span class="font-medium text-gray-600">En detalle</span>
+        <span class="font-medium text-gray-600">{copy.eyebrow}</span>
       </div>
       <h2 class="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-        Cómo se ve el trabajo en cada sector.
+        {copy.title}
       </h2>
     </div>
 
     <div class="mt-16 space-y-16">
-      {INDUSTRY_ITEMS.map((industry, industryIndex) => {
+      {industryItems.map((industry, industryIndex) => {
         const imageFirst = industryIndex % 2 === 1;
 
         return (
@@ -55,7 +66,7 @@ import { INDUSTRY_ITEMS } from "@/components/industries/industry-data";
 
                 <div class="mt-8">
                   <p class="text-xs font-medium uppercase text-gray-400">
-                    Servicios relacionados
+                    {copy.relatedServicesLabel}
                   </p>
                   <div class="mt-3 flex flex-wrap gap-2">
                     {industry.relatedServices.map((service) => (

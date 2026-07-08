@@ -1,14 +1,9 @@
 "use client";
 
 import { FadeInView } from "@/components/animations/FadeInView";
-
-const BULLETS: readonly string[] = [
-  "Procesos con demasiados pasos manuales.",
-  "Documentos que requieren revisión, extracción o clasificación.",
-  "Información repartida entre Drive, hojas de cálculo, CRM, ERP, correo y herramientas internas.",
-  "Reporting que llega tarde o depende de preparación manual.",
-  "Equipos que necesitan adoptar una solución sin añadir otra capa de fricción.",
-];
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 
 function FlowDiagram() {
   return (
@@ -29,7 +24,13 @@ function FlowDiagram() {
   );
 }
 
-export function WhatWeDo() {
+export function WhatWeDo({
+  locale = DEFAULT_LOCALE,
+}: {
+  readonly locale?: Locale;
+}) {
+  const copy = getContent(locale).home.whatWeDo;
+
   return (
     <section id="que-hacemos" className="relative overflow-hidden bg-surface py-24 lg:py-28">
       <div className="section-fade-white-to-surface" />
@@ -39,28 +40,19 @@ export function WhatWeDo() {
           <div>
             <div className="inline-flex items-center gap-3 text-sm text-gray-500">
               <span className="h-px w-10 bg-brand-300" />
-              <span className="font-medium text-gray-600">Qué hacemos</span>
+              <span className="font-medium text-gray-600">{copy.eyebrow}</span>
             </div>
             <h2 className="mt-5 max-w-3xl font-heading text-3xl font-semibold leading-tight text-gray-900 text-balance sm:text-4xl md:text-5xl">
-              Mejoramos operaciones internas donde procesos, datos y
-              herramientas se cruzan.
+              {copy.title}
             </h2>
             <div className="mt-6 max-w-3xl space-y-5 text-lg leading-8 text-gray-500">
-              <p>
-                El trabajo no empieza por elegir una tecnología. Empieza por
-                entender cómo funciona la operación, qué información se mueve,
-                dónde se repite trabajo manual y qué necesita el equipo para
-                operar con más control.
-              </p>
-              <p>
-                A partir de ese diagnóstico se construyen herramientas internas,
-                integraciones, bases de conocimiento, procesamiento documental o
-                automatización con IA cuando encaja con el flujo real.
-              </p>
+              {copy.description.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
 
             <ul className="mt-8 space-y-3">
-              {BULLETS.map((item) => (
+              {copy.bullets.map((item) => (
                 <li
                   className="grid grid-cols-[0.75rem_1fr] gap-4 text-base leading-7 text-gray-600"
                   key={item}

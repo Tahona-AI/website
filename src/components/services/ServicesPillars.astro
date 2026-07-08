@@ -1,5 +1,16 @@
 ---
-import { SERVICE_FAMILIES } from "@/components/services/service-families";
+import { getServiceFamilies } from "@/components/services/service-families";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = DEFAULT_LOCALE } = Astro.props;
+const serviceFamilies = getServiceFamilies(locale);
+const copy = getContent(locale).servicesPage.pillarsSection;
 
 const FAMILY_CARD_BACKGROUNDS = [
   "radial-gradient(circle at 88% 12%, rgba(45,106,79,0.12), transparent 34%), radial-gradient(circle at 12% 88%, rgba(64,145,108,0.08), transparent 36%)",
@@ -13,18 +24,18 @@ const FAMILY_CARD_BACKGROUNDS = [
     <div class="max-w-4xl">
       <div class="inline-flex items-center gap-3 text-sm text-gray-500">
         <span class="h-px w-10 bg-brand-300"></span>
-        <span class="font-medium text-gray-600">Cómo se ordenan los servicios</span>
+        <span class="font-medium text-gray-600">{copy.eyebrow}</span>
       </div>
       <h2 class="mt-4 max-w-4xl font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-        Tres familias de trabajo que se ordenan en una secuencia.
+        {copy.title}
       </h2>
       <p class="mt-5 max-w-3xl text-lg leading-8 text-gray-500 text-pretty">
-        Los Fundamentos entienden y ordenan la operación. El Desarrollo de IA y los Otros desarrollos construyen sobre esa base, no al revés.
+        {copy.description}
       </p>
     </div>
 
     <div class="mt-14 grid gap-6 lg:grid-cols-3">
-      {SERVICE_FAMILIES.map((family, familyIndex) => (
+      {serviceFamilies.map((family, familyIndex) => (
         <article
           id={family.id}
           class="group relative flex min-h-[34rem] flex-col overflow-hidden rounded-[1.75rem] border border-gray-200/80 bg-white/88 p-6 shadow-[0_22px_60px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md transition-[border-color,box-shadow,transform] duration-200 ease-out hover:-translate-y-1 hover:border-brand-200 hover:bg-white hover:shadow-[0_30px_72px_-44px_rgba(31,31,31,0.5)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:p-8"

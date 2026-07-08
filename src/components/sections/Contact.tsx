@@ -1,97 +1,43 @@
 "use client";
 
 import { useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+import { ContactForm } from "@/components/sections/contact/ContactForm";
+import { ContactModal } from "@/components/sections/contact/ContactModal";
+import { ContactSidebar } from "@/components/sections/contact/ContactSidebar";
 import {
-  ClockIcon,
-  EnvelopeIcon,
-  PhoneIcon,
-  ShieldIcon,
-  UserCheckIcon,
-  XIcon,
-} from "@phosphor-icons/react";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { primaryCtaArrowClass, primaryCtaBaseClass } from "@/components/ui/cta-styles";
-import { cn } from "@/lib/utils";
+  CONTACT_WEBHOOK_URL,
+  EMPTY_CONTACT_FORM,
+  isFormField,
+  validateContactForm,
+} from "@/components/sections/contact-content";
+import type {
+  ContactFormData,
+  FormErrors,
+} from "@/components/sections/contact-content";
+import { getContent } from "@/i18n/content";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
+import type { Locale } from "@/i18n/routing";
 
-interface FormErrors {
-  name?: string;
-  email?: string;
-  details?: string;
-  submit?: string;
-}
-
-type FormField = "name" | "email" | "details";
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  details: string;
-}
-
-function LabelInputContainer({
-  className,
-  children,
+export function Contact({
+  locale = DEFAULT_LOCALE,
 }: {
-  className?: string;
-  children: React.ReactNode;
+  readonly locale?: Locale;
 }) {
-  return <div className={cn("flex w-full flex-col gap-2.5", className)}>{children}</div>;
-}
-
-const trustBadges = [
-  { icon: ClockIcon, text: "Respuesta en 24h laborables" },
-  { icon: UserCheckIcon, text: "Primera oportunidad clara" },
-  { icon: ShieldIcon, text: "Sin compromiso ni presión comercial" },
-];
-
-function isFormField(value: string): value is FormField {
-  return value === "name" || value === "email" || value === "details";
-}
-
-function validateEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-export function Contact() {
+  const copy = getContent(locale).contact;
   const [errors, setErrors] = useState<FormErrors>({});
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: "",
-    email: "",
-    details: "",
-  });
+  const [formData, setFormData] =
+    useState<ContactFormData>(EMPTY_CONTACT_FORM);
   const [showModal, setShowModal] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function validateForm(): boolean {
-    const newErrors: FormErrors = {};
-
-    if (formData.name.length < 2) {
-      newErrors.name = "El nombre debe tener al menos 2 caracteres";
-    } else if (formData.name.length > 100) {
-      newErrors.name = "El nombre es demasiado largo";
-    }
-
-    if (!validateEmail(formData.email)) {
-      newErrors.email = "Por favor, introduce un email válido";
-    }
-
-    if (formData.details.length < 10) {
-      newErrors.details = "Por favor, cuéntanos un poco más sobre tu proyecto";
-    } else if (formData.details.length > 2000) {
-      newErrors.details = "El mensaje es demasiado largo";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  }
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!validateForm()) {
+    const newErrors = validateContactForm(formData, copy);
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
 
@@ -99,52 +45,52 @@ export function Contact() {
     setErrors({});
 
     try {
-       const webhookUrl = "https://n8n.tahona.ai/webhook/tahona-form";
-      
       const formBody = new URLSearchParams();
-      formBody.append('name', formData.name);
-      formBody.append('email', formData.email);
-      formBody.append('details', formData.details);
+      formBody.append("name", formData.name);
+      formBody.append("email", formData.email);
+      formBody.append("details", formData.details);
 
-      await fetch(webhookUrl, {
-        method: "POST",
-        mode: "no-cors",
+      await fetch(CONTACT_WEBHOOK_URL, {
+        body: formBody.toString(),
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: formBody.toString(),
+        method: "POST",
+        mode: "no-cors",
       });
 
-      // En modo no-cors no podemos leer la respuesta, asumimos éxito si no hay error de red
       setShowModal(true);
-      setFormData({ name: "", email: "", details: "" });
+      setFormData(EMPTY_CONTACT_FORM);
     } catch (error) {
-      setErrors({
-        submit: "Hubo un error al enviar el formulario. Inténtalo de nuevo.",
-      });
+      if (!(error instanceof Error)) {
+        setErrors({ submit: copy.errorMessages.submit });
+        return;
+      }
+
+      setErrors({ submit: copy.errorMessages.submit });
     } finally {
       setIsSubmitting(false);
     }
   }
 
   function handleInputChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
-    const { name, value } = e.target;
+    const { name, value } = event.target;
     if (!isFormField(name)) {
       return;
     }
 
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((previous) => ({ ...previous, [name]: value }));
 
     if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+      setErrors((previous) => ({ ...previous, [name]: undefined }));
     }
   }
 
   return (
     <>
-      <section id="contacto" className="relative overflow-hidden bg-surface py-24">
+      <section className="relative overflow-hidden bg-surface py-24" id="contacto">
         <div className="section-fade-white-to-surface" />
 
         <div className="relative mx-auto max-w-7xl">
@@ -152,233 +98,33 @@ export function Contact() {
             <div>
               <div className="inline-flex items-center gap-3 text-sm text-gray-500">
                 <span className="h-px w-10 bg-brand-300" />
-                <span className="font-medium text-gray-600">Contacto</span>
+                <span className="font-medium text-gray-600">{copy.eyebrow}</span>
               </div>
               <h2 className="mt-4 max-w-6xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
-                Una primera conversación para entender el contexto.
+                {copy.title}
               </h2>
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 text-pretty md:text-lg">
-                Una primera conversación permite revisar la operación, detectar si existe una oportunidad real de mejora y decidir el siguiente paso con claridad.
+                {copy.description}
               </p>
             </div>
 
-          <div className="mt-14 grid gap-14 lg:grid-cols-12 lg:gap-16">
-            <div className="space-y-8 lg:col-span-5">
-              <div className="rounded-[1.75rem] border border-white/75 bg-white/78 p-6 shadow-[0_24px_70px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md sm:p-7">
-                <div className="space-y-3">
-                  <p className="text-sm font-medium uppercase tracking-[0.12em] text-brand-700">
-                    Contacto
-                  </p>
-                  <p className="max-w-lg text-base leading-relaxed text-gray-600 text-pretty">
-                    Revisamos el contexto con criterio práctico. Si hay una oportunidad real, indicamos por dónde empezar y qué conviene validar primero.
-                  </p>
-                </div>
-
-                <div className="mt-6 border-t border-white/70 pt-2">
-                  <a
-                    href="mailto:hola@tahona.ai"
-                    className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700"
-                  >
-                    <span className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 shadow-[0_18px_40px_-30px_rgba(36,88,64,0.38)] transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
-                      <EnvelopeIcon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Correo</p>
-                      <p className="mt-1 font-heading text-xl font-semibold text-gray-900">hola@tahona.ai</p>
-                      <p className="mt-1 text-sm text-gray-600">Un correo basta para empezar a valorar el encaje.</p>
-                    </div>
-                  </a>
-
-                  <a
-                    href="tel:+34684006043"
-                    className="group mt-3 flex items-start gap-4 rounded-[1.5rem] border border-white/75 bg-white/78 px-5 py-5 transition-all duration-200 motion-reduce:transition-none hover:border-brand-200/70 hover:bg-white/88 hover:text-brand-700"
-                  >
-                    <span className="mt-0.5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100 bg-brand-50 text-brand-600 shadow-[0_18px_40px_-30px_rgba(36,88,64,0.38)] transition-colors duration-200 motion-reduce:transition-none group-hover:bg-brand-100">
-                      <PhoneIcon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-[0.11em] text-gray-500">Teléfono</p>
-                      <p className="mt-1 font-heading text-xl font-semibold text-gray-900">+34 684 006 043</p>
-                      <p className="mt-1 text-sm text-gray-600">Si se prefiere ir al grano, se puede ver en una llamada breve.</p>
-                    </div>
-                  </a>
-                </div>
-              </div>
-
-              <div className="space-y-3 rounded-[1.75rem] border border-white/70 bg-white/68 p-6 shadow-[0_22px_60px_-48px_rgba(31,31,31,0.4)] backdrop-blur-md">
-                {trustBadges.map((badge) => {
-                  const Icon = badge.icon;
-                  return (
-                    <div key={badge.text} className="flex items-center gap-3 text-sm text-gray-600">
-                      <Icon className="h-4 w-4 text-brand-500" />
-                      <span>{badge.text}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/75 bg-white/84 p-6 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md sm:p-8 lg:col-span-7 lg:p-10">
-              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.92)_48%,rgba(240,247,243,0.78)_100%)]" aria-hidden="true" />
-              <div className="relative z-10 mx-auto w-full max-w-3xl rounded-[1.75rem] bg-transparent p-5 sm:p-7">
-                <div>
-                  <h3 className="font-heading text-[1.9rem] font-semibold tracking-[-0.03em] text-gray-900 sm:text-[2.15rem]">
-                    Punto de partida
-                  </h3>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-gray-600 sm:text-[0.95rem]">
-                    Con lo básico basta. Respondemos con una valoración inicial y el siguiente paso más útil.
-                  </p>
-                </div>
-
-                <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <LabelInputContainer>
-                      <Label htmlFor="name" className="text-[0.95rem] font-semibold text-gray-900">Nombre</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        placeholder="Nombre y apellidos"
-                        required
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        aria-invalid={Boolean(errors.name)}
-                        aria-describedby={errors.name ? "contact-name-error" : undefined}
-                        className={cn(
-                          "h-12 rounded-[1.1rem] border border-[#d7ddd8] bg-[#f8faf8] px-4 text-[0.98rem] text-gray-900 shadow-[0_2px_3px_-1px_rgba(0,0,0,0.08),0_1px_0_0_rgba(25,28,33,0.02),0_0_0_1px_rgba(25,28,33,0.06)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none placeholder:text-gray-400 focus-visible:border-brand-400 focus-visible:bg-white focus-visible:ring-brand-500/15",
-                          errors.name && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/25"
-                        )}
-                      />
-                      {errors.name && (
-                        <p id="contact-name-error" className="text-sm text-red-600" role="alert">{errors.name}</p>
-                      )}
-                    </LabelInputContainer>
-
-                    <LabelInputContainer>
-                      <Label htmlFor="email" className="text-[0.95rem] font-semibold text-gray-900">Correo electrónico</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="nombre@empresa.com"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        aria-invalid={Boolean(errors.email)}
-                        aria-describedby={errors.email ? "contact-email-error" : undefined}
-                        className={cn(
-                          "h-12 rounded-[1.1rem] border border-[#d7ddd8] bg-[#f8faf8] px-4 text-[0.98rem] text-gray-900 shadow-[0_2px_3px_-1px_rgba(0,0,0,0.08),0_1px_0_0_rgba(25,28,33,0.02),0_0_0_1px_rgba(25,28,33,0.06)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none placeholder:text-gray-400 focus-visible:border-brand-400 focus-visible:bg-white focus-visible:ring-brand-500/15",
-                          errors.email && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/25"
-                        )}
-                      />
-                      {errors.email && (
-                        <p id="contact-email-error" className="text-sm text-red-600" role="alert">{errors.email}</p>
-                      )}
-                    </LabelInputContainer>
-                  </div>
-
-                  <LabelInputContainer>
-                    <Label htmlFor="details" className="text-[0.95rem] font-semibold text-gray-900">Proceso o problema a revisar</Label>
-                    <Textarea
-                      id="details"
-                      name="details"
-                      placeholder="Proceso actual, qué se hace hoy a mano, dónde se atasca y qué equipo está implicado."
-                      rows={5}
-                      required
-                      value={formData.details}
-                      onChange={handleInputChange}
-                      aria-invalid={Boolean(errors.details)}
-                      aria-describedby={errors.details ? "contact-details-error" : undefined}
-                      className={cn(
-                        "min-h-40 rounded-[1.35rem] border border-[#d7ddd8] bg-[#f8faf8] px-4 py-3 text-[0.98rem] leading-relaxed text-gray-900 shadow-[0_2px_3px_-1px_rgba(0,0,0,0.08),0_1px_0_0_rgba(25,28,33,0.02),0_0_0_1px_rgba(25,28,33,0.06)] transition-[border-color,box-shadow,background-color] duration-200 motion-reduce:transition-none placeholder:text-gray-400 focus-visible:border-brand-400 focus-visible:bg-white focus-visible:ring-brand-500/15",
-                        errors.details && "border-red-500 focus-visible:border-red-500 focus-visible:ring-red-500/25"
-                      )}
-                    />
-                    {errors.details && (
-                      <p id="contact-details-error" className="text-sm text-red-600" role="alert">{errors.details}</p>
-                    )}
-                  </LabelInputContainer>
-
-                  <div className="h-px w-full bg-gradient-to-r from-transparent via-[#cad5ce] to-transparent" aria-hidden="true" />
-
-                  <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-                    <p className="max-w-sm text-sm leading-relaxed text-gray-600">
-                      Respondemos en 24h laborables. Sin presión comercial: si el encaje no es claro, se dirá con la misma claridad.
-                    </p>
-
-                    <div className="flex w-full flex-col gap-3 md:w-auto md:items-end">
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className={cn(
-                          primaryCtaBaseClass,
-                          "min-h-12 w-full px-3 pl-5 text-sm font-semibold md:min-w-[292px]"
-                        )}
-                      >
-                        <span className="leading-tight">{isSubmitting ? "Enviando..." : "Solicitar una primera conversación"}</span>
-                        <span
-                          className={cn(primaryCtaArrowClass, isSubmitting && "opacity-70")}
-                          aria-hidden="true"
-                        >
-                          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-6-6 6 6-6 6" />
-                          </svg>
-                        </span>
-                      </button>
-
-                      {errors.submit && (
-                        <p className="text-sm text-red-600 md:max-w-[220px]" role="alert">
-                          {errors.submit}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </form>
-              </div>
+            <div className="mt-14 grid gap-14 lg:grid-cols-12 lg:gap-16">
+              <ContactSidebar copy={copy} />
+              <ContactForm
+                copy={copy}
+                errors={errors}
+                formData={formData}
+                isSubmitting={isSubmitting}
+                onInputChange={handleInputChange}
+                onSubmit={handleSubmit}
+              />
             </div>
           </div>
-        </div>
         </div>
       </section>
 
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/45 p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-lg overflow-hidden rounded-[2rem] border border-white/80 bg-white/92 p-8 shadow-[0_34px_90px_-38px_rgba(31,31,31,0.5)] backdrop-blur-md sm:p-10">
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.95)_52%,rgba(240,247,243,0.8)_100%)]" aria-hidden="true" />
-            <button
-              type="button"
-              onClick={() => setShowModal(false)}
-              aria-label="Cerrar"
-              className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/75 bg-white/78 text-gray-400 shadow-[0_16px_40px_-32px_rgba(31,31,31,0.45)] transition-colors duration-200 motion-reduce:transition-none hover:text-gray-700"
-            >
-              <XIcon className="h-5 w-5" />
-            </button>
-            <div className="relative">
-              <div className="inline-flex items-center gap-3 text-sm text-gray-500">
-                <span className="h-px w-8 bg-brand-300" />
-                <span className="font-medium text-gray-600">Mensaje recibido</span>
-              </div>
-              <h3 className="mt-4 font-heading text-3xl font-semibold text-gray-900 text-balance sm:text-4xl">
-                Mensaje recibido
-              </h3>
-              <p className="mt-3 max-w-md text-base leading-relaxed text-gray-600 text-pretty">
-                Lo revisaremos y te responderemos en 24h laborables con el siguiente paso más útil.
-              </p>
-
-                <div className="mt-6 flex items-center gap-3 border-t border-gray-200 pt-5 text-sm text-gray-600">
-                  <EnvelopeIcon className="h-4 w-4 text-brand-600" />
-                  <span>Si prefieres ampliarlo por correo, escríbenos a hola@tahona.ai</span>
-                </div>
-
-              <button
-                type="button"
-                onClick={() => setShowModal(false)}
-                className="mt-8 inline-flex min-h-12 items-center justify-center rounded-xl bg-brand-600 px-8 py-3 text-sm font-medium text-white shadow-[0_22px_45px_-24px_rgba(36,88,64,0.9)] transition-all duration-200 motion-reduce:transition-none hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-[0_26px_55px_-24px_rgba(27,69,48,0.95)]"
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
+        <ContactModal copy={copy} onClose={() => setShowModal(false)} />
       )}
     </>
   );
