@@ -2,46 +2,46 @@
 
 ## Architecture Summary
 
-The site keeps Spanish as the default locale at the existing URLs and generates English and Polish under `/en/` and `/pl/`. Shared Astro page templates receive a `locale` prop, React islands read typed content from `src/i18n/content.ts`, and routing helpers in `src/i18n/routing.ts` generate localized internal links, canonicals, hreflang alternates and language-selector targets.
+Spanish remains the default locale at the root URLs. English and Polish are generated under `/en/` and `/pl/`. Shared Astro templates receive a `locale` prop, React islands read typed content from `src/i18n/content.ts`, and `src/i18n/routing.ts` generates localized links, canonicals, hreflang alternates and language-selector targets.
 
-SEO/GEO baseline files were preserved. The i18n work extends them with localized metadata, localized JSON-LD language and breadcrumb labels, alternate links in the page head, and expanded `llms.txt` route coverage.
+Localized metadata, JSON-LD language, breadcrumb labels and `llms.txt` route coverage must change together with public positioning. The generated sitemap covers all Spanish, English and Polish routes.
 
-The generated sitemap lists all Spanish, English and Polish routes. Hreflang alternates are emitted in each page head rather than as sitemap alternate entries in this pass.
-
-## Key Phrases Reviewed
+## Current Positioning Phrases
 
 | ES | EN | PL |
 | --- | --- | --- |
-| La tecnología ya existe. Falta la implementación adecuada. | The technology already exists. What is missing is the right implementation. | Technologia już istnieje. Brakuje właściwego wdrożenia. |
-| Procesos, datos y herramientas internas | Internal processes, data and tools | Procesy, dane i narzędzia wewnętrzne |
-| Fundamentos | Foundations | Fundamenty |
-| Desarrollo de IA | AI development | Wdrożenia AI |
-| Otros desarrollos | Other custom development | Inne wdrożenia techniczne |
-| Trabajo aplicado | Applied work | Projekty wdrożeniowe |
+| De la estrategia a la implementación. | From strategy to implementation. | Od strategii do wdrożenia. |
+| Partner tecnológico | Technology partner | Partner technologiczny |
+| Productos digitales | Digital products | Produkty cyfrowe |
+| Software a medida | Custom software | Oprogramowanie na miarę |
+| Soluciones de IA | AI solutions | Rozwiązania AI |
+| Estrategia y arquitectura | Strategy and architecture | Strategia i architektura |
+| Inteligencia artificial | Artificial intelligence | Sztuczna inteligencja |
+| Producto y software | Product and software | Produkt i oprogramowanie |
+| Diagnóstico y definición | Diagnosis and definition | Diagnoza i definicja |
+| Estrategia de producto y tecnología | Product and technology strategy | Strategia produktu i technologii |
+| Arquitectura y hoja de ruta | Architecture and roadmap | Architektura i plan działania |
+| Agentes y automatización | Agents and automation | Agenci i automatyzacja |
+| Procesamiento documental y conocimiento | Document processing and knowledge | Przetwarzanie dokumentów i wiedza |
+| Integraciones y plataformas | Integrations and platforms | Integracje i platformy |
 | Validación humana | Human validation | Walidacja przez człowieka |
 | Trazabilidad de cambios | Change tracking | Śledzenie zmian |
-| Trazabilidad de acciones de agentes | Agent action traceability | Śledzenie działań |
 | Trazabilidad industrial / calidad | Industrial / quality traceability | Identyfikowalność |
-| Herramientas internas | Internal tools | Narzędzia wewnętrzne |
-| Bases de conocimiento empresarial | Enterprise knowledge bases | Firmowe bazy wiedzy |
-| Diagnóstico operativo | Operational diagnosis | Diagnoza operacyjna |
-| Implementación técnica | Technical implementation | Wdrożenie techniczne |
-| Procesamiento documental | Document processing | Przetwarzanie dokumentów |
-| Ingesta documental | Document ingestion | Wczytywanie dokumentów |
-| Automatización supervisada | Supervised automation | Automatyzacja nadzorowana |
 
-## Polish copy decisions
+## Polish Copy Decisions
 
-- `Wdrożenia AI` replaces `Rozwój rozwiązań AI` in the main taxonomy. It is shorter, more implementation-led and closer to Tahona's positioning.
-- `Inne wdrożenia techniczne` replaces `Pozostałe prace rozwojowe`. The previous wording sounded generic and slightly software-house-like.
-- `Projekty wdrożeniowe` replaces `Praca wdrożeniowa` for public navigation and case framing.
-- `Wczytywanie dokumentów` replaces `Ingestia dokumentów` in public copy. `Ingestia` is understandable in technical circles but too artificial for a general B2B website.
-- `Śledzenie działań` is used for AI agents and audit trails. `Identyfikowalność` is kept for industrial, quality and traceability contexts where it is a natural Polish term.
-- English loanwords were reduced where possible: `software` became `oprogramowanie`, `workflow` became `przepływ pracy`, `back office` became `zaplecze operacyjne`, and `follow-up` became `dalszy kontakt`.
+- `Partner technologiczny` is the primary company category. Operational diagnosis remains part of the method, not the main positioning.
+- `Produkt i oprogramowanie` is a first-class service family. It replaces wording that presented non-AI development as a residual category.
+- `Oprogramowanie na miarę` is preferred over an English `custom software` loan phrase.
+- `Technologia szyta na miarę` is used only as a supporting metaphor for the tailored approach, not as the formal category.
+- `Wczytywanie dokumentów` is preferred to `ingestia dokumentów` in public copy.
+- `Śledzenie działań` is used for AI agents and audit trails. `Identyfikowalność` remains for industrial and quality contexts.
+- English loanwords are reduced where natural Polish terms exist: `software` becomes `oprogramowanie`, `workflow` becomes `przepływ pracy`, and `back office` becomes `zaplecze operacyjne`.
 
 ## Intentional Rewrites
 
-- English copy avoids direct "you" phrasing in body sections and keeps a professional B2B tone.
-- Polish paragraphs were rewritten for natural syntax instead of following Spanish sentence order.
-- Health-sector language stays non-clinical: operational support, documentation, internal knowledge and administrative coordination only.
-- Marketing text explicitly preserves the "not a marketing agency" boundary while avoiding untranslated `growth` / `lead ops` wording in public copy.
+- English body copy avoids direct second-person phrasing and keeps a professional B2B tone.
+- Polish paragraphs use natural syntax instead of following Spanish sentence order.
+- AI is presented as a core end-to-end capability, but not as Tahona's only capability.
+- Health-sector language remains non-clinical: operational support, documentation, internal knowledge and administrative coordination only.
+- Marketing text preserves the boundary that Tahona is not a marketing agency.

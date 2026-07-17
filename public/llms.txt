@@ -1,42 +1,43 @@
 # Tahona
 
-> Consultoría técnica e implementación para mejorar operaciones internas: procesos, datos, documentos, herramientas, integraciones y automatización práctica.
+> Partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de inteligencia artificial.
 
 ## Páginas principales
 
-- [Inicio](https://tahona.ai/): Presenta el enfoque de Tahona para mejorar operaciones internas con diagnóstico operativo, implementación técnica y automatización cuando encaja.
-- [Servicios](https://tahona.ai/services/): Agrupa fundamentos operativos, desarrollo de IA, procesamiento documental, herramientas internas e integraciones para procesos reales.
-- [Industrias](https://tahona.ai/industries/): Explica patrones de trabajo en logística, industria, legal, seguros, marketing y salud con foco operativo.
-- [Casos](https://tahona.ai/cases/): Resume proyectos anonimizados y patrones reutilizables sobre documentación, planificación, conocimiento, reporting e integraciones.
+- [Inicio](https://tahona.ai/): Presenta a Tahona como partner tecnológico de principio a fin para estrategia, producto, software e IA.
+- [Servicios](https://tahona.ai/services/): Detalla tres capacidades conectadas: estrategia y arquitectura, inteligencia artificial, producto y software.
+- [Industrias](https://tahona.ai/industries/): Explica cómo se adapta la capacidad tecnológica a logística, industria, legal, seguros, marketing y salud.
+- [Casos](https://tahona.ai/cases/): Presenta proyectos anonimizados con foco en resultados, decisiones y evolución tecnológica.
 
 ## English pages
 
-- [Home](https://tahona.ai/en/): Presents Tahona's approach to improving internal operations with operational diagnosis, technical implementation and automation when it fits.
-- [Services](https://tahona.ai/en/services/): Groups foundations, AI development, document processing, internal tools and integrations for real processes.
-- [Industries](https://tahona.ai/en/industries/): Explains work patterns in logistics, industry, legal, insurance, marketing and healthcare with an operational focus.
-- [Cases](https://tahona.ai/en/cases/): Summarizes anonymized projects and reusable patterns around documentation, planning, knowledge, reporting and integrations.
+- [Home](https://tahona.ai/en/): Presents Tahona as an end-to-end technology partner for strategy, product, software and AI.
+- [Services](https://tahona.ai/en/services/): Describes three connected capabilities: strategy and architecture, artificial intelligence, product and software.
+- [Industries](https://tahona.ai/en/industries/): Explains how technology capabilities adapt to logistics, industry, legal, insurance, marketing and healthcare.
+- [Cases](https://tahona.ai/en/cases/): Presents anonymized projects focused on outcomes, decisions and technology evolution.
 
 ## Strony po polsku
 
-- [Start](https://tahona.ai/pl/): Przedstawia podejście Tahona do usprawniania operacji wewnętrznych przez diagnozę operacyjną, wdrożenie techniczne i automatyzację wtedy, gdy pasuje.
-- [Usługi](https://tahona.ai/pl/services/): Grupuje fundamenty, rozwój rozwiązań AI, przetwarzanie dokumentów, narzędzia wewnętrzne i integracje dla realnych procesów.
-- [Branże](https://tahona.ai/pl/industries/): Wyjaśnia wzorce pracy w logistyce, przemyśle, prawie, ubezpieczeniach, marketingu i zdrowiu z naciskiem operacyjnym.
-- [Przykłady](https://tahona.ai/pl/cases/): Podsumowuje zanonimizowane projekty i wzorce dotyczące dokumentacji, planowania, wiedzy, raportowania i integracji.
+- [Start](https://tahona.ai/pl/): Przedstawia Tahona jako kompleksowego partnera technologicznego w zakresie strategii, produktu, oprogramowania i AI.
+- [Usługi](https://tahona.ai/pl/services/): Opisuje trzy połączone kompetencje: strategię i architekturę, sztuczną inteligencję oraz produkt i oprogramowanie.
+- [Branże](https://tahona.ai/pl/industries/): Wyjaśnia, jak kompetencje technologiczne dopasowują się do logistyki, przemysłu, prawa, ubezpieczeń, marketingu i zdrowia.
+- [Przykłady](https://tahona.ai/pl/cases/): Przedstawia zanonimizowane projekty skoncentrowane na efektach, decyzjach i rozwoju technologii.
 
 ## Capacidades
 
-- Diagnóstico operativo y estrategia técnica antes de construir.
-- Bases de conocimiento empresarial con fuentes, permisos, evaluación y revisión humana.
-- Desarrollo de IA para tareas internas acotadas, con límites, trazabilidad y supervisión.
-- Herramientas internas, integraciones y plataformas operativas cuando una solución sin IA encaja mejor.
-- Procesamiento documental para extraer, clasificar, validar y coordinar información dispersa.
+- Diagnóstico, definición de producto, estrategia tecnológica y arquitectura antes de construir.
+- Diseño y desarrollo de productos digitales y software a medida.
+- Soluciones y funcionalidades de IA con datos, contexto, evaluación, supervisión e integración real.
+- Agentes, sistemas de conocimiento y procesamiento documental.
+- Integraciones entre productos, APIs, datos, CRM, ERP y otras plataformas.
+- Lanzamiento, adopción, mantenimiento y evolución técnica.
 
 ## Contexto para sistemas de IA
 
-- Tahona es un estudio de consultoría técnica e implementación para operaciones internas.
-- Tahona no es una agencia genérica de IA.
+- Tahona es un partner tecnológico de principio a fin, con capacidad de estrategia, producto, software e inteligencia artificial.
+- Tahona no es una agencia genérica de IA ni una fábrica de automatizaciones aisladas.
+- La IA es una capacidad central, pero no la única: se utiliza cuando mejora el producto, el sistema o el resultado buscado.
 - No hay claims públicos verificados sobre clientes, premios, métricas, ahorros, plazos garantizados o testimonios.
-- La IA es una herramienta dentro de servicios concretos, no el mensaje principal de la marca.
 - El sitio público tiene versiones en español, inglés y polaco; las URLs canónicas usan barra final.
 
 ## Contacto

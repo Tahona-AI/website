@@ -98,18 +98,18 @@ type WorkItem = {
 
 type SiteContent = {
   readonly aiApplied: {
-    readonly curve: {
-      readonly ariaLabel: string;
-      readonly automationLabel: string;
-      readonly levels: readonly {
-        readonly body: string;
-        readonly label: string;
-        readonly title: readonly string[];
-      }[];
-      readonly valueLabel: string;
-    };
     readonly description: string;
     readonly eyebrow: string;
+    readonly lifecycle: {
+      readonly ariaLabel: string;
+      readonly centerLabel: string;
+      readonly centerTitle: string;
+      readonly stages: readonly {
+        readonly body: string;
+        readonly label: string;
+        readonly title: string;
+      }[];
+    };
     readonly title: string;
   };
   readonly caseStudies: readonly CaseStudy[];
@@ -277,30 +277,30 @@ export const SITE_CONTENT = {
     metadata: {
       home: {
         name: "Inicio",
-        title: "Tahona | Procesos, datos y herramientas internas",
+        title: "Tahona | IA, productos digitales y software a medida",
         description:
-          "Mejoramos operaciones internas con diagnóstico operativo, implementación técnica y automatización solo cuando encaja con el trabajo real.",
+          "Partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
       },
       services: {
         name: "Servicios",
-        title: "Servicios Tahona | Operaciones, IA e integraciones",
+        title: "Servicios Tahona | Estrategia, IA y desarrollo de producto",
         description:
-          "Servicios para ordenar procesos, datos, documentos, herramientas internas, desarrollo de IA e integraciones alrededor de la operación real.",
+          "Estrategia tecnológica, inteligencia artificial, productos digitales, software a medida e integraciones de principio a fin.",
       },
       industries: {
         name: "Industrias",
-        title: "Industrias Tahona | Software e IA por sector",
+        title: "Industrias Tahona | Productos digitales, software e IA",
         description:
-          "Aplicamos software, IA e integraciones en logística, industria, legal, seguros, marketing y salud con foco en procesos y herramientas internas.",
+          "Capacidad de producto, software e IA adaptada a logística, industria, legal, seguros, marketing y salud.",
       },
       cases: {
         name: "Casos",
-        title: "Casos Tahona | Proyectos operativos anonimizados",
+        title: "Casos Tahona | Productos y sistemas sobre retos reales",
         description:
-          "Proyectos anonimizados sobre documentación, planificación, conocimiento, reporting e integraciones, explicados desde el problema operativo y la solución.",
+          "Casos anonimizados centrados en el resultado: operaciones más claras, mejores decisiones y servicios digitales preparados para evolucionar.",
       },
       keywords:
-        "diagnóstico operativo, implementación técnica, automatización de procesos, herramientas internas, datos documentos reporting, eficiencia operativa",
+        "partner tecnológico, productos digitales, software a medida, desarrollo de IA, estrategia tecnológica, integraciones, arquitectura de software",
     },
     skipLink: "Saltar al contenido principal",
     navigation: {
@@ -318,77 +318,73 @@ export const SITE_CONTENT = {
       ],
       serviceColumns: [
         {
-          title: "Fundamentos",
+          title: "Estrategia y arquitectura",
           items: [
             {
-              label: "Consultoría",
-              description:
-                "Auditoría operativa y diagnóstico de procesos, datos y herramientas.",
+              label: "Diagnóstico y definición",
+              description: "Contexto, objetivos, usuarios, procesos y oportunidades.",
               href: "#consultoria-auditoria-operativa",
             },
             {
-              label: "Estrategia",
-              description: "Hoja de ruta técnica y operativa antes de construir.",
+              label: "Estrategia de producto y tecnología",
+              description: "Decisiones de producto, alcance y hoja de ruta.",
               href: "#estrategia-tecnica-operativa",
             },
             {
-              label: "Bases de conocimiento",
-              description:
-                "Conocimiento interno con fuentes, permisos y revisión humana.",
+              label: "Arquitectura y hoja de ruta",
+              description: "Sistema, datos, integraciones, riesgos y evolución.",
               href: "#bases-conocimiento-empresarial",
             },
           ],
         },
         {
-          title: "Desarrollo de IA",
+          title: "Inteligencia artificial",
           items: [
             {
-              label: "Optimización de procesos",
-              description:
-                "Menos pasos manuales sobre las herramientas existentes.",
+              label: "Soluciones de IA",
+              description: "Capacidades de IA integradas en productos y procesos.",
               href: "#optimizacion-procesos",
             },
             {
-              label: "Agentes de IA",
-              description:
-                "Tareas acotadas con límites, supervisión y trazabilidad.",
+              label: "Agentes y automatización",
+              description: "Tareas acotadas con límites, supervisión y trazabilidad.",
               href: "#agentes-ia",
             },
             {
-              label: "Procesamiento documental",
-              description: "Extracción, validación y clasificación de documentos.",
+              label: "Documentos y conocimiento",
+              description: "Procesamiento documental y conocimiento con fuentes.",
               href: "#procesamiento-documental",
             },
           ],
         },
         {
-          title: "Otros desarrollos",
+          title: "Producto y software",
           items: [
             {
-              label: "Herramientas a medida",
-              description:
-                "Software alrededor de un proceso concreto, con la complejidad justa.",
+              label: "Productos digitales",
+              description: "Productos y experiencias digitales desde la definición.",
               href: "#herramientas-medida",
             },
             {
-              label: "Herramientas internas",
-              description: "Backoffice, paneles y workflows para el día a día.",
+              label: "Software a medida",
+              description: "Aplicaciones y plataformas alrededor del negocio.",
               href: "#herramientas-internas",
             },
             {
-              label: "Integraciones / plataformas",
-              description: "Drive, CRM, ERP, hojas de cálculo y APIs conectados.",
+              label: "Integraciones y plataformas",
+              description: "Datos, herramientas y sistemas conectados.",
               href: "#integraciones-plataformas-operativas",
             },
           ],
         },
+
       ],
     },
     home: {
       hero: {
-        titleLines: ["Del diagnóstico a la implementación."],
+        titleLines: ["De la estrategia a la implementación."],
         description:
-          "Tahona es el partner tecnológico para mejorar cómo funciona una empresa por dentro.",
+          "Tahona es el partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
         primaryLabel: "Hablemos",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
@@ -396,122 +392,138 @@ export const SITE_CONTENT = {
       },
       whatWeDo: {
         eyebrow: "Qué hacemos",
-        title:
-          "Mejoramos operaciones internas donde procesos, datos y herramientas se cruzan.",
+        title: "Estrategia, producto y tecnología en un mismo equipo.",
         description: [
-          "El trabajo no empieza por elegir una tecnología. Empieza por entender cómo funciona la operación, qué información se mueve, dónde se repite trabajo manual y qué necesita el equipo para operar con más control.",
-          "A partir de ese diagnóstico se construyen herramientas internas, integraciones, bases de conocimiento, procesamiento documental o automatización con IA cuando encaja con el flujo real.",
+          "Acompañamos todo el ciclo: entendemos el reto, definimos la solución, diseñamos la experiencia, construimos la tecnología y la integramos en el negocio.",
+          "El resultado puede ser un producto digital, software a medida o una solución de IA. La tecnología se decide en función del objetivo, los usuarios y el contexto, no al revés.",
+          "El enfoque es de sastrería tecnológica: cada sistema se diseña alrededor del negocio, se valida con sus usuarios y se prepara para evolucionar.",
         ],
         bullets: [
-          "Procesos con demasiados pasos manuales.",
-          "Documentos que requieren revisión, extracción o clasificación.",
-          "Información repartida entre Drive, hojas de cálculo, CRM, ERP, correo y herramientas internas.",
-          "Reporting que llega tarde o depende de preparación manual.",
-          "Equipos que necesitan adoptar una solución sin añadir otra capa de fricción.",
+          "Diagnóstico, definición de producto y estrategia tecnológica.",
+          "Diseño y desarrollo de productos digitales.",
+          "Software a medida y plataformas internas.",
+          "Soluciones de IA integradas en productos y procesos.",
+          "Arquitectura, datos, integraciones y evolución técnica.",
         ],
       },
       services: {
         eyebrow: "Servicios",
-        title: "Tres familias de trabajo.",
+        title: "Tres capacidades. Un único partner tecnológico.",
         description:
-          "Primero se entiende la operación. Después se decide si hace falta estrategia, software, IA, integraciones, acompañamiento de adopción o formación.",
+          "Estrategia y arquitectura, inteligencia artificial, producto y software. Desde la definición inicial hasta la puesta en producción y la evolución del sistema.",
         ctaLabel: "Ver servicios",
       },
       industries: {
         eyebrow: "Industrias",
-        title: "Sectores que trabajamos.",
+        title: "Capacidad tecnológica adaptada a cada sector.",
         description:
-          "No nos encerramos en un vertical. El patrón común son operaciones con información dispersa, tareas repetibles, documentación e integraciones entre herramientas.",
+          "Cambian los procesos, los usuarios, los datos y las restricciones. La capacidad para definir, diseñar y construir se mantiene.",
         ctaLabel: "Ver industrias",
       },
       ourWork: {
-        eyebrow: "Nuestro trabajo",
-        title: "Proyectos reales en los que hemos trabajado.",
+        eyebrow: "Casos",
+        title: "Productos y sistemas orientados a resultados reales.",
         description:
-          "Algunos ejemplos de trabajo aplicado en operaciones reales: plataformas internas, planificación, documentación, datos e integraciones construidas alrededor de cómo trabaja cada equipo.",
+          "El foco está en el resultado: operaciones más claras, decisiones mejor informadas y servicios digitales capaces de evolucionar con el negocio.",
         ctaLabel: "Ver casos",
       },
       howWeWork: {
         eyebrow: "Cómo trabajamos",
-        title: "Entender la operación antes de cambiarla.",
+        title: "Un partner desde la definición hasta la evolución.",
         description:
-          "Cada empresa tiene una forma distinta de trabajar. El proceso empieza leyendo procesos, datos, herramientas, documentos y restricciones reales. Después se priorizan mejoras con sentido práctico y se implementan de forma que el equipo pueda adoptarlas.",
+          "Asumimos el recorrido completo: estrategia, producto, arquitectura, desarrollo, integración y mejora continua. El diagnóstico permite entender el punto de partida; el objetivo es construir y hacer avanzar la solución.",
         steps: [
           {
             number: "01",
-            title: "Contexto",
+            title: "Contexto y objetivo",
             description:
-              "Primera lectura de la operación, prioridades y fricciones principales.",
+              "Entendemos el negocio, los usuarios, los procesos, los datos y el resultado esperado.",
           },
           {
             number: "02",
-            title: "Diagnóstico",
+            title: "Estrategia y definición",
             description:
-              "Revisión de procesos, datos, documentos, herramientas y dependencias internas.",
+              "Definimos la oportunidad, el alcance, las prioridades y la hoja de ruta.",
           },
           {
             number: "03",
-            title: "Priorización",
+            title: "Producto y arquitectura",
             description:
-              "Selección de oportunidades por valor operativo, complejidad, riesgo y adopción.",
+              "Diseñamos la experiencia, el sistema, los datos y las integraciones.",
           },
           {
             number: "04",
-            title: "Construcción",
+            title: "Construcción e integración",
             description:
-              "Diseño e implementación de software, IA, integraciones o automatización según el caso.",
+              "Desarrollamos software y capacidades de IA en ciclos cortos con validación continua.",
           },
           {
             number: "05",
-            title: "Adopción",
+            title: "Lanzamiento y evolución",
             description:
-              "Ajustes, documentación y handoff para que el sistema entre en el trabajo diario.",
+              "Integramos, medimos, documentamos y seguimos mejorando el sistema.",
           },
         ],
       },
     },
     aiApplied: {
-      eyebrow: "IA aplicada",
-      title: "IA cuando mejora un proceso, no cuando solo añade ruido.",
+      eyebrow: "Inteligencia artificial",
+      title: "IA de principio a fin, integrada en productos y operaciones.",
       description:
-        "Trabajamos con modelos, asistentes y agentes cuando ayudan a leer documentos, preparar información, ejecutar pasos repetibles, revisar resultados o conectar herramientas internas. Cada sistema debe tener límites, trazabilidad y un punto claro de supervisión.",
-      curve: {
-        ariaLabel: "Curva de valor de la IA aplicada",
-        valueLabel: "Valor",
-        automationLabel: "Automatización",
-        levels: [
-          { label: "NIVEL 01", title: ["Uso con criterio"], body: "Decisión humana." },
-          { label: "NIVEL 02", title: ["Asistentes específicos"], body: "Lectura y revisión." },
-          { label: "NIVEL 03", title: ["Automatización", "supervisada"], body: "Reglas y trazabilidad." },
-          { label: "NIVEL 04", title: ["Agentes con contexto"], body: "Permisos y límites." },
+        "Trabajamos desde la estrategia y el caso de uso hasta los datos, la arquitectura, la construcción, la evaluación y la evolución en producción. Desarrollamos sistemas de IA que forman parte del negocio, no demostraciones aisladas.",
+      lifecycle: {
+        ariaLabel: "Ciclo integral de desarrollo de una solución de inteligencia artificial",
+        centerLabel: "IA de principio a fin",
+        centerTitle: "Sistema en producción",
+        stages: [
+          {
+            label: "Estrategia",
+            title: "Caso de uso y objetivo",
+            body: "Valor, alcance, usuarios y criterios de éxito.",
+          },
+          {
+            label: "Fundamentos",
+            title: "Datos y contexto",
+            body: "Fuentes, permisos, calidad y conocimiento del negocio.",
+          },
+          {
+            label: "Ingeniería",
+            title: "Construcción e integración",
+            body: "Modelos, producto, herramientas y sistemas conectados.",
+          },
+          {
+            label: "Operación",
+            title: "Evaluación y evolución",
+            body: "Pruebas, supervisión, métricas y mejora continua.",
+          },
         ],
       },
     },
     servicesPage: {
       hero: {
-        titleLines: ["Servicios para ordenar, construir e integrar operaciones internas."],
+        titleLines: ["Estrategia, IA y desarrollo de producto de principio a fin."],
         description:
-          "Trabajamos desde la operación real de cada empresa. El objetivo es entender procesos, datos, documentos y herramientas para decidir qué conviene construir, integrar o automatizar.",
-        primaryLabel: "Solicitar una primera conversación",
+          "Un único equipo para definir, diseñar, construir, integrar y hacer evolucionar productos digitales, software a medida y soluciones de IA.",
+        primaryLabel: "Hablemos",
         primaryHref: "#contacto",
-        secondaryLabel: "Ver cómo trabajamos",
+        secondaryLabel: "Ver capacidades",
         secondaryHref: "#familias-servicios",
       },
       pillarsSection: {
-        eyebrow: "Cómo se ordenan los servicios",
-        title: "Tres familias de trabajo que se ordenan en una secuencia.",
+        eyebrow: "Capacidades",
+        title: "Tres capacidades. Un único partner tecnológico.",
         description:
-          "Los Fundamentos entienden y ordenan la operación. El Desarrollo de IA y los Otros desarrollos construyen sobre esa base, no al revés.",
+          "Estrategia y arquitectura, inteligencia artificial, producto y software. Se combinan según el reto, sin silos ni soluciones predeterminadas.",
       },
       detailSection: {
         eyebrow: "Servicios en detalle",
-        title: "Lo que hacemos, agrupado por familia.",
+        title: "Capacidad para decidir, construir e integrar.",
       },
       examplesSection: {
-        eyebrow: "Qué construimos",
-        title: "Ejemplos de sistemas concretos para operaciones concretas.",
+        eyebrow: "Qué desarrollamos",
+        title: "Productos, sistemas y capacidades para contextos reales.",
         description:
-          "No trabajamos con entregables genéricos. Implementaciones adaptadas al contexto, construidas sobre datos y restricciones reales.",
+          "Cada implementación se adapta al negocio, a sus usuarios, a sus datos y a la forma en que debe evolucionar.",
       },
       faqSection: {
         eyebrow: "Preguntas frecuentes",
@@ -521,9 +533,9 @@ export const SITE_CONTENT = {
     },
     industriesPage: {
       hero: {
-        titleLines: ["Software, IA e integraciones para cada sector."],
+        titleLines: ["Productos digitales, software e IA para cada sector."],
         description:
-          "En cada sector hay procesos, documentos, datos, reporting y herramientas que necesitan funcionar mejor juntos. La forma de operar es la misma: entender, implementar y mejorar.",
+          "Cada sector tiene usuarios, procesos, datos y restricciones distintas. Adaptamos la estrategia, el producto, el software y la IA al contexto real del negocio.",
         primaryLabel: "Solicitar una primera conversación",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
@@ -548,9 +560,9 @@ export const SITE_CONTENT = {
     },
     casesPage: {
       hero: {
-        titleLines: ["Nuestro trabajo aplicado a operaciones reales."],
+        titleLines: ["Productos y sistemas sobre retos reales."],
         description:
-          "Proyectos y patrones abordados por Tahona, presentados de forma anonimizada y sin métricas, testimonios ni logos inventados. El foco está en qué problema operativo se ordena y qué se construye alrededor.",
+          "Casos anonimizados centrados en el resultado: más claridad, mejores decisiones y una base tecnológica capaz de evolucionar con el negocio.",
         primaryLabel: "Solicitar una primera conversación",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
@@ -558,20 +570,20 @@ export const SITE_CONTENT = {
       },
       section: {
         eyebrow: "Casos",
-        title: "Trabajo aplicado a operaciones reales.",
+        title: "Resultados sobre retos reales.",
         text:
-          "Proyectos y patrones abordados desde operaciones internas: documentación, planificación, conocimiento, reporting e integraciones.",
+          "Productos y sistemas orientados a mejorar cómo se trabaja, se decide y se presta servicio.",
         relatedAreasLabel: "Áreas relacionadas",
       },
     },
     contact: {
       eyebrow: "Contacto",
-      title: "Una primera conversación para entender el contexto.",
+      title: "Hablemos del producto, sistema o reto tecnológico.",
       description:
-        "Una primera conversación permite revisar la operación, detectar si existe una oportunidad real de mejora y decidir el siguiente paso con claridad.",
+        "Una primera conversación para entender el objetivo, el punto de partida y el siguiente paso más útil.",
       sidebarEyebrow: "Contacto",
       sidebarBody:
-        "Revisamos el contexto con criterio práctico. Si hay una oportunidad real, indicamos por dónde empezar y qué conviene validar primero.",
+        "Revisamos el contexto, el objetivo y las restricciones. Si hay una línea clara de trabajo, proponemos el mejor punto de partida.",
       emailLabel: "Correo",
       emailPlaceholder: "nombre@empresa.com",
       emailValueLabel: "hola@tahona.ai",
@@ -589,9 +601,9 @@ export const SITE_CONTENT = {
         "Con lo básico basta. Respondemos con una valoración inicial y el siguiente paso más útil.",
       nameLabel: "Nombre",
       namePlaceholder: "Nombre y apellidos",
-      detailsLabel: "Proceso o problema a revisar",
+      detailsLabel: "Proyecto, producto o reto",
       detailsPlaceholder:
-        "Proceso actual, qué se hace hoy a mano, dónde se atasca y qué equipo está implicado.",
+        "Qué se quiere construir o mejorar, qué existe hoy y qué resultado se busca.",
       privacyNote:
         "Respondemos en 24h laborables. Sin presión comercial: si el encaje no es claro, se dirá con la misma claridad.",
       submitLabel: "Solicitar una primera conversación",
@@ -617,21 +629,21 @@ export const SITE_CONTENT = {
       contactLabel: "Contacta con nosotros",
       copyright: "Todos los derechos reservados.",
       description:
-        "Equipo técnico que mejora procesos, datos y herramientas internas con criterio práctico.",
+        "Partner tecnológico para productos digitales, software a medida y soluciones de IA.",
     },
     structuredData: {
       organizationDescription:
-        "Estudio técnico de consultoría e implementación para mejorar operaciones internas, procesos, datos, documentos, herramientas e integraciones.",
+        "Partner tecnológico para estrategia, productos digitales, software a medida, inteligencia artificial e integraciones.",
       knowsAbout: [
-        "diagnóstico operativo",
-        "implementación técnica",
-        "automatización de procesos",
-        "herramientas internas",
+        "estrategia tecnológica",
+        "desarrollo de producto digital",
+        "desarrollo de inteligencia artificial",
+        "software a medida",
         "procesamiento documental",
         "integraciones operativas",
       ],
       serviceSchemaName:
-        "Servicios de implementación técnica para operaciones internas",
+        "Servicios de estrategia, inteligencia artificial, producto y software",
       serviceCatalogName: "Familias de servicios Tahona",
       industryListName: "Sectores y patrones operativos",
       casesListName: "Casos anonimizados de trabajo operativo",
@@ -640,49 +652,49 @@ export const SITE_CONTENT = {
       {
         id: "fundamentos",
         marker: "01",
-        title: "Fundamentos",
+        title: "Estrategia y arquitectura",
         description:
-          "Antes de construir se ordena el problema. Diagnóstico, estrategia y conocimiento interno para tomar decisiones técnicas con contexto.",
+          "Definimos qué construir, por qué y cómo llevarlo a una solución viable, integrada y preparada para evolucionar.",
         visualSrc: "/images/service1-illustration.png",
         visualScaleClass: "scale-[1.08]",
         services: [
           {
             id: "consultoria-auditoria-operativa",
-            title: "Consultoría y auditoría operativa",
-            menuLabel: "Consultoría",
+            title: "Diagnóstico y definición",
+            menuLabel: "Diagnóstico y definición",
             summary:
-              "Revisión de procesos, herramientas, documentos, datos y dependencias internas para entender dónde se pierde claridad, control o capacidad operativa.",
+              "Lectura estructurada del negocio, los usuarios, los procesos, los datos y la tecnología existente para convertir un reto abierto en una oportunidad concreta.",
             bullets: [
-              "Mapa del proceso actual",
-              "Inventario de trabajo manual y bloqueos",
-              "Riesgos, dependencias y prioridades",
-              "Recomendación de siguientes pasos",
+              "Objetivos, usuarios y contexto",
+              "Procesos, datos y sistemas actuales",
+              "Oportunidades y restricciones",
+              "Criterios de éxito y siguientes pasos",
             ],
           },
           {
             id: "estrategia-tecnica-operativa",
-            title: "Estrategia técnica y operativa",
-            menuLabel: "Estrategia",
+            title: "Estrategia de producto y tecnología",
+            menuLabel: "Estrategia de producto",
             summary:
-              "Hoja de ruta para decidir qué implementar, en qué orden y con qué restricciones. Sirve cuando el equipo necesita claridad antes de invertir en desarrollo.",
+              "Definición de la propuesta, el alcance y la hoja de ruta para avanzar con prioridades claras antes de invertir en construcción.",
             bullets: [
+              "Visión y alcance de producto",
               "Roadmap por fases",
-              "Alcance funcional y técnico",
-              "Criterios de decisión",
-              "Riesgos de adopción, datos e integración",
+              "Decisiones funcionales y técnicas",
+              "Riesgos, dependencias y adopción",
             ],
           },
           {
             id: "bases-conocimiento-empresarial",
-            title: "Bases de conocimiento empresarial",
-            menuLabel: "Bases de conocimiento",
+            title: "Arquitectura y hoja de ruta",
+            menuLabel: "Arquitectura",
             summary:
-              "Infraestructura de conocimiento y contexto interno para consultar documentos, datos y contexto de empresa con fuentes, permisos, evaluación y revisión humana.",
+              "Diseño de la arquitectura, los datos, las integraciones y el modelo de evolución que necesita la solución para funcionar a largo plazo.",
             bullets: [
-              "Ingesta documental y normalización",
-              "Respuestas con citas y trazabilidad",
-              "Diseño de permisos y alcance",
-              "Integración con Drive, CRM, ERP y reporting",
+              "Arquitectura de aplicación y datos",
+              "Integraciones y dependencias",
+              "Seguridad, permisos y trazabilidad",
+              "Plan de entrega y evolución",
             ],
           },
         ],
@@ -690,49 +702,49 @@ export const SITE_CONTENT = {
       {
         id: "desarrollo-ia",
         marker: "02",
-        title: "Desarrollo de IA",
+        title: "Inteligencia artificial",
         description:
-          "Implementación de IA a nivel interno. El diseño de estos sistemas incluye límites, supervisión, fuentes, trazabilidad y adopción.",
+          "Diseñamos e implementamos soluciones de IA con datos, contexto, evaluación, supervisión e integración real.",
         visualSrc: "/images/service2-illustration.png",
         visualScaleClass: "scale-[1.1]",
         services: [
           {
             id: "optimizacion-procesos",
-            title: "Optimización de procesos",
-            menuLabel: "Optimización de procesos",
+            title: "Soluciones y productos con IA",
+            menuLabel: "Soluciones de IA",
             summary:
-              "Mejora de flujos operativos con reglas, automatización, modelos o software, reduciendo pasos manuales e integración con las herramientas existentes.",
+              "Capacidades de IA integradas en productos, servicios y procesos para resolver un caso de uso definido y medible.",
             bullets: [
-              "Simplificación del flujo antes de automatizar",
-              "Automatizaciones con revisión donde haga falta",
-              "Integraciones entre herramientas",
-              "Medición operativa y ajustes",
+              "Definición del caso de uso",
+              "Diseño de experiencia y comportamiento",
+              "Modelos, datos y contexto",
+              "Evaluación y puesta en producción",
             ],
           },
           {
             id: "agentes-ia",
-            title: "Agentes de IA",
-            menuLabel: "Agentes de IA",
+            title: "Agentes y automatización",
+            menuLabel: "Agentes y automatización",
             summary:
-              "Agentes conectados a herramientas internas para tareas acotadas como buscar información, preparar borradores, ejecutar pasos repetibles o coordinar un flujo con supervisión.",
+              "Sistemas capaces de consultar información, usar herramientas y ejecutar tareas acotadas con permisos, límites y supervisión.",
             bullets: [
-              "Definición de tarea, límites y permisos",
-              "Herramientas y fuentes disponibles",
-              "Trazabilidad de las acciones",
-              "Revisión humana y escalado",
+              "Tareas, herramientas y permisos",
+              "Contexto y fuentes disponibles",
+              "Trazabilidad de acciones",
+              "Supervisión humana y escalado",
             ],
           },
           {
             id: "procesamiento-documental",
-            title: "Procesamiento documental",
-            menuLabel: "Procesamiento documental",
+            title: "Procesamiento documental y conocimiento",
+            menuLabel: "Documentos y conocimiento",
             summary:
-              "Extracción, clasificación, validación y revisión asistida de documentos para convertir información dispersa en información estructurada y flujos operativos útiles.",
+              "Sistemas que transforman documentos y conocimiento disperso en información estructurada, consultable y útil para personas, productos y agentes.",
             bullets: [
-              "Ingesta de PDFs, hojas, correos o formularios",
-              "Extracción de campos y validación con reglas",
-              "Clasificación, enrutado y generación de borradores",
-              "Revisión humana e inserción en CRM o ERP",
+              "Ingesta, extracción y normalización",
+              "Clasificación y validación",
+              "Fuentes, permisos y citas",
+              "Integración con productos y sistemas",
             ],
           },
         ],
@@ -740,49 +752,49 @@ export const SITE_CONTENT = {
       {
         id: "otros-desarrollos",
         marker: "03",
-        title: "Otros desarrollos",
+        title: "Producto y software",
         description:
-          "Muchas mejoras no necesitan solo IA. Necesitan una herramienta clara, una integración fiable o una plataforma interna que encaje con la forma real de trabajar.",
+          "Diseñamos y desarrollamos productos digitales, aplicaciones y plataformas a medida desde la definición hasta producción.",
         visualSrc: "/images/service3-illustration.png",
         visualScaleClass: "scale-[1.12]",
         services: [
           {
             id: "herramientas-medida",
-            title: "Herramientas a medida",
-            menuLabel: "Herramientas a medida",
+            title: "Productos digitales",
+            menuLabel: "Productos digitales",
             summary:
-              "Software construido alrededor de un proceso concreto, sobre los datos y restricciones reales de la operación.",
+              "Diseño y desarrollo de productos digitales completos, desde la propuesta y la experiencia hasta la tecnología que los hace funcionar.",
             bullets: [
-              "Aplicaciones internas",
-              "Paneles operativos",
-              "Flujos de aprobación",
-              "Gestión documental o administrativa",
+              "Definición y estrategia de producto",
+              "Experiencia y flujos de usuario",
+              "Desarrollo frontend y backend",
+              "Lanzamiento y evolución",
             ],
           },
           {
             id: "herramientas-internas",
-            title: "Herramientas internas",
-            menuLabel: "Herramientas internas",
+            title: "Software a medida",
+            menuLabel: "Software a medida",
             summary:
-              "Sistemas para centralizar tareas, información y decisiones que hoy están en Excel, correos, Drive, WhatsApp o herramientas inconexas.",
+              "Aplicaciones y plataformas construidas alrededor del negocio, sus reglas, sus datos y sus necesidades reales.",
             bullets: [
-              "Backoffice operativo",
-              "Panel de seguimiento y dashboards",
-              "Workflows internos",
-              "Control de estado, alertas y reporting",
+              "Aplicaciones web y plataformas",
+              "Herramientas internas y backoffice",
+              "Paneles, workflows y reporting",
+              "Mantenimiento y evolución técnica",
             ],
           },
           {
             id: "integraciones-plataformas-operativas",
-            title: "Integraciones y plataformas operativas",
-            menuLabel: "Integraciones / plataformas",
+            title: "Integraciones y plataformas",
+            menuLabel: "Integraciones y plataformas",
             summary:
-              "Conexión entre Drive, CRM, ERP, hojas de cálculo, APIs, reporting y sistemas internos para evitar duplicidades y trabajo manual.",
+              "Conexión entre productos, APIs, datos y herramientas para que la tecnología funcione como un sistema y no como piezas aisladas.",
             bullets: [
-              "Sincronización de datos",
-              "Conectores entre herramientas",
-              "Automatización de handoffs",
-              "Monitorización básica y control de errores",
+              "APIs y conectores",
+              "Sincronización y flujos de datos",
+              "Integración con CRM, ERP y Drive",
+              "Monitorización y control de errores",
             ],
           },
         ],
@@ -791,16 +803,16 @@ export const SITE_CONTENT = {
     implementationExamples: [
       {
         marker: "01",
-        title: "Bases de conocimiento",
+        title: "Sistemas de conocimiento",
         description:
-          "Con fuentes citables, permisos, evaluación y revisión humana sobre documentos reales.",
+          "Con fuentes citables, permisos, evaluación e integración con productos y procesos.",
         className: "lg:col-span-3",
       },
       {
         marker: "02",
-        title: "Herramientas internas",
+        title: "Productos digitales",
         description:
-          "Para coordinar procesos, documentos, tareas y responsables del día a día.",
+          "Experiencias y aplicaciones diseñadas alrededor de usuarios y objetivos reales.",
         className: "lg:col-span-3",
       },
       {
@@ -843,28 +855,27 @@ export const SITE_CONTENT = {
       {
         question: "¿Tahona siempre usa IA?",
         answer:
-          "No. La IA se usa cuando mejora el proceso. En algunos casos la solución correcta es una integración, una herramienta interna, una regla de negocio o una simplificación del flujo.",
+          "No. La IA es una capacidad central, pero se usa cuando mejora la solución. En otros casos la respuesta correcta es producto, software, integraciones o una combinación de varias capacidades.",
       },
       {
-        question: "¿Puedo trabajar con herramientas existentes?",
+        question: "¿Tahona puede asumir un producto digital de principio a fin?",
         answer:
-          "Sí. La mayoría de proyectos parten de herramientas ya presentes en la empresa: Drive, CRM, ERP, hojas de cálculo, correo, reporting, APIs o sistemas internos.",
+          "Sí. Podemos trabajar desde la estrategia y la definición del producto hasta la experiencia, la arquitectura, el desarrollo, las integraciones, el lanzamiento y la evolución.",
       },
       {
-        question:
-          "¿Qué diferencia hay entre automatización y optimización de procesos?",
+        question: "¿Se puede trabajar con la tecnología que ya existe en la empresa?",
         answer:
-          "Automatizar ejecuta pasos. Optimizar procesos exige revisar si esos pasos tienen sentido, qué datos necesitan, dónde debe mantenerse revisión humana y cómo entra el cambio en el trabajo diario.",
+          "Sí. La mayoría de proyectos deben convivir con sistemas ya presentes: CRM, ERP, Drive, hojas de cálculo, APIs, datos internos o plataformas de terceros.",
       },
       {
-        question: "¿Qué es una base de conocimiento enterprise?",
+        question: "¿Qué incluye una solución de IA completa?",
         answer:
-          "Es una capa de conocimiento interno con ingesta documental, normalización, fuentes citables, permisos, evaluación, revisión humana e integración con herramientas reales. No es solo un buscador sobre documentos.",
+          "Caso de uso, datos y contexto, arquitectura, producto, modelos, evaluación, permisos, supervisión, integración y evolución en producción.",
       },
       {
-        question: "¿Cuándo tiene sentido un agente de IA?",
+        question: "¿Cómo se decide por dónde empezar?",
         answer:
-          "Cuando existe una tarea operativa concreta, fuentes fiables, límites claros, herramientas controladas, trazabilidad y un punto de supervisión. Si esas condiciones no existen, conviene resolver primero el proceso.",
+          "Se parte del objetivo y del contexto. Definimos el alcance mínimo que permite validar valor, riesgo y viabilidad antes de ampliar la solución.",
       },
     ],
     industryItems: [
@@ -1191,30 +1202,30 @@ export const SITE_CONTENT = {
     metadata: {
       home: {
         name: "Home",
-        title: "Tahona | Internal processes, data and tools",
+        title: "Tahona | AI, digital products and custom software",
         description:
-          "We improve internal operations through operational diagnosis, technical implementation and automation only when it fits the real work.",
+          "Technology partner for designing, building and integrating digital products, custom software and AI solutions.",
       },
       services: {
         name: "Services",
-        title: "Tahona Services | Operations, AI and integrations",
+        title: "Tahona Services | Strategy, AI and product development",
         description:
-          "Services for organizing processes, data, documents, internal tools, AI development and integrations around real operations.",
+          "Technology strategy, artificial intelligence, digital products, custom software and end-to-end integrations.",
       },
       industries: {
         name: "Industries",
-        title: "Tahona Industries | Software and AI by sector",
+        title: "Tahona Industries | Digital products, software and AI",
         description:
-          "We apply software, AI and integrations in logistics, industry, legal, insurance, marketing and healthcare with an operational focus.",
+          "Product, software and AI capabilities adapted to logistics, industry, legal, insurance, marketing and healthcare.",
       },
       cases: {
         name: "Cases",
-        title: "Tahona Cases | Anonymized operations projects",
+        title: "Tahona Cases | Products and systems for real challenges",
         description:
-          "Anonymized projects on documentation, planning, knowledge, reporting and integrations, explained from the operational problem and the solution built around it.",
+          "Anonymized cases focused on outcomes: clearer operations, better decisions and digital services built to evolve.",
       },
       keywords:
-        "operational diagnosis, technical implementation, process automation, internal tools, data documents reporting, operational efficiency",
+        "technology partner, digital products, custom software, AI development, technology strategy, integrations, software architecture",
     },
     skipLink: "Skip to main content",
     navigation: {
@@ -1232,77 +1243,73 @@ export const SITE_CONTENT = {
       ],
       serviceColumns: [
         {
-          title: "Foundations",
+          title: "Strategy and architecture",
           items: [
             {
-              label: "Consulting",
-              description:
-                "Operational audit and diagnosis of processes, data and tools.",
+              label: "Discovery and definition",
+              description: "Context, goals, users, processes and opportunities.",
               href: "#consultoria-auditoria-operativa",
             },
             {
-              label: "Strategy",
-              description: "Technical and operational roadmap before building.",
+              label: "Product and technology strategy",
+              description: "Product decisions, scope and roadmap.",
               href: "#estrategia-tecnica-operativa",
             },
             {
-              label: "Knowledge bases",
-              description:
-                "Internal knowledge with sources, permissions and human review.",
+              label: "Architecture and roadmap",
+              description: "Systems, data, integrations, risks and evolution.",
               href: "#bases-conocimiento-empresarial",
             },
           ],
         },
         {
-          title: "AI development",
+          title: "Artificial intelligence",
           items: [
             {
-              label: "Process optimization",
-              description:
-                "Fewer manual steps on top of existing tools.",
+              label: "AI solutions",
+              description: "AI capabilities embedded in products and processes.",
               href: "#optimizacion-procesos",
             },
             {
-              label: "AI agents",
-              description:
-                "Bounded tasks with limits, supervision and traceability.",
+              label: "Agents and automation",
+              description: "Bounded tasks with limits, supervision and traceability.",
               href: "#agentes-ia",
             },
             {
-              label: "Document processing",
-              description: "Extraction, validation and classification of documents.",
+              label: "Documents and knowledge",
+              description: "Document processing and source-backed knowledge.",
               href: "#procesamiento-documental",
             },
           ],
         },
         {
-          title: "Other custom development",
+          title: "Product and software",
           items: [
             {
-              label: "Custom tools",
-              description:
-                "Software around a specific process, with the right level of complexity.",
+              label: "Digital products",
+              description: "Digital products and experiences from definition onward.",
               href: "#herramientas-medida",
             },
             {
-              label: "Internal tools",
-              description: "Back offices, panels and workflows for daily work.",
+              label: "Custom software",
+              description: "Applications and platforms built around the business.",
               href: "#herramientas-internas",
             },
             {
-              label: "Integrations / platforms",
-              description: "Drive, CRM, ERP, spreadsheets and APIs connected.",
+              label: "Integrations and platforms",
+              description: "Connected data, tools and systems.",
               href: "#integraciones-plataformas-operativas",
             },
           ],
         },
+
       ],
     },
     home: {
       hero: {
-        titleLines: ["From diagnosis to implementation."],
+        titleLines: ["From strategy to implementation."],
         description:
-          "Tahona is the technology partner for improving how a company works from within.",
+          "Tahona is the technology partner for designing, building and integrating digital products, custom software and AI solutions.",
         primaryLabel: "Let's talk",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
@@ -1310,122 +1317,138 @@ export const SITE_CONTENT = {
       },
       whatWeDo: {
         eyebrow: "What we do",
-        title:
-          "We improve internal operations where processes, data and tools meet.",
+        title: "Strategy, product and technology in one team.",
         description: [
-          "The work does not start by choosing a technology. It starts by understanding how the operation works, what information moves through it, where manual work repeats and what the team needs to operate with more control.",
-          "From that diagnosis we build internal tools, integrations, knowledge bases, document processing or AI automation when it fits the real workflow.",
+          "We cover the full cycle: understanding the challenge, defining the solution, designing the experience, building the technology and integrating it into the business.",
+          "The outcome may be a digital product, custom software or an AI solution. Technology is chosen around the goal, the users and the context, not the other way around.",
+          "Our approach is technology made to measure: every system is designed around the business, validated with its users and prepared to evolve.",
         ],
         bullets: [
-          "Processes with too many manual steps.",
-          "Documents that need review, extraction or classification.",
-          "Information spread across Drive, spreadsheets, CRM, ERP, email and internal tools.",
-          "Reporting that arrives late or depends on manual preparation.",
-          "Teams that need adoption without adding another layer of friction.",
+          "Discovery, product definition and technology strategy.",
+          "Digital product design and development.",
+          "Custom software and internal platforms.",
+          "AI solutions embedded in products and processes.",
+          "Architecture, data, integrations and technical evolution.",
         ],
       },
       services: {
         eyebrow: "Services",
-        title: "Three families of work.",
+        title: "Three capabilities. One technology partner.",
         description:
-          "First we understand the operation. Then we decide whether the work needs strategy, software, AI, integrations, adoption support or training.",
+          "Strategy and architecture, artificial intelligence, product and software. From initial definition to production and ongoing evolution.",
         ctaLabel: "View services",
       },
       industries: {
         eyebrow: "Industries",
-        title: "Sectors we work with.",
+        title: "Technology capabilities adapted to each sector.",
         description:
-          "We do not lock into one vertical. The common pattern is operations with scattered information, repeatable tasks, documentation and tool integrations.",
+          "Processes, users, data and constraints change. The ability to define, design and build remains the same.",
         ctaLabel: "View industries",
       },
       ourWork: {
-        eyebrow: "Applied work",
-        title: "Real projects we have worked on.",
+        eyebrow: "Cases",
+        title: "Products and systems focused on real outcomes.",
         description:
-          "Examples of applied work in real operations: internal platforms, planning, documentation, data and integrations built around how each team works.",
+          "The focus is the outcome: clearer operations, better-informed decisions and digital services able to evolve with the business.",
         ctaLabel: "View cases",
       },
       howWeWork: {
         eyebrow: "How we work",
-        title: "Understand the operation before changing it.",
+        title: "A partner from definition through evolution.",
         description:
-          "Every company works differently. The process starts by reading the real processes, data, tools, documents and constraints. Then improvements are prioritized with practical judgment and implemented in a way the team can adopt.",
+          "We own the full journey: strategy, product, architecture, development, integration and continuous improvement. Discovery establishes the starting point; the goal is to build and move the solution forward.",
         steps: [
           {
             number: "01",
-            title: "Context",
+            title: "Context and goal",
             description:
-              "First reading of the operation, priorities and main points of friction.",
+              "We understand the business, users, processes, data and expected outcome.",
           },
           {
             number: "02",
-            title: "Diagnosis",
+            title: "Strategy and definition",
             description:
-              "Review of processes, data, documents, tools and internal dependencies.",
+              "We define the opportunity, scope, priorities and roadmap.",
           },
           {
             number: "03",
-            title: "Prioritization",
+            title: "Product and architecture",
             description:
-              "Selection of opportunities by operational value, complexity, risk and adoption.",
+              "We design the experience, system, data and integrations.",
           },
           {
             number: "04",
-            title: "Build",
+            title: "Build and integration",
             description:
-              "Design and implementation of software, AI, integrations or automation depending on the case.",
+              "We develop software and AI capabilities in short cycles with continuous validation.",
           },
           {
             number: "05",
-            title: "Adoption",
+            title: "Launch and evolution",
             description:
-              "Adjustments, documentation and handoff so the system enters daily work.",
+              "We integrate, measure, document and continue improving the system.",
           },
         ],
       },
     },
     aiApplied: {
-      eyebrow: "Applied AI",
-      title: "AI when it improves a process, not when it only adds noise.",
+      eyebrow: "Artificial intelligence",
+      title: "End-to-end AI, embedded in products and operations.",
       description:
-        "We work with models, assistants and agents when they help read documents, prepare information, execute repeatable steps, review results or connect internal tools. Each system needs limits, traceability and a clear point of supervision.",
-      curve: {
-        ariaLabel: "Applied AI value curve",
-        valueLabel: "Value",
-        automationLabel: "Automation",
-        levels: [
-          { label: "LEVEL 01", title: ["Judgment-led use"], body: "Human decision." },
-          { label: "LEVEL 02", title: ["Specific assistants"], body: "Reading and review." },
-          { label: "LEVEL 03", title: ["Supervised", "automation"], body: "Rules and traceability." },
-          { label: "LEVEL 04", title: ["Context-aware agents"], body: "Permissions and limits." },
+        "We work from strategy and use-case definition through data, architecture, build, evaluation and evolution in production. We develop AI systems that become part of the business, not isolated demonstrations.",
+      lifecycle: {
+        ariaLabel: "End-to-end lifecycle for developing an artificial intelligence solution",
+        centerLabel: "End-to-end AI",
+        centerTitle: "System in production",
+        stages: [
+          {
+            label: "Strategy",
+            title: "Use case and goal",
+            body: "Value, scope, users and success criteria.",
+          },
+          {
+            label: "Foundations",
+            title: "Data and context",
+            body: "Sources, permissions, quality and business knowledge.",
+          },
+          {
+            label: "Engineering",
+            title: "Build and integration",
+            body: "Models, product, tools and connected systems.",
+          },
+          {
+            label: "Operations",
+            title: "Evaluation and evolution",
+            body: "Testing, supervision, metrics and continuous improvement.",
+          },
         ],
       },
     },
     servicesPage: {
       hero: {
-        titleLines: ["Services to organize, build and integrate internal operations."],
+        titleLines: ["End-to-end strategy, AI and product development."],
         description:
-          "We work from each company's real operation. The goal is to understand processes, data, documents and tools so we can decide what should be built, integrated or automated.",
-        primaryLabel: "Request a first conversation",
+          "One team to define, design, build, integrate and evolve digital products, custom software and AI solutions.",
+        primaryLabel: "Let's talk",
         primaryHref: "#contacto",
-        secondaryLabel: "See how we work",
+        secondaryLabel: "View capabilities",
         secondaryHref: "#familias-servicios",
       },
       pillarsSection: {
-        eyebrow: "How services are organized",
-        title: "Three families of work arranged in a sequence.",
+        eyebrow: "Capabilities",
+        title: "Three capabilities. One technology partner.",
         description:
-          "Foundations understand and organize the operation. AI development and other custom development build on that base, not the other way around.",
+          "Strategy and architecture, artificial intelligence, product and software. Combined around the challenge, without silos or predetermined solutions.",
       },
       detailSection: {
         eyebrow: "Services in detail",
-        title: "What we do, grouped by family.",
+        title: "The capability to decide, build and integrate.",
       },
       examplesSection: {
-        eyebrow: "What we build",
-        title: "Examples of concrete systems for concrete operations.",
+        eyebrow: "What we develop",
+        title: "Products, systems and capabilities for real contexts.",
         description:
-          "We do not work with generic deliverables. Implementations are adapted to context and built on real data and constraints.",
+          "Each implementation is adapted to the business, its users, its data and the way it needs to evolve.",
       },
       faqSection: {
         eyebrow: "FAQ",
@@ -1435,9 +1458,9 @@ export const SITE_CONTENT = {
     },
     industriesPage: {
       hero: {
-        titleLines: ["Software, AI and integrations for each sector."],
+        titleLines: ["Digital products, software and AI for each sector."],
         description:
-          "Every sector has processes, documents, data, reporting and tools that need to work better together. The way of operating is the same: understand, implement and improve.",
+          "Every sector has different users, processes, data and constraints. We adapt strategy, product, software and AI to the real business context.",
         primaryLabel: "Request a first conversation",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
@@ -1462,9 +1485,9 @@ export const SITE_CONTENT = {
     },
     casesPage: {
       hero: {
-        titleLines: ["Our applied work in real operations."],
+        titleLines: ["Products and systems for real challenges."],
         description:
-          "Projects and patterns addressed by Tahona, presented anonymously and without invented metrics, testimonials or logos. The focus is the operational problem being organized and what gets built around it.",
+          "Anonymized cases focused on outcomes: greater clarity, better decisions and a technology foundation able to evolve with the business.",
         primaryLabel: "Request a first conversation",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
@@ -1472,20 +1495,20 @@ export const SITE_CONTENT = {
       },
       section: {
         eyebrow: "Cases",
-        title: "Applied work in real operations.",
+        title: "Outcomes for real challenges.",
         text:
-          "Projects and patterns addressed from internal operations: documentation, planning, knowledge, reporting and integrations.",
+          "Products and systems focused on improving how work, decisions and services happen.",
         relatedAreasLabel: "Related areas",
       },
     },
     contact: {
       eyebrow: "Contact",
-      title: "A first conversation to understand the context.",
+      title: "Let's discuss the product, system or technology challenge.",
       description:
-        "A first conversation helps review the operation, detect whether there is a real improvement opportunity and decide the next step clearly.",
+        "A first conversation to understand the goal, the starting point and the most useful next step.",
       sidebarEyebrow: "Contact",
       sidebarBody:
-        "We review the context with practical judgment. If there is a real opportunity, we indicate where to start and what should be validated first.",
+        "We review the context, goal and constraints. If there is a clear path forward, we propose the best starting point.",
       emailLabel: "Email",
       emailPlaceholder: "name@company.com",
       emailValueLabel: "hola@tahona.ai",
@@ -1502,9 +1525,9 @@ export const SITE_CONTENT = {
         "The basics are enough. We reply with an initial assessment and the most useful next step.",
       nameLabel: "Name",
       namePlaceholder: "Full name",
-      detailsLabel: "Process or problem to review",
+      detailsLabel: "Project, product or challenge",
       detailsPlaceholder:
-        "Current process, what is still manual, where it gets stuck and which team is involved.",
+        "What should be built or improved, what exists today and what outcome is expected.",
       privacyNote:
         "We reply within 24 business hours. No sales pressure: if the fit is not clear, we will say so clearly.",
       submitLabel: "Request a first conversation",
@@ -1530,21 +1553,21 @@ export const SITE_CONTENT = {
       contactLabel: "Contact us",
       copyright: "All rights reserved.",
       description:
-        "A technical team improving processes, data and internal tools with practical judgment.",
+        "Technology partner for digital products, custom software and AI solutions.",
     },
     structuredData: {
       organizationDescription:
-        "Technical consulting and implementation studio for improving internal operations, processes, data, documents, tools and integrations.",
+        "Technology partner for strategy, digital products, custom software, artificial intelligence and integrations.",
       knowsAbout: [
-        "operational diagnosis",
-        "technical implementation",
-        "process automation",
-        "internal tools",
+        "technology strategy",
+        "digital product development",
+        "artificial intelligence development",
+        "custom software",
         "document processing",
         "operational integrations",
       ],
       serviceSchemaName:
-        "Technical implementation services for internal operations",
+        "Strategy, artificial intelligence, product and software services",
       serviceCatalogName: "Tahona service families",
       industryListName: "Sectors and operational patterns",
       casesListName: "Anonymized operational work cases",
@@ -1553,49 +1576,49 @@ export const SITE_CONTENT = {
       {
         id: "fundamentos",
         marker: "01",
-        title: "Foundations",
+        title: "Strategy and architecture",
         description:
-          "Before building, the problem is organized. Diagnosis, strategy and internal knowledge give technical decisions the right context.",
+          "We define what to build, why it matters and how to turn it into a viable, integrated solution prepared to evolve.",
         visualSrc: "/images/service1-illustration.png",
         visualScaleClass: "scale-[1.08]",
         services: [
           {
             id: "consultoria-auditoria-operativa",
-            title: "Operational consulting and audit",
-            menuLabel: "Consulting",
+            title: "Discovery and definition",
+            menuLabel: "Discovery and definition",
             summary:
-              "Review of processes, tools, documents, data and internal dependencies to understand where clarity, control or operating capacity is being lost.",
+              "A structured view of the business, users, processes, data and existing technology that turns an open challenge into a concrete opportunity.",
             bullets: [
-              "Map of the current process",
-              "Inventory of manual work and blockers",
-              "Risks, dependencies and priorities",
-              "Recommended next steps",
+              "Goals, users and context",
+              "Current processes, data and systems",
+              "Opportunities and constraints",
+              "Success criteria and next steps",
             ],
           },
           {
             id: "estrategia-tecnica-operativa",
-            title: "Technical and operational strategy",
-            menuLabel: "Strategy",
+            title: "Product and technology strategy",
+            menuLabel: "Product strategy",
             summary:
-              "A roadmap to decide what to implement, in what order and under which constraints. Useful when the team needs clarity before investing in development.",
+              "Definition of the proposition, scope and roadmap needed to move forward with clear priorities before investing in delivery.",
             bullets: [
+              "Product vision and scope",
               "Phased roadmap",
-              "Functional and technical scope",
-              "Decision criteria",
-              "Adoption, data and integration risks",
+              "Functional and technical decisions",
+              "Risks, dependencies and adoption",
             ],
           },
           {
             id: "bases-conocimiento-empresarial",
-            title: "Enterprise knowledge bases",
-            menuLabel: "Knowledge bases",
+            title: "Architecture and roadmap",
+            menuLabel: "Architecture",
             summary:
-              "Knowledge and internal context infrastructure for consulting documents, data and company context with sources, permissions, evaluation and human review.",
+              "Design of the architecture, data, integrations and evolution model the solution needs to work over time.",
             bullets: [
-              "Document ingestion and normalization",
-              "Answers with citations and traceability",
-              "Permission and scope design",
-              "Integration with Drive, CRM, ERP and reporting",
+              "Application and data architecture",
+              "Integrations and dependencies",
+              "Security, permissions and traceability",
+              "Delivery and evolution plan",
             ],
           },
         ],
@@ -1603,49 +1626,49 @@ export const SITE_CONTENT = {
       {
         id: "desarrollo-ia",
         marker: "02",
-        title: "AI development",
+        title: "Artificial intelligence",
         description:
-          "Internal AI implementation. These systems are designed with limits, supervision, sources, traceability and adoption in mind.",
+          "We design and implement AI solutions with data, context, evaluation, supervision and real integration.",
         visualSrc: "/images/service2-illustration.png",
         visualScaleClass: "scale-[1.1]",
         services: [
           {
             id: "optimizacion-procesos",
-            title: "Process optimization",
-            menuLabel: "Process optimization",
+            title: "AI solutions and products",
+            menuLabel: "AI solutions",
             summary:
-              "Improvement of operational flows with rules, automation, models or software, reducing manual steps and integrating with existing tools.",
+              "AI capabilities embedded in products, services and processes to solve a defined and measurable use case.",
             bullets: [
-              "Flow simplification before automation",
-              "Automation with review where needed",
-              "Integrations between tools",
-              "Operational measurement and adjustments",
+              "Use-case definition",
+              "Experience and behavior design",
+              "Models, data and context",
+              "Evaluation and production launch",
             ],
           },
           {
             id: "agentes-ia",
-            title: "AI agents",
-            menuLabel: "AI agents",
+            title: "Agents and automation",
+            menuLabel: "Agents and automation",
             summary:
-              "Agents connected to internal tools for bounded tasks such as finding information, preparing drafts, executing repeatable steps or coordinating a supervised flow.",
+              "Systems that retrieve information, use tools and execute bounded tasks with permissions, limits and supervision.",
             bullets: [
-              "Definition of task, limits and permissions",
-              "Available tools and sources",
-              "Traceability of actions",
-              "Human review and escalation",
+              "Tasks, tools and permissions",
+              "Available context and sources",
+              "Action traceability",
+              "Human supervision and escalation",
             ],
           },
           {
             id: "procesamiento-documental",
-            title: "Document processing",
-            menuLabel: "Document processing",
+            title: "Document processing and knowledge",
+            menuLabel: "Documents and knowledge",
             summary:
-              "Extraction, classification, validation and assisted review of documents to turn scattered information into structured information and useful operational flows.",
+              "Systems that turn documents and scattered knowledge into structured, searchable information for people, products and agents.",
             bullets: [
-              "Ingestion of PDFs, sheets, emails or forms",
-              "Field extraction and rule-based validation",
-              "Classification, routing and draft generation",
-              "Human review and insertion into CRM or ERP",
+              "Ingestion, extraction and normalization",
+              "Classification and validation",
+              "Sources, permissions and citations",
+              "Integration with products and systems",
             ],
           },
         ],
@@ -1653,49 +1676,49 @@ export const SITE_CONTENT = {
       {
         id: "otros-desarrollos",
         marker: "03",
-        title: "Other custom development",
+        title: "Product and software",
         description:
-          "Many improvements do not only need AI. They need a clear tool, a reliable integration or an internal platform that fits the real way of working.",
+          "We design and develop digital products, applications and custom platforms from definition through production.",
         visualSrc: "/images/service3-illustration.png",
         visualScaleClass: "scale-[1.12]",
         services: [
           {
             id: "herramientas-medida",
-            title: "Custom tools",
-            menuLabel: "Custom tools",
+            title: "Digital products",
+            menuLabel: "Digital products",
             summary:
-              "Software built around a specific process, on top of the real data and constraints of the operation.",
+              "Design and development of complete digital products, from proposition and experience through the technology that makes them work.",
             bullets: [
-              "Internal applications",
-              "Operational panels",
-              "Approval flows",
-              "Document or administrative management",
+              "Product definition and strategy",
+              "User experience and flows",
+              "Frontend and backend development",
+              "Launch and evolution",
             ],
           },
           {
             id: "herramientas-internas",
-            title: "Internal tools",
-            menuLabel: "Internal tools",
+            title: "Custom software",
+            menuLabel: "Custom software",
             summary:
-              "Systems for centralizing tasks, information and decisions that now live in Excel, email, Drive, WhatsApp or disconnected tools.",
+              "Applications and platforms built around the business, its rules, its data and its real needs.",
             bullets: [
-              "Operational back office",
-              "Tracking panels and dashboards",
-              "Internal workflows",
-              "Status control, alerts and reporting",
+              "Web applications and platforms",
+              "Internal tools and back offices",
+              "Dashboards, workflows and reporting",
+              "Maintenance and technical evolution",
             ],
           },
           {
             id: "integraciones-plataformas-operativas",
-            title: "Integrations and operational platforms",
-            menuLabel: "Integrations / platforms",
+            title: "Integrations and platforms",
+            menuLabel: "Integrations and platforms",
             summary:
-              "Connection between Drive, CRM, ERP, spreadsheets, APIs, reporting and internal systems to avoid duplication and manual work.",
+              "Connections between products, APIs, data and tools so technology works as a system rather than isolated pieces.",
             bullets: [
-              "Data synchronization",
-              "Connectors between tools",
-              "Handoff automation",
-              "Basic monitoring and error control",
+              "APIs and connectors",
+              "Data synchronization and flows",
+              "CRM, ERP and Drive integration",
+              "Monitoring and error control",
             ],
           },
         ],
@@ -1704,16 +1727,16 @@ export const SITE_CONTENT = {
     implementationExamples: [
       {
         marker: "01",
-        title: "Knowledge bases",
+        title: "Knowledge systems",
         description:
-          "With citable sources, permissions, evaluation and human review on real documents.",
+          "With citable sources, permissions, evaluation and integration with products and processes.",
         className: "lg:col-span-3",
       },
       {
         marker: "02",
-        title: "Internal tools",
+        title: "Digital products",
         description:
-          "To coordinate processes, documents, tasks and day-to-day owners.",
+          "Experiences and applications designed around real users and outcomes.",
         className: "lg:col-span-3",
       },
       {
@@ -1756,27 +1779,27 @@ export const SITE_CONTENT = {
       {
         question: "Does Tahona always use AI?",
         answer:
-          "No. AI is used when it improves the process. In some cases the right solution is an integration, an internal tool, a business rule or a simpler flow.",
+          "No. AI is a core capability, but it is used when it improves the solution. In other cases the right answer is product, software, integrations or a combination of several capabilities.",
       },
       {
-        question: "Can we work with existing tools?",
+        question: "Can Tahona take a digital product from start to finish?",
         answer:
-          "Yes. Most projects start from tools already present in the company: Drive, CRM, ERP, spreadsheets, email, reporting, APIs or internal systems.",
+          "Yes. We can work from product strategy and definition through experience, architecture, development, integrations, launch and evolution.",
       },
       {
-        question: "What is the difference between automation and process optimization?",
+        question: "Can the solution work with the technology already in place?",
         answer:
-          "Automation executes steps. Process optimization requires reviewing whether those steps make sense, what data they need, where human review should remain and how the change enters daily work.",
+          "Yes. Most projects need to coexist with existing systems such as CRM, ERP, Drive, spreadsheets, APIs, internal data or third-party platforms.",
       },
       {
-        question: "What is an enterprise knowledge base?",
+        question: "What does a complete AI solution include?",
         answer:
-          "It is an internal knowledge layer with document ingestion, normalization, citable sources, permissions, evaluation, human review and integration with real tools. It is not just a search box over documents.",
+          "Use case, data and context, architecture, product, models, evaluation, permissions, supervision, integration and evolution in production.",
       },
       {
-        question: "When does an AI agent make sense?",
+        question: "How do we decide where to start?",
         answer:
-          "When there is a concrete operational task, reliable sources, clear limits, controlled tools, traceability and a supervision point. If those conditions are missing, the process should be solved first.",
+          "We start from the goal and the context. We define the smallest scope that can validate value, risk and feasibility before expanding the solution.",
       },
     ],
     industryItems: [
@@ -2102,30 +2125,30 @@ export const SITE_CONTENT = {
     metadata: {
       home: {
         name: "Strona główna",
-        title: "Tahona | Procesy, dane i narzędzia wewnętrzne",
+        title: "Tahona | AI, produkty cyfrowe i oprogramowanie na miarę",
         description:
-          "Usprawniamy procesy wewnętrzne przez diagnozę operacyjną, wdrożenie techniczne i automatyzację tylko wtedy, gdy pasuje do rzeczywistego sposobu pracy.",
+          "Partner technologiczny projektujący, tworzący i integrujący produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
       },
       services: {
         name: "Usługi",
-        title: "Usługi Tahona | Procesy, AI i integracje",
+        title: "Usługi Tahona | Strategia, AI i rozwój produktu",
         description:
-          "Usługi porządkujące procesy, dane, dokumenty, narzędzia wewnętrzne, wdrożenia AI i integracje wokół rzeczywistego sposobu pracy.",
+          "Strategia technologiczna, sztuczna inteligencja, produkty cyfrowe, oprogramowanie na miarę i kompleksowe integracje.",
       },
       industries: {
         name: "Branże",
-        title: "Branże Tahona | Oprogramowanie i AI dla sektorów",
+        title: "Branże Tahona | Produkty cyfrowe, oprogramowanie i AI",
         description:
-          "Stosujemy oprogramowanie, AI i integracje w logistyce, przemyśle, prawie, ubezpieczeniach, marketingu i zdrowiu, koncentrując się na procesach i narzędziach wewnętrznych.",
+          "Kompetencje produktowe, programistyczne i AI dopasowane do logistyki, przemysłu, prawa, ubezpieczeń, marketingu i zdrowia.",
       },
       cases: {
         name: "Przykłady",
-        title: "Przykłady Tahona | Zanonimizowane projekty operacyjne",
+        title: "Przykłady Tahona | Produkty i systemy dla realnych wyzwań",
         description:
-          "Zanonimizowane projekty dotyczące dokumentacji, planowania, wiedzy, raportowania i integracji, opisane od strony problemu operacyjnego i rozwiązania.",
+          "Zanonimizowane przykłady skoncentrowane na efektach: większej przejrzystości, lepszych decyzjach i usługach cyfrowych gotowych do rozwoju.",
       },
       keywords:
-        "diagnoza operacyjna, wdrożenie techniczne, automatyzacja procesów, narzędzia wewnętrzne, dane, dokumenty, raportowanie, efektywność operacyjna",
+        "partner technologiczny, produkty cyfrowe, oprogramowanie na miarę, rozwój AI, strategia technologiczna, integracje, architektura oprogramowania",
     },
     skipLink: "Przejdź do głównej treści",
     navigation: {
@@ -2143,77 +2166,73 @@ export const SITE_CONTENT = {
       ],
       serviceColumns: [
         {
-          title: "Fundamenty",
+          title: "Strategia i architektura",
           items: [
             {
-              label: "Konsulting",
-              description:
-                "Audyt operacyjny i diagnoza procesów, danych oraz narzędzi.",
+              label: "Diagnoza i definicja",
+              description: "Kontekst, cele, użytkownicy, procesy i możliwości.",
               href: "#consultoria-auditoria-operativa",
             },
             {
-              label: "Strategia",
-              description: "Mapa techniczno-operacyjna przed rozpoczęciem budowy.",
+              label: "Strategia produktu i technologii",
+              description: "Decyzje produktowe, zakres i plan działania.",
               href: "#estrategia-tecnica-operativa",
             },
             {
-              label: "Bazy wiedzy",
-              description:
-                "Wiedza wewnętrzna ze źródłami, uprawnieniami i kontrolą człowieka.",
+              label: "Architektura i plan działania",
+              description: "Systemy, dane, integracje, ryzyka i rozwój.",
               href: "#bases-conocimiento-empresarial",
             },
           ],
         },
         {
-          title: "Wdrożenia AI",
+          title: "Sztuczna inteligencja",
           items: [
             {
-              label: "Optymalizacja procesów",
-              description:
-                "Mniej kroków ręcznych na bazie istniejących narzędzi.",
+              label: "Rozwiązania AI",
+              description: "Funkcje AI wbudowane w produkty i procesy.",
               href: "#optimizacion-procesos",
             },
             {
-              label: "Agenci AI",
-              description:
-                "Zadania o jasno określonym zakresie, z granicami, nadzorem i śledzeniem działań.",
+              label: "Agenci i automatyzacja",
+              description: "Zadania z jasno określonym zakresem, nadzorem i śledzeniem działań.",
               href: "#agentes-ia",
             },
             {
-              label: "Przetwarzanie dokumentów",
-              description: "Ekstrakcja, walidacja i klasyfikacja dokumentów.",
+              label: "Dokumenty i wiedza",
+              description: "Przetwarzanie dokumentów i wiedza oparta na źródłach.",
               href: "#procesamiento-documental",
             },
           ],
         },
         {
-          title: "Inne wdrożenia techniczne",
+          title: "Produkt i oprogramowanie",
           items: [
             {
-              label: "Narzędzia na miarę",
-              description:
-                "Oprogramowanie wokół konkretnego procesu, z właściwym poziomem złożoności.",
+              label: "Produkty cyfrowe",
+              description: "Produkty i doświadczenia cyfrowe od etapu definicji.",
               href: "#herramientas-medida",
             },
             {
-              label: "Narzędzia wewnętrzne",
-              description: "Zaplecze operacyjne, panele i przepływy pracy do codziennych zadań.",
+              label: "Oprogramowanie na miarę",
+              description: "Aplikacje i platformy zbudowane wokół biznesu.",
               href: "#herramientas-internas",
             },
             {
-              label: "Integracje / platformy",
-              description: "Połączone Drive, CRM, ERP, arkusze i API.",
+              label: "Integracje i platformy",
+              description: "Połączone dane, narzędzia i systemy.",
               href: "#integraciones-plataformas-operativas",
             },
           ],
         },
+
       ],
     },
     home: {
       hero: {
-        titleLines: ["Od diagnozy do wdrożenia."],
+        titleLines: ["Od strategii do wdrożenia."],
         description:
-          "Tahona to partner technologiczny, który pomaga firmom lepiej działać od wewnątrz.",
+          "Tahona to partner technologiczny, który projektuje, tworzy i integruje produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
         primaryLabel: "Porozmawiajmy",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",
@@ -2221,122 +2240,138 @@ export const SITE_CONTENT = {
       },
       whatWeDo: {
         eyebrow: "Czym się zajmujemy",
-        title:
-          "Usprawniamy procesy wewnętrzne tam, gdzie spotykają się dane, dokumenty i narzędzia.",
+        title: "Strategia, produkt i technologia w jednym zespole.",
         description: [
-          "Praca nie zaczyna się od wyboru technologii. Zaczyna się od zrozumienia, jak firma pracuje, jakie informacje przepływają między zespołami, gdzie powtarza się praca ręczna i czego zespół potrzebuje, aby działać z większą kontrolą.",
-          "Na podstawie tej diagnozy budujemy narzędzia wewnętrzne, integracje, bazy wiedzy, przetwarzanie dokumentów albo automatyzację z AI, jeśli pasuje do rzeczywistego sposobu pracy.",
+          "Prowadzimy cały cykl: poznajemy wyzwanie, definiujemy rozwiązanie, projektujemy doświadczenie, tworzymy technologię i integrujemy ją z biznesem.",
+          "Efektem może być produkt cyfrowy, oprogramowanie na miarę albo rozwiązanie AI. Technologię dobieramy do celu, użytkowników i kontekstu, a nie odwrotnie.",
+          "Nasze podejście to technologia szyta na miarę: każdy system powstaje wokół biznesu, jest weryfikowany z użytkownikami i przygotowany do dalszego rozwoju.",
         ],
         bullets: [
-          "Procesy z nadmiarem ręcznych kroków.",
-          "Dokumenty wymagające przeglądu, ekstrakcji lub klasyfikacji.",
-          "Informacje rozproszone między Drive, arkuszami, CRM, ERP, pocztą i narzędziami wewnętrznymi.",
-          "Raportowanie, które pojawia się z opóźnieniem albo wymaga ręcznego przygotowania.",
-          "Zespoły potrzebujące wdrożenia bez dokładania kolejnej warstwy tarcia.",
+          "Diagnoza, definicja produktu i strategia technologiczna.",
+          "Projektowanie i rozwój produktów cyfrowych.",
+          "Oprogramowanie na miarę i platformy wewnętrzne.",
+          "Rozwiązania AI wbudowane w produkty i procesy.",
+          "Architektura, dane, integracje i rozwój techniczny.",
         ],
       },
       services: {
         eyebrow: "Usługi",
-        title: "Trzy rodziny pracy.",
+        title: "Trzy kompetencje. Jeden partner technologiczny.",
         description:
-          "Najpierw rozumiemy sposób pracy. Dopiero potem decydujemy, czy potrzebna jest strategia, oprogramowanie, AI, integracje, wsparcie adopcji czy szkolenie.",
+          "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Od pierwszej definicji po produkcję i dalszy rozwój systemu.",
         ctaLabel: "Zobacz usługi",
       },
       industries: {
         eyebrow: "Branże",
-        title: "Sektory, z którymi pracujemy.",
+        title: "Kompetencje technologiczne dopasowane do branży.",
         description:
-          "Nie zamykamy się w jednej branży. Wspólny wzorzec to rozproszone informacje, powtarzalne zadania, dokumentacja i integracje między narzędziami.",
+          "Procesy, użytkownicy, dane i ograniczenia są różne. Umiejętność definiowania, projektowania i budowania pozostaje ta sama.",
         ctaLabel: "Zobacz branże",
       },
       ourWork: {
-        eyebrow: "Projekty wdrożeniowe",
-        title: "Realizacje oparte na rzeczywistych procesach.",
+        eyebrow: "Przykłady",
+        title: "Produkty i systemy nastawione na realne efekty.",
         description:
-          "Przykłady projektów wdrożeniowych w realnych procesach: platformy wewnętrzne, planowanie, dokumentacja, dane i integracje budowane wokół sposobu pracy danego zespołu.",
+          "Liczy się rezultat: większa przejrzystość pracy, trafniejsze decyzje i usługi cyfrowe, które mogą rozwijać się wraz z biznesem.",
         ctaLabel: "Zobacz przykłady",
       },
       howWeWork: {
         eyebrow: "Jak pracujemy",
-        title: "Zrozumieć sposób pracy, zanim zacznie się go zmieniać.",
+        title: "Partner od definicji po dalszy rozwój.",
         description:
-          "Każda firma pracuje inaczej. Proces zaczyna się od zrozumienia rzeczywistych procesów, danych, narzędzi, dokumentów i ograniczeń. Następnie priorytetyzujemy usprawnienia, które mają praktyczny sens, i wdrażamy je tak, aby zespół mógł je przyjąć.",
+          "Bierzemy odpowiedzialność za cały cykl: strategię, produkt, architekturę, rozwój, integrację i ciągłe doskonalenie. Diagnoza wyznacza punkt startu; celem jest zbudowanie i rozwijanie rozwiązania.",
         steps: [
           {
             number: "01",
-            title: "Kontekst",
+            title: "Kontekst i cel",
             description:
-              "Pierwsze rozpoznanie sposobu pracy, priorytetów i głównych tarć.",
+              "Poznajemy biznes, użytkowników, procesy, dane i oczekiwany rezultat.",
           },
           {
             number: "02",
-            title: "Diagnoza",
+            title: "Strategia i definicja",
             description:
-              "Przegląd procesów, danych, dokumentów, narzędzi i zależności wewnętrznych.",
+              "Określamy możliwość, zakres, priorytety i plan działania.",
           },
           {
             number: "03",
-            title: "Priorytetyzacja",
+            title: "Produkt i architektura",
             description:
-              "Wybór obszarów usprawnienia według wartości operacyjnej, złożoności, ryzyka i łatwości adopcji.",
+              "Projektujemy doświadczenie, system, dane i integracje.",
           },
           {
             number: "04",
-            title: "Budowa",
+            title: "Budowa i integracja",
             description:
-              "Projektowanie i wdrożenie oprogramowania, AI, integracji lub automatyzacji zależnie od przypadku.",
+              "Tworzymy oprogramowanie i funkcje AI w krótkich cyklach z ciągłą weryfikacją.",
           },
           {
             number: "05",
-            title: "Adopcja",
+            title: "Uruchomienie i rozwój",
             description:
-              "Dostosowanie, dokumentacja i przekazanie, aby system wszedł do codziennej pracy.",
+              "Integrujemy, mierzymy, dokumentujemy i dalej rozwijamy system.",
           },
         ],
       },
     },
     aiApplied: {
-      eyebrow: "AI w praktyce",
-      title: "AI wtedy, gdy poprawia proces, a nie tylko dodaje szum.",
+      eyebrow: "Sztuczna inteligencja",
+      title: "Kompleksowe AI zintegrowane z produktami i procesami.",
       description:
-        "Pracujemy z modelami, asystentami i agentami, gdy pomagają czytać dokumenty, przygotowywać informacje, wykonywać powtarzalne kroki, sprawdzać wyniki albo łączyć narzędzia wewnętrzne. Każdy system musi mieć granice, śledzenie działań i jasny punkt nadzoru.",
-      curve: {
-        ariaLabel: "Krzywa wartości AI w praktyce",
-        valueLabel: "Wartość",
-        automationLabel: "Automatyzacja",
-        levels: [
-          { label: "POZIOM 01", title: ["Użycie z kryterium"], body: "Decyzja człowieka." },
-          { label: "POZIOM 02", title: ["Asystenci specjalistyczni"], body: "Czytanie i przegląd." },
-          { label: "POZIOM 03", title: ["Automatyzacja", "nadzorowana"], body: "Reguły i śledzenie zmian." },
-          { label: "POZIOM 04", title: ["Agenci z kontekstem"], body: "Uprawnienia i granice." },
+        "Pracujemy od strategii i definicji przypadku użycia, przez dane, architekturę i budowę, po ewaluację oraz rozwój na produkcji. Tworzymy systemy AI będące częścią biznesu, a nie odizolowanym demo.",
+      lifecycle: {
+        ariaLabel: "Kompleksowy cykl tworzenia rozwiązania sztucznej inteligencji",
+        centerLabel: "AI end-to-end",
+        centerTitle: "System produkcyjny",
+        stages: [
+          {
+            label: "Strategia",
+            title: "Przypadek użycia i cel",
+            body: "Wartość, zakres, użytkownicy i kryteria sukcesu.",
+          },
+          {
+            label: "Podstawy",
+            title: "Dane i kontekst",
+            body: "Źródła, uprawnienia, jakość i wiedza biznesowa.",
+          },
+          {
+            label: "Inżynieria",
+            title: "Budowa i integracja",
+            body: "Modele, produkt, narzędzia i połączone systemy.",
+          },
+          {
+            label: "Działanie",
+            title: "Ewaluacja i rozwój",
+            body: "Testy, nadzór, metryki i ciągłe doskonalenie.",
+          },
         ],
       },
     },
     servicesPage: {
       hero: {
-        titleLines: ["Usługi porządkujące, budujące i integrujące procesy wewnętrzne."],
+        titleLines: ["Kompleksowa strategia, AI i rozwój produktu."],
         description:
-          "Punktem wyjścia są rzeczywiste procesy firmy. Najpierw rozumiemy dane, dokumenty i narzędzia, a dopiero potem decydujemy, co warto zbudować, zintegrować lub zautomatyzować.",
-        primaryLabel: "Umów pierwszą rozmowę",
+          "Jeden zespół definiuje, projektuje, tworzy, integruje i rozwija produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
+        primaryLabel: "Porozmawiajmy",
         primaryHref: "#contacto",
-        secondaryLabel: "Zobacz, jak pracujemy",
+        secondaryLabel: "Zobacz kompetencje",
         secondaryHref: "#familias-servicios",
       },
       pillarsSection: {
-        eyebrow: "Jak porządkujemy usługi",
-        title: "Trzy rodziny pracy ułożone w sekwencję.",
+        eyebrow: "Kompetencje",
+        title: "Trzy kompetencje. Jeden partner technologiczny.",
         description:
-          "Fundamenty pomagają zrozumieć i uporządkować sposób pracy. Wdrożenia AI oraz inne wdrożenia techniczne budujemy dopiero na tej podstawie, nie odwrotnie.",
+          "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Łączymy je wokół wyzwania, bez silosów i z góry narzuconych rozwiązań.",
       },
       detailSection: {
         eyebrow: "Usługi szczegółowo",
-        title: "Co robimy, pogrupowane według obszaru.",
+        title: "Kompetencje do podejmowania decyzji, budowy i integracji.",
       },
       examplesSection: {
-        eyebrow: "Co budujemy",
-        title: "Przykłady konkretnych systemów dla konkretnych procesów.",
+        eyebrow: "Co tworzymy",
+        title: "Produkty, systemy i możliwości dla realnych warunków.",
         description:
-          "Nie tworzymy generycznych rozwiązań. Wdrożenia są dopasowane do kontekstu i budowane na rzeczywistych danych oraz ograniczeniach.",
+          "Każde wdrożenie dopasowujemy do biznesu, użytkowników, danych i sposobu, w jaki rozwiązanie ma się rozwijać.",
       },
       faqSection: {
         eyebrow: "Pytania",
@@ -2346,9 +2381,9 @@ export const SITE_CONTENT = {
     },
     industriesPage: {
       hero: {
-        titleLines: ["Oprogramowanie, AI i integracje dla wybranych sektorów."],
+        titleLines: ["Produkty cyfrowe, oprogramowanie i AI dla różnych sektorów."],
         description:
-          "W każdym sektorze są procesy, dokumenty, dane, raportowanie i narzędzia, które muszą lepiej działać razem. Metoda pozostaje ta sama: zrozumieć, wdrożyć i poprawić.",
+          "Każda branża ma innych użytkowników, procesy, dane i ograniczenia. Dostosowujemy strategię, produkt, oprogramowanie i AI do realnego kontekstu biznesowego.",
         primaryLabel: "Umów pierwszą rozmowę",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",
@@ -2373,9 +2408,9 @@ export const SITE_CONTENT = {
     },
     casesPage: {
       hero: {
-        titleLines: ["Projekty wdrożeniowe w realnych procesach."],
+        titleLines: ["Produkty i systemy dla realnych wyzwań."],
         description:
-          "Projekty i wzorce realizowane przez Tahona, przedstawione anonimowo i bez wymyślonych metryk, opinii czy logo. Pokazujemy problem operacyjny, który porządkujemy, oraz rozwiązanie zbudowane wokół niego.",
+          "Zanonimizowane przykłady skoncentrowane na efektach: większej przejrzystości, lepszych decyzjach i bazie technologicznej gotowej do rozwoju wraz z biznesem.",
         primaryLabel: "Umów pierwszą rozmowę",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",
@@ -2383,20 +2418,20 @@ export const SITE_CONTENT = {
       },
       section: {
         eyebrow: "Przykłady",
-        title: "Projekty wdrożeniowe w realnych procesach.",
+        title: "Efekty dla realnych wyzwań.",
         text:
-          "Projekty i wzorce prowadzone od strony procesów wewnętrznych: dokumentacja, planowanie, wiedza, raportowanie i integracje.",
+          "Produkty i systemy usprawniające pracę, decyzje i świadczenie usług.",
         relatedAreasLabel: "Powiązane obszary",
       },
     },
     contact: {
       eyebrow: "Kontakt",
-      title: "Pierwsza rozmowa, aby zrozumieć kontekst.",
+      title: "Porozmawiajmy o produkcie, systemie lub wyzwaniu technologicznym.",
       description:
-        "Pierwsza rozmowa pozwala przejrzeć sposób pracy, sprawdzić, czy istnieje konkretny obszar do usprawnienia, i jasno ustalić kolejny krok.",
+        "Pierwsza rozmowa pozwala zrozumieć cel, punkt wyjścia i najbardziej użyteczny kolejny krok.",
       sidebarEyebrow: "Kontakt",
       sidebarBody:
-        "Przeglądamy kontekst według praktycznego kryterium. Jeśli widzimy konkretny obszar usprawnienia, wskazujemy, od czego zacząć i co warto najpierw zweryfikować.",
+        "Analizujemy kontekst, cel i ograniczenia. Jeśli istnieje jasny kierunek działania, proponujemy najlepszy punkt startu.",
       emailLabel: "E-mail",
       emailPlaceholder: "imie@firma.pl",
       emailValueLabel: "hola@tahona.ai",
@@ -2413,9 +2448,9 @@ export const SITE_CONTENT = {
         "Wystarczą podstawy. Odpowiadamy z pierwszą oceną i najbardziej użytecznym następnym krokiem.",
       nameLabel: "Imię i nazwisko",
       namePlaceholder: "Imię i nazwisko",
-      detailsLabel: "Proces lub problem do przejrzenia",
+      detailsLabel: "Projekt, produkt lub wyzwanie",
       detailsPlaceholder:
-        "Obecny proces, co dziś dzieje się ręcznie, gdzie pojawia się zator i jaki zespół jest zaangażowany.",
+        "Co należy zbudować lub usprawnić, co istnieje dziś i jaki rezultat ma zostać osiągnięty.",
       privacyNote:
         "Odpowiadamy w ciągu 24 godzin roboczych. Bez presji sprzedażowej: jeśli nie widzimy dobrego dopasowania, powiemy to wprost.",
       submitLabel: "Umów pierwszą rozmowę",
@@ -2441,21 +2476,21 @@ export const SITE_CONTENT = {
       contactLabel: "Skontaktuj się z nami",
       copyright: "Wszelkie prawa zastrzeżone.",
       description:
-        "Zespół techniczny usprawniający procesy, dane i narzędzia wewnętrzne z praktycznym kryterium działania.",
+        "Partner technologiczny dla produktów cyfrowych, oprogramowania na miarę i rozwiązań AI.",
     },
     structuredData: {
       organizationDescription:
-        "Studio konsultingu technicznego i wdrożeń usprawniających procesy wewnętrzne, dane, dokumenty, narzędzia i integracje.",
+        "Partner technologiczny w zakresie strategii, produktów cyfrowych, oprogramowania na miarę, sztucznej inteligencji i integracji.",
       knowsAbout: [
-        "diagnoza operacyjna",
-        "wdrożenie techniczne",
-        "automatyzacja procesów",
-        "narzędzia wewnętrzne",
+        "strategia technologiczna",
+        "rozwój produktów cyfrowych",
+        "rozwój sztucznej inteligencji",
+        "oprogramowanie na miarę",
         "przetwarzanie dokumentów",
         "integracje operacyjne",
       ],
       serviceSchemaName:
-        "Usługi wdrożeń technicznych dla procesów wewnętrznych",
+        "Usługi strategii, sztucznej inteligencji, produktu i oprogramowania",
       serviceCatalogName: "Rodziny usług Tahona",
       industryListName: "Sektory i wzorce operacyjne",
       casesListName: "Zanonimizowane przykłady projektów operacyjnych",
@@ -2464,49 +2499,49 @@ export const SITE_CONTENT = {
       {
         id: "fundamentos",
         marker: "01",
-        title: "Fundamenty",
+        title: "Strategia i architektura",
         description:
-          "Przed budową porządkujemy problem. Diagnoza, strategia i wiedza wewnętrzna pozwalają podejmować decyzje techniczne z właściwym kontekstem.",
+          "Określamy, co zbudować, dlaczego i jak przełożyć to na wykonalne, zintegrowane rozwiązanie gotowe do rozwoju.",
         visualSrc: "/images/service1-illustration.png",
         visualScaleClass: "scale-[1.08]",
         services: [
           {
             id: "consultoria-auditoria-operativa",
-            title: "Konsulting i audyt operacyjny",
-            menuLabel: "Konsulting",
+            title: "Diagnoza i definicja",
+            menuLabel: "Diagnoza i definicja",
             summary:
-              "Przegląd procesów, narzędzi, dokumentów, danych i zależności wewnętrznych, aby zrozumieć, gdzie traci się jasność, kontrolę lub zdolność operacyjną.",
+              "Uporządkowane spojrzenie na biznes, użytkowników, procesy, dane i obecną technologię, które zmienia otwarte wyzwanie w konkretną możliwość.",
             bullets: [
-              "Mapa obecnego procesu",
-              "Inwentaryzacja pracy ręcznej i blokad",
-              "Ryzyka, zależności i priorytety",
-              "Rekomendacja kolejnych kroków",
+              "Cele, użytkownicy i kontekst",
+              "Obecne procesy, dane i systemy",
+              "Możliwości i ograniczenia",
+              "Kryteria sukcesu i kolejne kroki",
             ],
           },
           {
             id: "estrategia-tecnica-operativa",
-            title: "Strategia techniczna i operacyjna",
-            menuLabel: "Strategia",
+            title: "Strategia produktu i technologii",
+            menuLabel: "Strategia produktu",
             summary:
-              "Mapa działań pomagająca zdecydować, co wdrożyć, w jakiej kolejności i przy jakich ograniczeniach. Przydatna, gdy zespół potrzebuje jasności przed inwestycją w rozwój.",
+              "Definicja propozycji, zakresu i planu działania, która pozwala inwestować w budowę zgodnie z jasnymi priorytetami.",
             bullets: [
-              "Roadmapa etapami",
-              "Zakres funkcjonalny i techniczny",
-              "Kryteria decyzji",
-              "Ryzyka adopcji, danych i integracji",
+              "Wizja i zakres produktu",
+              "Etapowy plan działania",
+              "Decyzje funkcjonalne i techniczne",
+              "Ryzyka, zależności i adopcja",
             ],
           },
           {
             id: "bases-conocimiento-empresarial",
-            title: "Firmowe bazy wiedzy",
-            menuLabel: "Bazy wiedzy",
+            title: "Architektura i plan działania",
+            menuLabel: "Architektura",
             summary:
-              "Warstwa wiedzy wewnętrznej do pracy z dokumentami, danymi i kontekstem firmy, ze źródłami, uprawnieniami, ewaluacją i kontrolą człowieka.",
+              "Projekt architektury, danych, integracji i modelu rozwoju potrzebnego, aby rozwiązanie działało w długim okresie.",
             bullets: [
-              "Wczytywanie i normalizacja dokumentów",
-              "Odpowiedzi ze źródłami i śledzeniem pochodzenia informacji",
-              "Projekt uprawnień i zakresu",
-              "Integracja z Drive, CRM, ERP i raportowaniem",
+              "Architektura aplikacji i danych",
+              "Integracje i zależności",
+              "Bezpieczeństwo, uprawnienia i śledzenie działań",
+              "Plan dostarczania i rozwoju",
             ],
           },
         ],
@@ -2514,49 +2549,49 @@ export const SITE_CONTENT = {
       {
         id: "desarrollo-ia",
         marker: "02",
-        title: "Wdrożenia AI",
+        title: "Sztuczna inteligencja",
         description:
-          "Wewnętrzne wdrożenia AI. Projektujemy je z myślą o granicach, nadzorze, źródłach, śledzeniu działań i adopcji.",
+          "Projektujemy i wdrażamy rozwiązania AI z danymi, kontekstem, ewaluacją, nadzorem i realną integracją.",
         visualSrc: "/images/service2-illustration.png",
         visualScaleClass: "scale-[1.1]",
         services: [
           {
             id: "optimizacion-procesos",
-            title: "Optymalizacja procesów",
-            menuLabel: "Optymalizacja procesów",
+            title: "Rozwiązania i produkty z AI",
+            menuLabel: "Rozwiązania AI",
             summary:
-              "Usprawnianie przepływów operacyjnych przez reguły, automatyzację, modele lub oprogramowanie, z ograniczeniem ręcznych kroków i integracją z istniejącymi narzędziami.",
+              "Funkcje AI wbudowane w produkty, usługi i procesy, aby rozwiązać zdefiniowany i mierzalny przypadek użycia.",
             bullets: [
-              "Uproszczenie przepływu przed automatyzacją",
-              "Automatyzacje z kontrolą tam, gdzie jest potrzebna",
-              "Integracje między narzędziami",
-              "Pomiar operacyjny i korekty",
+              "Definicja przypadku użycia",
+              "Projektowanie doświadczenia i zachowania",
+              "Modele, dane i kontekst",
+              "Ewaluacja i uruchomienie produkcyjne",
             ],
           },
           {
             id: "agentes-ia",
-            title: "Agenci AI",
-            menuLabel: "Agenci AI",
+            title: "Agenci i automatyzacja",
+            menuLabel: "Agenci i automatyzacja",
             summary:
-              "Agenci podłączeni do narzędzi wewnętrznych dla zadań o jasno określonym zakresie, takich jak wyszukiwanie informacji, przygotowanie szkiców, wykonywanie powtarzalnych kroków lub koordynacja nadzorowanego przepływu.",
+              "Systemy, które wyszukują informacje, korzystają z narzędzi i wykonują zadania o określonym zakresie z uprawnieniami, ograniczeniami i nadzorem.",
             bullets: [
-              "Definicja zadania, granic i uprawnień",
-              "Dostępne narzędzia i źródła",
+              "Zadania, narzędzia i uprawnienia",
+              "Dostępny kontekst i źródła",
               "Śledzenie działań",
-              "Kontrola człowieka i eskalacja",
+              "Nadzór człowieka i eskalacja",
             ],
           },
           {
             id: "procesamiento-documental",
-            title: "Przetwarzanie dokumentów",
-            menuLabel: "Przetwarzanie dokumentów",
+            title: "Przetwarzanie dokumentów i wiedza",
+            menuLabel: "Dokumenty i wiedza",
             summary:
-              "Ekstrakcja, klasyfikacja, walidacja i wspomagany przegląd dokumentów, aby zamienić rozproszone informacje w uporządkowane dane i użyteczne przepływy operacyjne.",
+              "Systemy zmieniające dokumenty i rozproszoną wiedzę w uporządkowane, przeszukiwalne informacje dla ludzi, produktów i agentów.",
             bullets: [
-              "Wczytywanie PDF-ów, arkuszy, e-maili lub formularzy",
-              "Ekstrakcja pól i walidacja regułami",
-              "Klasyfikacja, routing i generowanie szkiców",
-              "Kontrola człowieka i zapis do CRM lub ERP",
+              "Wczytywanie, ekstrakcja i normalizacja",
+              "Klasyfikacja i walidacja",
+              "Źródła, uprawnienia i cytowania",
+              "Integracja z produktami i systemami",
             ],
           },
         ],
@@ -2564,49 +2599,49 @@ export const SITE_CONTENT = {
       {
         id: "otros-desarrollos",
         marker: "03",
-        title: "Inne wdrożenia techniczne",
+        title: "Produkt i oprogramowanie",
         description:
-          "Wiele usprawnień nie wymaga AI. Wymaga jasnego narzędzia, niezawodnej integracji albo platformy wewnętrznej pasującej do rzeczywistego sposobu pracy.",
+          "Projektujemy i tworzymy produkty cyfrowe, aplikacje oraz platformy na miarę od definicji po produkcję.",
         visualSrc: "/images/service3-illustration.png",
         visualScaleClass: "scale-[1.12]",
         services: [
           {
             id: "herramientas-medida",
-            title: "Narzędzia na miarę",
-            menuLabel: "Narzędzia na miarę",
+            title: "Produkty cyfrowe",
+            menuLabel: "Produkty cyfrowe",
             summary:
-              "Oprogramowanie zbudowane wokół konkretnego procesu, na rzeczywistych danych i ograniczeniach operacyjnych.",
+              "Projektowanie i rozwój kompletnych produktów cyfrowych, od propozycji i doświadczenia po technologię, która je obsługuje.",
             bullets: [
-              "Aplikacje wewnętrzne",
-              "Panele operacyjne",
-              "Przepływy akceptacji",
-              "Zarządzanie dokumentacją lub administracją",
+              "Definicja i strategia produktu",
+              "Doświadczenie i przepływy użytkownika",
+              "Rozwój frontend i backend",
+              "Uruchomienie i dalszy rozwój",
             ],
           },
           {
             id: "herramientas-internas",
-            title: "Narzędzia wewnętrzne",
-            menuLabel: "Narzędzia wewnętrzne",
+            title: "Oprogramowanie na miarę",
+            menuLabel: "Oprogramowanie na miarę",
             summary:
-              "Systemy centralizujące zadania, informacje i decyzje, które dziś są w Excelu, e-mailach, Drive, WhatsApp lub niepołączonych narzędziach.",
+              "Aplikacje i platformy zbudowane wokół biznesu, jego reguł, danych i realnych potrzeb.",
             bullets: [
-              "Zaplecze operacyjne",
-              "Panele śledzenia i raporty",
-              "Wewnętrzne przepływy pracy",
-              "Kontrola statusu, alerty i raportowanie",
+              "Aplikacje internetowe i platformy",
+              "Narzędzia wewnętrzne i zaplecze operacyjne",
+              "Panele, przepływy pracy i raportowanie",
+              "Utrzymanie i rozwój techniczny",
             ],
           },
           {
             id: "integraciones-plataformas-operativas",
-            title: "Integracje i platformy operacyjne",
-            menuLabel: "Integracje / platformy",
+            title: "Integracje i platformy",
+            menuLabel: "Integracje i platformy",
             summary:
-              "Połączenie Drive, CRM, ERP, arkuszy, API, raportowania i systemów wewnętrznych, aby ograniczyć duplikację i pracę ręczną.",
+              "Połączenia między produktami, API, danymi i narzędziami, dzięki którym technologia działa jako jeden system, a nie zbiór osobnych elementów.",
             bullets: [
-              "Synchronizacja danych",
-              "Konektory między narzędziami",
-              "Automatyzacja przekazywania danych lub zadań",
-              "Podstawowy monitoring i kontrola błędów",
+              "API i konektory",
+              "Synchronizacja i przepływy danych",
+              "Integracja z CRM, ERP i Drive",
+              "Monitorowanie i obsługa błędów",
             ],
           },
         ],
@@ -2615,16 +2650,16 @@ export const SITE_CONTENT = {
     implementationExamples: [
       {
         marker: "01",
-        title: "Bazy wiedzy",
+        title: "Systemy wiedzy",
         description:
-          "Ze źródłami, uprawnieniami, ewaluacją i kontrolą człowieka na realnych dokumentach.",
+          "Ze źródłami, uprawnieniami, ewaluacją i integracją z produktami oraz procesami.",
         className: "lg:col-span-3",
       },
       {
         marker: "02",
-        title: "Narzędzia wewnętrzne",
+        title: "Produkty cyfrowe",
         description:
-          "Do koordynowania procesów, dokumentów, zadań i odpowiedzialnych osób.",
+          "Doświadczenia i aplikacje projektowane wokół realnych użytkowników i rezultatów.",
         className: "lg:col-span-3",
       },
       {
@@ -2665,29 +2700,29 @@ export const SITE_CONTENT = {
     ],
     servicesFaq: [
       {
-        question: "Czy Tahona zawsze używa AI?",
+        question: "Czy Tahona zawsze wykorzystuje AI?",
         answer:
-          "Nie. AI używamy wtedy, gdy poprawia proces. W niektórych przypadkach właściwym rozwiązaniem jest integracja, narzędzie wewnętrzne, reguła biznesowa albo uproszczenie przepływu.",
+          "Nie. AI jest jedną z kluczowych kompetencji, ale wykorzystujemy je wtedy, gdy poprawia rozwiązanie. W innych przypadkach właściwą odpowiedzią jest produkt, oprogramowanie, integracja lub połączenie kilku kompetencji.",
       },
       {
-        question: "Czy możemy pracować z istniejącymi narzędziami?",
+        question: "Czy Tahona może zrealizować produkt cyfrowy od początku do końca?",
         answer:
-          "Tak. Większość projektów startuje od narzędzi już obecnych w firmie: Drive, CRM, ERP, arkuszy, poczty, raportowania, API lub systemów wewnętrznych.",
+          "Tak. Możemy poprowadzić strategię i definicję produktu, doświadczenie, architekturę, rozwój, integracje, uruchomienie i dalszą ewolucję.",
       },
       {
-        question: "Czym różni się automatyzacja od optymalizacji procesów?",
+        question: "Czy rozwiązanie może działać z technologią już obecną w firmie?",
         answer:
-          "Automatyzacja wykonuje kroki. Optymalizacja procesów wymaga sprawdzenia, czy te kroki mają sens, jakich danych potrzebują, gdzie powinna zostać kontrola człowieka i jak zmiana trafia do codziennej pracy.",
+          "Tak. Większość projektów musi współpracować z istniejącymi systemami, takimi jak CRM, ERP, Drive, arkusze, API, dane wewnętrzne czy platformy zewnętrzne.",
       },
       {
-        question: "Czym jest firmowa baza wiedzy?",
+        question: "Co obejmuje kompletne rozwiązanie AI?",
         answer:
-          "To warstwa wiedzy wewnętrznej z wczytywaniem i normalizacją dokumentów, cytowalnymi źródłami, uprawnieniami, ewaluacją, kontrolą człowieka i integracją z rzeczywistymi narzędziami. To nie jest tylko wyszukiwarka nad dokumentami.",
+          "Przypadek użycia, dane i kontekst, architekturę, produkt, modele, ewaluację, uprawnienia, nadzór, integrację i rozwój na produkcji.",
       },
       {
-        question: "Kiedy agent AI ma sens?",
+        question: "Jak ustalamy, od czego zacząć?",
         answer:
-          "Gdy istnieje konkretne zadanie operacyjne, wiarygodne źródła, jasne granice, kontrolowane narzędzia, śledzenie działań i punkt nadzoru. Jeśli tych warunków nie ma, najpierw warto rozwiązać proces.",
+          "Zaczynamy od celu i kontekstu. Definiujemy najmniejszy zakres pozwalający zweryfikować wartość, ryzyko i wykonalność przed rozszerzeniem rozwiązania.",
       },
     ],
     industryItems: [

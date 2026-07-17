@@ -124,13 +124,14 @@ cn("base-class", condition && "conditional-class", className)
 
 ### Voice
 - **Direct**: no fluff, get to the point
-- **Practical**: operational clarity before technology
+- **Practical**: connect strategy, product and technology to a concrete business outcome
 - **Confident**: technical expertise without hype
 - **Corporate/professional**: serious, clear, and human, but not casual
 
 ### DO
 - Use neutral corporate Spanish. Avoid addressing the visitor directly as "tú" or "usted" unless explicitly approved for a specific CTA.
-- Lead with operations: processes, data, documents, internal tools, adoption, and measurable control.
+- Lead with Tahona as an end-to-end technology partner across strategy, digital product, custom software and AI.
+- Keep operational diagnosis as part of the method, not as the main company category.
 - Be specific when evidence exists, but do not invent timelines, savings, metrics, sectors, clients, or guarantees.
 
 ### DON'T
@@ -142,18 +143,18 @@ cn("base-class", condition && "conditional-class", className)
 - Money-first claims without proof: "ahorra X horas", "reduce costes", "aumenta la facturación"
 
 ### Key Messages
-- "Procesos, datos y herramientas internas"
-- "La tecnología ya existe. Falta la implementación adecuada."
-- "Mejoramos operaciones internas con diagnóstico operativo, implementación técnica y automatización solo cuando encaja con el trabajo real."
-- "Para equipos con procesos reales que quieren mejorar su operación."
+- "De la estrategia a la implementación."
+- "Partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA."
+- "Estrategia, producto y tecnología en un mismo equipo."
+- IA is a core capability, but software, product and integrations are equally central.
 
 ### Service Taxonomy
 
 Use this service grouping unless Dani changes it:
 
-1. **Fundaciones**: Consultoría / auditoría operativa, Estrategia, Bases de conocimiento.
-2. **Desarrollo de IA**: Optimización de procesos, Agentes de IA, Procesamiento documental.
-3. **Otros desarrollos**: Herramientas a medida, Herramientas internas, Integraciones / plataformas operativas.
+1. **Estrategia y arquitectura**: Diagnóstico y definición, Estrategia de producto y tecnología, Arquitectura y hoja de ruta.
+2. **Inteligencia artificial**: Soluciones y productos con IA, Agentes y automatización, Procesamiento documental y conocimiento.
+3. **Producto y software**: Productos digitales, Software a medida, Integraciones y plataformas.
 
 ### Industry Taxonomy
 

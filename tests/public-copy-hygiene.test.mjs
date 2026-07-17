@@ -158,8 +158,9 @@ describe("public copy hygiene", () => {
       );
     }
 
-    assert.match(llmsSource, /consultoría técnica/i);
-    assert.match(llmsSource, /operaciones internas/i);
+    assert.match(llmsSource, /partner tecnológico/i);
+    assert.match(llmsSource, /productos digitales/i);
+    assert.match(llmsSource, /software a medida/i);
     assert.match(llmsSource, /no es una agencia genérica de IA/i);
   });
 
@@ -173,24 +174,24 @@ describe("public copy hygiene", () => {
     );
     assert.match(
       i18nSource,
-      /Tahona \| Internal processes, data and tools/,
+      /Tahona \| AI, digital products and custom software/,
     );
     assert.match(
       i18nSource,
-      /Tahona \| Procesy, dane i narzędzia wewnętrzne/,
+      /Tahona \| AI, produkty cyfrowe i oprogramowanie na miarę/,
     );
     assert.equal(
       i18nSource.includes(
-        "Servicios Tahona | Operaciones, IA e integraciones",
+        "Servicios Tahona | Estrategia, IA y desarrollo de producto",
       ),
       true,
     );
     assert.equal(
-      i18nSource.includes("Tahona Services | Operations, AI and integrations"),
+      i18nSource.includes("Tahona Services | Strategy, AI and product development"),
       true,
     );
     assert.equal(
-      i18nSource.includes("Usługi Tahona | Procesy, AI i integracje"),
+      i18nSource.includes("Usługi Tahona | Strategia, AI i rozwój produktu"),
       true,
     );
   });
