@@ -109,7 +109,7 @@ export function Hero({
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.25 }}
-              className="mt-8 max-w-3xl text-[clamp(1rem,1.35vw,1.25rem)] leading-8 text-gray-500 lg:max-w-[38rem]"
+              className="mt-7 max-w-4xl font-heading text-[clamp(1.45rem,2.35vw,2.35rem)] font-medium leading-[1.18] text-gray-500 lg:max-w-[58rem]"
             >
               {resolvedDescription}
             </motion.p>

@@ -386,16 +386,13 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: [
-          "La tecnología ya existe.",
-          "Falta la implementación adecuada.",
-        ],
+        titleLines: ["Del diagnóstico a la implementación."],
         description:
-          "Equipo técnico que mejora operaciones internas con diagnóstico, implementación práctica y automatización cuando aporta. Sin cambiar lo que ya funciona.",
-        primaryLabel: "Hablemos sin compromiso",
+          "Tahona es el partner tecnológico para mejorar cómo funciona una empresa por dentro.",
+        primaryLabel: "Hablemos",
         primaryHref: "#contacto",
-        secondaryLabel: "Ver cómo trabajamos",
-        secondaryHref: "#proceso",
+        secondaryLabel: "Ver servicios",
+        secondaryHref: "#soluciones",
       },
       whatWeDo: {
         eyebrow: "Qué hacemos",
@@ -1303,16 +1300,13 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: [
-          "The technology already exists.",
-          "What is missing is the right implementation.",
-        ],
+        titleLines: ["From diagnosis to implementation."],
         description:
-          "A technical team that improves internal operations through diagnosis, practical implementation and automation when it adds value. Without replacing what already works.",
-        primaryLabel: "Start a conversation",
+          "Tahona is the technology partner for improving how a company works from within.",
+        primaryLabel: "Let's talk",
         primaryHref: "#contacto",
-        secondaryLabel: "See how we work",
-        secondaryHref: "#proceso",
+        secondaryLabel: "View services",
+        secondaryHref: "#soluciones",
       },
       whatWeDo: {
         eyebrow: "What we do",
@@ -2217,16 +2211,13 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: [
-          "Technologia już istnieje.",
-          "Brakuje właściwego wdrożenia.",
-        ],
+        titleLines: ["Od diagnozy do wdrożenia."],
         description:
-          "Zespół techniczny, który usprawnia procesy, dane i narzędzia wewnętrzne przez diagnozę, praktyczne wdrożenie i automatyzację tam, gdzie naprawdę wnosi wartość. Bez zastępowania tego, co już działa.",
-        primaryLabel: "Umów pierwszą rozmowę",
+          "Tahona to partner technologiczny, który pomaga firmom lepiej działać od wewnątrz.",
+        primaryLabel: "Porozmawiajmy",
         primaryHref: "#contacto",
-        secondaryLabel: "Zobacz, jak pracujemy",
-        secondaryHref: "#proceso",
+        secondaryLabel: "Zobacz usługi",
+        secondaryHref: "#soluciones",
       },
       whatWeDo: {
         eyebrow: "Czym się zajmujemy",
