@@ -134,9 +134,6 @@ export function MobileNavMenu({
               ))}
 
               <div className="mt-4 border-t border-gray-200 pt-4">
-                <p className="mb-2 text-xs font-medium uppercase tracking-[0.12em] text-gray-500">
-                  {content.navigation.languageLabel}
-                </p>
                 <LanguageSelector
                   currentPath={currentPath}
                   label={content.navigation.languageLabel}

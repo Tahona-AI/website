@@ -13,9 +13,9 @@
 
 ```bash
 bun install     # Install dependencies
-bun dev         # Dev server at localhost:4321
-bun build       # Build static site to ./dist/
-bun preview     # Preview production build
+bun run dev       # Dev server at localhost:4321
+bun run build     # Build static site to ./dist/
+bun run preview   # Preview production build
 ```
 
 ---
@@ -176,7 +176,7 @@ Currently client-side only. Form submission needs external service (Formspree, N
 ### Build Verification
 Always run after changes:
 ```bash
-bun build  # Must succeed for deploy
+bun run build  # Must succeed for deploy
 ```
 
 ---
