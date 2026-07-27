@@ -84,6 +84,40 @@ const localizedCanonicalRoutes = [
   "https://tahona.ai/pl/cases/",
 ];
 
+const hybridPositioningPatterns = {
+  es: [
+    /partner tecnológico de principio a fin/i,
+    /estrategia y arquitectura/i,
+    /inteligencia artificial/i,
+    /producto y software/i,
+    /cuando el proceso es acotado y medible/i,
+    /cuando el alcance y el modelo de colaboración lo requieren/i,
+  ],
+  en: [
+    /end-to-end technology partner/i,
+    /strategy and architecture/i,
+    /artificial intelligence/i,
+    /product and software/i,
+    /when the process is bounded and measurable/i,
+    /when the scope and collaboration model require it/i,
+  ],
+  pl: [
+    /partner technologiczny od strategii po wdrożenie/i,
+    /strategia i architektura/i,
+    /sztuczna inteligencja/i,
+    /produkt i oprogramowanie/i,
+    /gdy proces ma jasno określony zakres i mierzalny rezultat/i,
+    /gdy wymagają tego zakres i model współpracy/i,
+  ],
+};
+
+const forbiddenPublicCategoryPatterns = [
+  /Service as Software/i,
+  /AI-native agency/i,
+  /partner 360/i,
+  /partner all-in/i,
+];
+
 function readProjectFile(path) {
   return readFileSync(join(repoRoot, path), "utf8");
 }
@@ -164,6 +198,27 @@ describe("public copy hygiene", () => {
     assert.match(llmsSource, /no es una agencia genérica de IA/i);
   });
 
+  test("hybrid positioning stays balanced and selective across public locales", () => {
+    const publicPositioningSource = [
+      readProjectFile("src/i18n/content.ts"),
+      readProjectFile("public/llms.txt"),
+    ].join("\n");
+
+    for (const [locale, patterns] of Object.entries(hybridPositioningPatterns)) {
+      for (const pattern of patterns) {
+        assert.match(
+          publicPositioningSource,
+          pattern,
+          `missing ${locale} hybrid-positioning marker: ${pattern.source}`,
+        );
+      }
+    }
+
+    for (const pattern of forbiddenPublicCategoryPatterns) {
+      assert.doesNotMatch(publicPositioningSource, pattern);
+    }
+  });
+
   test("metadata defaults and route titles avoid duplicate generic SERP copy", () => {
     const seoSource = readProjectFile("src/components/SEO.astro");
     const i18nSource = readProjectFile("src/i18n/content.ts");
@@ -174,11 +229,15 @@ describe("public copy hygiene", () => {
     );
     assert.match(
       i18nSource,
-      /Tahona \| AI, digital products and custom software/,
+      /Tahona \| Partner tecnológico de principio a fin/,
     );
     assert.match(
       i18nSource,
-      /Tahona \| AI, produkty cyfrowe i oprogramowanie na miarę/,
+      /Tahona \| End-to-end technology partner/,
+    );
+    assert.match(
+      i18nSource,
+      /Tahona \| Partner technologiczny od strategii po wdrożenie/,
     );
     assert.equal(
       i18nSource.includes(

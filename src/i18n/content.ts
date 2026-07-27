@@ -277,9 +277,9 @@ export const SITE_CONTENT = {
     metadata: {
       home: {
         name: "Inicio",
-        title: "Tahona | IA, productos digitales y software a medida",
+        title: "Tahona | Partner tecnológico de principio a fin",
         description:
-          "Partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
+          "Partner tecnológico de principio a fin para estrategia, productos digitales, software a medida, integraciones y soluciones de IA.",
       },
       services: {
         name: "Servicios",
@@ -382,9 +382,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["De la estrategia a la implementación."],
+        titleLines: ["De la estrategia a productos y sistemas que funcionan."],
         description:
-          "Tahona es el partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
+          "Tahona es el partner tecnológico de principio a fin para definir, diseñar, construir e integrar productos digitales, software a medida y soluciones de IA orientadas a resultados reales.",
         primaryLabel: "Hablemos",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
@@ -394,9 +394,8 @@ export const SITE_CONTENT = {
         eyebrow: "Qué hacemos",
         title: "Estrategia, producto y tecnología en un mismo equipo.",
         description: [
-          "Acompañamos todo el ciclo: entendemos el reto, definimos la solución, diseñamos la experiencia, construimos la tecnología y la integramos en el negocio.",
-          "El resultado puede ser un producto digital, software a medida o una solución de IA. La tecnología se decide en función del objetivo, los usuarios y el contexto, no al revés.",
-          "El enfoque es de sastrería tecnológica: cada sistema se diseña alrededor del negocio, se valida con sus usuarios y se prepara para evolucionar.",
+          "Unimos consultoría, producto e ingeniería para convertir retos abiertos en soluciones que funcionan. Podemos entrar desde la definición, construir el producto o sistema, integrarlo en el negocio y seguir evolucionándolo en producción.",
+          "El resultado puede ser un producto digital, software a medida o una solución de IA. En procesos acotados y medibles, también podemos asumir la ejecución de una parte del trabajo.",
         ],
         bullets: [
           "Diagnóstico, definición de producto y estrategia tecnológica.",
@@ -410,28 +409,28 @@ export const SITE_CONTENT = {
         eyebrow: "Servicios",
         title: "Tres capacidades. Un único partner tecnológico.",
         description:
-          "Estrategia y arquitectura, inteligencia artificial, producto y software. Desde la definición inicial hasta la puesta en producción y la evolución del sistema.",
+          "Estrategia y arquitectura, inteligencia artificial, producto y software. Se combinan según el reto y el resultado esperado, desde la definición hasta producción y evolución.",
         ctaLabel: "Ver servicios",
       },
       industries: {
         eyebrow: "Industrias",
         title: "Capacidad tecnológica adaptada a cada sector.",
         description:
-          "Cambian los procesos, los usuarios, los datos y las restricciones. La capacidad para definir, diseñar y construir se mantiene.",
+          "Cambian los procesos, los usuarios, los datos y las restricciones. Mantenemos el mismo recorrido de principio a fin y orientamos cada solución al resultado que importa en ese contexto.",
         ctaLabel: "Ver industrias",
       },
       ourWork: {
         eyebrow: "Casos",
-        title: "Productos y sistemas orientados a resultados reales.",
+        title: "Productos y sistemas construidos sobre retos reales.",
         description:
-          "El foco está en el resultado: operaciones más claras, decisiones mejor informadas y servicios digitales capaces de evolucionar con el negocio.",
+          "Los casos anonimizados muestran qué problema se abordó, qué se construyó y cómo la solución se integra y evoluciona en su contexto.",
         ctaLabel: "Ver casos",
       },
       howWeWork: {
         eyebrow: "Cómo trabajamos",
         title: "Un partner desde la definición hasta la evolución.",
         description:
-          "Asumimos el recorrido completo: estrategia, producto, arquitectura, desarrollo, integración y mejora continua. El diagnóstico permite entender el punto de partida; el objetivo es construir y hacer avanzar la solución.",
+          "Trabajamos de principio a fin: estrategia, producto, arquitectura, desarrollo, integración y mejora continua. El diagnóstico permite entender el punto de partida; el objetivo es construir y hacer avanzar la solución.",
         steps: [
           {
             number: "01",
@@ -459,42 +458,42 @@ export const SITE_CONTENT = {
           },
           {
             number: "05",
-            title: "Lanzamiento y evolución",
+            title: "Lanzamiento, operación y evolución",
             description:
-              "Integramos, medimos, documentamos y seguimos mejorando el sistema.",
+              "Integramos, medimos y seguimos mejorando el sistema. Cuando el alcance y el modelo de colaboración lo requieren, también asumimos la operación acordada y la gestión de excepciones.",
           },
         ],
       },
     },
     aiApplied: {
-      eyebrow: "Inteligencia artificial",
-      title: "IA de principio a fin, integrada en productos y operaciones.",
+      eyebrow: "IA aplicada",
+      title: "De procesos complejos a sistemas que ejecutan el trabajo.",
       description:
-        "Trabajamos desde la estrategia y el caso de uso hasta los datos, la arquitectura, la construcción, la evaluación y la evolución en producción. Desarrollamos sistemas de IA que forman parte del negocio, no demostraciones aisladas.",
+        "Cuando el proceso es acotado y medible, vamos más allá de construir la herramienta: integramos, operamos y mejoramos el sistema para que una parte del trabajo ocurra con trazabilidad y supervisión.",
       lifecycle: {
-        ariaLabel: "Ciclo integral de desarrollo de una solución de inteligencia artificial",
-        centerLabel: "IA de principio a fin",
-        centerTitle: "Sistema en producción",
+        ariaLabel: "Ciclo de un sistema que ejecuta trabajo con trazabilidad y supervisión",
+        centerLabel: "Proceso acotado",
+        centerTitle: "Ejecución trazable",
         stages: [
           {
-            label: "Estrategia",
-            title: "Caso de uso y objetivo",
-            body: "Valor, alcance, usuarios y criterios de éxito.",
+            label: "Resultado",
+            title: "Objetivo y límites",
+            body: "Unidad de trabajo, alcance, excepciones y criterios de calidad.",
           },
           {
             label: "Fundamentos",
             title: "Datos y contexto",
-            body: "Fuentes, permisos, calidad y conocimiento del negocio.",
+            body: "Fuentes, permisos, reglas y conocimiento del negocio.",
           },
           {
-            label: "Ingeniería",
-            title: "Construcción e integración",
-            body: "Modelos, producto, herramientas y sistemas conectados.",
+            label: "Construcción",
+            title: "Sistema e integración",
+            body: "Producto, IA, herramientas y sistemas conectados.",
           },
           {
             label: "Operación",
-            title: "Evaluación y evolución",
-            body: "Pruebas, supervisión, métricas y mejora continua.",
+            title: "Supervisión y evolución",
+            body: "Evaluación, trazabilidad, gestión de excepciones y mejora continua.",
           },
         ],
       },
@@ -578,9 +577,9 @@ export const SITE_CONTENT = {
     },
     contact: {
       eyebrow: "Contacto",
-      title: "Hablemos del producto, sistema o reto tecnológico.",
+      title: "Hablemos del reto, el proceso o el producto.",
       description:
-        "Una primera conversación para entender el objetivo, el punto de partida y el siguiente paso más útil.",
+        "No hace falta llegar con una solución técnica definida. Una primera conversación permite entender el objetivo, el punto de partida y el siguiente paso más útil.",
       sidebarEyebrow: "Contacto",
       sidebarBody:
         "Revisamos el contexto, el objetivo y las restricciones. Si hay una línea clara de trabajo, proponemos el mejor punto de partida.",
@@ -592,7 +591,7 @@ export const SITE_CONTENT = {
       phoneHint:
         "Si se prefiere ir al grano, se puede ver en una llamada breve.",
       trustBadges: [
-        "Respuesta en 24h laborables",
+        "Respuesta clara y directa",
         "Primera oportunidad clara",
         "Sin compromiso ni presión comercial",
       ],
@@ -601,39 +600,39 @@ export const SITE_CONTENT = {
         "Con lo básico basta. Respondemos con una valoración inicial y el siguiente paso más útil.",
       nameLabel: "Nombre",
       namePlaceholder: "Nombre y apellidos",
-      detailsLabel: "Proyecto, producto o reto",
+      detailsLabel: "Reto, proceso o producto",
       detailsPlaceholder:
         "Qué se quiere construir o mejorar, qué existe hoy y qué resultado se busca.",
       privacyNote:
-        "Respondemos en 24h laborables. Sin presión comercial: si el encaje no es claro, se dirá con la misma claridad.",
+        "Sin presión comercial: si el encaje no es claro, se dirá con la misma claridad.",
       submitLabel: "Solicitar una primera conversación",
       submittingLabel: "Enviando...",
       closeLabel: "Cerrar",
       modalEyebrow: "Mensaje recibido",
       modalTitle: "Mensaje recibido",
       modalText:
-        "Lo revisaremos y te responderemos en 24h laborables con el siguiente paso más útil.",
+        "Lo revisaremos y responderemos con el siguiente paso más útil.",
       modalEmailText:
-        "Si prefieres ampliarlo por correo, escríbenos a hola@tahona.ai",
+        "Para ampliar el contexto por correo: hola@tahona.ai",
       mailCtaText: "hola@tahona.ai",
       errorMessages: {
         nameShort: "El nombre debe tener al menos 2 caracteres",
         nameLong: "El nombre es demasiado largo",
-        emailInvalid: "Por favor, introduce un email válido",
-        detailsShort: "Por favor, cuéntanos un poco más sobre tu proyecto",
+        emailInvalid: "El correo no es válido",
+        detailsShort: "Hace falta algo más de contexto sobre el reto, proceso o producto",
         detailsLong: "El mensaje es demasiado largo",
-        submit: "Hubo un error al enviar el formulario. Inténtalo de nuevo.",
+        submit: "No se pudo enviar el formulario. Se puede intentar de nuevo.",
       },
     },
     footer: {
       contactLabel: "Contacta con nosotros",
       copyright: "Todos los derechos reservados.",
       description:
-        "Partner tecnológico para productos digitales, software a medida y soluciones de IA.",
+        "Partner tecnológico de principio a fin para estrategia, producto, software e IA.",
     },
     structuredData: {
       organizationDescription:
-        "Partner tecnológico para estrategia, productos digitales, software a medida, inteligencia artificial e integraciones.",
+        "Partner tecnológico de principio a fin para estrategia, productos digitales, software a medida, inteligencia artificial e integraciones.",
       knowsAbout: [
         "estrategia tecnológica",
         "desarrollo de producto digital",
@@ -1202,9 +1201,9 @@ export const SITE_CONTENT = {
     metadata: {
       home: {
         name: "Home",
-        title: "Tahona | AI, digital products and custom software",
+        title: "Tahona | End-to-end technology partner",
         description:
-          "Technology partner for designing, building and integrating digital products, custom software and AI solutions.",
+          "End-to-end technology partner for strategy, digital products, custom software, integrations and AI solutions.",
       },
       services: {
         name: "Services",
@@ -1307,9 +1306,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["From strategy to implementation."],
+        titleLines: ["From strategy to products and systems that work."],
         description:
-          "Tahona is the technology partner for designing, building and integrating digital products, custom software and AI solutions.",
+          "Tahona is the end-to-end technology partner for defining, designing, building and integrating digital products, custom software and AI solutions focused on real outcomes.",
         primaryLabel: "Let's talk",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
@@ -1319,9 +1318,8 @@ export const SITE_CONTENT = {
         eyebrow: "What we do",
         title: "Strategy, product and technology in one team.",
         description: [
-          "We cover the full cycle: understanding the challenge, defining the solution, designing the experience, building the technology and integrating it into the business.",
-          "The outcome may be a digital product, custom software or an AI solution. Technology is chosen around the goal, the users and the context, not the other way around.",
-          "Our approach is technology made to measure: every system is designed around the business, validated with its users and prepared to evolve.",
+          "We bring consulting, product and engineering together to turn open-ended challenges into working solutions. We can join at definition, build the product or system, integrate it into the business and continue evolving it in production.",
+          "The outcome may be a digital product, custom software or an AI solution. When the process is bounded and measurable, we can also take on execution of part of the work.",
         ],
         bullets: [
           "Discovery, product definition and technology strategy.",
@@ -1335,28 +1333,28 @@ export const SITE_CONTENT = {
         eyebrow: "Services",
         title: "Three capabilities. One technology partner.",
         description:
-          "Strategy and architecture, artificial intelligence, product and software. From initial definition to production and ongoing evolution.",
+          "Strategy and architecture, artificial intelligence, product and software. They combine around the challenge and expected outcome, from definition through production and evolution.",
         ctaLabel: "View services",
       },
       industries: {
         eyebrow: "Industries",
         title: "Technology capabilities adapted to each sector.",
         description:
-          "Processes, users, data and constraints change. The ability to define, design and build remains the same.",
+          "Processes, users, data and constraints change. We keep the same end-to-end journey and focus each solution on the outcome that matters in its context.",
         ctaLabel: "View industries",
       },
       ourWork: {
         eyebrow: "Cases",
-        title: "Products and systems focused on real outcomes.",
+        title: "Products and systems built around real challenges.",
         description:
-          "The focus is the outcome: clearer operations, better-informed decisions and digital services able to evolve with the business.",
+          "These anonymized cases show the problem addressed, what was built and how the solution integrates and evolves in its context.",
         ctaLabel: "View cases",
       },
       howWeWork: {
         eyebrow: "How we work",
         title: "A partner from definition through evolution.",
         description:
-          "We own the full journey: strategy, product, architecture, development, integration and continuous improvement. Discovery establishes the starting point; the goal is to build and move the solution forward.",
+          "We work end to end across strategy, product, architecture, development, integration and continuous improvement. Discovery establishes the starting point; the goal is to build and move the solution forward.",
         steps: [
           {
             number: "01",
@@ -1384,42 +1382,42 @@ export const SITE_CONTENT = {
           },
           {
             number: "05",
-            title: "Launch and evolution",
+            title: "Launch, operations and evolution",
             description:
-              "We integrate, measure, document and continue improving the system.",
+              "We integrate, measure and keep improving the system. When the scope and collaboration model require it, we also take on the agreed operation and exception handling.",
           },
         ],
       },
     },
     aiApplied: {
-      eyebrow: "Artificial intelligence",
-      title: "End-to-end AI, embedded in products and operations.",
+      eyebrow: "Applied AI",
+      title: "From complex processes to systems that do the work.",
       description:
-        "We work from strategy and use-case definition through data, architecture, build, evaluation and evolution in production. We develop AI systems that become part of the business, not isolated demonstrations.",
+        "When the process is bounded and measurable, we go beyond building the tool: we integrate, operate and improve the system so that part of the work happens with traceability and oversight.",
       lifecycle: {
-        ariaLabel: "End-to-end lifecycle for developing an artificial intelligence solution",
-        centerLabel: "End-to-end AI",
-        centerTitle: "System in production",
+        ariaLabel: "Lifecycle of a system that performs work with traceability and oversight",
+        centerLabel: "Bounded process",
+        centerTitle: "Traceable execution",
         stages: [
           {
-            label: "Strategy",
-            title: "Use case and goal",
-            body: "Value, scope, users and success criteria.",
+            label: "Outcome",
+            title: "Goal and boundaries",
+            body: "Unit of work, scope, exceptions and quality criteria.",
           },
           {
             label: "Foundations",
             title: "Data and context",
-            body: "Sources, permissions, quality and business knowledge.",
+            body: "Sources, permissions, rules and business knowledge.",
           },
           {
-            label: "Engineering",
-            title: "Build and integration",
-            body: "Models, product, tools and connected systems.",
+            label: "Build",
+            title: "System and integration",
+            body: "Product, AI, tools and connected systems.",
           },
           {
             label: "Operations",
-            title: "Evaluation and evolution",
-            body: "Testing, supervision, metrics and continuous improvement.",
+            title: "Oversight and evolution",
+            body: "Evaluation, traceability, exception handling and continuous improvement.",
           },
         ],
       },
@@ -1503,9 +1501,9 @@ export const SITE_CONTENT = {
     },
     contact: {
       eyebrow: "Contact",
-      title: "Let's discuss the product, system or technology challenge.",
+      title: "Let's discuss the challenge, process or product.",
       description:
-        "A first conversation to understand the goal, the starting point and the most useful next step.",
+        "There is no need to arrive with a defined technical solution. A first conversation helps clarify the goal, the starting point and the most useful next step.",
       sidebarEyebrow: "Contact",
       sidebarBody:
         "We review the context, goal and constraints. If there is a clear path forward, we propose the best starting point.",
@@ -1516,7 +1514,7 @@ export const SITE_CONTENT = {
       phoneLabel: "Phone",
       phoneHint: "For a direct first pass, a short call is enough.",
       trustBadges: [
-        "Response within 24 business hours",
+        "Clear, direct response",
         "First opportunity made clear",
         "No commitment or sales pressure",
       ],
@@ -1525,18 +1523,18 @@ export const SITE_CONTENT = {
         "The basics are enough. We reply with an initial assessment and the most useful next step.",
       nameLabel: "Name",
       namePlaceholder: "Full name",
-      detailsLabel: "Project, product or challenge",
+      detailsLabel: "Challenge, process or product",
       detailsPlaceholder:
         "What should be built or improved, what exists today and what outcome is expected.",
       privacyNote:
-        "We reply within 24 business hours. No sales pressure: if the fit is not clear, we will say so clearly.",
+        "No sales pressure: if the fit is not clear, we will say so clearly.",
       submitLabel: "Request a first conversation",
       submittingLabel: "Sending...",
       closeLabel: "Close",
       modalEyebrow: "Message received",
       modalTitle: "Message received",
       modalText:
-        "We will review it and reply within 24 business hours with the most useful next step.",
+        "We will review it and reply with the most useful next step.",
       modalEmailText:
         "To add more context by email, write to hola@tahona.ai",
       mailCtaText: "hola@tahona.ai",
@@ -1544,7 +1542,7 @@ export const SITE_CONTENT = {
         nameShort: "Name must be at least 2 characters",
         nameLong: "Name is too long",
         emailInvalid: "Please enter a valid email address",
-        detailsShort: "Please share a little more about the project",
+        detailsShort: "Please share a little more about the challenge, process or product",
         detailsLong: "The message is too long",
         submit: "There was an error sending the form. Please try again.",
       },
@@ -1553,11 +1551,11 @@ export const SITE_CONTENT = {
       contactLabel: "Contact us",
       copyright: "All rights reserved.",
       description:
-        "Technology partner for digital products, custom software and AI solutions.",
+        "End-to-end technology partner for strategy, product, software and AI.",
     },
     structuredData: {
       organizationDescription:
-        "Technology partner for strategy, digital products, custom software, artificial intelligence and integrations.",
+        "End-to-end technology partner for strategy, digital products, custom software, artificial intelligence and integrations.",
       knowsAbout: [
         "technology strategy",
         "digital product development",
@@ -2125,9 +2123,9 @@ export const SITE_CONTENT = {
     metadata: {
       home: {
         name: "Strona główna",
-        title: "Tahona | AI, produkty cyfrowe i oprogramowanie na miarę",
+        title: "Tahona | Partner technologiczny od strategii po wdrożenie",
         description:
-          "Partner technologiczny projektujący, tworzący i integrujący produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
+          "Partner technologiczny od strategii po wdrożenie: strategia, produkty cyfrowe, oprogramowanie na miarę, integracje i rozwiązania AI.",
       },
       services: {
         name: "Usługi",
@@ -2230,9 +2228,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["Od strategii do wdrożenia."],
+        titleLines: ["Od strategii do produktów i systemów, które działają."],
         description:
-          "Tahona to partner technologiczny, który projektuje, tworzy i integruje produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
+          "Tahona to partner technologiczny od strategii po wdrożenie. Definiujemy, projektujemy, tworzymy i integrujemy produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI nastawione na realne rezultaty.",
         primaryLabel: "Porozmawiajmy",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",
@@ -2242,9 +2240,8 @@ export const SITE_CONTENT = {
         eyebrow: "Czym się zajmujemy",
         title: "Strategia, produkt i technologia w jednym zespole.",
         description: [
-          "Prowadzimy cały cykl: poznajemy wyzwanie, definiujemy rozwiązanie, projektujemy doświadczenie, tworzymy technologię i integrujemy ją z biznesem.",
-          "Efektem może być produkt cyfrowy, oprogramowanie na miarę albo rozwiązanie AI. Technologię dobieramy do celu, użytkowników i kontekstu, a nie odwrotnie.",
-          "Nasze podejście to technologia szyta na miarę: każdy system powstaje wokół biznesu, jest weryfikowany z użytkownikami i przygotowany do dalszego rozwoju.",
+          "Łączymy doradztwo, produkt i inżynierię, aby przekładać otwarte wyzwania na działające rozwiązania. Możemy zacząć od definicji, zbudować produkt lub system, zintegrować go z firmą i dalej rozwijać w środowisku produkcyjnym.",
+          "Efektem może być produkt cyfrowy, oprogramowanie na miarę lub rozwiązanie AI. Gdy proces ma jasno określony zakres i mierzalny rezultat, możemy także przejąć realizację części pracy.",
         ],
         bullets: [
           "Diagnoza, definicja produktu i strategia technologiczna.",
@@ -2258,28 +2255,28 @@ export const SITE_CONTENT = {
         eyebrow: "Usługi",
         title: "Trzy kompetencje. Jeden partner technologiczny.",
         description:
-          "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Od pierwszej definicji po produkcję i dalszy rozwój systemu.",
+          "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Łączymy je według wyzwania i oczekiwanego rezultatu, od definicji po wdrożenie i dalszy rozwój.",
         ctaLabel: "Zobacz usługi",
       },
       industries: {
         eyebrow: "Branże",
         title: "Kompetencje technologiczne dopasowane do branży.",
         description:
-          "Procesy, użytkownicy, dane i ograniczenia są różne. Umiejętność definiowania, projektowania i budowania pozostaje ta sama.",
+          "Procesy, użytkownicy, dane i ograniczenia są różne. Zachowujemy ten sam zakres od strategii po wdrożenie, a każde rozwiązanie kierujemy na rezultat ważny w danym kontekście.",
         ctaLabel: "Zobacz branże",
       },
       ourWork: {
         eyebrow: "Przykłady",
-        title: "Produkty i systemy nastawione na realne efekty.",
+        title: "Produkty i systemy zbudowane wokół realnych wyzwań.",
         description:
-          "Liczy się rezultat: większa przejrzystość pracy, trafniejsze decyzje i usługi cyfrowe, które mogą rozwijać się wraz z biznesem.",
+          "Zanonimizowane przykłady pokazują rozwiązany problem, zbudowany produkt lub system oraz sposób jego integracji i dalszego rozwoju.",
         ctaLabel: "Zobacz przykłady",
       },
       howWeWork: {
         eyebrow: "Jak pracujemy",
         title: "Partner od definicji po dalszy rozwój.",
         description:
-          "Bierzemy odpowiedzialność za cały cykl: strategię, produkt, architekturę, rozwój, integrację i ciągłe doskonalenie. Diagnoza wyznacza punkt startu; celem jest zbudowanie i rozwijanie rozwiązania.",
+          "Pracujemy od strategii po wdrożenie: łączymy produkt, architekturę, rozwój, integrację i ciągłe doskonalenie. Diagnoza wyznacza punkt startu; celem jest zbudowanie i rozwijanie rozwiązania.",
         steps: [
           {
             number: "01",
@@ -2307,42 +2304,42 @@ export const SITE_CONTENT = {
           },
           {
             number: "05",
-            title: "Uruchomienie i rozwój",
+            title: "Uruchomienie, obsługa i rozwój",
             description:
-              "Integrujemy, mierzymy, dokumentujemy i dalej rozwijamy system.",
+              "Integrujemy, mierzymy i dalej rozwijamy system. Gdy wymagają tego zakres i model współpracy, przejmujemy również uzgodnioną obsługę i zarządzanie wyjątkami.",
           },
         ],
       },
     },
     aiApplied: {
-      eyebrow: "Sztuczna inteligencja",
-      title: "Kompleksowe AI zintegrowane z produktami i procesami.",
+      eyebrow: "AI w praktyce",
+      title: "Od złożonych procesów do systemów, które wykonują pracę.",
       description:
-        "Pracujemy od strategii i definicji przypadku użycia, przez dane, architekturę i budowę, po ewaluację oraz rozwój na produkcji. Tworzymy systemy AI będące częścią biznesu, a nie odizolowanym demo.",
+        "Gdy proces ma jasno określony zakres i mierzalny rezultat, wykraczamy poza samo zbudowanie narzędzia: integrujemy, obsługujemy i rozwijamy system, aby część pracy odbywała się pod nadzorem i w sposób możliwy do prześledzenia.",
       lifecycle: {
-        ariaLabel: "Kompleksowy cykl tworzenia rozwiązania sztucznej inteligencji",
-        centerLabel: "AI end-to-end",
-        centerTitle: "System produkcyjny",
+        ariaLabel: "Cykl systemu wykonującego pracę pod nadzorem i w sposób możliwy do prześledzenia",
+        centerLabel: "Określony proces",
+        centerTitle: "Praca pod nadzorem",
         stages: [
           {
-            label: "Strategia",
-            title: "Przypadek użycia i cel",
-            body: "Wartość, zakres, użytkownicy i kryteria sukcesu.",
+            label: "Rezultat",
+            title: "Cel i granice",
+            body: "Jednostka pracy, zakres, wyjątki i kryteria jakości.",
           },
           {
             label: "Podstawy",
             title: "Dane i kontekst",
-            body: "Źródła, uprawnienia, jakość i wiedza biznesowa.",
+            body: "Źródła, uprawnienia, zasady i wiedza biznesowa.",
           },
           {
-            label: "Inżynieria",
-            title: "Budowa i integracja",
-            body: "Modele, produkt, narzędzia i połączone systemy.",
+            label: "Budowa",
+            title: "System i integracja",
+            body: "Produkt, AI, narzędzia i połączone systemy.",
           },
           {
-            label: "Działanie",
-            title: "Ewaluacja i rozwój",
-            body: "Testy, nadzór, metryki i ciągłe doskonalenie.",
+            label: "Obsługa",
+            title: "Nadzór i rozwój",
+            body: "Ewaluacja, śledzenie działań, obsługa wyjątków i ciągłe doskonalenie.",
           },
         ],
       },
@@ -2426,9 +2423,9 @@ export const SITE_CONTENT = {
     },
     contact: {
       eyebrow: "Kontakt",
-      title: "Porozmawiajmy o produkcie, systemie lub wyzwaniu technologicznym.",
+      title: "Porozmawiajmy o wyzwaniu, procesie lub produkcie.",
       description:
-        "Pierwsza rozmowa pozwala zrozumieć cel, punkt wyjścia i najbardziej użyteczny kolejny krok.",
+        "Nie trzeba przychodzić z gotowym rozwiązaniem technicznym. Pierwsza rozmowa pozwala zrozumieć cel, punkt wyjścia i najbardziej użyteczny kolejny krok.",
       sidebarEyebrow: "Kontakt",
       sidebarBody:
         "Analizujemy kontekst, cel i ograniczenia. Jeśli istnieje jasny kierunek działania, proponujemy najlepszy punkt startu.",
@@ -2439,7 +2436,7 @@ export const SITE_CONTENT = {
       phoneLabel: "Telefon",
       phoneHint: "Jeśli potrzebny jest konkretny start, wystarczy krótka rozmowa.",
       trustBadges: [
-        "Odpowiedź w ciągu 24 godzin roboczych",
+        "Jasna i konkretna odpowiedź",
         "Pierwszy obszar usprawnienia nazwany wprost",
         "Bez zobowiązań i presji sprzedażowej",
       ],
@@ -2448,18 +2445,18 @@ export const SITE_CONTENT = {
         "Wystarczą podstawy. Odpowiadamy z pierwszą oceną i najbardziej użytecznym następnym krokiem.",
       nameLabel: "Imię i nazwisko",
       namePlaceholder: "Imię i nazwisko",
-      detailsLabel: "Projekt, produkt lub wyzwanie",
+      detailsLabel: "Wyzwanie, proces lub produkt",
       detailsPlaceholder:
-        "Co należy zbudować lub usprawnić, co istnieje dziś i jaki rezultat ma zostać osiągnięty.",
+        "Co należy zbudować lub usprawnić, co istnieje dziś i jaki rezultat jest potrzebny.",
       privacyNote:
-        "Odpowiadamy w ciągu 24 godzin roboczych. Bez presji sprzedażowej: jeśli nie widzimy dobrego dopasowania, powiemy to wprost.",
+        "Bez presji sprzedażowej: jeśli nie widzimy dobrego dopasowania, powiemy to wprost.",
       submitLabel: "Umów pierwszą rozmowę",
       submittingLabel: "Wysyłanie...",
       closeLabel: "Zamknij",
       modalEyebrow: "Wiadomość odebrana",
       modalTitle: "Wiadomość odebrana",
       modalText:
-        "Przejrzymy ją i odpowiemy w ciągu 24 godzin roboczych z najbardziej użytecznym następnym krokiem.",
+        "Przejrzymy ją i odpowiemy z najbardziej użytecznym następnym krokiem.",
       modalEmailText:
         "Aby dodać więcej kontekstu e-mailem, napisz na hola@tahona.ai",
       mailCtaText: "hola@tahona.ai",
@@ -2467,7 +2464,7 @@ export const SITE_CONTENT = {
         nameShort: "Imię i nazwisko musi mieć co najmniej 2 znaki",
         nameLong: "Imię i nazwisko jest zbyt długie",
         emailInvalid: "Podaj poprawny adres e-mail",
-        detailsShort: "Opisz nieco szerzej projekt lub problem",
+        detailsShort: "Opisz nieco szerzej wyzwanie, proces lub produkt",
         detailsLong: "Wiadomość jest zbyt długa",
         submit: "Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.",
       },
@@ -2476,11 +2473,11 @@ export const SITE_CONTENT = {
       contactLabel: "Skontaktuj się z nami",
       copyright: "Wszelkie prawa zastrzeżone.",
       description:
-        "Partner technologiczny dla produktów cyfrowych, oprogramowania na miarę i rozwiązań AI.",
+        "Partner technologiczny od strategii po wdrożenie dla produktu, oprogramowania i AI.",
     },
     structuredData: {
       organizationDescription:
-        "Partner technologiczny w zakresie strategii, produktów cyfrowych, oprogramowania na miarę, sztucznej inteligencji i integracji.",
+        "Partner technologiczny od strategii po wdrożenie w zakresie produktów cyfrowych, oprogramowania na miarę, sztucznej inteligencji i integracji.",
       knowsAbout: [
         "strategia technologiczna",
         "rozwój produktów cyfrowych",

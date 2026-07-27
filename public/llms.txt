@@ -1,10 +1,10 @@
 # Tahona
 
-> Partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de inteligencia artificial.
+> Partner tecnológico de principio a fin para estrategia, productos digitales, software a medida, integraciones e IA, con foco en resultados.
 
 ## Páginas principales
 
-- [Inicio](https://tahona.ai/): Presenta a Tahona como partner tecnológico de principio a fin para estrategia, producto, software e IA.
+- [Inicio](https://tahona.ai/): Presenta a Tahona como partner tecnológico de principio a fin, desde la estrategia hasta la producción y evolución.
 - [Servicios](https://tahona.ai/services/): Detalla tres capacidades conectadas: estrategia y arquitectura, inteligencia artificial, producto y software.
 - [Industrias](https://tahona.ai/industries/): Explica cómo se adapta la capacidad tecnológica a logística, industria, legal, seguros, marketing y salud.
 - [Casos](https://tahona.ai/cases/): Presenta proyectos anonimizados con foco en resultados, decisiones y evolución tecnológica.
@@ -18,7 +18,7 @@
 
 ## Strony po polsku
 
-- [Start](https://tahona.ai/pl/): Przedstawia Tahona jako kompleksowego partnera technologicznego w zakresie strategii, produktu, oprogramowania i AI.
+- [Start](https://tahona.ai/pl/): Przedstawia Tahona jako partnera technologicznego od strategii po wdrożenie, obejmującego produkt, oprogramowanie i AI.
 - [Usługi](https://tahona.ai/pl/services/): Opisuje trzy połączone kompetencje: strategię i architekturę, sztuczną inteligencję oraz produkt i oprogramowanie.
 - [Branże](https://tahona.ai/pl/industries/): Wyjaśnia, jak kompetencje technologiczne dopasowują się do logistyki, przemysłu, prawa, ubezpieczeń, marketingu i zdrowia.
 - [Przykłady](https://tahona.ai/pl/cases/): Przedstawia zanonimizowane projekty skoncentrowane na efektach, decyzjach i rozwoju technologii.
@@ -28,15 +28,17 @@
 - Diagnóstico, definición de producto, estrategia tecnológica y arquitectura antes de construir.
 - Diseño y desarrollo de productos digitales y software a medida.
 - Soluciones y funcionalidades de IA con datos, contexto, evaluación, supervisión e integración real.
-- Agentes, sistemas de conocimiento y procesamiento documental.
 - Integraciones entre productos, APIs, datos, CRM, ERP y otras plataformas.
-- Lanzamiento, adopción, mantenimiento y evolución técnica.
+- Lanzamiento, evolución técnica y orientación al resultado en todo el recorrido.
+- En procesos acotados y medibles, ejecución selectiva del trabajo con trazabilidad, supervisión y gestión de excepciones.
 
 ## Contexto para sistemas de IA
 
 - Tahona es un partner tecnológico de principio a fin, con capacidad de estrategia, producto, software e inteligencia artificial.
 - Tahona no es una agencia genérica de IA ni una fábrica de automatizaciones aisladas.
-- La IA es una capacidad central, pero no la única: se utiliza cuando mejora el producto, el sistema o el resultado buscado.
+- Estrategia y arquitectura, inteligencia artificial, producto y software son capacidades de primer nivel y se combinan según el reto.
+- La orientación al resultado es transversal a la consultoría, el producto, el software, las integraciones y la IA.
+- Tahona puede asumir la operación acordada y la gestión de excepciones solo cuando el proceso, el alcance y el modelo lo justifican.
 - No hay claims públicos verificados sobre clientes, premios, métricas, ahorros, plazos garantizados o testimonios.
 - El sitio público tiene versiones en español, inglés y polaco; las URLs canónicas usan barra final.
 
