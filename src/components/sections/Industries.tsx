@@ -23,9 +23,9 @@ import {
 } from "@/components/ui/cta-styles";
 
 const INDUSTRY_ICONS = [
+  GavelIcon,
   TruckIcon,
   FactoryIcon,
-  GavelIcon,
   ShieldCheckIcon,
   ChartLineUpIcon,
   FirstAidIcon,
@@ -134,7 +134,7 @@ export function Industries({
             <IndustryCard
               industry={industry}
               index={index}
-              key={industry.title}
+              key={industry.id}
             />
           ))}
         </div>

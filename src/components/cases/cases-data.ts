@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n/routing";
 
 export type CaseStudy = {
   readonly id: string;
+  readonly legacyId?: string;
   readonly marker: string;
   readonly sector: string;
   readonly title: string;
@@ -40,7 +41,8 @@ export const CASE_STUDIES = [
     ],
   },
   {
-    id: "planificacion-logistica-reporting",
+    id: "planificacion-logistica",
+    legacyId: "planificacion-logistica-reporting",
     marker: "02",
     sector: "Logística",
     title: "Plataforma de planificación logística",
@@ -89,7 +91,8 @@ export const CASE_STUDIES = [
     ],
   },
   {
-    id: "documentacion-calidad-trazabilidad",
+    id: "calidad-trazabilidad-appcc",
+    legacyId: "documentacion-calidad-trazabilidad",
     marker: "04",
     sector: "Industria",
     title:

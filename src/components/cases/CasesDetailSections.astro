@@ -35,8 +35,15 @@ const copy = getContent(locale).casesPage.section;
         return (
           <article
             id={caseStudy.id}
-            class="scroll-mt-28 border-t border-gray-200 pt-16 first:border-t-0 first:pt-0"
+            class="relative scroll-mt-28 border-t border-gray-200 pt-16 first:border-t-0 first:pt-0"
           >
+            {caseStudy.legacyId && (
+              <span
+                id={caseStudy.legacyId}
+                class="absolute inset-x-0 top-0 h-px scroll-mt-28"
+                aria-hidden="true"
+              ></span>
+            )}
             <div
               class:list={[
                 "grid gap-10 lg:items-center lg:gap-14",

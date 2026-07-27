@@ -35,6 +35,9 @@ Localized metadata, JSON-LD language, breadcrumb labels and `llms.txt` route cov
 | Validación humana | Human validation | Walidacja przez człowieka |
 | Trazabilidad de cambios | Change tracking | Śledzenie zmian |
 | Trazabilidad industrial / calidad | Industrial / quality traceability | Identyfikowalność |
+| Industria y trazabilidad | Industry and traceability | Przemysł i identyfikowalność |
+| Operaciones comerciales | Commercial operations | Operacje sprzedażowe |
+| Salud no clínica | Non-clinical healthcare | Niekliniczne obszary ochrony zdrowia |
 
 ## Hybrid Positioning Decisions
 
@@ -44,6 +47,8 @@ Localized metadata, JSON-LD language, breadcrumb labels and `llms.txt` route cov
 - Operating a delivered system is selective and conditional. Public copy may say Tahona assumes agreed operation and exception handling only when the process is bounded and measurable and the scope or collaboration model warrants it.
 - Public copy must not present Tahona as an automation agency, an AI-only agency, an operations consultancy or a company defined by a single delivery model.
 - The labels `Service as Software`, `AI-native agency`, `partner 360` and `partner all-in` are documentation-only forbidden terms and must not appear in public copy.
+- The industries page distinguishes full-detail sector experience and active workstreams in legal, logistics, and industry and traceability from lighter, applicable patterns in insurance, commercial operations, and non-clinical healthcare.
+- The lighter contexts do not imply equal prior delivery, case evidence, or sector authority. They show where similar rules, data, documentation, validation, and integration patterns may apply.
 
 ## Polish Copy Decisions
 
@@ -65,4 +70,4 @@ Localized metadata, JSON-LD language, breadcrumb labels and `llms.txt` route cov
 - AI is presented as a core capability, but not as Tahona's only capability or public category.
 - Selective execution appears only for bounded, measurable processes and never as a blanket promise to operate every delivered system.
 - Health-sector language remains non-clinical: operational support, documentation, internal knowledge and administrative coordination only.
-- Marketing text preserves the boundary that Tahona is not a marketing agency.
+- Commercial operations copy preserves the boundary that Tahona is not a marketing agency.

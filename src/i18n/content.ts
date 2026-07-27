@@ -70,22 +70,50 @@ type FaqItem = {
   readonly question: string;
 };
 
-type IndustryItem = {
-  readonly bullets: readonly string[];
-  readonly description: string;
+type IndustryLink = {
+  readonly hash: `#${string}`;
+  readonly label: string;
+};
+
+type IndustryItemBase = {
   readonly id: string;
+  readonly legacyId?: string;
+  readonly level: "primary" | "secondary";
   readonly marker: string;
-  readonly relatedServices: readonly string[];
   readonly summary: string;
   readonly tags: readonly string[];
   readonly title: string;
+};
+
+export type PrimaryIndustryItem = IndustryItemBase & {
+  readonly bullets: readonly string[];
+  readonly caseLink: IndustryLink;
+  readonly description: string;
+  readonly level: "primary";
+  readonly relatedServices: readonly IndustryLink[];
   readonly visualAlt: string;
   readonly visualSrc: string;
 };
 
+export type SecondaryIndustryItem = IndustryItemBase & {
+  readonly level: "secondary";
+};
+
+export type IndustryItem = PrimaryIndustryItem | SecondaryIndustryItem;
+
+type IndustryItems = readonly [
+  PrimaryIndustryItem,
+  PrimaryIndustryItem,
+  PrimaryIndustryItem,
+  SecondaryIndustryItem,
+  SecondaryIndustryItem,
+  SecondaryIndustryItem,
+];
+
 type CaseStudy = {
   readonly bullets: readonly string[];
   readonly id: string;
+  readonly legacyId?: string;
   readonly marker: string;
   readonly sector: string;
   readonly summary: string;
@@ -213,6 +241,7 @@ type SiteContent = {
   readonly industriesFaq: readonly FaqItem[];
   readonly industriesPage: {
     readonly detailSection: {
+      readonly description: string;
       readonly eyebrow: string;
       readonly relatedServicesLabel: string;
       readonly title: string;
@@ -229,7 +258,7 @@ type SiteContent = {
     };
     readonly hero: HeroCopy;
   };
-  readonly industryItems: readonly IndustryItem[];
+  readonly industryItems: IndustryItems;
   readonly metadata: Record<RouteKey, PageMeta> & {
     readonly keywords: string;
   };
@@ -272,9 +301,10 @@ type SiteContent = {
   readonly skipLink: string;
   readonly structuredData: {
     readonly casesListName: string;
-    readonly industryListName: string;
     readonly knowsAbout: readonly string[];
     readonly organizationDescription: string;
+    readonly primaryIndustryListName: string;
+    readonly secondaryIndustryListName: string;
     readonly serviceCatalogName: string;
     readonly serviceSchemaName: string;
   };
@@ -298,9 +328,9 @@ export const SITE_CONTENT = {
       },
       industries: {
         name: "Industrias",
-        title: "Industrias Tahona | Productos digitales, software e IA",
+        title: "Industrias Tahona | Tecnología adaptada a cada contexto",
         description:
-          "Capacidad de producto, software e IA adaptada a logística, industria, legal, seguros, marketing y salud.",
+          "Patrones sectoriales en legal, logística e industria, y contextos aplicables a seguros, operaciones comerciales y salud no clínica.",
       },
       cases: {
         name: "Casos",
@@ -542,23 +572,25 @@ export const SITE_CONTENT = {
     },
     industriesPage: {
       hero: {
-        titleLines: ["Productos digitales, software e IA para cada sector."],
+        titleLines: ["Tecnología adaptada al contexto de cada sector."],
         description:
-          "Cada sector tiene usuarios, procesos, datos y restricciones distintas. Adaptamos la estrategia, el producto, el software y la IA al contexto real del negocio.",
+          "Las reglas, los datos y los puntos de validación cambian de un sector a otro. Tahona combina estrategia, producto, software e IA alrededor de la operación real.",
         primaryLabel: "Solicitar una primera conversación",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
         secondaryHref: "/services/",
       },
       gridSection: {
-        eyebrow: "Industrias",
-        title: "Sectores que trabajamos.",
+        eyebrow: "Otros contextos",
+        title: "Otros contextos donde aplican estos patrones.",
         description:
-          "No nos encerramos en un vertical. El patrón común son operaciones con información dispersa, tareas repetibles, documentación e integraciones entre herramientas.",
+          "Seguros, operaciones comerciales y salud no clínica comparten patrones de documentación, reglas, validación e integración que abordamos de forma selectiva según el contexto.",
       },
       detailSection: {
-        eyebrow: "En detalle",
-        title: "Cómo se ve el trabajo en cada sector.",
+        eyebrow: "Experiencia sectorial",
+        title: "Experiencia sectorial y líneas de trabajo activas.",
+        description:
+          "Tres contextos donde el conocimiento del proceso, las restricciones y los puntos de control forma parte central del trabajo.",
         relatedServicesLabel: "Servicios relacionados",
       },
       faqSection: {
@@ -654,7 +686,8 @@ export const SITE_CONTENT = {
       serviceSchemaName:
         "Servicios de estrategia, inteligencia artificial, producto y software",
       serviceCatalogName: "Familias de servicios Tahona",
-      industryListName: "Sectores y patrones operativos",
+      primaryIndustryListName: "Experiencia sectorial y líneas de trabajo activas",
+      secondaryIndustryListName: "Otros contextos donde aplican estos patrones",
       casesListName: "Casos anonimizados de trabajo operativo",
     },
     serviceFamilies: [
@@ -866,169 +899,158 @@ export const SITE_CONTENT = {
     ],
     industryItems: [
       {
-        id: "logistica",
-        marker: "01",
-        title: "Logística",
-        summary:
-          "Planificación, optimización de rutas, documentación logística, eventos operativos, reporting e integración con herramientas de operación.",
-        description:
-          "En logística encontramos rutas, planificación, eventos, documentación de transporte, datos de operación, reporting y coordinación entre herramientas. Trabajamos sobre ingesta de datos, optimización operativa, optimización de rutas, procesamiento documental, reporting e integración con los sistemas existentes.",
-        visualSrc: "/images/visual-logistics.png",
-        visualAlt: "Visual 3D de operación logística",
-        tags: ["Rutas", "Flota", "Documentación", "Reporting"],
-        bullets: [
-          "Optimización de rutas y planificación",
-          "Documentación logística y procesamiento de archivos",
-          "Reporting de servicio",
-          "Gestión de flotas",
-          "Eventos operativos y seguimiento",
-          "Integración con herramientas, APIs y hojas de cálculo",
-        ],
-        relatedServices: [
-          "Optimización de procesos",
-          "Optimización de rutas",
-          "Herramientas a medida",
-          "Integraciones / plataformas",
-          "Procesamiento documental",
-        ],
-      },
-      {
-        id: "industria",
-        marker: "02",
-        title: "Industria",
-        summary:
-          "Control de calidad, documentación, trazabilidad, procesos internos, reporting y herramientas para coordinar el trabajo operativo.",
-        description:
-          "En entornos industriales y de operación aparecen controles de calidad, documentación recurrente, trazabilidad, coordinación entre equipos y reporting. Trabajamos sobre herramientas internas, flujos documentales, bases de conocimiento, integraciones y automatización.",
-        visualSrc: "/images/visual-industry-manufacturing.png",
-        visualAlt: "Visual 3D de operación industrial",
-        tags: ["Calidad", "Documentación", "Trazabilidad", "Reporting"],
-        bullets: [
-          "Calidad y documentación",
-          "Gestión de stock",
-          "Herramientas internas e integraciones",
-          "Trazabilidad de procesos",
-          "Reporting operativo",
-          "Trazabilidad APPCC como patrón",
-        ],
-        relatedServices: [
-          "Procesamiento documental",
-          "Herramientas internas",
-          "Optimización de procesos",
-          "Integraciones / plataformas",
-        ],
-      },
-      {
         id: "legal",
-        marker: "03",
+        level: "primary",
+        marker: "01",
         title: "Legal",
         summary:
-          "Flujos documentales, generación y revisión de documentos, automatización administrativa y validación humana.",
+          "Documentos y expedientes con reglas de acceso, validación humana y trazabilidad entre versiones, decisiones y tareas.",
         description:
-          "Muchos procesos legales y administrativos combinan documentos, datos, plantillas, revisión, comunicación y seguimiento. Podemos construir flujos para generar, revisar, clasificar y coordinar documentos sin eliminar los puntos de validación humana.",
+          "El trabajo legal combina documentos, expedientes, reglas de acceso y puntos de validación que no pueden desaparecer. Diseñamos sistemas para ordenar archivos, preparar información, coordinar la revisión humana y mantener trazabilidad entre versiones, decisiones y tareas.",
         visualSrc: "/images/visual-industry-legal.png",
         visualAlt: "Visual 3D de documentación legal",
-        tags: ["Documentos", "Validación", "Flujos", "Seguimiento"],
+        tags: ["Expedientes", "Documentos", "Validación", "Trazabilidad"],
         bullets: [
-          "Generación y revisión de documentos",
-          "Procesamiento documental",
-          "Contabilidad",
-          "Herramientas internas para seguimiento",
-          "Flujos administrativos",
-          "Validación humana",
-          "Trazabilidad del flujo",
+          "Expedientes, documentos y plantillas",
+          "Extracción y preparación de información",
+          "Revisión y validación humana",
+          "Permisos y reglas de acceso",
+          "Seguimiento de tareas y asuntos",
+          "Trazabilidad de cambios y decisiones",
         ],
+        caseLink: {
+          hash: "#plataforma-documental-operativa",
+          label: "Ver caso: Plataforma documental y operativa",
+        },
         relatedServices: [
-          "Procesamiento documental",
-          "Herramientas internas",
-          "Optimización de procesos",
-          "Bases de conocimiento",
+          {
+            hash: "#procesamiento-documental",
+            label: "Procesamiento documental y conocimiento",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Software a medida",
+          },
+          {
+            hash: "#estrategia-arquitectura",
+            label: "Estrategia y arquitectura",
+          },
+        ],
+      },
+      {
+        id: "logistica",
+        level: "primary",
+        marker: "02",
+        title: "Logística",
+        summary:
+          "Planificación sujeta a restricciones, rutas, datos operativos e integraciones entre las herramientas que coordinan el servicio.",
+        description:
+          "La planificación logística depende de restricciones reales: capacidad, ventanas horarias, rutas, incidencias y disponibilidad de datos. El trabajo conecta esas reglas con información operativa, sistemas existentes e interfaces que permiten revisar y ajustar la planificación.",
+        visualSrc: "/images/visual-logistics.png",
+        visualAlt: "Visual 3D de operación logística",
+        tags: ["Planificación", "Restricciones", "Rutas", "Integraciones"],
+        bullets: [
+          "Planificación de rutas y cargas",
+          "Capacidad, ventanas e incidencias",
+          "Importación y validación de datos operativos",
+          "Revisión de rutas y excepciones",
+          "Reporting para coordinación del servicio",
+          "Integración con APIs, hojas y sistemas existentes",
+        ],
+        caseLink: {
+          hash: "#planificacion-logistica",
+          label: "Ver caso: Plataforma de planificación logística",
+        },
+        relatedServices: [
+          {
+            hash: "#consultoria-auditoria-operativa",
+            label: "Diagnóstico y definición",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Software a medida",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integraciones y plataformas",
+          },
+        ],
+      },
+      {
+        id: "industria-trazabilidad",
+        legacyId: "industria",
+        level: "primary",
+        marker: "03",
+        title: "Industria y trazabilidad",
+        summary:
+          "Controles de calidad, lotes y registros, documentación y trazabilidad dentro de flujos operativos acotados.",
+        description:
+          "En industria, la calidad depende de controles concretos, lotes o registros, documentación recurrente y una trazabilidad que conecte cada revisión con su origen. Construimos herramientas para flujos acotados, con validaciones y responsables claros. APPCC y seguridad alimentaria aparecen como un patrón específico dentro de este contexto.",
+        visualSrc: "/images/visual-industry-manufacturing.png",
+        visualAlt: "Visual 3D de calidad y trazabilidad industrial",
+        tags: ["Calidad", "Lotes y registros", "Documentación", "Trazabilidad"],
+        bullets: [
+          "Controles de calidad y puntos de revisión",
+          "Lotes, registros y evidencias",
+          "Documentación recurrente",
+          "Trazabilidad entre origen, cambio y validación",
+          "Flujos acotados con responsables claros",
+          "APPCC como patrón dentro de calidad alimentaria",
+        ],
+        caseLink: {
+          hash: "#calidad-trazabilidad-appcc",
+          label: "Ver caso: Calidad y trazabilidad APPCC",
+        },
+        relatedServices: [
+          {
+            hash: "#procesamiento-documental",
+            label: "Procesamiento documental y conocimiento",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Software a medida",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integraciones y plataformas",
+          },
         ],
       },
       {
         id: "seguros",
+        level: "secondary",
         marker: "04",
         title: "Seguros",
         summary:
-          "Captación, cualificación, CRM, cotización, seguimiento, documentación y reporting comercial.",
-        description:
-          "En seguros, la operación comercial depende de captación, cualificación, documentación, cotización, CRM, seguimiento y reporting. Podemos conectar esas piezas con herramientas internas, automatización supervisada y flujos de información más claros.",
-        visualSrc: "/images/visual-industry-insurance.png",
-        visualAlt: "Visual 3D de operación de seguros",
-        tags: ["Captación", "CRM", "Cotización", "Reporting"],
-        bullets: [
-          "Captación y cualificación",
-          "CRM y cotización",
-          "Reporting y control operativo",
-          "Seguimiento comercial",
-          "Documentación y handoffs",
-          "Automatización supervisada",
-        ],
-        relatedServices: [
-          "Optimización de procesos",
-          "Integraciones / plataformas",
-          "Herramientas internas",
-          "Agentes de IA",
-        ],
+          "Cotización, documentación, CRM, seguimiento y traspasos que requieren reglas claras y revisión humana.",
+        tags: ["Cotización", "Documentación", "CRM", "Revisión"],
       },
       {
-        id: "marketing-growth",
+        id: "operaciones-comerciales",
+        legacyId: "marketing-growth",
+        level: "secondary",
         marker: "05",
-        title: "Marketing y growth",
+        title: "Operaciones comerciales",
         summary:
-          "Lead ops, captación, cualificación, reporting, CRM, herramientas internas y coordinación comercial.",
-        description:
-          "No prestamos servicios de agencia de marketing. El encaje está en la operación: captación, lead ops, cualificación, CRM, reporting, herramientas internas y coordinación de campañas o procesos comerciales.",
-        visualSrc: "/images/visual-industry-marketing.png",
-        visualAlt: "Visual 3D de operación de marketing y growth",
-        tags: ["Lead ops", "Cualificación", "CRM", "Reporting"],
-        bullets: [
-          "Captación y formularios",
-          "Automatizaciones",
-          "Reporting comercial",
-          "Lead ops y cualificación",
-          "Integración con CRM y seguimiento",
-          "Herramientas internas",
-        ],
-        relatedServices: [
-          "Optimización de procesos",
-          "Integraciones y plataformas",
-          "Herramientas internas",
-          "Agentes de IA",
-        ],
+          "Coordinación entre captación, cualificación, CRM, reporting y herramientas internas. No prestamos servicios de agencia de marketing.",
+        tags: ["Cualificación", "CRM", "Reporting", "Coordinación"],
       },
       {
-        id: "salud",
+        id: "salud-no-clinica",
+        legacyId: "salud",
+        level: "secondary",
         marker: "06",
-        title: "Salud",
+        title: "Salud no clínica",
         summary:
-          "Soporte operativo, documentación, conocimiento interno y sistemas no clínicos.",
-        description:
-          "En salud solo trabajamos sobre capas operativas no clínicas: documentación, conocimiento interno, coordinación, reporting y apoyo administrativo.",
-        visualSrc: "/images/visual-industry-health.png",
-        visualAlt: "Visual 3D de operación de salud no clínica",
-        tags: ["Soporte", "Documentación", "Conocimiento", "PoC"],
-        bullets: [
-          "Documentación operativa",
-          "Conocimiento interno",
-          "Coordinación administrativa",
-          "Sistemas no clínicos",
-          "Reporting interno",
-          "Validación y revisión humana",
-        ],
-        relatedServices: [
-          "Bases de conocimiento",
-          "Procesamiento documental",
-          "Herramientas internas",
-          "Integraciones / plataformas",
-        ],
+          "Coordinación administrativa, documentación, conocimiento interno, comunicación y soporte operativo no clínico.",
+        tags: ["Administración", "Documentación", "Conocimiento", "Comunicación"],
       },
     ],
     industriesFaq: [
       {
         question: "¿Tahona se especializa en un solo sector?",
         answer:
-          "No. Trabajamos sobre operaciones internas. Algunos sectores tienen patrones especialmente claros, pero la decisión depende del proceso, los datos, los documentos y las herramientas de cada empresa.",
+          "No. Concentramos experiencia y líneas de trabajo en legal, logística e industria y trazabilidad, y aplicamos esos patrones de forma selectiva en otros contextos. El enfoque se adapta a los usuarios, las reglas, los datos, las restricciones y los puntos de validación de cada sector.",
       },
       {
         question: "¿Qué pasa con los sectores regulados?",
@@ -1083,7 +1105,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "planificacion-logistica-reporting",
+        id: "planificacion-logistica",
+        legacyId: "planificacion-logistica-reporting",
         marker: "02",
         sector: "Logística",
         title: "Plataforma de planificación logística",
@@ -1132,7 +1155,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "documentacion-calidad-trazabilidad",
+        id: "calidad-trazabilidad-appcc",
+        legacyId: "documentacion-calidad-trazabilidad",
         marker: "04",
         sector: "Industria",
         title:
@@ -1200,9 +1224,9 @@ export const SITE_CONTENT = {
       },
       industries: {
         name: "Industries",
-        title: "Tahona Industries | Digital products, software and AI",
+        title: "Tahona Industries | Technology shaped to each context",
         description:
-          "Product, software and AI capabilities adapted to logistics, industry, legal, insurance, marketing and healthcare.",
+          "Sector patterns in legal, logistics and industry, with related contexts in insurance, commercial operations and non-clinical healthcare.",
       },
       cases: {
         name: "Cases",
@@ -1444,23 +1468,25 @@ export const SITE_CONTENT = {
     },
     industriesPage: {
       hero: {
-        titleLines: ["Digital products, software and AI for each sector."],
+        titleLines: ["Technology shaped to each sector context."],
         description:
-          "Every sector has different users, processes, data and constraints. We adapt strategy, product, software and AI to the real business context.",
+          "Rules, data and validation points differ by sector. Tahona brings strategy, product, software and AI together around how the operation actually works.",
         primaryLabel: "Request a first conversation",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
         secondaryHref: "/en/services/",
       },
       gridSection: {
-        eyebrow: "Industries",
-        title: "Sectors we work with.",
+        eyebrow: "Other contexts",
+        title: "Other contexts where these patterns apply.",
         description:
-          "We do not lock into one vertical. The common pattern is operations with scattered information, repeatable tasks, documentation and integrations between tools.",
+          "Insurance, commercial operations and non-clinical healthcare share documentation, rules, validation and integration patterns that we address selectively for each context.",
       },
       detailSection: {
-        eyebrow: "In detail",
-        title: "How the work looks in each sector.",
+        eyebrow: "Sector experience",
+        title: "Sector experience and active workstreams.",
+        description:
+          "Three contexts where process knowledge, constraints and control points are central to the work.",
         relatedServicesLabel: "Related services",
       },
       faqSection: {
@@ -1555,7 +1581,8 @@ export const SITE_CONTENT = {
       serviceSchemaName:
         "Strategy, artificial intelligence, product and software services",
       serviceCatalogName: "Tahona service families",
-      industryListName: "Sectors and operational patterns",
+      primaryIndustryListName: "Sector experience and active workstreams",
+      secondaryIndustryListName: "Other contexts where these patterns apply",
       casesListName: "Anonymized operational work cases",
     },
     serviceFamilies: [
@@ -1767,169 +1794,158 @@ export const SITE_CONTENT = {
     ],
     industryItems: [
       {
-        id: "logistica",
-        marker: "01",
-        title: "Logistics",
-        summary:
-          "Planning, route optimization, logistics documentation, operational events, reporting and integration with operations tools.",
-        description:
-          "In logistics we find routes, planning, events, transport documentation, operational data, reporting and coordination between tools. We work on data ingestion, operational optimization, route optimization, document processing, reporting and integration with existing systems.",
-        visualSrc: "/images/visual-logistics.png",
-        visualAlt: "3D visual of logistics operations",
-        tags: ["Routes", "Fleet", "Documentation", "Reporting"],
-        bullets: [
-          "Route optimization and planning",
-          "Logistics documentation and file processing",
-          "Service reporting",
-          "Fleet management",
-          "Operational events and tracking",
-          "Integration with tools, APIs and spreadsheets",
-        ],
-        relatedServices: [
-          "Process optimization",
-          "Route optimization",
-          "Custom tools",
-          "Integrations / platforms",
-          "Document processing",
-        ],
-      },
-      {
-        id: "industria",
-        marker: "02",
-        title: "Industry",
-        summary:
-          "Quality control, documentation, traceability, internal processes, reporting and tools to coordinate operational work.",
-        description:
-          "Industrial and operational environments bring recurring quality checks, documentation, traceability, team coordination and reporting. We work on internal tools, document flows, knowledge bases, integrations and automation.",
-        visualSrc: "/images/visual-industry-manufacturing.png",
-        visualAlt: "3D visual of industrial operations",
-        tags: ["Quality", "Documentation", "Traceability", "Reporting"],
-        bullets: [
-          "Quality and documentation",
-          "Stock management",
-          "Internal tools and integrations",
-          "Process traceability",
-          "Operational reporting",
-          "HACCP traceability as a pattern",
-        ],
-        relatedServices: [
-          "Document processing",
-          "Internal tools",
-          "Process optimization",
-          "Integrations / platforms",
-        ],
-      },
-      {
         id: "legal",
-        marker: "03",
+        level: "primary",
+        marker: "01",
         title: "Legal",
         summary:
-          "Document flows, document generation and review, administrative automation and human validation.",
+          "Documents and matters governed by access rules, human validation and traceability across versions, decisions and tasks.",
         description:
-          "Many legal and administrative processes combine documents, data, templates, review, communication and follow-up. We can build flows to generate, review, classify and coordinate documents without removing human validation points.",
+          "Legal work combines documents, matters, access rules and validation points that cannot simply disappear. We design systems to organize files, prepare information, coordinate human review and preserve traceability across versions, decisions and tasks.",
         visualSrc: "/images/visual-industry-legal.png",
         visualAlt: "3D visual of legal documentation",
-        tags: ["Documents", "Validation", "Flows", "Tracking"],
+        tags: ["Matters", "Documents", "Validation", "Traceability"],
         bullets: [
-          "Document generation and review",
-          "Document processing",
-          "Accounting",
-          "Internal tracking tools",
-          "Administrative flows",
-          "Human validation",
-          "Flow traceability",
+          "Matters, documents and templates",
+          "Information extraction and preparation",
+          "Human review and validation",
+          "Permissions and access rules",
+          "Task and matter tracking",
+          "Traceability across changes and decisions",
         ],
+        caseLink: {
+          hash: "#plataforma-documental-operativa",
+          label: "View case: Document and operations platform",
+        },
         relatedServices: [
-          "Document processing",
-          "Internal tools",
-          "Process optimization",
-          "Knowledge bases",
+          {
+            hash: "#procesamiento-documental",
+            label: "Document processing and knowledge",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Custom software",
+          },
+          {
+            hash: "#estrategia-arquitectura",
+            label: "Strategy and architecture",
+          },
+        ],
+      },
+      {
+        id: "logistica",
+        level: "primary",
+        marker: "02",
+        title: "Logistics",
+        summary:
+          "Constraint-based planning, routes, operational data and integrations between the tools that coordinate service delivery.",
+        description:
+          "Logistics planning depends on real constraints such as capacity, time windows, routes, incidents and data availability. The work connects those rules with operational information, existing systems and interfaces that let teams review and adjust the plan.",
+        visualSrc: "/images/visual-logistics.png",
+        visualAlt: "3D visual of logistics operations",
+        tags: ["Planning", "Constraints", "Routes", "Integrations"],
+        bullets: [
+          "Route and load planning",
+          "Capacity, time windows and incidents",
+          "Operational data import and validation",
+          "Route and exception review",
+          "Reporting for service coordination",
+          "Integration with APIs, spreadsheets and existing systems",
+        ],
+        caseLink: {
+          hash: "#planificacion-logistica",
+          label: "View case: Logistics planning platform",
+        },
+        relatedServices: [
+          {
+            hash: "#consultoria-auditoria-operativa",
+            label: "Discovery and definition",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Custom software",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integrations and platforms",
+          },
+        ],
+      },
+      {
+        id: "industria-trazabilidad",
+        legacyId: "industria",
+        level: "primary",
+        marker: "03",
+        title: "Industry and traceability",
+        summary:
+          "Quality controls, lots and records, documentation and traceability within bounded operational workflows.",
+        description:
+          "In industry, quality depends on concrete controls, lots or records, recurring documentation and traceability that connects each review to its source. We build tools for bounded workflows with clear validation points and owners. HACCP and food safety appear as one specific pattern within this context.",
+        visualSrc: "/images/visual-industry-manufacturing.png",
+        visualAlt: "3D visual of industrial quality and traceability",
+        tags: ["Quality", "Lots and records", "Documentation", "Traceability"],
+        bullets: [
+          "Quality controls and review points",
+          "Lots, records and evidence",
+          "Recurring documentation",
+          "Traceability from source through change and validation",
+          "Bounded workflows with clear owners",
+          "HACCP as a food-quality pattern",
+        ],
+        caseLink: {
+          hash: "#calidad-trazabilidad-appcc",
+          label: "View case: HACCP quality and traceability",
+        },
+        relatedServices: [
+          {
+            hash: "#procesamiento-documental",
+            label: "Document processing and knowledge",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Custom software",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integrations and platforms",
+          },
         ],
       },
       {
         id: "seguros",
+        level: "secondary",
         marker: "04",
         title: "Insurance",
         summary:
-          "Acquisition, qualification, CRM, quoting, follow-up, documentation and commercial reporting.",
-        description:
-          "In insurance, commercial operations depend on acquisition, qualification, documentation, quoting, CRM, follow-up and reporting. We can connect those pieces with internal tools, supervised automation and clearer information flows.",
-        visualSrc: "/images/visual-industry-insurance.png",
-        visualAlt: "3D visual of insurance operations",
-        tags: ["Acquisition", "CRM", "Quoting", "Reporting"],
-        bullets: [
-          "Acquisition and qualification",
-          "CRM and quoting",
-          "Reporting and operational control",
-          "Commercial follow-up",
-          "Documentation and handoffs",
-          "Supervised automation",
-        ],
-        relatedServices: [
-          "Process optimization",
-          "Integrations / platforms",
-          "Internal tools",
-          "AI agents",
-        ],
+          "Quoting, documentation, CRM, follow-up and handoffs that depend on clear rules and human review.",
+        tags: ["Quoting", "Documentation", "CRM", "Review"],
       },
       {
-        id: "marketing-growth",
+        id: "operaciones-comerciales",
+        legacyId: "marketing-growth",
+        level: "secondary",
         marker: "05",
-        title: "Marketing and growth",
+        title: "Commercial operations",
         summary:
-          "Lead ops, acquisition, qualification, reporting, CRM, internal tools and commercial coordination.",
-        description:
-          "We do not provide marketing agency services. The fit is operational: acquisition, lead ops, qualification, CRM, reporting, internal tools and coordination of campaigns or commercial processes.",
-        visualSrc: "/images/visual-industry-marketing.png",
-        visualAlt: "3D visual of marketing and growth operations",
-        tags: ["Lead ops", "Qualification", "CRM", "Reporting"],
-        bullets: [
-          "Acquisition and forms",
-          "Automations",
-          "Commercial reporting",
-          "Lead ops and qualification",
-          "CRM integration and follow-up",
-          "Internal tools",
-        ],
-        relatedServices: [
-          "Process optimization",
-          "Integrations and platforms",
-          "Internal tools",
-          "AI agents",
-        ],
+          "Coordination across acquisition, qualification, CRM, reporting and internal tools. Tahona does not provide marketing agency services.",
+        tags: ["Qualification", "CRM", "Reporting", "Coordination"],
       },
       {
-        id: "salud",
+        id: "salud-no-clinica",
+        legacyId: "salud",
+        level: "secondary",
         marker: "06",
-        title: "Healthcare",
+        title: "Non-clinical healthcare",
         summary:
-          "Operational support, documentation, internal knowledge and non-clinical systems.",
-        description:
-          "In healthcare we only work on non-clinical operational layers: documentation, internal knowledge, coordination, reporting and administrative support.",
-        visualSrc: "/images/visual-industry-health.png",
-        visualAlt: "3D visual of non-clinical healthcare operations",
-        tags: ["Support", "Documentation", "Knowledge", "PoC"],
-        bullets: [
-          "Operational documentation",
-          "Internal knowledge",
-          "Administrative coordination",
-          "Non-clinical systems",
-          "Internal reporting",
-          "Validation and human review",
-        ],
-        relatedServices: [
-          "Knowledge bases",
-          "Document processing",
-          "Internal tools",
-          "Integrations / platforms",
-        ],
+          "Administrative coordination, documentation, internal knowledge, communication and non-clinical operational support.",
+        tags: ["Administration", "Documentation", "Knowledge", "Communication"],
       },
     ],
     industriesFaq: [
       {
         question: "Does Tahona specialize in one sector?",
         answer:
-          "No. We work on internal operations. Some sectors have especially clear patterns, but the decision depends on each company's process, data, documents and tools.",
+          "No. We concentrate sector experience and current work in legal, logistics, and industry and traceability, then apply those patterns selectively in other contexts. The approach adapts to each sector's users, rules, data, constraints and validation points.",
       },
       {
         question: "What about regulated sectors?",
@@ -1984,7 +2000,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "planificacion-logistica-reporting",
+        id: "planificacion-logistica",
+        legacyId: "planificacion-logistica-reporting",
         marker: "02",
         sector: "Logistics",
         title: "Logistics planning platform",
@@ -2033,7 +2050,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "documentacion-calidad-trazabilidad",
+        id: "calidad-trazabilidad-appcc",
+        legacyId: "documentacion-calidad-trazabilidad",
         marker: "04",
         sector: "Industry",
         title: "Documentation, quality and traceability platform for food operations",
@@ -2100,9 +2118,9 @@ export const SITE_CONTENT = {
       },
       industries: {
         name: "Branże",
-        title: "Branże Tahona | Produkty cyfrowe, oprogramowanie i AI",
+        title: "Branże Tahona | Technologia dopasowana do kontekstu",
         description:
-          "Kompetencje produktowe, programistyczne i AI dopasowane do logistyki, przemysłu, prawa, ubezpieczeń, marketingu i zdrowia.",
+          "Wzorce branżowe w prawie, logistyce i przemyśle oraz ich zastosowanie w ubezpieczeniach, operacjach sprzedażowych i nieklinicznej ochronie zdrowia.",
       },
       cases: {
         name: "Przykłady",
@@ -2344,23 +2362,25 @@ export const SITE_CONTENT = {
     },
     industriesPage: {
       hero: {
-        titleLines: ["Produkty cyfrowe, oprogramowanie i AI dla różnych sektorów."],
+        titleLines: ["Technologia dopasowana do kontekstu każdej branży."],
         description:
-          "Każda branża ma innych użytkowników, procesy, dane i ograniczenia. Dostosowujemy strategię, produkt, oprogramowanie i AI do realnego kontekstu biznesowego.",
+          "Reguły, dane i punkty kontroli różnią się zależnie od branży. Tahona łączy strategię, produkt, oprogramowanie i AI wokół rzeczywistego sposobu działania organizacji.",
         primaryLabel: "Umów pierwszą rozmowę",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",
         secondaryHref: "/pl/services/",
       },
       gridSection: {
-        eyebrow: "Branże",
-        title: "Sektory, z którymi pracujemy.",
+        eyebrow: "Inne konteksty",
+        title: "Inne obszary, w których te wzorce mają zastosowanie.",
         description:
-          "Nie zamykamy się w jednej branży. Wspólny wzorzec to rozproszone informacje, powtarzalne zadania, dokumentacja i integracje między narzędziami.",
+          "Ubezpieczenia, operacje sprzedażowe i niekliniczna ochrona zdrowia łączą wzorce dokumentacji, reguł, kontroli i integracji, które stosujemy selektywnie, zależnie od kontekstu.",
       },
       detailSection: {
-        eyebrow: "Szczegóły",
-        title: "Jak wygląda praca w każdym sektorze.",
+        eyebrow: "Doświadczenie branżowe",
+        title: "Doświadczenie branżowe i aktywne kierunki prac.",
+        description:
+          "Trzy konteksty, w których znajomość procesu, ograniczeń i punktów kontroli stanowi centralną część pracy.",
         relatedServicesLabel: "Powiązane usługi",
       },
       faqSection: {
@@ -2455,7 +2475,8 @@ export const SITE_CONTENT = {
       serviceSchemaName:
         "Usługi strategii, sztucznej inteligencji, produktu i oprogramowania",
       serviceCatalogName: "Rodziny usług Tahona",
-      industryListName: "Sektory i wzorce operacyjne",
+      primaryIndustryListName: "Doświadczenie branżowe i aktywne kierunki prac",
+      secondaryIndustryListName: "Inne obszary zastosowania tych wzorców",
       casesListName: "Zanonimizowane przykłady projektów operacyjnych",
     },
     serviceFamilies: [
@@ -2667,169 +2688,158 @@ export const SITE_CONTENT = {
     ],
     industryItems: [
       {
-        id: "logistica",
-        marker: "01",
-        title: "Logistyka",
-        summary:
-          "Planowanie, optymalizacja tras, dokumentacja logistyczna, zdarzenia operacyjne, raportowanie i integracja z narzędziami operacyjnymi.",
-        description:
-          "W logistyce pojawiają się trasy, planowanie, zdarzenia, dokumentacja transportowa, dane operacyjne, raportowanie i koordynacja między narzędziami. Pracujemy nad wczytywaniem danych, optymalizacją operacyjną, optymalizacją tras, przetwarzaniem dokumentów, raportowaniem i integracją z istniejącymi systemami.",
-        visualSrc: "/images/visual-logistics.png",
-        visualAlt: "Wizualizacja 3D operacji logistycznych",
-        tags: ["Trasy", "Flota", "Dokumentacja", "Raportowanie"],
-        bullets: [
-          "Optymalizacja tras i planowanie",
-          "Dokumentacja logistyczna i przetwarzanie plików",
-          "Raportowanie operacyjne",
-          "Zarządzanie flotą",
-          "Zdarzenia operacyjne i śledzenie",
-          "Integracja z narzędziami, API i arkuszami",
-        ],
-        relatedServices: [
-          "Optymalizacja procesów",
-          "Optymalizacja tras",
-          "Narzędzia na miarę",
-          "Integracje / platformy",
-          "Przetwarzanie dokumentów",
-        ],
-      },
-      {
-        id: "industria",
-        marker: "02",
-        title: "Przemysł",
-        summary:
-          "Kontrola jakości, dokumentacja, identyfikowalność, procesy wewnętrzne, raportowanie i narzędzia do koordynacji pracy operacyjnej.",
-        description:
-          "W środowiskach przemysłowych i operacyjnych pojawiają się kontrole jakości, powtarzalna dokumentacja, identyfikowalność, koordynacja między zespołami i raportowanie. Pracujemy nad narzędziami wewnętrznymi, przepływami dokumentów, bazami wiedzy, integracjami i automatyzacją.",
-        visualSrc: "/images/visual-industry-manufacturing.png",
-        visualAlt: "Wizualizacja 3D operacji przemysłowej",
-        tags: ["Jakość", "Dokumentacja", "Identyfikowalność", "Raportowanie"],
-        bullets: [
-          "Jakość i dokumentacja",
-          "Zarządzanie stanami",
-          "Narzędzia wewnętrzne i integracje",
-          "Identyfikowalność procesów",
-          "Raportowanie operacyjne",
-          "HACCP jako wzorzec identyfikowalności",
-        ],
-        relatedServices: [
-          "Przetwarzanie dokumentów",
-          "Narzędzia wewnętrzne",
-          "Optymalizacja procesów",
-          "Integracje / platformy",
-        ],
-      },
-      {
         id: "legal",
-        marker: "03",
+        level: "primary",
+        marker: "01",
         title: "Prawo",
         summary:
-          "Przepływy dokumentów, generowanie i przegląd dokumentów, automatyzacja administracyjna i walidacja przez człowieka.",
+          "Dokumenty i sprawy objęte regułami dostępu, kontrolą człowieka oraz śledzeniem wersji, decyzji i zadań.",
         description:
-          "Wiele procesów prawnych i administracyjnych łączy dokumenty, dane, szablony, przegląd, komunikację i śledzenie. Możemy budować przepływy do generowania, przeglądu, klasyfikacji i koordynacji dokumentów bez usuwania punktów walidacji przez człowieka.",
+          "Praca prawna łączy dokumenty, sprawy, reguły dostępu i punkty kontroli, których nie można po prostu usunąć. Projektujemy systemy porządkujące pliki, przygotowujące informacje, koordynujące kontrolę człowieka oraz śledzące wersje, decyzje i zadania.",
         visualSrc: "/images/visual-industry-legal.png",
         visualAlt: "Wizualizacja 3D dokumentacji prawnej",
-        tags: ["Dokumenty", "Walidacja", "Przepływy", "Śledzenie statusów"],
+        tags: ["Sprawy", "Dokumenty", "Walidacja", "Śledzenie zmian"],
         bullets: [
-          "Generowanie i przegląd dokumentów",
-          "Przetwarzanie dokumentów",
-          "Rozliczenia i administracja",
-          "Narzędzia wewnętrzne do śledzenia",
-          "Przepływy administracyjne",
-          "Walidacja przez człowieka",
-          "Identyfikowalność przepływu",
+          "Sprawy, dokumenty i szablony",
+          "Ekstrakcja i przygotowanie informacji",
+          "Kontrola i walidacja przez człowieka",
+          "Uprawnienia i reguły dostępu",
+          "Śledzenie zadań i spraw",
+          "Śledzenie zmian i decyzji",
         ],
+        caseLink: {
+          hash: "#plataforma-documental-operativa",
+          label: "Zobacz przykład: Platforma dokumentowa i operacyjna",
+        },
         relatedServices: [
-          "Przetwarzanie dokumentów",
-          "Narzędzia wewnętrzne",
-          "Optymalizacja procesów",
-          "Bazy wiedzy",
+          {
+            hash: "#procesamiento-documental",
+            label: "Przetwarzanie dokumentów i wiedza",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Oprogramowanie na miarę",
+          },
+          {
+            hash: "#estrategia-arquitectura",
+            label: "Strategia i architektura",
+          },
+        ],
+      },
+      {
+        id: "logistica",
+        level: "primary",
+        marker: "02",
+        title: "Logistyka",
+        summary:
+          "Planowanie z uwzględnieniem ograniczeń, trasy, dane operacyjne oraz integracje narzędzi koordynujących realizację usług.",
+        description:
+          "Planowanie logistyczne zależy od rzeczywistych ograniczeń: pojemności, okien czasowych, tras, zdarzeń i dostępności danych. Praca łączy te reguły z informacjami operacyjnymi, obecnymi systemami i interfejsami, które pozwalają przeglądać i korygować plan.",
+        visualSrc: "/images/visual-logistics.png",
+        visualAlt: "Wizualizacja 3D operacji logistycznych",
+        tags: ["Planowanie", "Ograniczenia", "Trasy", "Integracje"],
+        bullets: [
+          "Planowanie tras i ładunków",
+          "Pojemność, okna czasowe i zdarzenia",
+          "Import i walidacja danych operacyjnych",
+          "Przegląd tras i wyjątków",
+          "Raportowanie wspierające koordynację usług",
+          "Integracja z API, arkuszami i obecnymi systemami",
+        ],
+        caseLink: {
+          hash: "#planificacion-logistica",
+          label: "Zobacz przykład: Platforma planowania logistycznego",
+        },
+        relatedServices: [
+          {
+            hash: "#consultoria-auditoria-operativa",
+            label: "Diagnoza i definicja",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Oprogramowanie na miarę",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integracje i platformy",
+          },
+        ],
+      },
+      {
+        id: "industria-trazabilidad",
+        legacyId: "industria",
+        level: "primary",
+        marker: "03",
+        title: "Przemysł i identyfikowalność",
+        summary:
+          "Kontrole jakości, partie i rejestry, dokumentacja oraz identyfikowalność w procesach operacyjnych o określonym zakresie.",
+        description:
+          "W przemyśle jakość opiera się na konkretnych kontrolach, partiach lub rejestrach, powtarzalnej dokumentacji i identyfikowalności łączącej każdą kontrolę ze źródłem. Budujemy narzędzia dla procesów o określonym zakresie, z jasnymi punktami walidacji i odpowiedzialnością. HACCP i bezpieczeństwo żywności są jednym ze szczególnych wzorców w tym kontekście.",
+        visualSrc: "/images/visual-industry-manufacturing.png",
+        visualAlt: "Wizualizacja 3D jakości i identyfikowalności przemysłowej",
+        tags: ["Jakość", "Partie i rejestry", "Dokumentacja", "Identyfikowalność"],
+        bullets: [
+          "Kontrole jakości i punkty przeglądu",
+          "Partie, rejestry i dowody",
+          "Powtarzalna dokumentacja",
+          "Identyfikowalność od źródła po zmianę i walidację",
+          "Procesy o określonym zakresie i jasnej odpowiedzialności",
+          "HACCP jako wzorzec jakości żywności",
+        ],
+        caseLink: {
+          hash: "#calidad-trazabilidad-appcc",
+          label: "Zobacz przykład: Jakość i identyfikowalność HACCP",
+        },
+        relatedServices: [
+          {
+            hash: "#procesamiento-documental",
+            label: "Przetwarzanie dokumentów i wiedza",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Oprogramowanie na miarę",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integracje i platformy",
+          },
         ],
       },
       {
         id: "seguros",
+        level: "secondary",
         marker: "04",
         title: "Ubezpieczenia",
         summary:
-          "Pozyskiwanie, kwalifikacja, CRM, wyceny, dalszy kontakt, dokumentacja i raportowanie sprzedażowe.",
-        description:
-          "W ubezpieczeniach proces sprzedażowy zależy od pozyskiwania, kwalifikacji, dokumentacji, wycen, CRM, dalszego kontaktu i raportowania. Możemy połączyć te elementy narzędziami wewnętrznymi, nadzorowaną automatyzacją i czytelniejszymi przepływami informacji.",
-        visualSrc: "/images/visual-industry-insurance.png",
-        visualAlt: "Wizualizacja 3D operacji ubezpieczeniowych",
-        tags: ["Pozyskiwanie", "CRM", "Wyceny", "Raportowanie"],
-        bullets: [
-          "Pozyskiwanie i kwalifikacja",
-          "CRM i wyceny",
-          "Raportowanie i kontrola operacyjna",
-          "Dalszy kontakt sprzedażowy",
-          "Dokumentacja i przekazania",
-          "Automatyzacja nadzorowana",
-        ],
-        relatedServices: [
-          "Optymalizacja procesów",
-          "Integracje / platformy",
-          "Narzędzia wewnętrzne",
-          "Agenci AI",
-        ],
+          "Wyceny, dokumentacja, CRM, dalszy kontakt i przekazania wymagające jasnych reguł oraz kontroli człowieka.",
+        tags: ["Wyceny", "Dokumentacja", "CRM", "Kontrola"],
       },
       {
-        id: "marketing-growth",
+        id: "operaciones-comerciales",
+        legacyId: "marketing-growth",
+        level: "secondary",
         marker: "05",
-        title: "Marketing i sprzedaż",
+        title: "Operacje sprzedażowe",
         summary:
-          "Obsługa leadów, pozyskiwanie, kwalifikacja, raportowanie, CRM, narzędzia wewnętrzne i koordynacja sprzedażowa.",
-        description:
-          "Nie świadczymy usług agencji marketingowej. Nasze dopasowanie jest operacyjne: pozyskiwanie, obsługa leadów, kwalifikacja, CRM, raportowanie, narzędzia wewnętrzne i koordynacja kampanii lub procesów sprzedażowych.",
-        visualSrc: "/images/visual-industry-marketing.png",
-        visualAlt: "Wizualizacja 3D operacji marketingu i sprzedaży",
-        tags: ["Obsługa leadów", "Kwalifikacja", "CRM", "Raportowanie"],
-        bullets: [
-          "Pozyskiwanie i formularze",
-          "Automatyzacje",
-          "Raportowanie sprzedażowe",
-          "Obsługa leadów i kwalifikacja",
-          "Integracja z CRM i śledzenie",
-          "Narzędzia wewnętrzne",
-        ],
-        relatedServices: [
-          "Optymalizacja procesów",
-          "Integracje i platformy",
-          "Narzędzia wewnętrzne",
-          "Agenci AI",
-        ],
+          "Koordynacja pozyskiwania, kwalifikacji, CRM, raportowania i narzędzi wewnętrznych. Tahona nie świadczy usług agencji marketingowej.",
+        tags: ["Kwalifikacja", "CRM", "Raportowanie", "Koordynacja"],
       },
       {
-        id: "salud",
+        id: "salud-no-clinica",
+        legacyId: "salud",
+        level: "secondary",
         marker: "06",
-        title: "Zdrowie",
+        title: "Niekliniczne obszary ochrony zdrowia",
         summary:
-          "Wsparcie operacyjne, dokumentacja, wiedza wewnętrzna i systemy niekliniczne.",
-        description:
-          "W sektorze zdrowia pracujemy wyłącznie nad nieklinicznymi warstwami operacyjnymi: dokumentacją, wiedzą wewnętrzną, koordynacją, raportowaniem i wsparciem administracyjnym.",
-        visualSrc: "/images/visual-industry-health.png",
-        visualAlt: "Wizualizacja 3D nieklinicznych operacji zdrowotnych",
-        tags: ["Wsparcie", "Dokumentacja", "Wiedza", "PoC"],
-        bullets: [
-          "Dokumentacja operacyjna",
-          "Wiedza wewnętrzna",
-          "Koordynacja administracyjna",
-          "Systemy niekliniczne",
-          "Raportowanie wewnętrzne",
-          "Walidacja i przegląd przez człowieka",
-        ],
-        relatedServices: [
-          "Bazy wiedzy",
-          "Przetwarzanie dokumentów",
-          "Narzędzia wewnętrzne",
-          "Integracje / platformy",
-        ],
+          "Koordynacja administracyjna, dokumentacja, wiedza wewnętrzna, komunikacja i niekliniczne wsparcie operacyjne.",
+        tags: ["Administracja", "Dokumentacja", "Wiedza", "Komunikacja"],
       },
     ],
     industriesFaq: [
       {
         question: "Czy Tahona specjalizuje się w jednym sektorze?",
         answer:
-          "Nie. Pracujemy nad procesami wewnętrznymi. Niektóre sektory mają szczególnie czytelne wzorce, ale decyzja zależy od procesu, danych, dokumentów i narzędzi danej firmy.",
+          "Nie. Nasze doświadczenie sektorowe i kierunki prac koncentrują się na prawie, logistyce oraz przemyśle i identyfikowalności, a podobne wzorce stosujemy selektywnie w innych kontekstach. Podejście dostosowujemy do użytkowników, reguł, danych, ograniczeń i punktów kontroli właściwych dla danej branży.",
       },
       {
         question: "Co z sektorami regulowanymi?",
@@ -2884,7 +2894,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "planificacion-logistica-reporting",
+        id: "planificacion-logistica",
+        legacyId: "planificacion-logistica-reporting",
         marker: "02",
         sector: "Logistyka",
         title: "Platforma planowania logistycznego",
@@ -2933,7 +2944,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "documentacion-calidad-trazabilidad",
+        id: "calidad-trazabilidad-appcc",
+        legacyId: "documentacion-calidad-trazabilidad",
         marker: "04",
         sector: "Przemysł",
         title:
