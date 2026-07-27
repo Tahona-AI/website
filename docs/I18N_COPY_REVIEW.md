@@ -25,6 +25,9 @@ Localized metadata, JSON-LD language, breadcrumb labels and `llms.txt` route cov
 | Agentes y automatización | Agents and automation | Agenci i automatyzacja |
 | Procesamiento documental y conocimiento | Document processing and knowledge | Przetwarzanie dokumentów i wiedza |
 | Integraciones y plataformas | Integrations and platforms | Integracje i platformy |
+| Consultoría y definición | Consulting and definition | Doradztwo i definicja |
+| Construcción de producto o sistema | Product or system delivery | Budowa produktu lub systemu |
+| Evolución y operación acordada | Agreed evolution and operations | Uzgodniony rozwój i obsługa |
 | Objetivo y límites | Goal and boundaries | Cel i granice |
 | Sistema e integración | System and integration | System i integracja |
 | Supervisión y evolución | Oversight and evolution | Nadzór i rozwój |
@@ -51,6 +54,7 @@ Localized metadata, JSON-LD language, breadcrumb labels and `llms.txt` route cov
 - `Wczytywanie dokumentów` is preferred to `ingestia dokumentów` in public copy.
 - `Śledzenie działań` is used for AI agents and audit trails. `Identyfikowalność` remains for industrial and quality contexts.
 - `Obsługa` and concrete process language are preferred for selective system operation. `Operacje` remains limited to sector-specific contexts where it is the natural term.
+- `Uzgodniony rozwój i obsługa` names the selective post-launch engagement mode. It does not imply blanket operation; operational tasks and exception handling require a bounded, measurable process and an agreed collaboration model.
 - `Praca pod nadzorem` and `zarządzanie wyjątkami` express the selective execution boundary without implying full autonomous operation.
 - English loanwords are reduced where natural Polish terms exist: `software` becomes `oprogramowanie`, `workflow` becomes `przepływ pracy`, and `back office` becomes `zaplecze operacyjne`.
 

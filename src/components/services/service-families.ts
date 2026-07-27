@@ -11,6 +11,7 @@ export type ServiceItem = {
 
 export type ServiceFamily = {
   readonly id: string;
+  readonly legacyId: string;
   readonly marker: string;
   readonly title: string;
   readonly description: string;

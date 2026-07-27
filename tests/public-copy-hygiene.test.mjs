@@ -41,6 +41,11 @@ const activePublicFiles = [
   "src/components/sections/Industries.tsx",
   "src/components/sections/OurWork.tsx",
   "src/components/sections/HowWeWork.tsx",
+  "src/components/services/EngagementModes.astro",
+  "src/components/services/ServiceDetailSections.astro",
+  "src/components/services/ServicesFAQ.astro",
+  "src/components/services/ServicesPillars.astro",
+  "src/components/services/engagement-modes.ts",
   "src/components/services/service-families.ts",
   "src/components/services/services-faq.ts",
   "src/components/industries/industry-data.ts",
@@ -130,6 +135,10 @@ function sha256(path) {
   return createHash("sha256")
     .update(readFileSync(join(repoRoot, path)))
     .digest("hex");
+}
+
+function countMatches(source, pattern) {
+  return [...source.matchAll(pattern)].length;
 }
 
 describe("public copy hygiene", () => {
@@ -241,16 +250,16 @@ describe("public copy hygiene", () => {
     );
     assert.equal(
       i18nSource.includes(
-        "Servicios Tahona | Estrategia, IA y desarrollo de producto",
+        "Servicios Tahona | Estrategia, IA, producto y software",
       ),
       true,
     );
     assert.equal(
-      i18nSource.includes("Tahona Services | Strategy, AI and product development"),
+      i18nSource.includes("Tahona Services | Strategy, AI, product and software"),
       true,
     );
     assert.equal(
-      i18nSource.includes("Usługi Tahona | Strategia, AI i rozwój produktu"),
+      i18nSource.includes("Usługi Tahona | Strategia, AI, produkt i oprogramowanie"),
       true,
     );
   });
@@ -321,6 +330,132 @@ describe("public copy hygiene", () => {
       [...positions].sort((a, b) => a - b),
       positions,
     );
+  });
+
+  test("services page keeps one canonical catalogue and three engagement modes", () => {
+    const expectedFiles = [
+      "src/components/services/EngagementModes.astro",
+      "src/components/services/engagement-modes.ts",
+    ];
+    const missingFiles = expectedFiles.filter(
+      (file) => !projectFileExists(file),
+    );
+
+    assert.deepEqual(missingFiles, []);
+    assert.equal(
+      projectFileExists(
+        "src/components/services/ImplementationExamples.astro",
+      ),
+      false,
+    );
+    assert.equal(
+      projectFileExists(
+        "src/components/services/implementation-examples.ts",
+      ),
+      false,
+    );
+
+    const pageSource = readProjectFile(
+      "src/components/pages/ServicesPage.astro",
+    );
+    const pillarsSource = readProjectFile(
+      "src/components/services/ServicesPillars.astro",
+    );
+    const detailSource = readProjectFile(
+      "src/components/services/ServiceDetailSections.astro",
+    );
+    const engagementSource = readProjectFile(
+      "src/components/services/EngagementModes.astro",
+    );
+    const i18nSource = readProjectFile("src/i18n/content.ts");
+
+    assert.match(pageSource, /<EngagementModes locale=\{locale\} \/>/);
+    assert.doesNotMatch(pageSource, /ImplementationExamples/);
+    assert.doesNotMatch(pillarsSource, /family\.services\.map/);
+    assert.match(pillarsSource, /href=\{`#\$\{family\.id\}`\}/);
+    assert.match(detailSource, /family\.services\.map/);
+    assert.match(engagementSource, /engagementModes\.map/);
+    assert.match(i18nSource, /readonly engagementModes: EngagementModes/);
+    assert.equal(countMatches(i18nSource, /engagementModes: \[/g), 3);
+    assert.equal(countMatches(i18nSource, /implementationExamples: \[/g), 0);
+  });
+
+  test("services family anchors are semantic and preserve legacy deep links", () => {
+    const i18nSource = readProjectFile("src/i18n/content.ts");
+    const detailSource = readProjectFile(
+      "src/components/services/ServiceDetailSections.astro",
+    );
+
+    for (const currentId of [
+      "estrategia-arquitectura",
+      "inteligencia-artificial",
+      "producto-software",
+    ]) {
+      assert.match(i18nSource, new RegExp(`id: "${currentId}"`));
+    }
+
+    for (const legacyId of [
+      "fundamentos",
+      "desarrollo-ia",
+      "otros-desarrollos",
+    ]) {
+      assert.match(i18nSource, new RegExp(`legacyId: "${legacyId}"`));
+    }
+
+    assert.match(detailSource, /id=\{family\.id\}/);
+    assert.match(detailSource, /id=\{family\.legacyId\}/);
+    assert.match(detailSource, /serviceFamilies\.length/);
+    assert.doesNotMatch(detailSource, /\{family\.marker\} \/ 03/);
+  });
+
+  test("services copy protects focused engagements and selective operation", () => {
+    const i18nSource = readProjectFile("src/i18n/content.ts");
+
+    assert.match(
+      i18nSource,
+      /Estrategia, IA, producto y software de principio a fin\./,
+    );
+    assert.match(
+      i18nSource,
+      /End-to-end strategy, AI, product and software\./,
+    );
+    assert.match(
+      i18nSource,
+      /Strategia, AI, produkt i oprogramowanie od początku do końca\./,
+    );
+
+    for (const modeTitle of [
+      "Consultoría y definición",
+      "Construcción de producto o sistema",
+      "Evolución y operación acordada",
+      "Consulting and definition",
+      "Product or system delivery",
+      "Agreed evolution and operations",
+      "Doradztwo i definicja",
+      "Budowa produktu lub systemu",
+      "Uzgodniony rozwój i obsługa",
+    ]) {
+      assert.match(i18nSource, new RegExp(modeTitle));
+    }
+
+    for (const faqBoundary of [
+      /¿Tahona solo trabaja en proyectos completos de principio a fin\?/,
+      /¿Tahona puede operar una parte de un proceso\?/,
+      /Does Tahona only work on complete end-to-end projects\?/,
+      /Can Tahona operate part of a process\?/,
+      /Czy Tahona realizuje wyłącznie kompletne projekty od początku do końca\?/,
+      /Czy Tahona może obsługiwać część procesu\?/,
+    ]) {
+      assert.match(i18nSource, faqBoundary);
+    }
+
+    for (const conditionalBoundary of [
+      /procesos acotados y medibles/i,
+      /bounded, measurable processes/i,
+      /procesów o jasno określonym zakresie i mierzalnym rezultacie/i,
+    ]) {
+      assert.match(i18nSource, conditionalBoundary);
+    }
   });
 
   test("active Open Graph image is the neutral public-copy asset", () => {

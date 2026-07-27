@@ -43,6 +43,7 @@ type ServiceItem = {
 type ServiceFamily = {
   readonly description: string;
   readonly id: string;
+  readonly legacyId: string;
   readonly marker: string;
   readonly services: readonly ServiceItem[];
   readonly title: string;
@@ -50,12 +51,19 @@ type ServiceFamily = {
   readonly visualSrc: string;
 };
 
-type ImplementationExample = {
-  readonly className: string;
+type EngagementMarker = "01" | "02" | "03";
+
+type EngagementMode = {
   readonly description: string;
-  readonly marker: string;
+  readonly marker: EngagementMarker;
   readonly title: string;
 };
+
+type EngagementModes = readonly [
+  EngagementMode,
+  EngagementMode,
+  EngagementMode,
+];
 
 type FaqItem = {
   readonly answer: string;
@@ -201,7 +209,7 @@ type SiteContent = {
       readonly title: string;
     };
   };
-  readonly implementationExamples: readonly ImplementationExample[];
+  readonly engagementModes: EngagementModes;
   readonly industriesFaq: readonly FaqItem[];
   readonly industriesPage: {
     readonly detailSection: {
@@ -243,7 +251,7 @@ type SiteContent = {
       readonly eyebrow: string;
       readonly title: string;
     };
-    readonly examplesSection: {
+    readonly engagementSection: {
       readonly description: string;
       readonly eyebrow: string;
       readonly title: string;
@@ -257,6 +265,7 @@ type SiteContent = {
     readonly pillarsSection: {
       readonly description: string;
       readonly eyebrow: string;
+      readonly linkLabel: string;
       readonly title: string;
     };
   };
@@ -283,7 +292,7 @@ export const SITE_CONTENT = {
       },
       services: {
         name: "Servicios",
-        title: "Servicios Tahona | Estrategia, IA y desarrollo de producto",
+        title: "Servicios Tahona | Estrategia, IA, producto y software",
         description:
           "Estrategia tecnológica, inteligencia artificial, productos digitales, software a medida e integraciones de principio a fin.",
       },
@@ -500,9 +509,9 @@ export const SITE_CONTENT = {
     },
     servicesPage: {
       hero: {
-        titleLines: ["Estrategia, IA y desarrollo de producto de principio a fin."],
+        titleLines: ["Estrategia, IA, producto y software de principio a fin."],
         description:
-          "Un único equipo para definir, diseñar, construir, integrar y hacer evolucionar productos digitales, software a medida y soluciones de IA.",
+          "Tahona combina estrategia y arquitectura, IA, producto y software para definir, construir e integrar soluciones vinculadas a un resultado concreto.",
         primaryLabel: "Hablemos",
         primaryHref: "#contacto",
         secondaryLabel: "Ver capacidades",
@@ -513,16 +522,17 @@ export const SITE_CONTENT = {
         title: "Tres capacidades. Un único partner tecnológico.",
         description:
           "Estrategia y arquitectura, inteligencia artificial, producto y software. Se combinan según el reto, sin silos ni soluciones predeterminadas.",
+        linkLabel: "Ver servicios",
       },
       detailSection: {
         eyebrow: "Servicios en detalle",
         title: "Capacidad para decidir, construir e integrar.",
       },
-      examplesSection: {
-        eyebrow: "Qué desarrollamos",
-        title: "Productos, sistemas y capacidades para contextos reales.",
+      engagementSection: {
+        eyebrow: "Formas de colaboración",
+        title: "Cómo podemos trabajar juntos.",
         description:
-          "Cada implementación se adapta al negocio, a sus usuarios, a sus datos y a la forma en que debe evolucionar.",
+          "El alcance puede centrarse en una fase concreta o cubrir el recorrido completo, según el reto.",
       },
       faqSection: {
         eyebrow: "Preguntas frecuentes",
@@ -649,7 +659,8 @@ export const SITE_CONTENT = {
     },
     serviceFamilies: [
       {
-        id: "fundamentos",
+        id: "estrategia-arquitectura",
+        legacyId: "fundamentos",
         marker: "01",
         title: "Estrategia y arquitectura",
         description:
@@ -699,7 +710,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "desarrollo-ia",
+        id: "inteligencia-artificial",
+        legacyId: "desarrollo-ia",
         marker: "02",
         title: "Inteligencia artificial",
         description:
@@ -749,7 +761,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "otros-desarrollos",
+        id: "producto-software",
+        legacyId: "otros-desarrollos",
         marker: "03",
         title: "Producto y software",
         description:
@@ -799,55 +812,24 @@ export const SITE_CONTENT = {
         ],
       },
     ],
-    implementationExamples: [
+    engagementModes: [
       {
         marker: "01",
-        title: "Sistemas de conocimiento",
+        title: "Consultoría y definición",
         description:
-          "Con fuentes citables, permisos, evaluación e integración con productos y procesos.",
-        className: "lg:col-span-3",
+          "Diagnóstico, decisiones, arquitectura y hoja de ruta. Puede ser un encargo completo e independiente.",
       },
       {
         marker: "02",
-        title: "Productos digitales",
+        title: "Construcción de producto o sistema",
         description:
-          "Experiencias y aplicaciones diseñadas alrededor de usuarios y objetivos reales.",
-        className: "lg:col-span-3",
+          "Diseño, producto, ingeniería, integraciones y lanzamiento a producción, coordinados en un mismo alcance.",
       },
       {
         marker: "03",
-        title: "Integraciones",
+        title: "Evolución y operación acordada",
         description:
-          "Entre Drive, CRM, ERP, hojas de cálculo, reporting y sistemas internos.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "04",
-        title: "Procesamiento documental",
-        description:
-          "Extracción, validación, clasificación y handoff humano en flujos reales.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "05",
-        title: "Agentes de IA",
-        description:
-          "Para tareas acotadas, con límites, herramientas controladas y trazabilidad.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "06",
-        title: "Paneles e informes operativos",
-        description:
-          "Reporting construido sobre datos reales de la operación, no sobre informes manuales.",
-        className: "lg:col-span-3",
-      },
-      {
-        marker: "07",
-        title: "Workflows de aprobación",
-        description:
-          "Estados, responsables, alertas y registro para procesos que hoy dependen del seguimiento manual.",
-        className: "lg:col-span-3",
+          "Mantenimiento, medición y mejora. En procesos acotados y medibles, y cuando el alcance y el modelo de colaboración lo justifican, puede incluir tareas operativas y gestión de excepciones acordadas.",
       },
     ],
     servicesFaq: [
@@ -857,9 +839,14 @@ export const SITE_CONTENT = {
           "No. La IA es una capacidad central, pero se usa cuando mejora la solución. En otros casos la respuesta correcta es producto, software, integraciones o una combinación de varias capacidades.",
       },
       {
-        question: "¿Tahona puede asumir un producto digital de principio a fin?",
+        question: "¿Tahona solo trabaja en proyectos completos de principio a fin?",
         answer:
-          "Sí. Podemos trabajar desde la estrategia y la definición del producto hasta la experiencia, la arquitectura, el desarrollo, las integraciones, el lanzamiento y la evolución.",
+          "No. Un trabajo enfocado de consultoría, arquitectura, integración o desarrollo puede ser un encargo completo por sí mismo. También podemos conectar varias fases cuando el reto requiere un recorrido de principio a fin.",
+      },
+      {
+        question: "¿Tahona puede operar una parte de un proceso?",
+        answer:
+          "Solo de forma selectiva. El proceso debe ser acotado y medible, con criterios claros de calidad, supervisión, excepciones y modelo de colaboración. En ese contexto, el alcance puede incluir tareas operativas y gestión de excepciones acordadas.",
       },
       {
         question: "¿Se puede trabajar con la tecnología que ya existe en la empresa?",
@@ -1207,7 +1194,7 @@ export const SITE_CONTENT = {
       },
       services: {
         name: "Services",
-        title: "Tahona Services | Strategy, AI and product development",
+        title: "Tahona Services | Strategy, AI, product and software",
         description:
           "Technology strategy, artificial intelligence, digital products, custom software and end-to-end integrations.",
       },
@@ -1424,9 +1411,9 @@ export const SITE_CONTENT = {
     },
     servicesPage: {
       hero: {
-        titleLines: ["End-to-end strategy, AI and product development."],
+        titleLines: ["End-to-end strategy, AI, product and software."],
         description:
-          "One team to define, design, build, integrate and evolve digital products, custom software and AI solutions.",
+          "Tahona brings strategy and architecture, AI, product and software together to define, build and integrate solutions around a concrete outcome.",
         primaryLabel: "Let's talk",
         primaryHref: "#contacto",
         secondaryLabel: "View capabilities",
@@ -1437,16 +1424,17 @@ export const SITE_CONTENT = {
         title: "Three capabilities. One technology partner.",
         description:
           "Strategy and architecture, artificial intelligence, product and software. Combined around the challenge, without silos or predetermined solutions.",
+        linkLabel: "View services",
       },
       detailSection: {
         eyebrow: "Services in detail",
         title: "The capability to decide, build and integrate.",
       },
-      examplesSection: {
-        eyebrow: "What we develop",
-        title: "Products, systems and capabilities for real contexts.",
+      engagementSection: {
+        eyebrow: "Ways to work together",
+        title: "How we can work together.",
         description:
-          "Each implementation is adapted to the business, its users, its data and the way it needs to evolve.",
+          "An engagement can focus on one stage or cover the full journey, depending on the challenge.",
       },
       faqSection: {
         eyebrow: "FAQ",
@@ -1572,7 +1560,8 @@ export const SITE_CONTENT = {
     },
     serviceFamilies: [
       {
-        id: "fundamentos",
+        id: "estrategia-arquitectura",
+        legacyId: "fundamentos",
         marker: "01",
         title: "Strategy and architecture",
         description:
@@ -1622,7 +1611,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "desarrollo-ia",
+        id: "inteligencia-artificial",
+        legacyId: "desarrollo-ia",
         marker: "02",
         title: "Artificial intelligence",
         description:
@@ -1672,7 +1662,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "otros-desarrollos",
+        id: "producto-software",
+        legacyId: "otros-desarrollos",
         marker: "03",
         title: "Product and software",
         description:
@@ -1722,55 +1713,24 @@ export const SITE_CONTENT = {
         ],
       },
     ],
-    implementationExamples: [
+    engagementModes: [
       {
         marker: "01",
-        title: "Knowledge systems",
+        title: "Consulting and definition",
         description:
-          "With citable sources, permissions, evaluation and integration with products and processes.",
-        className: "lg:col-span-3",
+          "Diagnosis, decisions, architecture and roadmap. This can be a complete standalone engagement.",
       },
       {
         marker: "02",
-        title: "Digital products",
+        title: "Product or system delivery",
         description:
-          "Experiences and applications designed around real users and outcomes.",
-        className: "lg:col-span-3",
+          "Design, product, engineering, integrations and production launch, coordinated within one delivery scope.",
       },
       {
         marker: "03",
-        title: "Integrations",
+        title: "Agreed evolution and operations",
         description:
-          "Between Drive, CRM, ERP, spreadsheets, reporting and internal systems.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "04",
-        title: "Document processing",
-        description:
-          "Extraction, validation, classification and human handoff in real flows.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "05",
-        title: "AI agents",
-        description:
-          "For bounded tasks, with limits, controlled tools and traceability.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "06",
-        title: "Operational panels and reports",
-        description:
-          "Reporting built on real operational data, not on manually prepared reports.",
-        className: "lg:col-span-3",
-      },
-      {
-        marker: "07",
-        title: "Approval workflows",
-        description:
-          "States, owners, alerts and records for processes that currently depend on manual follow-up.",
-        className: "lg:col-span-3",
+          "Maintenance, measurement and improvement. For bounded, measurable processes, and when the scope and collaboration model warrant it, this may include agreed operational tasks and exception handling.",
       },
     ],
     servicesFaq: [
@@ -1780,9 +1740,14 @@ export const SITE_CONTENT = {
           "No. AI is a core capability, but it is used when it improves the solution. In other cases the right answer is product, software, integrations or a combination of several capabilities.",
       },
       {
-        question: "Can Tahona take a digital product from start to finish?",
+        question: "Does Tahona only work on complete end-to-end projects?",
         answer:
-          "Yes. We can work from product strategy and definition through experience, architecture, development, integrations, launch and evolution.",
+          "No. A focused consulting, architecture, integration or development engagement can be complete in itself. We can also connect several stages when the challenge calls for an end-to-end journey.",
+      },
+      {
+        question: "Can Tahona operate part of a process?",
+        answer:
+          "Only selectively. The process must be bounded and measurable, with clear quality criteria, supervision, exceptions and a defined collaboration model. In that context, the scope may include agreed operational tasks and exception handling.",
       },
       {
         question: "Can the solution work with the technology already in place?",
@@ -2129,7 +2094,7 @@ export const SITE_CONTENT = {
       },
       services: {
         name: "Usługi",
-        title: "Usługi Tahona | Strategia, AI i rozwój produktu",
+        title: "Usługi Tahona | Strategia, AI, produkt i oprogramowanie",
         description:
           "Strategia technologiczna, sztuczna inteligencja, produkty cyfrowe, oprogramowanie na miarę i kompleksowe integracje.",
       },
@@ -2346,9 +2311,9 @@ export const SITE_CONTENT = {
     },
     servicesPage: {
       hero: {
-        titleLines: ["Kompleksowa strategia, AI i rozwój produktu."],
+        titleLines: ["Strategia, AI, produkt i oprogramowanie od początku do końca."],
         description:
-          "Jeden zespół definiuje, projektuje, tworzy, integruje i rozwija produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
+          "Tahona łączy strategię i architekturę, AI, produkt i oprogramowanie, aby definiować, tworzyć i integrować rozwiązania dla konkretnego rezultatu biznesowego.",
         primaryLabel: "Porozmawiajmy",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz kompetencje",
@@ -2359,16 +2324,17 @@ export const SITE_CONTENT = {
         title: "Trzy kompetencje. Jeden partner technologiczny.",
         description:
           "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Łączymy je wokół wyzwania, bez silosów i z góry narzuconych rozwiązań.",
+        linkLabel: "Zobacz usługi",
       },
       detailSection: {
         eyebrow: "Usługi szczegółowo",
         title: "Kompetencje do podejmowania decyzji, budowy i integracji.",
       },
-      examplesSection: {
-        eyebrow: "Co tworzymy",
-        title: "Produkty, systemy i możliwości dla realnych warunków.",
+      engagementSection: {
+        eyebrow: "Formy współpracy",
+        title: "Jak możemy współpracować.",
         description:
-          "Każde wdrożenie dopasowujemy do biznesu, użytkowników, danych i sposobu, w jaki rozwiązanie ma się rozwijać.",
+          "Współpraca może obejmować konkretny etap lub całą drogę, zależnie od wyzwania.",
       },
       faqSection: {
         eyebrow: "Pytania",
@@ -2494,7 +2460,8 @@ export const SITE_CONTENT = {
     },
     serviceFamilies: [
       {
-        id: "fundamentos",
+        id: "estrategia-arquitectura",
+        legacyId: "fundamentos",
         marker: "01",
         title: "Strategia i architektura",
         description:
@@ -2544,7 +2511,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "desarrollo-ia",
+        id: "inteligencia-artificial",
+        legacyId: "desarrollo-ia",
         marker: "02",
         title: "Sztuczna inteligencja",
         description:
@@ -2594,7 +2562,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "otros-desarrollos",
+        id: "producto-software",
+        legacyId: "otros-desarrollos",
         marker: "03",
         title: "Produkt i oprogramowanie",
         description:
@@ -2644,55 +2613,24 @@ export const SITE_CONTENT = {
         ],
       },
     ],
-    implementationExamples: [
+    engagementModes: [
       {
         marker: "01",
-        title: "Systemy wiedzy",
+        title: "Doradztwo i definicja",
         description:
-          "Ze źródłami, uprawnieniami, ewaluacją i integracją z produktami oraz procesami.",
-        className: "lg:col-span-3",
+          "Diagnoza, decyzje, architektura i plan działania. Taki zakres może stanowić kompletne, samodzielne zlecenie.",
       },
       {
         marker: "02",
-        title: "Produkty cyfrowe",
+        title: "Budowa produktu lub systemu",
         description:
-          "Doświadczenia i aplikacje projektowane wokół realnych użytkowników i rezultatów.",
-        className: "lg:col-span-3",
+          "Projektowanie, produkt, inżynieria, integracje i uruchomienie produkcyjne w ramach jednego zakresu.",
       },
       {
         marker: "03",
-        title: "Integracje",
+        title: "Uzgodniony rozwój i obsługa",
         description:
-          "Między Drive, CRM, ERP, arkuszami, raportowaniem i systemami wewnętrznymi.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "04",
-        title: "Przetwarzanie dokumentów",
-        description:
-          "Ekstrakcja, walidacja, klasyfikacja i przekazanie do człowieka w realnych przepływach.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "05",
-        title: "Agenci AI",
-        description:
-          "Dla zadań o jasno określonym zakresie, z granicami, kontrolowanymi narzędziami i śledzeniem działań.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "06",
-        title: "Panele i raporty operacyjne",
-        description:
-          "Raportowanie zbudowane na realnych danych operacyjnych, nie na ręcznie składanych raportach.",
-        className: "lg:col-span-3",
-      },
-      {
-        marker: "07",
-        title: "Przepływ akceptacji",
-        description:
-          "Statusy, właściciele, alerty i rejestr dla procesów, które dziś zależą od ręcznego pilnowania.",
-        className: "lg:col-span-3",
+          "Utrzymanie, pomiar i doskonalenie. W przypadku procesów o jasno określonym zakresie i mierzalnym rezultacie, gdy uzasadniają to zakres i model współpracy, może obejmować uzgodnione zadania operacyjne i zarządzanie wyjątkami.",
       },
     ],
     servicesFaq: [
@@ -2702,9 +2640,14 @@ export const SITE_CONTENT = {
           "Nie. AI jest jedną z kluczowych kompetencji, ale wykorzystujemy je wtedy, gdy poprawia rozwiązanie. W innych przypadkach właściwą odpowiedzią jest produkt, oprogramowanie, integracja lub połączenie kilku kompetencji.",
       },
       {
-        question: "Czy Tahona może zrealizować produkt cyfrowy od początku do końca?",
+        question: "Czy Tahona realizuje wyłącznie kompletne projekty od początku do końca?",
         answer:
-          "Tak. Możemy poprowadzić strategię i definicję produktu, doświadczenie, architekturę, rozwój, integracje, uruchomienie i dalszą ewolucję.",
+          "Nie. Skoncentrowane doradztwo, architektura, integracja lub prace programistyczne mogą stanowić kompletne zlecenie. Możemy też połączyć kilka etapów, gdy wyzwanie wymaga pełnej drogi od definicji po wdrożenie.",
+      },
+      {
+        question: "Czy Tahona może obsługiwać część procesu?",
+        answer:
+          "Tylko w wybranych przypadkach. Proces musi mieć jasno określony zakres i mierzalny rezultat, a także jasne kryteria jakości, zasady nadzoru, obsługi wyjątków i model współpracy. W takim kontekście zakres może obejmować uzgodnione zadania operacyjne i zarządzanie wyjątkami.",
       },
       {
         question: "Czy rozwiązanie może działać z technologią już obecną w firmie?",
