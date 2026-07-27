@@ -50,6 +50,24 @@ Localized metadata, JSON-LD language, breadcrumb labels and `llms.txt` route cov
 - The industries page distinguishes full-detail sector experience and active workstreams in legal, logistics, and industry and traceability from lighter, applicable patterns in insurance, commercial operations, and non-clinical healthcare.
 - The lighter contexts do not imply equal prior delivery, case evidence, or sector authority. They show where similar rules, data, documentation, validation, and integration patterns may apply.
 
+## Public Cases Contract
+
+- The cases route contains exactly four entries in the established order and keeps the canonical and legacy anchors documented in the route contract tests.
+- Every entry presents the same visible hierarchy: challenge, Tahona intervention, three concise statements of what the system enables, and two or three localized links to existing service capabilities.
+- The challenge describes the operational problem or constraint. The intervention explains what Tahona defined, designed, built or integrated across strategy, architecture, product, software and AI where it contributes. Enablement statements describe defensible workflow or system behavior without invented metrics or client outcomes.
+- Case titles stay work-oriented and consistent across the cases route and the two featured homepage entries:
+
+| ES | EN | PL |
+| --- | --- | --- |
+| Documentación legal conectada con el expediente | Legal documents connected to the matter | Dokumentacja prawna powiązana ze sprawą |
+| Planificación logística bajo restricciones operativas | Logistics planning under operational constraints | Planowanie logistyczne z uwzględnieniem ograniczeń operacyjnych |
+| Conocimiento interno con fuentes, permisos y evaluación | Internal knowledge with sources, permissions and evaluation | Wiedza wewnętrzna ze źródłami, uprawnieniami i ewaluacją |
+| Trazabilidad alimentaria desde la recepción hasta la salida | Food traceability from receipt to dispatch | Identyfikowalność żywności od przyjęcia do wysyłki |
+
+- Public case content and structured data must never classify a case by state, phase, maturity, ownership, delivery status or internal versus external category. This includes headings, badges, fields, data attributes, grouping and equivalent phrases in ES, EN and PL.
+- Forbidden public classifications include client work, active project, PoC, prototype, validation or production as case-state labels, internal infrastructure, own product, system we use, work in progress, validated and in production. Human validation remains valid when it describes a system control inside the workflow.
+- Case metadata and JSON-LD reflect the visible challenge, intervention and related capabilities. They do not carry a hidden case-state model.
+
 ## Polish Copy Decisions
 
 - `Partner technologiczny od strategii po wdrożenie` is the primary company category. Diagnosis and process analysis remain part of the method, not the main positioning.

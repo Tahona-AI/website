@@ -7,21 +7,21 @@
 - [Inicio](https://tahona.ai/): Presenta a Tahona como partner tecnológico de principio a fin, desde la estrategia hasta la producción y evolución.
 - [Servicios](https://tahona.ai/services/): Detalla tres capacidades conectadas: estrategia y arquitectura, inteligencia artificial, producto y software.
 - [Industrias](https://tahona.ai/industries/): Distingue la experiencia sectorial en legal, logística e industria y trazabilidad de otros patrones aplicables a seguros, operaciones comerciales y salud no clínica.
-- [Casos](https://tahona.ai/cases/): Presenta proyectos anonimizados con foco en resultados, decisiones y evolución tecnológica.
+- [Casos](https://tahona.ai/cases/): Expone cuatro retos concretos, la intervención de Tahona, las capacidades conectadas y lo que permite cada sistema.
 
 ## English pages
 
 - [Home](https://tahona.ai/en/): Presents Tahona as an end-to-end technology partner for strategy, product, software and AI.
 - [Services](https://tahona.ai/en/services/): Describes three connected capabilities: strategy and architecture, artificial intelligence, product and software.
 - [Industries](https://tahona.ai/en/industries/): Distinguishes sector experience in legal, logistics, and industry and traceability from related patterns in insurance, commercial operations, and non-clinical healthcare.
-- [Cases](https://tahona.ai/en/cases/): Presents anonymized projects focused on outcomes, decisions and technology evolution.
+- [Cases](https://tahona.ai/en/cases/): Shows four concrete challenges, Tahona's intervention, the connected capabilities and what each system enables.
 
 ## Strony po polsku
 
 - [Start](https://tahona.ai/pl/): Przedstawia Tahona jako partnera technologicznego od strategii po wdrożenie, obejmującego produkt, oprogramowanie i AI.
 - [Usługi](https://tahona.ai/pl/services/): Opisuje trzy połączone kompetencje: strategię i architekturę, sztuczną inteligencję oraz produkt i oprogramowanie.
 - [Branże](https://tahona.ai/pl/industries/): Rozróżnia doświadczenie w prawie, logistyce oraz przemyśle i identyfikowalności od podobnych wzorców w ubezpieczeniach, operacjach sprzedażowych i nieklinicznej ochronie zdrowia.
-- [Przykłady](https://tahona.ai/pl/cases/): Przedstawia zanonimizowane projekty skoncentrowane na efektach, decyzjach i rozwoju technologii.
+- [Przykłady](https://tahona.ai/pl/cases/): Pokazuje cztery konkretne wyzwania, działania Tahona, połączone kompetencje i możliwości każdego systemu.
 
 ## Capacidades
 

@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import "./cases-page-contract.test.mjs";
 import "./industries-page-contract.test.mjs";
 
 const repoRoot = process.cwd();

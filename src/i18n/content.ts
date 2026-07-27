@@ -110,14 +110,36 @@ type IndustryItems = readonly [
   SecondaryIndustryItem,
 ];
 
-type CaseStudy = {
-  readonly bullets: readonly string[];
+type CaseCapabilityHash =
+  | "#consultoria-auditoria-operativa"
+  | "#estrategia-arquitectura"
+  | "#herramientas-internas"
+  | "#integraciones-plataformas-operativas"
+  | "#optimizacion-procesos"
+  | "#procesamiento-documental";
+
+export type RelatedCaseCapability = {
+  readonly hash: CaseCapabilityHash;
+  readonly label: string;
+};
+
+type RelatedCaseCapabilities =
+  | readonly [RelatedCaseCapability, RelatedCaseCapability]
+  | readonly [
+      RelatedCaseCapability,
+      RelatedCaseCapability,
+      RelatedCaseCapability,
+    ];
+
+export type CaseStudy = {
+  readonly challenge: string;
+  readonly enables: readonly [string, string, string];
   readonly id: string;
+  readonly intervention: string;
   readonly legacyId?: string;
   readonly marker: string;
+  readonly relatedCapabilities: RelatedCaseCapabilities;
   readonly sector: string;
-  readonly summary: string;
-  readonly tags: readonly string[];
   readonly title: string;
   readonly visualAlt: string;
   readonly visualSrc: string;
@@ -152,8 +174,11 @@ type SiteContent = {
   readonly casesPage: {
     readonly hero: HeroCopy;
     readonly section: {
+      readonly challengeLabel: string;
+      readonly enablesLabel: string;
       readonly eyebrow: string;
-      readonly relatedAreasLabel: string;
+      readonly interventionLabel: string;
+      readonly relatedCapabilitiesLabel: string;
       readonly text: string;
       readonly title: string;
     };
@@ -336,7 +361,7 @@ export const SITE_CONTENT = {
         name: "Casos",
         title: "Casos Tahona | Productos y sistemas sobre retos reales",
         description:
-          "Casos anonimizados centrados en el resultado: operaciones más claras, mejores decisiones y servicios digitales preparados para evolucionar.",
+          "Cuatro casos que muestran el reto, la intervención de Tahona, las capacidades conectadas y lo que cada producto o sistema permite.",
       },
       keywords:
         "partner tecnológico, productos digitales, software a medida, desarrollo de IA, estrategia tecnológica, integraciones, arquitectura de software",
@@ -603,7 +628,7 @@ export const SITE_CONTENT = {
       hero: {
         titleLines: ["Productos y sistemas sobre retos reales."],
         description:
-          "Casos anonimizados centrados en el resultado: más claridad, mejores decisiones y una base tecnológica capaz de evolucionar con el negocio.",
+          "Cada caso parte de una necesidad concreta y muestra la intervención de Tahona, las capacidades conectadas y lo que el sistema permite.",
         primaryLabel: "Solicitar una primera conversación",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
@@ -611,10 +636,13 @@ export const SITE_CONTENT = {
       },
       section: {
         eyebrow: "Casos",
-        title: "Resultados sobre retos reales.",
+        title: "Del reto al sistema.",
         text:
-          "Productos y sistemas orientados a mejorar cómo se trabaja, se decide y se presta servicio.",
-        relatedAreasLabel: "Áreas relacionadas",
+          "Cuatro casos que conectan definición, arquitectura, producto, software e IA cuando aporta al conjunto.",
+        challengeLabel: "El reto",
+        interventionLabel: "La intervención",
+        enablesLabel: "Lo que permite",
+        relatedCapabilitiesLabel: "Capacidades relacionadas",
       },
     },
     contact: {
@@ -688,7 +716,7 @@ export const SITE_CONTENT = {
       serviceCatalogName: "Familias de servicios Tahona",
       primaryIndustryListName: "Experiencia sectorial y líneas de trabajo activas",
       secondaryIndustryListName: "Otros contextos donde aplican estos patrones",
-      casesListName: "Casos anonimizados de trabajo operativo",
+      casesListName: "Casos de productos y sistemas sobre retos reales",
     },
     serviceFamilies: [
       {
@@ -1083,127 +1111,154 @@ export const SITE_CONTENT = {
         id: "plataforma-documental-operativa",
         marker: "01",
         sector: "Legal",
-        title: "Plataforma documental y operativa",
-        summary:
-          "Diseño e implementación de una plataforma interna para coordinar procesos documentales, extracción de información, generación de borradores, validación humana, tareas repetibles y seguimiento operativo.",
+        title: "Documentación legal conectada con el expediente",
+        challenge:
+          "Los documentos, el contexto del expediente, la preparación repetida, las reglas de acceso, la revisión humana y la trazabilidad estaban repartidos entre herramientas y pasos desconectados.",
+        intervention:
+          "Tahona definió el proceso y la arquitectura, y diseñó y construyó una plataforma interna que conecta los datos del expediente, la entrada y extracción documental, la preparación de borradores, los puntos de control humano y el seguimiento de tareas.",
+        enables: [
+          "Documentos y datos vinculados al expediente",
+          "Validación humana antes de cada avance",
+          "Versiones, decisiones y tareas trazables",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Estrategia y arquitectura",
+            hash: "#estrategia-arquitectura",
+          },
+          {
+            label: "Procesamiento documental y conocimiento",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Software a medida",
+            hash: "#herramientas-internas",
+          },
+        ],
         visualSrc: "/images/visual-case-legal-document-platform.png",
         visualAlt: "Visual 3D de plataforma documental",
-        bullets: [
-          "Flujos documentales con estados",
-          "Sistema agéntico",
-          "Generación de borradores",
-          "Validación humana antes",
-          "Tareas repetibles y seguimiento",
-          "Trazabilidad de cambios",
-          "Base operativa para documentación interna",
-        ],
-        tags: [
-          "Procesamiento documental",
-          "Herramientas internas",
-          "Bases de conocimiento",
-          "Validación humana",
-        ],
       },
       {
         id: "planificacion-logistica",
         legacyId: "planificacion-logistica-reporting",
         marker: "02",
         sector: "Logística",
-        title: "Plataforma de planificación logística",
-        summary:
-          "Plataforma para planificar rutas, importar datos operativos, coordinar eventos, revisar documentación logística y generar reporting útil para la operación.",
+        title: "Planificación logística bajo restricciones operativas",
+        challenge:
+          "La planificación debe responder a la capacidad disponible, las franjas horarias, las rutas, las incidencias y la calidad desigual de los datos operativos.",
+        intervention:
+          "Tahona definió las reglas operativas y la arquitectura, y diseñó y construyó una interfaz de planificación con importación y validación de datos, revisión de rutas e integración con herramientas y reporting existentes.",
+        enables: [
+          "Un plan revisable antes de su ejecución",
+          "Restricciones, incidencias y excepciones explícitas",
+          "Datos y decisiones de planificación conectados con las herramientas operativas existentes",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Diagnóstico y definición",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Software a medida",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integraciones y plataformas",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-logistics.png",
         visualAlt: "Visual 3D de planificación logística",
-        bullets: [
-          "Optimización de rutas",
-          "Planificación de rutas",
-          "Importación de datos operativos",
-          "Coordinación de eventos",
-          "Revisión documental",
-          "Reporting operativo",
-          "Integración con herramientas existentes",
-        ],
-        tags: [
-          "Optimización de procesos",
-          "Integraciones / plataformas",
-          "Procesamiento documental",
-          "Reporting",
-        ],
       },
       {
         id: "base-conocimiento-empresarial",
         marker: "03",
         sector: "Transversal",
-        title: "Base de conocimiento empresarial",
-        summary:
-          "Capa de conocimiento interno agéntica con ingesta documental, procesamiento, fuentes citables, metadatos, permisos, evaluación, revisión humana e integración con herramientas internas.",
+        title: "Conocimiento interno con fuentes, permisos y evaluación",
+        challenge:
+          "Las fuentes internas estaban fragmentadas, los permisos variaban según el contexto y las respuestas debían seguir siendo atribuibles y evaluables.",
+        intervention:
+          "Tahona definió la arquitectura de conocimiento y diseñó y construyó un sistema con ingesta y normalización, recuperación asistida por IA con citas, permisos, evaluación e integración con herramientas internas.",
+        enables: [
+          "Respuestas acompañadas por sus fuentes",
+          "Acceso limitado por permisos y alcance",
+          "Evaluación y revisión conectadas con las herramientas internas",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Soluciones y productos con IA",
+            hash: "#optimizacion-procesos",
+          },
+          {
+            label: "Procesamiento documental y conocimiento",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Estrategia y arquitectura",
+            hash: "#estrategia-arquitectura",
+          },
+        ],
         visualSrc: "/images/visual-case-enterprise-knowledge.png",
         visualAlt: "Visual 3D de base de conocimiento enterprise",
-        bullets: [
-          "Ingesta documental",
-          "Normalización y metadatos",
-          "Fuentes citables",
-          "Permisos y alcance",
-          "Evaluación de respuestas",
-          "Integración con herramientas internas",
-        ],
-        tags: [
-          "Bases de conocimiento",
-          "Procesamiento documental",
-          "Permisos",
-          "Trazabilidad",
-        ],
       },
       {
         id: "calidad-trazabilidad-appcc",
         legacyId: "documentacion-calidad-trazabilidad",
         marker: "04",
         sector: "Industria",
-        title:
-          "Plataforma de documentación, calidad y trazabilidad para sector alimenticio",
-        summary:
-          "Plataforma de flujos para ordenar documentación, validar información, mantener trazabilidad y generar reporting en procesos de calidad en el sector alimenticio.",
+        title: "Trazabilidad alimentaria desde la recepción hasta la salida",
+        challenge:
+          "La recepción, los controles, los lotes, los registros y la evidencia debían mantener continuidad y trazabilidad a lo largo de flujos acotados de calidad alimentaria.",
+        intervention:
+          "Tahona definió el proceso, diseñó los flujos del producto y construyó un sistema de documentación, validación y trazabilidad con integraciones cuando el proceso las requiere.",
+        enables: [
+          "Registros conectados desde la recepción hasta la salida",
+          "Puntos de revisión claros en cada control",
+          "Evidencia y reporting recuperables por lote y flujo",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Diagnóstico y definición",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Software a medida",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integraciones y plataformas",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-case-appcc-quality.png",
         visualAlt: "Visual 3D de calidad y trazabilidad industrial",
-        bullets: [
-          "Procesamiento documental",
-          "APPCC",
-          "Validación de información",
-          "Trazabilidad de procesos",
-          "Reporting de calidad",
-          "Controles operativos",
-          "Integración de sistemas",
-        ],
-        tags: [
-          "Herramientas internas",
-          "Procesamiento documental",
-          "Optimización de procesos",
-          "Trazabilidad",
-        ],
       },
     ],
     workItems: [
       {
         id: "document-platform",
         sector: "Legal",
-        title: "Plataforma documental y operativa",
+        title: "Documentación legal conectada con el expediente",
         description:
-          "Diseño e implementación de una herramienta interna para coordinar procesos documentales, extracción de datos de documentos complejos, generación de borradores, validación humana, RPA, tareas repetibles y seguimiento operativo.",
+          "Plataforma interna que conecta expedientes, documentos, borradores, validación humana y seguimiento sobre una arquitectura común.",
         tags: [
+          "Estrategia y arquitectura",
           "Procesamiento documental",
-          "Validación humana",
-          "Tareas internas",
-          "Seguimiento",
+          "Software a medida",
         ],
         imageSrc: "/images/visual-case-legal-document-platform.png",
       },
       {
         id: "logistics-planning",
         sector: "Logística",
-        title: "Plataforma de optimización logística",
+        title: "Planificación logística bajo restricciones operativas",
         description:
-          "Plataforma para planificar rutas, importar pedidos, coordinar eventos, revisar documentación logística y generar reporting útil para la operación.",
-        tags: ["Planificación", "Optimización de rutas", "Reporting"],
+          "Interfaz de planificación que conecta restricciones, datos operativos, revisión de rutas y herramientas existentes.",
+        tags: [
+          "Diagnóstico y definición",
+          "Software a medida",
+          "Integraciones",
+        ],
         imageSrc: "/images/visual-logistics.png",
       },
     ],
@@ -1232,7 +1287,7 @@ export const SITE_CONTENT = {
         name: "Cases",
         title: "Tahona Cases | Products and systems for real challenges",
         description:
-          "Anonymized cases focused on outcomes: clearer operations, better decisions and digital services built to evolve.",
+          "Four cases showing the challenge, Tahona's intervention, the connected capabilities and what each product or system enables.",
       },
       keywords:
         "technology partner, digital products, custom software, AI development, technology strategy, integrations, software architecture",
@@ -1499,7 +1554,7 @@ export const SITE_CONTENT = {
       hero: {
         titleLines: ["Products and systems for real challenges."],
         description:
-          "Anonymized cases focused on outcomes: greater clarity, better decisions and a technology foundation able to evolve with the business.",
+          "Each case starts with a concrete need and shows Tahona's intervention, the connected capabilities and what the system enables.",
         primaryLabel: "Request a first conversation",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
@@ -1507,10 +1562,13 @@ export const SITE_CONTENT = {
       },
       section: {
         eyebrow: "Cases",
-        title: "Outcomes for real challenges.",
+        title: "From challenge to system.",
         text:
-          "Products and systems focused on improving how work, decisions and services happen.",
-        relatedAreasLabel: "Related areas",
+          "Four cases connecting definition, architecture, product, software and AI where it contributes to the wider system.",
+        challengeLabel: "Challenge",
+        interventionLabel: "The intervention",
+        enablesLabel: "What it enables",
+        relatedCapabilitiesLabel: "Related capabilities",
       },
     },
     contact: {
@@ -1583,7 +1641,7 @@ export const SITE_CONTENT = {
       serviceCatalogName: "Tahona service families",
       primaryIndustryListName: "Sector experience and active workstreams",
       secondaryIndustryListName: "Other contexts where these patterns apply",
-      casesListName: "Anonymized operational work cases",
+      casesListName: "Product and system cases for real challenges",
     },
     serviceFamilies: [
       {
@@ -1978,126 +2036,154 @@ export const SITE_CONTENT = {
         id: "plataforma-documental-operativa",
         marker: "01",
         sector: "Legal",
-        title: "Document and operations platform",
-        summary:
-          "Design and implementation of an internal platform to coordinate document processes, information extraction, draft generation, human validation, repeatable tasks and operational tracking.",
+        title: "Legal documents connected to the matter",
+        challenge:
+          "Documents, matter context, repeat preparation, access rules, human review and traceability were fragmented across disconnected tools and steps.",
+        intervention:
+          "Tahona defined the process and architecture, then designed and built an internal platform connecting matter data, document intake and extraction, draft preparation, human checkpoints and task follow-up.",
+        enables: [
+          "Documents and data connected to the matter",
+          "Human validation before each step advances",
+          "Traceable versions, decisions and tasks",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Strategy and architecture",
+            hash: "#estrategia-arquitectura",
+          },
+          {
+            label: "Document processing and knowledge",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Custom software",
+            hash: "#herramientas-internas",
+          },
+        ],
         visualSrc: "/images/visual-case-legal-document-platform.png",
         visualAlt: "3D visual of a document platform",
-        bullets: [
-          "Document flows with states",
-          "Agentic system",
-          "Draft generation",
-          "Human validation first",
-          "Repeatable tasks and tracking",
-          "Change traceability",
-          "Operational base for internal documentation",
-        ],
-        tags: [
-          "Document processing",
-          "Internal tools",
-          "Knowledge bases",
-          "Human validation",
-        ],
       },
       {
         id: "planificacion-logistica",
         legacyId: "planificacion-logistica-reporting",
         marker: "02",
         sector: "Logistics",
-        title: "Logistics planning platform",
-        summary:
-          "Platform for planning routes, importing operational data, coordinating events, reviewing logistics documentation and generating useful operational reporting.",
+        title: "Logistics planning under operational constraints",
+        challenge:
+          "Planning has to account for available capacity, time windows, routes, incidents and uneven operational data.",
+        intervention:
+          "Tahona defined the operating rules and architecture, then designed and built a planning interface with data import and validation, route review, reporting and integrations with existing tools.",
+        enables: [
+          "A plan that can be reviewed before execution",
+          "Explicit constraints, incidents and exceptions",
+          "Planning data and decisions connected to existing operational tools",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Discovery and definition",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Custom software",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integrations and platforms",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-logistics.png",
         visualAlt: "3D visual of logistics planning",
-        bullets: [
-          "Route optimization",
-          "Route planning",
-          "Operational data import",
-          "Event coordination",
-          "Document review",
-          "Operational reporting",
-          "Integration with existing tools",
-        ],
-        tags: [
-          "Process optimization",
-          "Integrations / platforms",
-          "Document processing",
-          "Reporting",
-        ],
       },
       {
         id: "base-conocimiento-empresarial",
         marker: "03",
         sector: "Cross-functional",
-        title: "Enterprise knowledge base",
-        summary:
-          "Agentic internal knowledge layer with document ingestion, processing, citable sources, metadata, permissions, evaluation, human review and integration with internal tools.",
+        title: "Internal knowledge with sources, permissions and evaluation",
+        challenge:
+          "Internal sources were fragmented, permissions varied by context, and answers still had to remain attributable and open to evaluation.",
+        intervention:
+          "Tahona defined the knowledge architecture, then designed and built a system for ingestion and normalization, AI-assisted retrieval with citations, permissions, evaluation and integration with internal tools.",
+        enables: [
+          "Answers accompanied by their sources",
+          "Access bounded by permissions and scope",
+          "Evaluation and review connected to internal tools",
+        ],
+        relatedCapabilities: [
+          {
+            label: "AI solutions and products",
+            hash: "#optimizacion-procesos",
+          },
+          {
+            label: "Document processing and knowledge",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Strategy and architecture",
+            hash: "#estrategia-arquitectura",
+          },
+        ],
         visualSrc: "/images/visual-case-enterprise-knowledge.png",
         visualAlt: "3D visual of an enterprise knowledge base",
-        bullets: [
-          "Document ingestion",
-          "Normalization and metadata",
-          "Citable sources",
-          "Permissions and scope",
-          "Response evaluation",
-          "Integration with internal tools",
-        ],
-        tags: [
-          "Knowledge bases",
-          "Document processing",
-          "Permissions",
-          "Traceability",
-        ],
       },
       {
         id: "calidad-trazabilidad-appcc",
         legacyId: "documentacion-calidad-trazabilidad",
         marker: "04",
         sector: "Industry",
-        title: "Documentation, quality and traceability platform for food operations",
-        summary:
-          "Workflow platform to organize documentation, validate information, maintain traceability and generate reporting in quality processes for food operations.",
+        title: "Food traceability from receipt to dispatch",
+        challenge:
+          "Reception, controls, lots, records and supporting evidence had to remain connected and traceable across bounded food-quality workflows.",
+        intervention:
+          "Tahona defined the process, designed the product workflows and built a documentation, validation and traceability system with integrations where the process requires them.",
+        enables: [
+          "Records connected from receipt through dispatch",
+          "Clear review points for each control",
+          "Evidence and reporting retrievable by lot and workflow",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Discovery and definition",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Custom software",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integrations and platforms",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-case-appcc-quality.png",
         visualAlt: "3D visual of industrial quality and traceability",
-        bullets: [
-          "Document processing",
-          "HACCP",
-          "Information validation",
-          "Process traceability",
-          "Quality reporting",
-          "Operational controls",
-          "Systems integration",
-        ],
-        tags: [
-          "Internal tools",
-          "Document processing",
-          "Process optimization",
-          "Traceability",
-        ],
       },
     ],
     workItems: [
       {
         id: "document-platform",
         sector: "Legal",
-        title: "Document and operations platform",
+        title: "Legal documents connected to the matter",
         description:
-          "Design and implementation of an internal tool to coordinate document processes, extract data from complex documents, generate drafts, support human validation, RPA, repeatable tasks and operational tracking.",
+          "An internal platform connecting matters, documents, drafts, human validation and task follow-up through one architecture.",
         tags: [
+          "Strategy and architecture",
           "Document processing",
-          "Human validation",
-          "Internal tasks",
-          "Tracking",
+          "Custom software",
         ],
         imageSrc: "/images/visual-case-legal-document-platform.png",
       },
       {
         id: "logistics-planning",
         sector: "Logistics",
-        title: "Logistics optimization platform",
+        title: "Logistics planning under operational constraints",
         description:
-          "Platform for planning routes, importing orders, coordinating events, reviewing logistics documentation and generating useful operational reporting.",
-        tags: ["Planning", "Route optimization", "Reporting"],
+          "A planning interface connecting constraints, operational data, route review and existing tools.",
+        tags: [
+          "Discovery and definition",
+          "Custom software",
+          "Integrations",
+        ],
         imageSrc: "/images/visual-logistics.png",
       },
     ],
@@ -2126,7 +2212,7 @@ export const SITE_CONTENT = {
         name: "Przykłady",
         title: "Przykłady Tahona | Produkty i systemy dla realnych wyzwań",
         description:
-          "Zanonimizowane przykłady skoncentrowane na efektach: większej przejrzystości, lepszych decyzjach i usługach cyfrowych gotowych do rozwoju.",
+          "Cztery przykłady pokazujące wyzwanie, działania Tahona, połączone kompetencje i możliwości każdego produktu lub systemu.",
       },
       keywords:
         "partner technologiczny, produkty cyfrowe, oprogramowanie na miarę, rozwój AI, strategia technologiczna, integracje, architektura oprogramowania",
@@ -2393,7 +2479,7 @@ export const SITE_CONTENT = {
       hero: {
         titleLines: ["Produkty i systemy dla realnych wyzwań."],
         description:
-          "Zanonimizowane przykłady skoncentrowane na efektach: większej przejrzystości, lepszych decyzjach i bazie technologicznej gotowej do rozwoju wraz z biznesem.",
+          "Każdy przykład zaczyna się od konkretnej potrzeby i pokazuje działania Tahona, połączone kompetencje oraz możliwości systemu.",
         primaryLabel: "Umów pierwszą rozmowę",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",
@@ -2401,10 +2487,13 @@ export const SITE_CONTENT = {
       },
       section: {
         eyebrow: "Przykłady",
-        title: "Efekty dla realnych wyzwań.",
+        title: "Od wyzwania do systemu.",
         text:
-          "Produkty i systemy usprawniające pracę, decyzje i świadczenie usług.",
-        relatedAreasLabel: "Powiązane obszary",
+          "Cztery przykłady łączące definicję, architekturę, produkt, oprogramowanie i AI tam, gdzie wspiera cały system.",
+        challengeLabel: "Wyzwanie",
+        interventionLabel: "Działania Tahona",
+        enablesLabel: "Co umożliwia system",
+        relatedCapabilitiesLabel: "Powiązane kompetencje",
       },
     },
     contact: {
@@ -2477,7 +2566,7 @@ export const SITE_CONTENT = {
       serviceCatalogName: "Rodziny usług Tahona",
       primaryIndustryListName: "Doświadczenie branżowe i aktywne kierunki prac",
       secondaryIndustryListName: "Inne obszary zastosowania tych wzorców",
-      casesListName: "Zanonimizowane przykłady projektów operacyjnych",
+      casesListName: "Przykłady produktów i systemów dla realnych wyzwań",
     },
     serviceFamilies: [
       {
@@ -2872,127 +2961,154 @@ export const SITE_CONTENT = {
         id: "plataforma-documental-operativa",
         marker: "01",
         sector: "Prawo",
-        title: "Platforma dokumentowa i operacyjna",
-        summary:
-          "Projekt i wdrożenie platformy wewnętrznej do koordynowania procesów dokumentowych, ekstrakcji informacji, generowania szkiców, walidacji przez człowieka, powtarzalnych zadań i śledzenia statusów.",
+        title: "Dokumentacja prawna powiązana ze sprawą",
+        challenge:
+          "Dokumenty, kontekst sprawy, powtarzalne przygotowywanie materiałów, reguły dostępu, kontrola człowieka i śledzenie zmian były rozproszone między niepołączonymi narzędziami i etapami pracy.",
+        intervention:
+          "Tahona zdefiniowała proces i architekturę, a następnie zaprojektowała i zbudowała wewnętrzną platformę łączącą dane sprawy, przyjmowanie i ekstrakcję dokumentów, przygotowanie projektów, punkty kontroli człowieka oraz śledzenie zadań.",
+        enables: [
+          "Dokumenty i dane powiązane ze sprawą",
+          "Walidacja przez człowieka przed każdym kolejnym krokiem",
+          "Możliwe do prześledzenia wersje, decyzje i zadania",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Strategia i architektura",
+            hash: "#estrategia-arquitectura",
+          },
+          {
+            label: "Przetwarzanie dokumentów i wiedza",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Oprogramowanie na miarę",
+            hash: "#herramientas-internas",
+          },
+        ],
         visualSrc: "/images/visual-case-legal-document-platform.png",
         visualAlt: "Wizualizacja 3D platformy dokumentowej",
-        bullets: [
-          "Przepływy dokumentów ze statusami",
-          "System agentowy z nadzorem",
-          "Generowanie szkiców",
-          "Walidacja przez człowieka przed dalszym krokiem",
-          "Powtarzalne zadania i śledzenie statusów",
-          "Identyfikowalność zmian",
-          "Baza operacyjna dla dokumentacji wewnętrznej",
-        ],
-        tags: [
-          "Przetwarzanie dokumentów",
-          "Narzędzia wewnętrzne",
-          "Bazy wiedzy",
-          "Walidacja przez człowieka",
-        ],
       },
       {
         id: "planificacion-logistica",
         legacyId: "planificacion-logistica-reporting",
         marker: "02",
         sector: "Logistyka",
-        title: "Platforma planowania logistycznego",
-        summary:
-          "Platforma do planowania tras, importu danych operacyjnych, koordynacji zdarzeń, przeglądu dokumentacji logistycznej i generowania użytecznego raportowania operacyjnego.",
+        title: "Planowanie logistyczne z uwzględnieniem ograniczeń operacyjnych",
+        challenge:
+          "Planowanie musi uwzględniać dostępne zasoby, okna czasowe, trasy, zdarzenia i nierówną jakość danych operacyjnych.",
+        intervention:
+          "Tahona zdefiniowała reguły operacyjne i architekturę, a następnie zaprojektowała i zbudowała interfejs planowania z importem i walidacją danych, przeglądem tras, raportowaniem oraz integracjami z istniejącymi narzędziami.",
+        enables: [
+          "Plan możliwy do sprawdzenia przed realizacją",
+          "Jawne ograniczenia, zdarzenia i wyjątki",
+          "Dane i decyzje planistyczne połączone z istniejącymi narzędziami operacyjnymi",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Diagnoza i definicja",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Oprogramowanie na miarę",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integracje i platformy",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-logistics.png",
         visualAlt: "Wizualizacja 3D planowania logistycznego",
-        bullets: [
-          "Optymalizacja tras",
-          "Planowanie tras",
-          "Import danych operacyjnych",
-          "Koordynacja zdarzeń",
-          "Przegląd dokumentów",
-          "Raportowanie operacyjne",
-          "Integracja z istniejącymi narzędziami",
-        ],
-        tags: [
-          "Optymalizacja procesów",
-          "Integracje / platformy",
-          "Przetwarzanie dokumentów",
-          "Raportowanie",
-        ],
       },
       {
         id: "base-conocimiento-empresarial",
         marker: "03",
         sector: "Przekrojowo",
-        title: "Firmowa baza wiedzy",
-        summary:
-          "Warstwa wiedzy wewnętrznej wspierana przez agentów, z wczytywaniem dokumentów, przetwarzaniem, cytowalnymi źródłami, metadanymi, uprawnieniami, ewaluacją, kontrolą człowieka i integracją z narzędziami wewnętrznymi.",
+        title: "Wiedza wewnętrzna ze źródłami, uprawnieniami i ewaluacją",
+        challenge:
+          "Źródła wewnętrzne były rozproszone, uprawnienia zależały od kontekstu, a odpowiedzi musiały pozostać przypisane do źródeł i możliwe do oceny.",
+        intervention:
+          "Tahona zdefiniowała architekturę wiedzy, a następnie zaprojektowała i zbudowała system obejmujący wczytywanie i normalizację, wyszukiwanie wspierane przez AI z cytowaniami, uprawnienia, ewaluację oraz integrację z narzędziami wewnętrznymi.",
+        enables: [
+          "Odpowiedzi wraz ze źródłami",
+          "Dostęp ograniczony przez uprawnienia i zakres",
+          "Ewaluacja i przegląd połączone z narzędziami wewnętrznymi",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Rozwiązania i produkty z AI",
+            hash: "#optimizacion-procesos",
+          },
+          {
+            label: "Przetwarzanie dokumentów i wiedza",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Strategia i architektura",
+            hash: "#estrategia-arquitectura",
+          },
+        ],
         visualSrc: "/images/visual-case-enterprise-knowledge.png",
         visualAlt: "Wizualizacja 3D firmowej bazy wiedzy",
-        bullets: [
-          "Wczytywanie dokumentów",
-          "Normalizacja i metadane",
-          "Cytowalne źródła",
-          "Uprawnienia i zakres",
-          "Ewaluacja odpowiedzi",
-          "Integracja z narzędziami wewnętrznymi",
-        ],
-        tags: [
-          "Bazy wiedzy",
-          "Przetwarzanie dokumentów",
-          "Uprawnienia",
-          "Identyfikowalność",
-        ],
       },
       {
         id: "calidad-trazabilidad-appcc",
         legacyId: "documentacion-calidad-trazabilidad",
         marker: "04",
         sector: "Przemysł",
-        title:
-          "Platforma dokumentacji, jakości i identyfikowalności dla operacji spożywczych",
-        summary:
-          "Platforma przepływów porządkująca dokumentację, walidująca informacje, utrzymująca identyfikowalność i generująca raportowanie w procesach jakości w operacjach spożywczych.",
+        title: "Identyfikowalność żywności od przyjęcia do wysyłki",
+        challenge:
+          "Przyjęcie, kontrole, partie, rejestry i materiały potwierdzające musiały zachować ciągłość i identyfikowalność w jasno określonych procesach jakości żywności.",
+        intervention:
+          "Tahona zdefiniowała proces, zaprojektowała przepływy produktu i zbudowała system dokumentacji, walidacji oraz identyfikowalności z integracjami tam, gdzie wymaga ich proces.",
+        enables: [
+          "Rejestry połączone od przyjęcia po wysyłkę",
+          "Jasne punkty przeglądu dla każdej kontroli",
+          "Dokumentacja i raportowanie dostępne według partii i przepływu",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Diagnoza i definicja",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Oprogramowanie na miarę",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integracje i platformy",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-case-appcc-quality.png",
         visualAlt: "Wizualizacja 3D jakości i identyfikowalności w przemyśle",
-        bullets: [
-          "Przetwarzanie dokumentów",
-          "HACCP",
-          "Walidacja informacji",
-          "Identyfikowalność procesów",
-          "Raportowanie jakości",
-          "Kontrole operacyjne",
-          "Integracja systemów",
-        ],
-        tags: [
-          "Narzędzia wewnętrzne",
-          "Przetwarzanie dokumentów",
-          "Optymalizacja procesów",
-          "Identyfikowalność",
-        ],
       },
     ],
     workItems: [
       {
         id: "document-platform",
         sector: "Prawo",
-        title: "Platforma dokumentowa i operacyjna",
+        title: "Dokumentacja prawna powiązana ze sprawą",
         description:
-          "Projekt i wdrożenie narzędzia wewnętrznego do koordynowania procesów dokumentowych, ekstrakcji danych ze złożonych dokumentów, generowania szkiców, walidacji przez człowieka, RPA, powtarzalnych zadań i śledzenia statusów.",
+          "Wewnętrzna platforma łącząca sprawy, dokumenty, projekty, kontrolę człowieka i śledzenie zadań we wspólnej architekturze.",
         tags: [
+          "Strategia i architektura",
           "Przetwarzanie dokumentów",
-          "Walidacja przez człowieka",
-          "Zadania wewnętrzne",
-          "Śledzenie statusów",
+          "Oprogramowanie na miarę",
         ],
         imageSrc: "/images/visual-case-legal-document-platform.png",
       },
       {
         id: "logistics-planning",
         sector: "Logistyka",
-        title: "Platforma optymalizacji logistycznej",
+        title: "Planowanie logistyczne z uwzględnieniem ograniczeń operacyjnych",
         description:
-          "Platforma do planowania tras, importu zamówień, koordynacji zdarzeń, przeglądu dokumentacji logistycznej i generowania użytecznego raportowania operacyjnego.",
-        tags: ["Planowanie", "Optymalizacja tras", "Raportowanie"],
+          "Interfejs planowania łączący ograniczenia, dane operacyjne, przegląd tras i istniejące narzędzia.",
+        tags: [
+          "Diagnoza i definicja",
+          "Oprogramowanie na miarę",
+          "Integracje",
+        ],
         imageSrc: "/images/visual-logistics.png",
       },
     ],

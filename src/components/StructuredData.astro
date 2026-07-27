@@ -213,9 +213,15 @@ const casesSchema =
           itemListElement: caseStudies.map((caseStudy, index) => ({
             "@type": "ListItem",
             position: index + 1,
-            name: caseStudy.title,
-            description: caseStudy.summary,
-            url: `${canonicalURL}#${caseStudy.id}`,
+            item: {
+              "@type": "CreativeWork",
+              name: caseStudy.title,
+              description: `${caseStudy.challenge} ${caseStudy.intervention}`,
+              about: caseStudy.relatedCapabilities.map(
+                (capability) => capability.label,
+              ),
+              url: `${canonicalURL}#${caseStudy.id}`,
+            },
           })),
         },
       ]
