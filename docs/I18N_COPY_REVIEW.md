@@ -11,7 +11,7 @@ Localized metadata, JSON-LD language, breadcrumb labels and `llms.txt` route cov
 | ES | EN | PL |
 | --- | --- | --- |
 | Partner tecnológico de principio a fin | End-to-end technology partner | Partner technologiczny od strategii po wdrożenie |
-| De la estrategia a productos y sistemas que funcionan. | From strategy to products and systems that work. | Od strategii do produktów i systemów, które działają. |
+| De la estrategia a la implementación. | From strategy to implementation. | Od strategii do wdrożenia. |
 | Estrategia, producto y tecnología en un mismo equipo. | Strategy, product and technology in one team. | Strategia, produkt i technologia w jednym zespole. |
 | Productos digitales | Digital products | Produkty cyfrowe |
 | Software a medida | Custom software | Oprogramowanie na miarę |

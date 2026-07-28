@@ -230,6 +230,30 @@ describe("public copy hygiene", () => {
     }
   });
 
+  test("homepage hero keeps the concise approved copy in every locale", () => {
+    const i18nSource = readProjectFile("src/i18n/content.ts");
+    const approvedHeroCopy = [
+      "De la estrategia a la implementación.",
+      "Tahona es el partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
+      "From strategy to implementation.",
+      "Tahona is the technology partner for designing, building and integrating digital products, custom software and AI solutions.",
+      "Od strategii do wdrożenia.",
+      "Tahona to partner technologiczny, który projektuje, tworzy i integruje produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
+    ];
+
+    for (const phrase of approvedHeroCopy) {
+      assert.equal(i18nSource.includes(phrase), true, `missing approved hero phrase: ${phrase}`);
+    }
+
+    for (const rejectedHeadline of [
+      "De la estrategia a productos y sistemas que funcionan.",
+      "From strategy to products and systems that work.",
+      "Od strategii do produktów i systemów, które działają.",
+    ]) {
+      assert.equal(i18nSource.includes(rejectedHeadline), false);
+    }
+  });
+
   test("metadata defaults and route titles avoid duplicate generic SERP copy", () => {
     const seoSource = readProjectFile("src/components/SEO.astro");
     const i18nSource = readProjectFile("src/i18n/content.ts");

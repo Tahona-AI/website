@@ -446,9 +446,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["De la estrategia a productos y sistemas que funcionan."],
+        titleLines: ["De la estrategia a la implementación."],
         description:
-          "Tahona es el partner tecnológico de principio a fin para definir, diseñar, construir e integrar productos digitales, software a medida y soluciones de IA orientadas a resultados reales.",
+          "Tahona es el partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
         primaryLabel: "Hablemos",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
@@ -1372,9 +1372,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["From strategy to products and systems that work."],
+        titleLines: ["From strategy to implementation."],
         description:
-          "Tahona is the end-to-end technology partner for defining, designing, building and integrating digital products, custom software and AI solutions focused on real outcomes.",
+          "Tahona is the technology partner for designing, building and integrating digital products, custom software and AI solutions.",
         primaryLabel: "Let's talk",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
@@ -2297,9 +2297,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["Od strategii do produktów i systemów, które działają."],
+        titleLines: ["Od strategii do wdrożenia."],
         description:
-          "Tahona to partner technologiczny od strategii po wdrożenie. Definiujemy, projektujemy, tworzymy i integrujemy produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI nastawione na realne rezultaty.",
+          "Tahona to partner technologiczny, który projektuje, tworzy i integruje produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
         primaryLabel: "Porozmawiajmy",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",

@@ -143,8 +143,8 @@ cn("base-class", condition && "conditional-class", className)
 - Money-first claims without proof: "ahorra X horas", "reduce costes", "aumenta la facturación"
 
 ### Key Messages
-- "De la estrategia a productos y sistemas que funcionan."
-- "Partner tecnológico de principio a fin para definir, diseñar, construir e integrar productos digitales, software a medida y soluciones de IA."
+- "De la estrategia a la implementación."
+- "Partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA."
 - "Estrategia, producto y tecnología en un mismo equipo."
 - Strategy and architecture, AI, and product and software are equally visible, first-class capabilities.
 - Outcome-oriented delivery is transversal across consulting, product, software, integrations and AI.
