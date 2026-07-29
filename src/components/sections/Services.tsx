@@ -32,7 +32,7 @@ function ServiceFamilyCard({
     <FadeInView delay={0.1 + index * 0.08}>
       <article
         className={cn(
-          "group relative grid min-h-[26rem] overflow-hidden rounded-[1.75rem] border border-gray-200/80 bg-white/84 p-6 shadow-[0_22px_60px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:bg-white/92 hover:shadow-[0_30px_72px_-44px_rgba(31,31,31,0.5)] sm:p-8 md:items-stretch md:gap-10 lg:min-h-[28rem] lg:p-9",
+          "group relative grid min-h-[24rem] overflow-hidden rounded-[1.75rem] border border-gray-200/80 bg-white/84 p-6 shadow-[0_22px_60px_-46px_rgba(31,31,31,0.42)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:bg-white/92 hover:shadow-[0_30px_72px_-44px_rgba(31,31,31,0.5)] sm:p-8 md:items-stretch md:gap-8 lg:p-8",
           isReversed
             ? "md:grid-cols-[minmax(18rem,22rem)_minmax(0,1fr)]"
             : "md:grid-cols-[minmax(0,1fr)_minmax(18rem,22rem)]"
@@ -59,7 +59,7 @@ function ServiceFamilyCard({
             {family.description}
           </p>
 
-          <ol className="mt-8 space-y-3 md:mt-auto md:pt-8">
+          <ol className="mt-7 space-y-3 border-t border-gray-200/80 pt-6">
             {family.services.map((service, serviceIndex) => (
               <li
                 className="grid grid-cols-[1.75rem_1fr] items-start gap-3 text-sm leading-6 text-gray-700"
@@ -80,7 +80,7 @@ function ServiceFamilyCard({
             isReversed ? "md:order-1" : "md:order-2"
           )}
         >
-          <div className="relative aspect-square w-full max-w-[21rem] overflow-hidden rounded-[1.5rem] border border-white/70 bg-[radial-gradient(circle_at_22%_18%,rgba(45,106,79,0.18),transparent_31%),radial-gradient(circle_at_78%_74%,rgba(64,145,108,0.14),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.72),rgba(255,255,255,0.18))] shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-sm">
+          <div className="relative aspect-square w-full max-w-[19rem] overflow-hidden rounded-[1.5rem] border border-white/70 bg-[radial-gradient(circle_at_22%_18%,rgba(45,106,79,0.18),transparent_31%),radial-gradient(circle_at_78%_74%,rgba(64,145,108,0.14),transparent_34%),linear-gradient(135deg,rgba(255,255,255,0.72),rgba(255,255,255,0.18))] shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] backdrop-blur-sm">
             <img
               src={family.visualSrc}
               alt=""
@@ -131,7 +131,7 @@ export function Services({
             </div>
           </FadeInView>
 
-          <div className="mt-16 grid grid-cols-1 gap-6" id="servicios-grid">
+          <div className="mt-14 grid grid-cols-1 gap-5" id="servicios-grid">
             {serviceFamilies.map((family, index) => (
               <ServiceFamilyCard
                 family={family}

@@ -31,6 +31,12 @@ const schemaLanguage = LOCALE_DETAILS[locale].schemaLanguage;
 const serviceFamilies = getServiceFamilies(locale);
 const servicesFaq = getServicesFaq(locale);
 const industryItems = getIndustryItems(locale);
+const primaryIndustryItems = industryItems.filter(
+  (industry) => industry.level === "primary",
+);
+const secondaryIndustryItems = industryItems.filter(
+  (industry) => industry.level === "secondary",
+);
 const industriesFaq = getIndustriesFaq(locale);
 const caseStudies = getCaseStudies(locale);
 
@@ -160,9 +166,21 @@ const industriesSchema =
     ? [
         {
           "@type": "ItemList",
-          "@id": `${canonicalURL}#industries`,
-          name: content.structuredData.industryListName,
-          itemListElement: industryItems.map((industry, index) => ({
+          "@id": `${canonicalURL}#primary-industries`,
+          name: content.structuredData.primaryIndustryListName,
+          itemListElement: primaryIndustryItems.map((industry, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: industry.title,
+            description: industry.summary,
+            url: `${canonicalURL}#${industry.id}`,
+          })),
+        },
+        {
+          "@type": "ItemList",
+          "@id": `${canonicalURL}#secondary-industries`,
+          name: content.structuredData.secondaryIndustryListName,
+          itemListElement: secondaryIndustryItems.map((industry, index) => ({
             "@type": "ListItem",
             position: index + 1,
             name: industry.title,
@@ -195,9 +213,15 @@ const casesSchema =
           itemListElement: caseStudies.map((caseStudy, index) => ({
             "@type": "ListItem",
             position: index + 1,
-            name: caseStudy.title,
-            description: caseStudy.summary,
-            url: `${canonicalURL}#${caseStudy.id}`,
+            item: {
+              "@type": "CreativeWork",
+              name: caseStudy.title,
+              description: `${caseStudy.challenge} ${caseStudy.intervention}`,
+              about: caseStudy.relatedCapabilities.map(
+                (capability) => capability.label,
+              ),
+              url: `${canonicalURL}#${caseStudy.id}`,
+            },
           })),
         },
       ]

@@ -1,7 +1,7 @@
 ---
 import { getCaseStudies } from "@/components/cases/cases-data";
 import { getContent } from "@/i18n/content";
-import { DEFAULT_LOCALE } from "@/i18n/routing";
+import { DEFAULT_LOCALE, getLocalizedHashPath } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
 
 interface Props {
@@ -35,8 +35,16 @@ const copy = getContent(locale).casesPage.section;
         return (
           <article
             id={caseStudy.id}
-            class="scroll-mt-28 border-t border-gray-200 pt-16 first:border-t-0 first:pt-0"
+            aria-labelledby={`case-title-${caseStudy.id}`}
+            class="relative scroll-mt-28 border-t border-gray-200 pt-16 first:border-t-0 first:pt-0"
           >
+            {caseStudy.legacyId && (
+              <span
+                id={caseStudy.legacyId}
+                class="absolute inset-x-0 top-0 h-px scroll-mt-28"
+                aria-hidden="true"
+              ></span>
+            )}
             <div
               class:list={[
                 "grid gap-10 lg:items-center lg:gap-14",
@@ -47,37 +55,68 @@ const copy = getContent(locale).casesPage.section;
             >
               <div class:list={[imageFirst && "lg:order-2"]}>
                 <p class="text-sm font-semibold text-brand-700">
-                  {caseStudy.marker} / 04
+                  {caseStudy.marker} / {String(caseStudies.length).padStart(2, "0")}
                 </p>
                 <p class="mt-5 text-sm font-medium text-gray-500">
                   {caseStudy.sector}
                 </p>
                 <h3 class="mt-3 font-heading text-3xl font-semibold text-gray-900 text-balance">
-                  {caseStudy.title}
+                  <span id={`case-title-${caseStudy.id}`}>
+                    {caseStudy.title}
+                  </span>
                 </h3>
-                <p class="mt-5 max-w-2xl text-base leading-8 text-gray-600 text-pretty">
-                  {caseStudy.summary}
-                </p>
 
-                <ul class="mt-7 grid gap-x-10 gap-y-3 text-sm leading-6 text-gray-600 sm:grid-cols-2">
-                  {caseStudy.bullets.map((bullet) => (
-                    <li class="grid grid-cols-[0.65rem_1fr] gap-3">
-                      <span class="mt-2 size-1.5 rounded-full bg-brand-500"></span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div class="mt-8 space-y-7">
+                  <div class="border-l-2 border-brand-200 pl-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700">
+                      {copy.challengeLabel}
+                    </p>
+                    <p class="mt-2 max-w-2xl text-base leading-8 text-gray-600 text-pretty">
+                      {caseStudy.challenge}
+                    </p>
+                  </div>
+
+                  <div class="border-l-2 border-gray-200 pl-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500">
+                      {copy.interventionLabel}
+                    </p>
+                    <p class="mt-2 max-w-2xl text-base leading-8 text-gray-600 text-pretty">
+                      {caseStudy.intervention}
+                    </p>
+                  </div>
+                </div>
 
                 <div class="mt-8">
-                  <p class="text-xs font-medium uppercase text-gray-400">
-                    {copy.relatedAreasLabel}
+                  <p class="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500">
+                    {copy.enablesLabel}
+                  </p>
+                  <ul class="mt-4 space-y-3 text-sm leading-6 text-gray-600">
+                    {caseStudy.enables.map((enablement) => (
+                      <li class="grid grid-cols-[0.65rem_1fr] gap-3">
+                        <span class="mt-2 size-1.5 rounded-full bg-brand-500"></span>
+                        <span>{enablement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="mt-8">
+                  <p class="text-xs font-semibold uppercase tracking-[0.12em] text-gray-500">
+                    {copy.relatedCapabilitiesLabel}
                   </p>
                   <div class="mt-3 flex flex-wrap gap-2">
-                    {caseStudy.tags.map((tag) => (
-                      <span class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/78 px-3.5 py-1.5 text-xs leading-5 text-gray-700">
+                    {caseStudy.relatedCapabilities.map((capability) => (
+                      <a
+                        href={getLocalizedHashPath(
+                          locale,
+                          "services",
+                          capability.hash,
+                        )}
+                        class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white/78 px-3.5 py-1.5 text-xs leading-5 text-gray-700 transition-colors hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+                      >
                         <span class="size-1.5 rounded-full bg-brand-500"></span>
-                        {tag}
-                      </span>
+                        {capability.label}
+                      </a>
                     ))}
                   </div>
                 </div>

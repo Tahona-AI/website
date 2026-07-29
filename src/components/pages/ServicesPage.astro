@@ -7,7 +7,7 @@ import { Contact } from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer.astro";
 import ServicesPillars from "@/components/services/ServicesPillars.astro";
 import ServiceDetailSections from "@/components/services/ServiceDetailSections.astro";
-import ImplementationExamples from "@/components/services/ImplementationExamples.astro";
+import EngagementModes from "@/components/services/EngagementModes.astro";
 import ServicesFAQ from "@/components/services/ServicesFAQ.astro";
 import { getContent } from "@/i18n/content";
 import { DEFAULT_LOCALE } from "@/i18n/routing";
@@ -41,7 +41,7 @@ const heroTitle = hero.titleLines.join(" ");
     />
     <ServicesPillars locale={locale} />
     <ServiceDetailSections locale={locale} />
-    <ImplementationExamples locale={locale} />
+    <EngagementModes locale={locale} />
     <ServicesFAQ locale={locale} />
     <Contact client:load locale={locale} />
     <Footer locale={locale} />

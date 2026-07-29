@@ -29,10 +29,18 @@ const copy = getContent(locale).servicesPage.detailSection;
 
     <div class="mt-14 space-y-16">
       {serviceFamilies.map((family) => (
-        <div class="grid gap-10 border-t border-gray-200 pt-14 first:border-t-0 first:pt-0 lg:grid-cols-[minmax(20rem,0.8fr)_minmax(0,2.2fr)] lg:gap-14 xl:gap-16">
+        <div
+          id={family.id}
+          class="relative grid scroll-mt-28 gap-10 border-t border-gray-200 pt-14 first:border-t-0 first:pt-0 lg:grid-cols-[minmax(20rem,0.8fr)_minmax(0,2.2fr)] lg:gap-14 xl:gap-16"
+        >
+          <span
+            id={family.legacyId}
+            class="absolute inset-x-0 top-0 h-px scroll-mt-28"
+            aria-hidden="true"
+          ></span>
           <aside class="lg:sticky lg:top-28 lg:self-start">
             <p class="text-sm font-semibold text-brand-700">
-              {family.marker} / 03
+              {family.marker} / {String(serviceFamilies.length).padStart(2, "0")}
             </p>
             <h3 class="mt-5 font-heading text-3xl font-semibold text-gray-900 text-balance">
               {family.title}

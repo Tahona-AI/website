@@ -2,7 +2,7 @@
 
 ## Quick Context
 
-**What**: Marketing website for Tahona - technical consulting and implementation for internal operations, processes, data, documents, tools, and practical automation when useful.
+**What**: Marketing website for Tahona, an end-to-end technology partner for strategy and consulting, digital product, custom software, integrations and AI.
 **Stack**: Astro + React + Tailwind CSS v4.  
 **Deploy**: GitHub Pages (static build).  
 **URL**: https://tahona.ai
@@ -146,7 +146,9 @@ cn("base-class", condition && "conditional-class", className)
 - "De la estrategia a la implementación."
 - "Partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA."
 - "Estrategia, producto y tecnología en un mismo equipo."
-- IA is a core capability, but software, product and integrations are equally central.
+- Strategy and architecture, AI, and product and software are equally visible, first-class capabilities.
+- Outcome-oriented delivery is transversal across consulting, product, software, integrations and AI.
+- Operation is selective, never a blanket promise. Tahona may assume the agreed operation and exception handling only when a bounded, measurable process and the collaboration model warrant it.
 
 ### Service Taxonomy
 

@@ -43,6 +43,7 @@ type ServiceItem = {
 type ServiceFamily = {
   readonly description: string;
   readonly id: string;
+  readonly legacyId: string;
   readonly marker: string;
   readonly services: readonly ServiceItem[];
   readonly title: string;
@@ -50,38 +51,99 @@ type ServiceFamily = {
   readonly visualSrc: string;
 };
 
-type ImplementationExample = {
-  readonly className: string;
+type EngagementMarker = "01" | "02" | "03";
+
+type EngagementMode = {
   readonly description: string;
-  readonly marker: string;
+  readonly marker: EngagementMarker;
   readonly title: string;
 };
+
+type EngagementModes = readonly [
+  EngagementMode,
+  EngagementMode,
+  EngagementMode,
+];
 
 type FaqItem = {
   readonly answer: string;
   readonly question: string;
 };
 
-type IndustryItem = {
-  readonly bullets: readonly string[];
-  readonly description: string;
+type IndustryLink = {
+  readonly hash: `#${string}`;
+  readonly label: string;
+};
+
+type IndustryItemBase = {
   readonly id: string;
+  readonly legacyId?: string;
+  readonly level: "primary" | "secondary";
   readonly marker: string;
-  readonly relatedServices: readonly string[];
   readonly summary: string;
   readonly tags: readonly string[];
   readonly title: string;
+};
+
+export type PrimaryIndustryItem = IndustryItemBase & {
+  readonly bullets: readonly string[];
+  readonly cardTitle?: string;
+  readonly caseLink: IndustryLink;
+  readonly description: string;
+  readonly level: "primary";
+  readonly relatedServices: readonly IndustryLink[];
   readonly visualAlt: string;
   readonly visualSrc: string;
 };
 
-type CaseStudy = {
-  readonly bullets: readonly string[];
+export type SecondaryIndustryItem = IndustryItemBase & {
+  readonly level: "secondary";
+};
+
+export type IndustryItem = PrimaryIndustryItem | SecondaryIndustryItem;
+
+type IndustryItems = readonly [
+  PrimaryIndustryItem,
+  PrimaryIndustryItem,
+  PrimaryIndustryItem,
+  SecondaryIndustryItem,
+  SecondaryIndustryItem,
+  SecondaryIndustryItem,
+  SecondaryIndustryItem,
+  SecondaryIndustryItem,
+  SecondaryIndustryItem,
+];
+
+type CaseCapabilityHash =
+  | "#consultoria-auditoria-operativa"
+  | "#estrategia-arquitectura"
+  | "#herramientas-internas"
+  | "#integraciones-plataformas-operativas"
+  | "#optimizacion-procesos"
+  | "#procesamiento-documental";
+
+export type RelatedCaseCapability = {
+  readonly hash: CaseCapabilityHash;
+  readonly label: string;
+};
+
+type RelatedCaseCapabilities =
+  | readonly [RelatedCaseCapability, RelatedCaseCapability]
+  | readonly [
+      RelatedCaseCapability,
+      RelatedCaseCapability,
+      RelatedCaseCapability,
+    ];
+
+export type CaseStudy = {
+  readonly challenge: string;
+  readonly enables: readonly [string, string, string];
   readonly id: string;
+  readonly intervention: string;
+  readonly legacyId?: string;
   readonly marker: string;
+  readonly relatedCapabilities: RelatedCaseCapabilities;
   readonly sector: string;
-  readonly summary: string;
-  readonly tags: readonly string[];
   readonly title: string;
   readonly visualAlt: string;
   readonly visualSrc: string;
@@ -98,26 +160,34 @@ type WorkItem = {
 
 type SiteContent = {
   readonly aiApplied: {
+    readonly chart: {
+      readonly ariaLabel: string;
+      readonly axisDateLabel: string;
+      readonly axisDurationLabel: string;
+      readonly caption: string;
+      readonly description: string;
+      readonly scrollLabel: string;
+      readonly sourceLabel: string;
+      readonly title: string;
+      readonly unreliableLabel: string;
+    };
     readonly description: string;
     readonly eyebrow: string;
-    readonly lifecycle: {
-      readonly ariaLabel: string;
-      readonly centerLabel: string;
-      readonly centerTitle: string;
-      readonly stages: readonly {
+    readonly principles: readonly {
         readonly body: string;
-        readonly label: string;
         readonly title: string;
       }[];
-    };
     readonly title: string;
   };
   readonly caseStudies: readonly CaseStudy[];
   readonly casesPage: {
     readonly hero: HeroCopy;
     readonly section: {
+      readonly challengeLabel: string;
+      readonly enablesLabel: string;
       readonly eyebrow: string;
-      readonly relatedAreasLabel: string;
+      readonly interventionLabel: string;
+      readonly relatedCapabilitiesLabel: string;
       readonly text: string;
       readonly title: string;
     };
@@ -180,6 +250,8 @@ type SiteContent = {
       readonly ctaLabel: string;
       readonly description: string;
       readonly eyebrow: string;
+      readonly primaryLabel: string;
+      readonly secondaryLabel: string;
       readonly title: string;
     };
     readonly ourWork: {
@@ -201,10 +273,11 @@ type SiteContent = {
       readonly title: string;
     };
   };
-  readonly implementationExamples: readonly ImplementationExample[];
+  readonly engagementModes: EngagementModes;
   readonly industriesFaq: readonly FaqItem[];
   readonly industriesPage: {
     readonly detailSection: {
+      readonly description: string;
       readonly eyebrow: string;
       readonly relatedServicesLabel: string;
       readonly title: string;
@@ -221,7 +294,7 @@ type SiteContent = {
     };
     readonly hero: HeroCopy;
   };
-  readonly industryItems: readonly IndustryItem[];
+  readonly industryItems: IndustryItems;
   readonly metadata: Record<RouteKey, PageMeta> & {
     readonly keywords: string;
   };
@@ -243,7 +316,7 @@ type SiteContent = {
       readonly eyebrow: string;
       readonly title: string;
     };
-    readonly examplesSection: {
+    readonly engagementSection: {
       readonly description: string;
       readonly eyebrow: string;
       readonly title: string;
@@ -257,15 +330,17 @@ type SiteContent = {
     readonly pillarsSection: {
       readonly description: string;
       readonly eyebrow: string;
+      readonly linkLabel: string;
       readonly title: string;
     };
   };
   readonly skipLink: string;
   readonly structuredData: {
     readonly casesListName: string;
-    readonly industryListName: string;
     readonly knowsAbout: readonly string[];
     readonly organizationDescription: string;
+    readonly primaryIndustryListName: string;
+    readonly secondaryIndustryListName: string;
     readonly serviceCatalogName: string;
     readonly serviceSchemaName: string;
   };
@@ -277,27 +352,27 @@ export const SITE_CONTENT = {
     metadata: {
       home: {
         name: "Inicio",
-        title: "Tahona | IA, productos digitales y software a medida",
+        title: "Tahona | Partner tecnológico de principio a fin",
         description:
-          "Partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
+          "Partner tecnológico de principio a fin para estrategia, productos digitales, software a medida, integraciones y soluciones de IA.",
       },
       services: {
         name: "Servicios",
-        title: "Servicios Tahona | Estrategia, IA y desarrollo de producto",
+        title: "Servicios Tahona | Estrategia, IA, producto y software",
         description:
           "Estrategia tecnológica, inteligencia artificial, productos digitales, software a medida e integraciones de principio a fin.",
       },
       industries: {
         name: "Industrias",
-        title: "Industrias Tahona | Productos digitales, software e IA",
+        title: "Industrias Tahona | Tecnología adaptada a cada contexto",
         description:
-          "Capacidad de producto, software e IA adaptada a logística, industria, legal, seguros, marketing y salud.",
+          "Patrones sectoriales en legal, logística e industria, y contextos aplicables a seguros, operaciones comerciales y salud no clínica.",
       },
       cases: {
         name: "Casos",
         title: "Casos Tahona | Productos y sistemas sobre retos reales",
         description:
-          "Casos anonimizados centrados en el resultado: operaciones más claras, mejores decisiones y servicios digitales preparados para evolucionar.",
+          "Cuatro casos que muestran el reto, la intervención de Tahona, las capacidades conectadas y lo que cada producto o sistema permite.",
       },
       keywords:
         "partner tecnológico, productos digitales, software a medida, desarrollo de IA, estrategia tecnológica, integraciones, arquitectura de software",
@@ -394,9 +469,8 @@ export const SITE_CONTENT = {
         eyebrow: "Qué hacemos",
         title: "Estrategia, producto y tecnología en un mismo equipo.",
         description: [
-          "Acompañamos todo el ciclo: entendemos el reto, definimos la solución, diseñamos la experiencia, construimos la tecnología y la integramos en el negocio.",
-          "El resultado puede ser un producto digital, software a medida o una solución de IA. La tecnología se decide en función del objetivo, los usuarios y el contexto, no al revés.",
-          "El enfoque es de sastrería tecnológica: cada sistema se diseña alrededor del negocio, se valida con sus usuarios y se prepara para evolucionar.",
+          "Unimos consultoría, producto e ingeniería para convertir retos abiertos en soluciones que funcionan. Podemos entrar desde la definición, construir el producto o sistema, integrarlo en el negocio y seguir evolucionándolo en producción.",
+          "El resultado puede ser un producto digital, software a medida o una solución de IA. En procesos acotados y medibles, también podemos asumir la ejecución de una parte del trabajo.",
         ],
         bullets: [
           "Diagnóstico, definición de producto y estrategia tecnológica.",
@@ -410,28 +484,30 @@ export const SITE_CONTENT = {
         eyebrow: "Servicios",
         title: "Tres capacidades. Un único partner tecnológico.",
         description:
-          "Estrategia y arquitectura, inteligencia artificial, producto y software. Desde la definición inicial hasta la puesta en producción y la evolución del sistema.",
+          "Estrategia y arquitectura, inteligencia artificial, producto y software. Se combinan según el reto y el resultado esperado, desde la definición hasta producción y evolución.",
         ctaLabel: "Ver servicios",
       },
       industries: {
         eyebrow: "Industrias",
         title: "Capacidad tecnológica adaptada a cada sector.",
         description:
-          "Cambian los procesos, los usuarios, los datos y las restricciones. La capacidad para definir, diseñar y construir se mantiene.",
+          "Cambian los procesos, los usuarios, los datos y las restricciones. Mantenemos el mismo recorrido de principio a fin y orientamos cada solución al resultado que importa en ese contexto.",
+        primaryLabel: "Sectores principales",
+        secondaryLabel: "Otros sectores",
         ctaLabel: "Ver industrias",
       },
       ourWork: {
         eyebrow: "Casos",
-        title: "Productos y sistemas orientados a resultados reales.",
+        title: "Productos y sistemas construidos sobre retos reales.",
         description:
-          "El foco está en el resultado: operaciones más claras, decisiones mejor informadas y servicios digitales capaces de evolucionar con el negocio.",
+          "Los casos anonimizados muestran qué problema se abordó, qué se construyó y cómo la solución se integra y evoluciona en su contexto.",
         ctaLabel: "Ver casos",
       },
       howWeWork: {
         eyebrow: "Cómo trabajamos",
         title: "Un partner desde la definición hasta la evolución.",
         description:
-          "Asumimos el recorrido completo: estrategia, producto, arquitectura, desarrollo, integración y mejora continua. El diagnóstico permite entender el punto de partida; el objetivo es construir y hacer avanzar la solución.",
+          "Trabajamos de principio a fin: estrategia, producto, arquitectura, desarrollo, integración y mejora continua. El diagnóstico permite entender el punto de partida; el objetivo es construir y hacer avanzar la solución.",
         steps: [
           {
             number: "01",
@@ -459,51 +535,53 @@ export const SITE_CONTENT = {
           },
           {
             number: "05",
-            title: "Lanzamiento y evolución",
+            title: "Lanzamiento, operación y evolución",
             description:
-              "Integramos, medimos, documentamos y seguimos mejorando el sistema.",
+              "Integramos, medimos y seguimos mejorando el sistema. Cuando el alcance y el modelo de colaboración lo requieren, también asumimos la operación acordada y la gestión de excepciones.",
           },
         ],
       },
     },
     aiApplied: {
-      eyebrow: "Inteligencia artificial",
-      title: "IA de principio a fin, integrada en productos y operaciones.",
+      eyebrow: "IA aplicada",
+      title: "La capacidad avanza. El trabajo real exige sistemas fiables.",
       description:
-        "Trabajamos desde la estrategia y el caso de uso hasta los datos, la arquitectura, la construcción, la evaluación y la evolución en producción. Desarrollamos sistemas de IA que forman parte del negocio, no demostraciones aisladas.",
-      lifecycle: {
-        ariaLabel: "Ciclo integral de desarrollo de una solución de inteligencia artificial",
-        centerLabel: "IA de principio a fin",
-        centerTitle: "Sistema en producción",
-        stages: [
-          {
-            label: "Estrategia",
-            title: "Caso de uso y objetivo",
-            body: "Valor, alcance, usuarios y criterios de éxito.",
-          },
-          {
-            label: "Fundamentos",
-            title: "Datos y contexto",
-            body: "Fuentes, permisos, calidad y conocimiento del negocio.",
-          },
-          {
-            label: "Ingeniería",
-            title: "Construcción e integración",
-            body: "Modelos, producto, herramientas y sistemas conectados.",
-          },
-          {
-            label: "Operación",
-            title: "Evaluación y evolución",
-            body: "Pruebas, supervisión, métricas y mejora continua.",
-          },
-        ],
+        "Los modelos ya resuelven tareas de software cada vez más largas. En una operación real, esa capacidad solo resulta útil cuando el proceso está acotado, conectado con datos y herramientas, evaluado y supervisado.",
+      chart: {
+        ariaLabel:
+          "Evolución del horizonte de tareas de software completadas por modelos de IA con un cincuenta por ciento de éxito",
+        axisDateLabel: "Fecha de lanzamiento del modelo",
+        axisDurationLabel: "Duración de la tarea para una persona",
+        caption:
+          "Estimaciones p50 e intervalos de METR Time Horizon 1.1 para una selección de modelos. La gráfica no mide la automatización de un proceso de negocio.",
+        description:
+          "Estimaciones públicas p50 e intervalos de confianza de una selección de modelos estado del arte, ordenados por fecha de lanzamiento.",
+        scrollLabel: "Desliza para explorar la gráfica",
+        sourceLabel: "Fuente y metodología",
+        title: "Duración de tareas de software completadas con un 50 % de éxito",
+        unreliableLabel:
+          "Las estimaciones por encima de 16 h no son fiables con la suite actual",
       },
+      principles: [
+        {
+          title: "Acotar el trabajo",
+          body: "Definir la unidad de trabajo, los límites, las excepciones y los criterios de calidad.",
+        },
+        {
+          title: "Integrar el contexto",
+          body: "Conectar datos, herramientas, permisos y trazabilidad con la operación real.",
+        },
+        {
+          title: "Evaluar y supervisar",
+          body: "Medir resultados, revisar excepciones y mantener responsables humanos.",
+        },
+      ],
     },
     servicesPage: {
       hero: {
-        titleLines: ["Estrategia, IA y desarrollo de producto de principio a fin."],
+        titleLines: ["Estrategia, IA, producto y software de principio a fin."],
         description:
-          "Un único equipo para definir, diseñar, construir, integrar y hacer evolucionar productos digitales, software a medida y soluciones de IA.",
+          "Tahona combina estrategia y arquitectura, IA, producto y software para definir, construir e integrar soluciones vinculadas a un resultado concreto.",
         primaryLabel: "Hablemos",
         primaryHref: "#contacto",
         secondaryLabel: "Ver capacidades",
@@ -514,16 +592,17 @@ export const SITE_CONTENT = {
         title: "Tres capacidades. Un único partner tecnológico.",
         description:
           "Estrategia y arquitectura, inteligencia artificial, producto y software. Se combinan según el reto, sin silos ni soluciones predeterminadas.",
+        linkLabel: "Ver servicios",
       },
       detailSection: {
         eyebrow: "Servicios en detalle",
         title: "Capacidad para decidir, construir e integrar.",
       },
-      examplesSection: {
-        eyebrow: "Qué desarrollamos",
-        title: "Productos, sistemas y capacidades para contextos reales.",
+      engagementSection: {
+        eyebrow: "Formas de colaboración",
+        title: "Cómo podemos trabajar juntos.",
         description:
-          "Cada implementación se adapta al negocio, a sus usuarios, a sus datos y a la forma en que debe evolucionar.",
+          "El alcance puede centrarse en una fase concreta o cubrir el recorrido completo, según el reto.",
       },
       faqSection: {
         eyebrow: "Preguntas frecuentes",
@@ -533,23 +612,25 @@ export const SITE_CONTENT = {
     },
     industriesPage: {
       hero: {
-        titleLines: ["Productos digitales, software e IA para cada sector."],
+        titleLines: ["Tecnología adaptada al contexto de cada sector."],
         description:
-          "Cada sector tiene usuarios, procesos, datos y restricciones distintas. Adaptamos la estrategia, el producto, el software y la IA al contexto real del negocio.",
+          "Las reglas, los datos y los puntos de validación cambian de un sector a otro. Tahona combina estrategia, producto, software e IA alrededor de la operación real.",
         primaryLabel: "Solicitar una primera conversación",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
         secondaryHref: "/services/",
       },
       gridSection: {
-        eyebrow: "Industrias",
-        title: "Sectores que trabajamos.",
+        eyebrow: "Otros sectores",
+        title: "Otros sectores donde aplican estos patrones.",
         description:
-          "No nos encerramos en un vertical. El patrón común son operaciones con información dispersa, tareas repetibles, documentación e integraciones entre herramientas.",
+          "Aplicamos estos patrones de forma selectiva en seguros, operaciones comerciales, salud no clínica, servicios profesionales, viajes y turismo, y educación y formación.",
       },
       detailSection: {
-        eyebrow: "En detalle",
-        title: "Cómo se ve el trabajo en cada sector.",
+        eyebrow: "Experiencia sectorial",
+        title: "Experiencia sectorial y líneas de trabajo activas.",
+        description:
+          "Tres contextos donde el conocimiento del proceso, las restricciones y los puntos de control forma parte central del trabajo.",
         relatedServicesLabel: "Servicios relacionados",
       },
       faqSection: {
@@ -562,7 +643,7 @@ export const SITE_CONTENT = {
       hero: {
         titleLines: ["Productos y sistemas sobre retos reales."],
         description:
-          "Casos anonimizados centrados en el resultado: más claridad, mejores decisiones y una base tecnológica capaz de evolucionar con el negocio.",
+          "Cada caso parte de una necesidad concreta y muestra la intervención de Tahona, las capacidades conectadas y lo que el sistema permite.",
         primaryLabel: "Solicitar una primera conversación",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
@@ -570,17 +651,20 @@ export const SITE_CONTENT = {
       },
       section: {
         eyebrow: "Casos",
-        title: "Resultados sobre retos reales.",
+        title: "Del reto al sistema.",
         text:
-          "Productos y sistemas orientados a mejorar cómo se trabaja, se decide y se presta servicio.",
-        relatedAreasLabel: "Áreas relacionadas",
+          "Cuatro casos que conectan definición, arquitectura, producto, software e IA cuando aporta al conjunto.",
+        challengeLabel: "El reto",
+        interventionLabel: "La intervención",
+        enablesLabel: "Lo que permite",
+        relatedCapabilitiesLabel: "Capacidades relacionadas",
       },
     },
     contact: {
       eyebrow: "Contacto",
-      title: "Hablemos del producto, sistema o reto tecnológico.",
+      title: "Hablemos del reto, el proceso o el producto.",
       description:
-        "Una primera conversación para entender el objetivo, el punto de partida y el siguiente paso más útil.",
+        "No hace falta llegar con una solución técnica definida. Una primera conversación permite entender el objetivo, el punto de partida y el siguiente paso más útil.",
       sidebarEyebrow: "Contacto",
       sidebarBody:
         "Revisamos el contexto, el objetivo y las restricciones. Si hay una línea clara de trabajo, proponemos el mejor punto de partida.",
@@ -592,7 +676,7 @@ export const SITE_CONTENT = {
       phoneHint:
         "Si se prefiere ir al grano, se puede ver en una llamada breve.",
       trustBadges: [
-        "Respuesta en 24h laborables",
+        "Respuesta clara y directa",
         "Primera oportunidad clara",
         "Sin compromiso ni presión comercial",
       ],
@@ -601,39 +685,39 @@ export const SITE_CONTENT = {
         "Con lo básico basta. Respondemos con una valoración inicial y el siguiente paso más útil.",
       nameLabel: "Nombre",
       namePlaceholder: "Nombre y apellidos",
-      detailsLabel: "Proyecto, producto o reto",
+      detailsLabel: "Reto, proceso o producto",
       detailsPlaceholder:
         "Qué se quiere construir o mejorar, qué existe hoy y qué resultado se busca.",
       privacyNote:
-        "Respondemos en 24h laborables. Sin presión comercial: si el encaje no es claro, se dirá con la misma claridad.",
+        "Sin presión comercial: si el encaje no es claro, se dirá con la misma claridad.",
       submitLabel: "Solicitar una primera conversación",
       submittingLabel: "Enviando...",
       closeLabel: "Cerrar",
       modalEyebrow: "Mensaje recibido",
       modalTitle: "Mensaje recibido",
       modalText:
-        "Lo revisaremos y te responderemos en 24h laborables con el siguiente paso más útil.",
+        "Lo revisaremos y responderemos con el siguiente paso más útil.",
       modalEmailText:
-        "Si prefieres ampliarlo por correo, escríbenos a hola@tahona.ai",
+        "Para ampliar el contexto por correo: hola@tahona.ai",
       mailCtaText: "hola@tahona.ai",
       errorMessages: {
         nameShort: "El nombre debe tener al menos 2 caracteres",
         nameLong: "El nombre es demasiado largo",
-        emailInvalid: "Por favor, introduce un email válido",
-        detailsShort: "Por favor, cuéntanos un poco más sobre tu proyecto",
+        emailInvalid: "El correo no es válido",
+        detailsShort: "Hace falta algo más de contexto sobre el reto, proceso o producto",
         detailsLong: "El mensaje es demasiado largo",
-        submit: "Hubo un error al enviar el formulario. Inténtalo de nuevo.",
+        submit: "No se pudo enviar el formulario. Se puede intentar de nuevo.",
       },
     },
     footer: {
       contactLabel: "Contacta con nosotros",
       copyright: "Todos los derechos reservados.",
       description:
-        "Partner tecnológico para productos digitales, software a medida y soluciones de IA.",
+        "Partner tecnológico de principio a fin para estrategia, producto, software e IA.",
     },
     structuredData: {
       organizationDescription:
-        "Partner tecnológico para estrategia, productos digitales, software a medida, inteligencia artificial e integraciones.",
+        "Partner tecnológico de principio a fin para estrategia, productos digitales, software a medida, inteligencia artificial e integraciones.",
       knowsAbout: [
         "estrategia tecnológica",
         "desarrollo de producto digital",
@@ -645,12 +729,14 @@ export const SITE_CONTENT = {
       serviceSchemaName:
         "Servicios de estrategia, inteligencia artificial, producto y software",
       serviceCatalogName: "Familias de servicios Tahona",
-      industryListName: "Sectores y patrones operativos",
-      casesListName: "Casos anonimizados de trabajo operativo",
+      primaryIndustryListName: "Experiencia sectorial y líneas de trabajo activas",
+      secondaryIndustryListName: "Otros sectores donde aplican estos patrones",
+      casesListName: "Casos de productos y sistemas sobre retos reales",
     },
     serviceFamilies: [
       {
-        id: "fundamentos",
+        id: "estrategia-arquitectura",
+        legacyId: "fundamentos",
         marker: "01",
         title: "Estrategia y arquitectura",
         description:
@@ -700,7 +786,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "desarrollo-ia",
+        id: "inteligencia-artificial",
+        legacyId: "desarrollo-ia",
         marker: "02",
         title: "Inteligencia artificial",
         description:
@@ -750,7 +837,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "otros-desarrollos",
+        id: "producto-software",
+        legacyId: "otros-desarrollos",
         marker: "03",
         title: "Producto y software",
         description:
@@ -800,55 +888,24 @@ export const SITE_CONTENT = {
         ],
       },
     ],
-    implementationExamples: [
+    engagementModes: [
       {
         marker: "01",
-        title: "Sistemas de conocimiento",
+        title: "Consultoría y definición",
         description:
-          "Con fuentes citables, permisos, evaluación e integración con productos y procesos.",
-        className: "lg:col-span-3",
+          "Diagnóstico, decisiones, arquitectura y hoja de ruta. Puede ser un encargo completo e independiente.",
       },
       {
         marker: "02",
-        title: "Productos digitales",
+        title: "Construcción de producto o sistema",
         description:
-          "Experiencias y aplicaciones diseñadas alrededor de usuarios y objetivos reales.",
-        className: "lg:col-span-3",
+          "Diseño, producto, ingeniería, integraciones y lanzamiento a producción, coordinados en un mismo alcance.",
       },
       {
         marker: "03",
-        title: "Integraciones",
+        title: "Evolución y operación acordada",
         description:
-          "Entre Drive, CRM, ERP, hojas de cálculo, reporting y sistemas internos.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "04",
-        title: "Procesamiento documental",
-        description:
-          "Extracción, validación, clasificación y handoff humano en flujos reales.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "05",
-        title: "Agentes de IA",
-        description:
-          "Para tareas acotadas, con límites, herramientas controladas y trazabilidad.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "06",
-        title: "Paneles e informes operativos",
-        description:
-          "Reporting construido sobre datos reales de la operación, no sobre informes manuales.",
-        className: "lg:col-span-3",
-      },
-      {
-        marker: "07",
-        title: "Workflows de aprobación",
-        description:
-          "Estados, responsables, alertas y registro para procesos que hoy dependen del seguimiento manual.",
-        className: "lg:col-span-3",
+          "Mantenimiento, medición y mejora. En procesos acotados y medibles, y cuando el alcance y el modelo de colaboración lo justifican, puede incluir tareas operativas y gestión de excepciones acordadas.",
       },
     ],
     servicesFaq: [
@@ -858,9 +915,14 @@ export const SITE_CONTENT = {
           "No. La IA es una capacidad central, pero se usa cuando mejora la solución. En otros casos la respuesta correcta es producto, software, integraciones o una combinación de varias capacidades.",
       },
       {
-        question: "¿Tahona puede asumir un producto digital de principio a fin?",
+        question: "¿Tahona solo trabaja en proyectos completos de principio a fin?",
         answer:
-          "Sí. Podemos trabajar desde la estrategia y la definición del producto hasta la experiencia, la arquitectura, el desarrollo, las integraciones, el lanzamiento y la evolución.",
+          "No. Un trabajo enfocado de consultoría, arquitectura, integración o desarrollo puede ser un encargo completo por sí mismo. También podemos conectar varias fases cuando el reto requiere un recorrido de principio a fin.",
+      },
+      {
+        question: "¿Tahona puede operar una parte de un proceso?",
+        answer:
+          "Solo de forma selectiva. El proceso debe ser acotado y medible, con criterios claros de calidad, supervisión, excepciones y modelo de colaboración. En ese contexto, el alcance puede incluir tareas operativas y gestión de excepciones acordadas.",
       },
       {
         question: "¿Se puede trabajar con la tecnología que ya existe en la empresa?",
@@ -880,169 +942,186 @@ export const SITE_CONTENT = {
     ],
     industryItems: [
       {
-        id: "logistica",
-        marker: "01",
-        title: "Logística",
-        summary:
-          "Planificación, optimización de rutas, documentación logística, eventos operativos, reporting e integración con herramientas de operación.",
-        description:
-          "En logística encontramos rutas, planificación, eventos, documentación de transporte, datos de operación, reporting y coordinación entre herramientas. Trabajamos sobre ingesta de datos, optimización operativa, optimización de rutas, procesamiento documental, reporting e integración con los sistemas existentes.",
-        visualSrc: "/images/visual-logistics.png",
-        visualAlt: "Visual 3D de operación logística",
-        tags: ["Rutas", "Flota", "Documentación", "Reporting"],
-        bullets: [
-          "Optimización de rutas y planificación",
-          "Documentación logística y procesamiento de archivos",
-          "Reporting de servicio",
-          "Gestión de flotas",
-          "Eventos operativos y seguimiento",
-          "Integración con herramientas, APIs y hojas de cálculo",
-        ],
-        relatedServices: [
-          "Optimización de procesos",
-          "Optimización de rutas",
-          "Herramientas a medida",
-          "Integraciones / plataformas",
-          "Procesamiento documental",
-        ],
-      },
-      {
-        id: "industria",
-        marker: "02",
-        title: "Industria",
-        summary:
-          "Control de calidad, documentación, trazabilidad, procesos internos, reporting y herramientas para coordinar el trabajo operativo.",
-        description:
-          "En entornos industriales y de operación aparecen controles de calidad, documentación recurrente, trazabilidad, coordinación entre equipos y reporting. Trabajamos sobre herramientas internas, flujos documentales, bases de conocimiento, integraciones y automatización.",
-        visualSrc: "/images/visual-industry-manufacturing.png",
-        visualAlt: "Visual 3D de operación industrial",
-        tags: ["Calidad", "Documentación", "Trazabilidad", "Reporting"],
-        bullets: [
-          "Calidad y documentación",
-          "Gestión de stock",
-          "Herramientas internas e integraciones",
-          "Trazabilidad de procesos",
-          "Reporting operativo",
-          "Trazabilidad APPCC como patrón",
-        ],
-        relatedServices: [
-          "Procesamiento documental",
-          "Herramientas internas",
-          "Optimización de procesos",
-          "Integraciones / plataformas",
-        ],
-      },
-      {
         id: "legal",
-        marker: "03",
+        level: "primary",
+        marker: "01",
         title: "Legal",
         summary:
-          "Flujos documentales, generación y revisión de documentos, automatización administrativa y validación humana.",
+          "Documentos y expedientes con reglas de acceso, validación humana y trazabilidad entre versiones, decisiones y tareas.",
         description:
-          "Muchos procesos legales y administrativos combinan documentos, datos, plantillas, revisión, comunicación y seguimiento. Podemos construir flujos para generar, revisar, clasificar y coordinar documentos sin eliminar los puntos de validación humana.",
+          "El trabajo legal combina documentos, expedientes, reglas de acceso y puntos de validación que no pueden desaparecer. Diseñamos sistemas para ordenar archivos, preparar información, coordinar la revisión humana y mantener trazabilidad entre versiones, decisiones y tareas.",
         visualSrc: "/images/visual-industry-legal.png",
         visualAlt: "Visual 3D de documentación legal",
-        tags: ["Documentos", "Validación", "Flujos", "Seguimiento"],
+        tags: ["Expedientes", "Documentos", "Validación", "Trazabilidad"],
         bullets: [
-          "Generación y revisión de documentos",
-          "Procesamiento documental",
-          "Contabilidad",
-          "Herramientas internas para seguimiento",
-          "Flujos administrativos",
-          "Validación humana",
-          "Trazabilidad del flujo",
+          "Expedientes, documentos y plantillas",
+          "Extracción y preparación de información",
+          "Revisión y validación humana",
+          "Permisos y reglas de acceso",
+          "Seguimiento de tareas y asuntos",
+          "Trazabilidad de cambios y decisiones",
         ],
+        caseLink: {
+          hash: "#plataforma-documental-operativa",
+          label: "Ver caso: Plataforma documental y operativa",
+        },
         relatedServices: [
-          "Procesamiento documental",
-          "Herramientas internas",
-          "Optimización de procesos",
-          "Bases de conocimiento",
+          {
+            hash: "#procesamiento-documental",
+            label: "Procesamiento documental y conocimiento",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Software a medida",
+          },
+          {
+            hash: "#estrategia-arquitectura",
+            label: "Estrategia y arquitectura",
+          },
+        ],
+      },
+      {
+        id: "logistica",
+        level: "primary",
+        marker: "02",
+        title: "Logística",
+        summary:
+          "Planificación sujeta a restricciones, rutas, datos operativos e integraciones entre las herramientas que coordinan el servicio.",
+        description:
+          "La planificación logística depende de restricciones reales: capacidad, ventanas horarias, rutas, incidencias y disponibilidad de datos. El trabajo conecta esas reglas con información operativa, sistemas existentes e interfaces que permiten revisar y ajustar la planificación.",
+        visualSrc: "/images/visual-logistics.png",
+        visualAlt: "Visual 3D de operación logística",
+        tags: ["Planificación", "Restricciones", "Rutas", "Integraciones"],
+        bullets: [
+          "Planificación de rutas y cargas",
+          "Capacidad, ventanas e incidencias",
+          "Importación y validación de datos operativos",
+          "Revisión de rutas y excepciones",
+          "Reporting para coordinación del servicio",
+          "Integración con APIs, hojas y sistemas existentes",
+        ],
+        caseLink: {
+          hash: "#planificacion-logistica",
+          label: "Ver caso: Plataforma de planificación logística",
+        },
+        relatedServices: [
+          {
+            hash: "#consultoria-auditoria-operativa",
+            label: "Diagnóstico y definición",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Software a medida",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integraciones y plataformas",
+          },
+        ],
+      },
+      {
+        id: "industria-trazabilidad",
+        legacyId: "industria",
+        level: "primary",
+        marker: "03",
+        cardTitle: "Industria",
+        title: "Industria y trazabilidad",
+        summary:
+          "Controles de calidad, lotes y registros, documentación y trazabilidad dentro de flujos operativos acotados.",
+        description:
+          "En industria, la calidad depende de controles concretos, lotes o registros, documentación recurrente y una trazabilidad que conecte cada revisión con su origen. Construimos herramientas para flujos acotados, con validaciones y responsables claros. APPCC y seguridad alimentaria aparecen como un patrón específico dentro de este contexto.",
+        visualSrc: "/images/visual-industry-manufacturing.png",
+        visualAlt: "Visual 3D de calidad y trazabilidad industrial",
+        tags: ["Calidad", "Lotes y registros", "Documentación", "Trazabilidad"],
+        bullets: [
+          "Controles de calidad y puntos de revisión",
+          "Lotes, registros y evidencias",
+          "Documentación recurrente",
+          "Trazabilidad entre origen, cambio y validación",
+          "Flujos acotados con responsables claros",
+          "APPCC como patrón dentro de calidad alimentaria",
+        ],
+        caseLink: {
+          hash: "#calidad-trazabilidad-appcc",
+          label: "Ver caso: Calidad y trazabilidad APPCC",
+        },
+        relatedServices: [
+          {
+            hash: "#procesamiento-documental",
+            label: "Procesamiento documental y conocimiento",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Software a medida",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integraciones y plataformas",
+          },
         ],
       },
       {
         id: "seguros",
+        level: "secondary",
         marker: "04",
         title: "Seguros",
         summary:
-          "Captación, cualificación, CRM, cotización, seguimiento, documentación y reporting comercial.",
-        description:
-          "En seguros, la operación comercial depende de captación, cualificación, documentación, cotización, CRM, seguimiento y reporting. Podemos conectar esas piezas con herramientas internas, automatización supervisada y flujos de información más claros.",
-        visualSrc: "/images/visual-industry-insurance.png",
-        visualAlt: "Visual 3D de operación de seguros",
-        tags: ["Captación", "CRM", "Cotización", "Reporting"],
-        bullets: [
-          "Captación y cualificación",
-          "CRM y cotización",
-          "Reporting y control operativo",
-          "Seguimiento comercial",
-          "Documentación y handoffs",
-          "Automatización supervisada",
-        ],
-        relatedServices: [
-          "Optimización de procesos",
-          "Integraciones / plataformas",
-          "Herramientas internas",
-          "Agentes de IA",
-        ],
+          "Cotización, documentación, CRM, seguimiento y traspasos que requieren reglas claras y revisión humana.",
+        tags: ["Cotización", "Documentación", "CRM", "Revisión"],
       },
       {
-        id: "marketing-growth",
+        id: "operaciones-comerciales",
+        legacyId: "marketing-growth",
+        level: "secondary",
         marker: "05",
-        title: "Marketing y growth",
+        title: "Operaciones comerciales",
         summary:
-          "Lead ops, captación, cualificación, reporting, CRM, herramientas internas y coordinación comercial.",
-        description:
-          "No prestamos servicios de agencia de marketing. El encaje está en la operación: captación, lead ops, cualificación, CRM, reporting, herramientas internas y coordinación de campañas o procesos comerciales.",
-        visualSrc: "/images/visual-industry-marketing.png",
-        visualAlt: "Visual 3D de operación de marketing y growth",
-        tags: ["Lead ops", "Cualificación", "CRM", "Reporting"],
-        bullets: [
-          "Captación y formularios",
-          "Automatizaciones",
-          "Reporting comercial",
-          "Lead ops y cualificación",
-          "Integración con CRM y seguimiento",
-          "Herramientas internas",
-        ],
-        relatedServices: [
-          "Optimización de procesos",
-          "Integraciones y plataformas",
-          "Herramientas internas",
-          "Agentes de IA",
-        ],
+          "Coordinación entre captación, cualificación, CRM, reporting y herramientas internas. No prestamos servicios de agencia de marketing.",
+        tags: ["Cualificación", "CRM", "Reporting", "Coordinación"],
       },
       {
-        id: "salud",
+        id: "salud-no-clinica",
+        legacyId: "salud",
+        level: "secondary",
         marker: "06",
-        title: "Salud",
+        title: "Salud no clínica",
         summary:
-          "Soporte operativo, documentación, conocimiento interno y sistemas no clínicos.",
-        description:
-          "En salud solo trabajamos sobre capas operativas no clínicas: documentación, conocimiento interno, coordinación, reporting y apoyo administrativo.",
-        visualSrc: "/images/visual-industry-health.png",
-        visualAlt: "Visual 3D de operación de salud no clínica",
-        tags: ["Soporte", "Documentación", "Conocimiento", "PoC"],
-        bullets: [
-          "Documentación operativa",
-          "Conocimiento interno",
-          "Coordinación administrativa",
-          "Sistemas no clínicos",
-          "Reporting interno",
-          "Validación y revisión humana",
-        ],
-        relatedServices: [
-          "Bases de conocimiento",
-          "Procesamiento documental",
-          "Herramientas internas",
-          "Integraciones / plataformas",
-        ],
+          "Coordinación administrativa, documentación, conocimiento interno, comunicación y soporte operativo no clínico.",
+        tags: ["Administración", "Documentación", "Conocimiento", "Comunicación"],
+      },
+      {
+        id: "servicios-profesionales",
+        level: "secondary",
+        marker: "07",
+        title: "Servicios profesionales",
+        summary:
+          "Trabajo con clientes, conocimiento experto, documentación y herramientas internas que deben compartir contexto sin perder puntos de revisión.",
+        tags: ["Clientes", "Conocimiento", "Documentación", "Herramientas"],
+      },
+      {
+        id: "viajes-turismo",
+        level: "secondary",
+        marker: "08",
+        title: "Viajes y turismo",
+        summary:
+          "Venta, reservas, proveedores y operación coordinadas entre CRM, documentación y sistemas internos.",
+        tags: ["Reservas", "CRM", "Proveedores", "Operación"],
+      },
+      {
+        id: "educacion-formacion",
+        level: "secondary",
+        marker: "09",
+        title: "Educación y formación",
+        summary:
+          "Admisión, documentación, seguimiento y comunicación a lo largo del recorrido del alumno.",
+        tags: ["Admisión", "Documentación", "Seguimiento", "Comunicación"],
       },
     ],
     industriesFaq: [
       {
         question: "¿Tahona se especializa en un solo sector?",
         answer:
-          "No. Trabajamos sobre operaciones internas. Algunos sectores tienen patrones especialmente claros, pero la decisión depende del proceso, los datos, los documentos y las herramientas de cada empresa.",
+          "No. Concentramos experiencia y líneas de trabajo en legal, logística e industria y trazabilidad, y aplicamos esos patrones de forma selectiva en otros contextos. El enfoque se adapta a los usuarios, las reglas, los datos, las restricciones y los puntos de validación de cada sector.",
       },
       {
         question: "¿Qué pasa con los sectores regulados?",
@@ -1075,125 +1154,154 @@ export const SITE_CONTENT = {
         id: "plataforma-documental-operativa",
         marker: "01",
         sector: "Legal",
-        title: "Plataforma documental y operativa",
-        summary:
-          "Diseño e implementación de una plataforma interna para coordinar procesos documentales, extracción de información, generación de borradores, validación humana, tareas repetibles y seguimiento operativo.",
+        title: "Documentación legal conectada con el expediente",
+        challenge:
+          "Los documentos, el contexto del expediente, la preparación repetida, las reglas de acceso, la revisión humana y la trazabilidad estaban repartidos entre herramientas y pasos desconectados.",
+        intervention:
+          "Tahona definió el proceso y la arquitectura, y diseñó y construyó una plataforma interna que conecta los datos del expediente, la entrada y extracción documental, la preparación de borradores, los puntos de control humano y el seguimiento de tareas.",
+        enables: [
+          "Documentos y datos vinculados al expediente",
+          "Validación humana antes de cada avance",
+          "Versiones, decisiones y tareas trazables",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Estrategia y arquitectura",
+            hash: "#estrategia-arquitectura",
+          },
+          {
+            label: "Procesamiento documental y conocimiento",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Software a medida",
+            hash: "#herramientas-internas",
+          },
+        ],
         visualSrc: "/images/visual-case-legal-document-platform.png",
         visualAlt: "Visual 3D de plataforma documental",
-        bullets: [
-          "Flujos documentales con estados",
-          "Sistema agéntico",
-          "Generación de borradores",
-          "Validación humana antes",
-          "Tareas repetibles y seguimiento",
-          "Trazabilidad de cambios",
-          "Base operativa para documentación interna",
-        ],
-        tags: [
-          "Procesamiento documental",
-          "Herramientas internas",
-          "Bases de conocimiento",
-          "Validación humana",
-        ],
       },
       {
-        id: "planificacion-logistica-reporting",
+        id: "planificacion-logistica",
+        legacyId: "planificacion-logistica-reporting",
         marker: "02",
         sector: "Logística",
-        title: "Plataforma de planificación logística",
-        summary:
-          "Plataforma para planificar rutas, importar datos operativos, coordinar eventos, revisar documentación logística y generar reporting útil para la operación.",
+        title: "Planificación logística bajo restricciones operativas",
+        challenge:
+          "La planificación debe responder a la capacidad disponible, las franjas horarias, las rutas, las incidencias y la calidad desigual de los datos operativos.",
+        intervention:
+          "Tahona definió las reglas operativas y la arquitectura, y diseñó y construyó una interfaz de planificación con importación y validación de datos, revisión de rutas e integración con herramientas y reporting existentes.",
+        enables: [
+          "Un plan revisable antes de su ejecución",
+          "Restricciones, incidencias y excepciones explícitas",
+          "Datos y decisiones de planificación conectados con las herramientas operativas existentes",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Diagnóstico y definición",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Software a medida",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integraciones y plataformas",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-logistics.png",
         visualAlt: "Visual 3D de planificación logística",
-        bullets: [
-          "Optimización de rutas",
-          "Planificación de rutas",
-          "Importación de datos operativos",
-          "Coordinación de eventos",
-          "Revisión documental",
-          "Reporting operativo",
-          "Integración con herramientas existentes",
-        ],
-        tags: [
-          "Optimización de procesos",
-          "Integraciones / plataformas",
-          "Procesamiento documental",
-          "Reporting",
-        ],
       },
       {
         id: "base-conocimiento-empresarial",
         marker: "03",
         sector: "Transversal",
-        title: "Base de conocimiento empresarial",
-        summary:
-          "Capa de conocimiento interno agéntica con ingesta documental, procesamiento, fuentes citables, metadatos, permisos, evaluación, revisión humana e integración con herramientas internas.",
+        title: "Conocimiento interno con fuentes, permisos y evaluación",
+        challenge:
+          "Las fuentes internas estaban fragmentadas, los permisos variaban según el contexto y las respuestas debían seguir siendo atribuibles y evaluables.",
+        intervention:
+          "Tahona definió la arquitectura de conocimiento y diseñó y construyó un sistema con ingesta y normalización, recuperación asistida por IA con citas, permisos, evaluación e integración con herramientas internas.",
+        enables: [
+          "Respuestas acompañadas por sus fuentes",
+          "Acceso limitado por permisos y alcance",
+          "Evaluación y revisión conectadas con las herramientas internas",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Soluciones y productos con IA",
+            hash: "#optimizacion-procesos",
+          },
+          {
+            label: "Procesamiento documental y conocimiento",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Estrategia y arquitectura",
+            hash: "#estrategia-arquitectura",
+          },
+        ],
         visualSrc: "/images/visual-case-enterprise-knowledge.png",
         visualAlt: "Visual 3D de base de conocimiento enterprise",
-        bullets: [
-          "Ingesta documental",
-          "Normalización y metadatos",
-          "Fuentes citables",
-          "Permisos y alcance",
-          "Evaluación de respuestas",
-          "Integración con herramientas internas",
-        ],
-        tags: [
-          "Bases de conocimiento",
-          "Procesamiento documental",
-          "Permisos",
-          "Trazabilidad",
-        ],
       },
       {
-        id: "documentacion-calidad-trazabilidad",
+        id: "calidad-trazabilidad-appcc",
+        legacyId: "documentacion-calidad-trazabilidad",
         marker: "04",
         sector: "Industria",
-        title:
-          "Plataforma de documentación, calidad y trazabilidad para sector alimenticio",
-        summary:
-          "Plataforma de flujos para ordenar documentación, validar información, mantener trazabilidad y generar reporting en procesos de calidad en el sector alimenticio.",
+        title: "Trazabilidad alimentaria desde la recepción hasta la salida",
+        challenge:
+          "La recepción, los controles, los lotes, los registros y la evidencia debían mantener continuidad y trazabilidad a lo largo de flujos acotados de calidad alimentaria.",
+        intervention:
+          "Tahona definió el proceso, diseñó los flujos del producto y construyó un sistema de documentación, validación y trazabilidad con integraciones cuando el proceso las requiere.",
+        enables: [
+          "Registros conectados desde la recepción hasta la salida",
+          "Puntos de revisión claros en cada control",
+          "Evidencia y reporting recuperables por lote y flujo",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Diagnóstico y definición",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Software a medida",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integraciones y plataformas",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-case-appcc-quality.png",
         visualAlt: "Visual 3D de calidad y trazabilidad industrial",
-        bullets: [
-          "Procesamiento documental",
-          "APPCC",
-          "Validación de información",
-          "Trazabilidad de procesos",
-          "Reporting de calidad",
-          "Controles operativos",
-          "Integración de sistemas",
-        ],
-        tags: [
-          "Herramientas internas",
-          "Procesamiento documental",
-          "Optimización de procesos",
-          "Trazabilidad",
-        ],
       },
     ],
     workItems: [
       {
         id: "document-platform",
         sector: "Legal",
-        title: "Plataforma documental y operativa",
+        title: "Documentación legal conectada con el expediente",
         description:
-          "Diseño e implementación de una herramienta interna para coordinar procesos documentales, extracción de datos de documentos complejos, generación de borradores, validación humana, RPA, tareas repetibles y seguimiento operativo.",
+          "Plataforma interna que conecta expedientes, documentos, borradores, validación humana y seguimiento sobre una arquitectura común.",
         tags: [
+          "Estrategia y arquitectura",
           "Procesamiento documental",
-          "Validación humana",
-          "Tareas internas",
-          "Seguimiento",
+          "Software a medida",
         ],
         imageSrc: "/images/visual-case-legal-document-platform.png",
       },
       {
         id: "logistics-planning",
         sector: "Logística",
-        title: "Plataforma de optimización logística",
+        title: "Planificación logística bajo restricciones operativas",
         description:
-          "Plataforma para planificar rutas, importar pedidos, coordinar eventos, revisar documentación logística y generar reporting útil para la operación.",
-        tags: ["Planificación", "Optimización de rutas", "Reporting"],
+          "Interfaz de planificación que conecta restricciones, datos operativos, revisión de rutas y herramientas existentes.",
+        tags: [
+          "Diagnóstico y definición",
+          "Software a medida",
+          "Integraciones",
+        ],
         imageSrc: "/images/visual-logistics.png",
       },
     ],
@@ -1202,27 +1310,27 @@ export const SITE_CONTENT = {
     metadata: {
       home: {
         name: "Home",
-        title: "Tahona | AI, digital products and custom software",
+        title: "Tahona | End-to-end technology partner",
         description:
-          "Technology partner for designing, building and integrating digital products, custom software and AI solutions.",
+          "End-to-end technology partner for strategy, digital products, custom software, integrations and AI solutions.",
       },
       services: {
         name: "Services",
-        title: "Tahona Services | Strategy, AI and product development",
+        title: "Tahona Services | Strategy, AI, product and software",
         description:
           "Technology strategy, artificial intelligence, digital products, custom software and end-to-end integrations.",
       },
       industries: {
         name: "Industries",
-        title: "Tahona Industries | Digital products, software and AI",
+        title: "Tahona Industries | Technology shaped to each context",
         description:
-          "Product, software and AI capabilities adapted to logistics, industry, legal, insurance, marketing and healthcare.",
+          "Sector patterns in legal, logistics and industry, with related contexts in insurance, commercial operations and non-clinical healthcare.",
       },
       cases: {
         name: "Cases",
         title: "Tahona Cases | Products and systems for real challenges",
         description:
-          "Anonymized cases focused on outcomes: clearer operations, better decisions and digital services built to evolve.",
+          "Four cases showing the challenge, Tahona's intervention, the connected capabilities and what each product or system enables.",
       },
       keywords:
         "technology partner, digital products, custom software, AI development, technology strategy, integrations, software architecture",
@@ -1319,9 +1427,8 @@ export const SITE_CONTENT = {
         eyebrow: "What we do",
         title: "Strategy, product and technology in one team.",
         description: [
-          "We cover the full cycle: understanding the challenge, defining the solution, designing the experience, building the technology and integrating it into the business.",
-          "The outcome may be a digital product, custom software or an AI solution. Technology is chosen around the goal, the users and the context, not the other way around.",
-          "Our approach is technology made to measure: every system is designed around the business, validated with its users and prepared to evolve.",
+          "We bring consulting, product and engineering together to turn open-ended challenges into working solutions. We can join at definition, build the product or system, integrate it into the business and continue evolving it in production.",
+          "The outcome may be a digital product, custom software or an AI solution. When the process is bounded and measurable, we can also take on execution of part of the work.",
         ],
         bullets: [
           "Discovery, product definition and technology strategy.",
@@ -1335,28 +1442,30 @@ export const SITE_CONTENT = {
         eyebrow: "Services",
         title: "Three capabilities. One technology partner.",
         description:
-          "Strategy and architecture, artificial intelligence, product and software. From initial definition to production and ongoing evolution.",
+          "Strategy and architecture, artificial intelligence, product and software. They combine around the challenge and expected outcome, from definition through production and evolution.",
         ctaLabel: "View services",
       },
       industries: {
         eyebrow: "Industries",
         title: "Technology capabilities adapted to each sector.",
         description:
-          "Processes, users, data and constraints change. The ability to define, design and build remains the same.",
+          "Processes, users, data and constraints change. We keep the same end-to-end journey and focus each solution on the outcome that matters in its context.",
+        primaryLabel: "Primary sectors",
+        secondaryLabel: "Other sectors",
         ctaLabel: "View industries",
       },
       ourWork: {
         eyebrow: "Cases",
-        title: "Products and systems focused on real outcomes.",
+        title: "Products and systems built around real challenges.",
         description:
-          "The focus is the outcome: clearer operations, better-informed decisions and digital services able to evolve with the business.",
+          "These anonymized cases show the problem addressed, what was built and how the solution integrates and evolves in its context.",
         ctaLabel: "View cases",
       },
       howWeWork: {
         eyebrow: "How we work",
         title: "A partner from definition through evolution.",
         description:
-          "We own the full journey: strategy, product, architecture, development, integration and continuous improvement. Discovery establishes the starting point; the goal is to build and move the solution forward.",
+          "We work end to end across strategy, product, architecture, development, integration and continuous improvement. Discovery establishes the starting point; the goal is to build and move the solution forward.",
         steps: [
           {
             number: "01",
@@ -1384,51 +1493,53 @@ export const SITE_CONTENT = {
           },
           {
             number: "05",
-            title: "Launch and evolution",
+            title: "Launch, operations and evolution",
             description:
-              "We integrate, measure, document and continue improving the system.",
+              "We integrate, measure and keep improving the system. When the scope and collaboration model require it, we also take on the agreed operation and exception handling.",
           },
         ],
       },
     },
     aiApplied: {
-      eyebrow: "Artificial intelligence",
-      title: "End-to-end AI, embedded in products and operations.",
+      eyebrow: "Applied AI",
+      title: "Capability is advancing. Real work demands reliable systems.",
       description:
-        "We work from strategy and use-case definition through data, architecture, build, evaluation and evolution in production. We develop AI systems that become part of the business, not isolated demonstrations.",
-      lifecycle: {
-        ariaLabel: "End-to-end lifecycle for developing an artificial intelligence solution",
-        centerLabel: "End-to-end AI",
-        centerTitle: "System in production",
-        stages: [
-          {
-            label: "Strategy",
-            title: "Use case and goal",
-            body: "Value, scope, users and success criteria.",
-          },
-          {
-            label: "Foundations",
-            title: "Data and context",
-            body: "Sources, permissions, quality and business knowledge.",
-          },
-          {
-            label: "Engineering",
-            title: "Build and integration",
-            body: "Models, product, tools and connected systems.",
-          },
-          {
-            label: "Operations",
-            title: "Evaluation and evolution",
-            body: "Testing, supervision, metrics and continuous improvement.",
-          },
-        ],
+        "Models can already solve increasingly long software tasks. In a real operation, that capability only becomes useful when the process is bounded, connected to data and tools, evaluated and supervised.",
+      chart: {
+        ariaLabel:
+          "Growth in the length of software tasks completed by AI models with a fifty percent success rate",
+        axisDateLabel: "Model release date",
+        axisDurationLabel: "Human task duration",
+        caption:
+          "METR Time Horizon 1.1 p50 estimates and confidence intervals for a selection of models. This chart does not measure the automation of a business process.",
+        description:
+          "Public p50 estimates and confidence intervals for a selection of state-of-the-art models, ordered by release date.",
+        scrollLabel: "Swipe to explore the chart",
+        sourceLabel: "Source and methodology",
+        title: "Length of software tasks completed with a 50% success rate",
+        unreliableLabel:
+          "Measurements above 16 hours are unreliable with the current task suite",
       },
+      principles: [
+        {
+          title: "Bound the work",
+          body: "Define the unit of work, limits, exceptions and quality criteria.",
+        },
+        {
+          title: "Integrate the context",
+          body: "Connect data, tools, permissions and traceability to the real operation.",
+        },
+        {
+          title: "Evaluate and supervise",
+          body: "Measure outcomes, review exceptions and keep people accountable.",
+        },
+      ],
     },
     servicesPage: {
       hero: {
-        titleLines: ["End-to-end strategy, AI and product development."],
+        titleLines: ["End-to-end strategy, AI, product and software."],
         description:
-          "One team to define, design, build, integrate and evolve digital products, custom software and AI solutions.",
+          "Tahona brings strategy and architecture, AI, product and software together to define, build and integrate solutions around a concrete outcome.",
         primaryLabel: "Let's talk",
         primaryHref: "#contacto",
         secondaryLabel: "View capabilities",
@@ -1439,16 +1550,17 @@ export const SITE_CONTENT = {
         title: "Three capabilities. One technology partner.",
         description:
           "Strategy and architecture, artificial intelligence, product and software. Combined around the challenge, without silos or predetermined solutions.",
+        linkLabel: "View services",
       },
       detailSection: {
         eyebrow: "Services in detail",
         title: "The capability to decide, build and integrate.",
       },
-      examplesSection: {
-        eyebrow: "What we develop",
-        title: "Products, systems and capabilities for real contexts.",
+      engagementSection: {
+        eyebrow: "Ways to work together",
+        title: "How we can work together.",
         description:
-          "Each implementation is adapted to the business, its users, its data and the way it needs to evolve.",
+          "An engagement can focus on one stage or cover the full journey, depending on the challenge.",
       },
       faqSection: {
         eyebrow: "FAQ",
@@ -1458,23 +1570,25 @@ export const SITE_CONTENT = {
     },
     industriesPage: {
       hero: {
-        titleLines: ["Digital products, software and AI for each sector."],
+        titleLines: ["Technology shaped to each sector context."],
         description:
-          "Every sector has different users, processes, data and constraints. We adapt strategy, product, software and AI to the real business context.",
+          "Rules, data and validation points differ by sector. Tahona brings strategy, product, software and AI together around how the operation actually works.",
         primaryLabel: "Request a first conversation",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
         secondaryHref: "/en/services/",
       },
       gridSection: {
-        eyebrow: "Industries",
-        title: "Sectors we work with.",
+        eyebrow: "Other sectors",
+        title: "Other sectors where these patterns apply.",
         description:
-          "We do not lock into one vertical. The common pattern is operations with scattered information, repeatable tasks, documentation and integrations between tools.",
+          "We apply these patterns selectively across insurance, commercial operations, non-clinical healthcare, professional services, travel and tourism, and education and training.",
       },
       detailSection: {
-        eyebrow: "In detail",
-        title: "How the work looks in each sector.",
+        eyebrow: "Sector experience",
+        title: "Sector experience and active workstreams.",
+        description:
+          "Three contexts where process knowledge, constraints and control points are central to the work.",
         relatedServicesLabel: "Related services",
       },
       faqSection: {
@@ -1487,7 +1601,7 @@ export const SITE_CONTENT = {
       hero: {
         titleLines: ["Products and systems for real challenges."],
         description:
-          "Anonymized cases focused on outcomes: greater clarity, better decisions and a technology foundation able to evolve with the business.",
+          "Each case starts with a concrete need and shows Tahona's intervention, the connected capabilities and what the system enables.",
         primaryLabel: "Request a first conversation",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
@@ -1495,17 +1609,20 @@ export const SITE_CONTENT = {
       },
       section: {
         eyebrow: "Cases",
-        title: "Outcomes for real challenges.",
+        title: "From challenge to system.",
         text:
-          "Products and systems focused on improving how work, decisions and services happen.",
-        relatedAreasLabel: "Related areas",
+          "Four cases connecting definition, architecture, product, software and AI where it contributes to the wider system.",
+        challengeLabel: "Challenge",
+        interventionLabel: "The intervention",
+        enablesLabel: "What it enables",
+        relatedCapabilitiesLabel: "Related capabilities",
       },
     },
     contact: {
       eyebrow: "Contact",
-      title: "Let's discuss the product, system or technology challenge.",
+      title: "Let's discuss the challenge, process or product.",
       description:
-        "A first conversation to understand the goal, the starting point and the most useful next step.",
+        "There is no need to arrive with a defined technical solution. A first conversation helps clarify the goal, the starting point and the most useful next step.",
       sidebarEyebrow: "Contact",
       sidebarBody:
         "We review the context, goal and constraints. If there is a clear path forward, we propose the best starting point.",
@@ -1516,7 +1633,7 @@ export const SITE_CONTENT = {
       phoneLabel: "Phone",
       phoneHint: "For a direct first pass, a short call is enough.",
       trustBadges: [
-        "Response within 24 business hours",
+        "Clear, direct response",
         "First opportunity made clear",
         "No commitment or sales pressure",
       ],
@@ -1525,18 +1642,18 @@ export const SITE_CONTENT = {
         "The basics are enough. We reply with an initial assessment and the most useful next step.",
       nameLabel: "Name",
       namePlaceholder: "Full name",
-      detailsLabel: "Project, product or challenge",
+      detailsLabel: "Challenge, process or product",
       detailsPlaceholder:
         "What should be built or improved, what exists today and what outcome is expected.",
       privacyNote:
-        "We reply within 24 business hours. No sales pressure: if the fit is not clear, we will say so clearly.",
+        "No sales pressure: if the fit is not clear, we will say so clearly.",
       submitLabel: "Request a first conversation",
       submittingLabel: "Sending...",
       closeLabel: "Close",
       modalEyebrow: "Message received",
       modalTitle: "Message received",
       modalText:
-        "We will review it and reply within 24 business hours with the most useful next step.",
+        "We will review it and reply with the most useful next step.",
       modalEmailText:
         "To add more context by email, write to hola@tahona.ai",
       mailCtaText: "hola@tahona.ai",
@@ -1544,7 +1661,7 @@ export const SITE_CONTENT = {
         nameShort: "Name must be at least 2 characters",
         nameLong: "Name is too long",
         emailInvalid: "Please enter a valid email address",
-        detailsShort: "Please share a little more about the project",
+        detailsShort: "Please share a little more about the challenge, process or product",
         detailsLong: "The message is too long",
         submit: "There was an error sending the form. Please try again.",
       },
@@ -1553,11 +1670,11 @@ export const SITE_CONTENT = {
       contactLabel: "Contact us",
       copyright: "All rights reserved.",
       description:
-        "Technology partner for digital products, custom software and AI solutions.",
+        "End-to-end technology partner for strategy, product, software and AI.",
     },
     structuredData: {
       organizationDescription:
-        "Technology partner for strategy, digital products, custom software, artificial intelligence and integrations.",
+        "End-to-end technology partner for strategy, digital products, custom software, artificial intelligence and integrations.",
       knowsAbout: [
         "technology strategy",
         "digital product development",
@@ -1569,12 +1686,14 @@ export const SITE_CONTENT = {
       serviceSchemaName:
         "Strategy, artificial intelligence, product and software services",
       serviceCatalogName: "Tahona service families",
-      industryListName: "Sectors and operational patterns",
-      casesListName: "Anonymized operational work cases",
+      primaryIndustryListName: "Sector experience and active workstreams",
+      secondaryIndustryListName: "Other sectors where these patterns apply",
+      casesListName: "Product and system cases for real challenges",
     },
     serviceFamilies: [
       {
-        id: "fundamentos",
+        id: "estrategia-arquitectura",
+        legacyId: "fundamentos",
         marker: "01",
         title: "Strategy and architecture",
         description:
@@ -1624,7 +1743,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "desarrollo-ia",
+        id: "inteligencia-artificial",
+        legacyId: "desarrollo-ia",
         marker: "02",
         title: "Artificial intelligence",
         description:
@@ -1674,7 +1794,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "otros-desarrollos",
+        id: "producto-software",
+        legacyId: "otros-desarrollos",
         marker: "03",
         title: "Product and software",
         description:
@@ -1724,55 +1845,24 @@ export const SITE_CONTENT = {
         ],
       },
     ],
-    implementationExamples: [
+    engagementModes: [
       {
         marker: "01",
-        title: "Knowledge systems",
+        title: "Consulting and definition",
         description:
-          "With citable sources, permissions, evaluation and integration with products and processes.",
-        className: "lg:col-span-3",
+          "Diagnosis, decisions, architecture and roadmap. This can be a complete standalone engagement.",
       },
       {
         marker: "02",
-        title: "Digital products",
+        title: "Product or system delivery",
         description:
-          "Experiences and applications designed around real users and outcomes.",
-        className: "lg:col-span-3",
+          "Design, product, engineering, integrations and production launch, coordinated within one delivery scope.",
       },
       {
         marker: "03",
-        title: "Integrations",
+        title: "Agreed evolution and operations",
         description:
-          "Between Drive, CRM, ERP, spreadsheets, reporting and internal systems.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "04",
-        title: "Document processing",
-        description:
-          "Extraction, validation, classification and human handoff in real flows.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "05",
-        title: "AI agents",
-        description:
-          "For bounded tasks, with limits, controlled tools and traceability.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "06",
-        title: "Operational panels and reports",
-        description:
-          "Reporting built on real operational data, not on manually prepared reports.",
-        className: "lg:col-span-3",
-      },
-      {
-        marker: "07",
-        title: "Approval workflows",
-        description:
-          "States, owners, alerts and records for processes that currently depend on manual follow-up.",
-        className: "lg:col-span-3",
+          "Maintenance, measurement and improvement. For bounded, measurable processes, and when the scope and collaboration model warrant it, this may include agreed operational tasks and exception handling.",
       },
     ],
     servicesFaq: [
@@ -1782,9 +1872,14 @@ export const SITE_CONTENT = {
           "No. AI is a core capability, but it is used when it improves the solution. In other cases the right answer is product, software, integrations or a combination of several capabilities.",
       },
       {
-        question: "Can Tahona take a digital product from start to finish?",
+        question: "Does Tahona only work on complete end-to-end projects?",
         answer:
-          "Yes. We can work from product strategy and definition through experience, architecture, development, integrations, launch and evolution.",
+          "No. A focused consulting, architecture, integration or development engagement can be complete in itself. We can also connect several stages when the challenge calls for an end-to-end journey.",
+      },
+      {
+        question: "Can Tahona operate part of a process?",
+        answer:
+          "Only selectively. The process must be bounded and measurable, with clear quality criteria, supervision, exceptions and a defined collaboration model. In that context, the scope may include agreed operational tasks and exception handling.",
       },
       {
         question: "Can the solution work with the technology already in place?",
@@ -1804,169 +1899,186 @@ export const SITE_CONTENT = {
     ],
     industryItems: [
       {
-        id: "logistica",
-        marker: "01",
-        title: "Logistics",
-        summary:
-          "Planning, route optimization, logistics documentation, operational events, reporting and integration with operations tools.",
-        description:
-          "In logistics we find routes, planning, events, transport documentation, operational data, reporting and coordination between tools. We work on data ingestion, operational optimization, route optimization, document processing, reporting and integration with existing systems.",
-        visualSrc: "/images/visual-logistics.png",
-        visualAlt: "3D visual of logistics operations",
-        tags: ["Routes", "Fleet", "Documentation", "Reporting"],
-        bullets: [
-          "Route optimization and planning",
-          "Logistics documentation and file processing",
-          "Service reporting",
-          "Fleet management",
-          "Operational events and tracking",
-          "Integration with tools, APIs and spreadsheets",
-        ],
-        relatedServices: [
-          "Process optimization",
-          "Route optimization",
-          "Custom tools",
-          "Integrations / platforms",
-          "Document processing",
-        ],
-      },
-      {
-        id: "industria",
-        marker: "02",
-        title: "Industry",
-        summary:
-          "Quality control, documentation, traceability, internal processes, reporting and tools to coordinate operational work.",
-        description:
-          "Industrial and operational environments bring recurring quality checks, documentation, traceability, team coordination and reporting. We work on internal tools, document flows, knowledge bases, integrations and automation.",
-        visualSrc: "/images/visual-industry-manufacturing.png",
-        visualAlt: "3D visual of industrial operations",
-        tags: ["Quality", "Documentation", "Traceability", "Reporting"],
-        bullets: [
-          "Quality and documentation",
-          "Stock management",
-          "Internal tools and integrations",
-          "Process traceability",
-          "Operational reporting",
-          "HACCP traceability as a pattern",
-        ],
-        relatedServices: [
-          "Document processing",
-          "Internal tools",
-          "Process optimization",
-          "Integrations / platforms",
-        ],
-      },
-      {
         id: "legal",
-        marker: "03",
+        level: "primary",
+        marker: "01",
         title: "Legal",
         summary:
-          "Document flows, document generation and review, administrative automation and human validation.",
+          "Documents and matters governed by access rules, human validation and traceability across versions, decisions and tasks.",
         description:
-          "Many legal and administrative processes combine documents, data, templates, review, communication and follow-up. We can build flows to generate, review, classify and coordinate documents without removing human validation points.",
+          "Legal work combines documents, matters, access rules and validation points that cannot simply disappear. We design systems to organize files, prepare information, coordinate human review and preserve traceability across versions, decisions and tasks.",
         visualSrc: "/images/visual-industry-legal.png",
         visualAlt: "3D visual of legal documentation",
-        tags: ["Documents", "Validation", "Flows", "Tracking"],
+        tags: ["Matters", "Documents", "Validation", "Traceability"],
         bullets: [
-          "Document generation and review",
-          "Document processing",
-          "Accounting",
-          "Internal tracking tools",
-          "Administrative flows",
-          "Human validation",
-          "Flow traceability",
+          "Matters, documents and templates",
+          "Information extraction and preparation",
+          "Human review and validation",
+          "Permissions and access rules",
+          "Task and matter tracking",
+          "Traceability across changes and decisions",
         ],
+        caseLink: {
+          hash: "#plataforma-documental-operativa",
+          label: "View case: Document and operations platform",
+        },
         relatedServices: [
-          "Document processing",
-          "Internal tools",
-          "Process optimization",
-          "Knowledge bases",
+          {
+            hash: "#procesamiento-documental",
+            label: "Document processing and knowledge",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Custom software",
+          },
+          {
+            hash: "#estrategia-arquitectura",
+            label: "Strategy and architecture",
+          },
+        ],
+      },
+      {
+        id: "logistica",
+        level: "primary",
+        marker: "02",
+        title: "Logistics",
+        summary:
+          "Constraint-based planning, routes, operational data and integrations between the tools that coordinate service delivery.",
+        description:
+          "Logistics planning depends on real constraints such as capacity, time windows, routes, incidents and data availability. The work connects those rules with operational information, existing systems and interfaces that let teams review and adjust the plan.",
+        visualSrc: "/images/visual-logistics.png",
+        visualAlt: "3D visual of logistics operations",
+        tags: ["Planning", "Constraints", "Routes", "Integrations"],
+        bullets: [
+          "Route and load planning",
+          "Capacity, time windows and incidents",
+          "Operational data import and validation",
+          "Route and exception review",
+          "Reporting for service coordination",
+          "Integration with APIs, spreadsheets and existing systems",
+        ],
+        caseLink: {
+          hash: "#planificacion-logistica",
+          label: "View case: Logistics planning platform",
+        },
+        relatedServices: [
+          {
+            hash: "#consultoria-auditoria-operativa",
+            label: "Discovery and definition",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Custom software",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integrations and platforms",
+          },
+        ],
+      },
+      {
+        id: "industria-trazabilidad",
+        legacyId: "industria",
+        level: "primary",
+        marker: "03",
+        cardTitle: "Industry",
+        title: "Industry and traceability",
+        summary:
+          "Quality controls, lots and records, documentation and traceability within bounded operational workflows.",
+        description:
+          "In industry, quality depends on concrete controls, lots or records, recurring documentation and traceability that connects each review to its source. We build tools for bounded workflows with clear validation points and owners. HACCP and food safety appear as one specific pattern within this context.",
+        visualSrc: "/images/visual-industry-manufacturing.png",
+        visualAlt: "3D visual of industrial quality and traceability",
+        tags: ["Quality", "Lots and records", "Documentation", "Traceability"],
+        bullets: [
+          "Quality controls and review points",
+          "Lots, records and evidence",
+          "Recurring documentation",
+          "Traceability from source through change and validation",
+          "Bounded workflows with clear owners",
+          "HACCP as a food-quality pattern",
+        ],
+        caseLink: {
+          hash: "#calidad-trazabilidad-appcc",
+          label: "View case: HACCP quality and traceability",
+        },
+        relatedServices: [
+          {
+            hash: "#procesamiento-documental",
+            label: "Document processing and knowledge",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Custom software",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integrations and platforms",
+          },
         ],
       },
       {
         id: "seguros",
+        level: "secondary",
         marker: "04",
         title: "Insurance",
         summary:
-          "Acquisition, qualification, CRM, quoting, follow-up, documentation and commercial reporting.",
-        description:
-          "In insurance, commercial operations depend on acquisition, qualification, documentation, quoting, CRM, follow-up and reporting. We can connect those pieces with internal tools, supervised automation and clearer information flows.",
-        visualSrc: "/images/visual-industry-insurance.png",
-        visualAlt: "3D visual of insurance operations",
-        tags: ["Acquisition", "CRM", "Quoting", "Reporting"],
-        bullets: [
-          "Acquisition and qualification",
-          "CRM and quoting",
-          "Reporting and operational control",
-          "Commercial follow-up",
-          "Documentation and handoffs",
-          "Supervised automation",
-        ],
-        relatedServices: [
-          "Process optimization",
-          "Integrations / platforms",
-          "Internal tools",
-          "AI agents",
-        ],
+          "Quoting, documentation, CRM, follow-up and handoffs that depend on clear rules and human review.",
+        tags: ["Quoting", "Documentation", "CRM", "Review"],
       },
       {
-        id: "marketing-growth",
+        id: "operaciones-comerciales",
+        legacyId: "marketing-growth",
+        level: "secondary",
         marker: "05",
-        title: "Marketing and growth",
+        title: "Commercial operations",
         summary:
-          "Lead ops, acquisition, qualification, reporting, CRM, internal tools and commercial coordination.",
-        description:
-          "We do not provide marketing agency services. The fit is operational: acquisition, lead ops, qualification, CRM, reporting, internal tools and coordination of campaigns or commercial processes.",
-        visualSrc: "/images/visual-industry-marketing.png",
-        visualAlt: "3D visual of marketing and growth operations",
-        tags: ["Lead ops", "Qualification", "CRM", "Reporting"],
-        bullets: [
-          "Acquisition and forms",
-          "Automations",
-          "Commercial reporting",
-          "Lead ops and qualification",
-          "CRM integration and follow-up",
-          "Internal tools",
-        ],
-        relatedServices: [
-          "Process optimization",
-          "Integrations and platforms",
-          "Internal tools",
-          "AI agents",
-        ],
+          "Coordination across acquisition, qualification, CRM, reporting and internal tools. Tahona does not provide marketing agency services.",
+        tags: ["Qualification", "CRM", "Reporting", "Coordination"],
       },
       {
-        id: "salud",
+        id: "salud-no-clinica",
+        legacyId: "salud",
+        level: "secondary",
         marker: "06",
-        title: "Healthcare",
+        title: "Non-clinical healthcare",
         summary:
-          "Operational support, documentation, internal knowledge and non-clinical systems.",
-        description:
-          "In healthcare we only work on non-clinical operational layers: documentation, internal knowledge, coordination, reporting and administrative support.",
-        visualSrc: "/images/visual-industry-health.png",
-        visualAlt: "3D visual of non-clinical healthcare operations",
-        tags: ["Support", "Documentation", "Knowledge", "PoC"],
-        bullets: [
-          "Operational documentation",
-          "Internal knowledge",
-          "Administrative coordination",
-          "Non-clinical systems",
-          "Internal reporting",
-          "Validation and human review",
-        ],
-        relatedServices: [
-          "Knowledge bases",
-          "Document processing",
-          "Internal tools",
-          "Integrations / platforms",
-        ],
+          "Administrative coordination, documentation, internal knowledge, communication and non-clinical operational support.",
+        tags: ["Administration", "Documentation", "Knowledge", "Communication"],
+      },
+      {
+        id: "servicios-profesionales",
+        level: "secondary",
+        marker: "07",
+        title: "Professional services",
+        summary:
+          "Client work, expert knowledge, documentation and internal tools that need to share context without losing review points.",
+        tags: ["Client work", "Knowledge", "Documentation", "Internal tools"],
+      },
+      {
+        id: "viajes-turismo",
+        level: "secondary",
+        marker: "08",
+        title: "Travel and tourism",
+        summary:
+          "Sales, bookings, suppliers and operations coordinated across CRM, documents and internal systems.",
+        tags: ["Bookings", "CRM", "Suppliers", "Operations"],
+      },
+      {
+        id: "educacion-formacion",
+        level: "secondary",
+        marker: "09",
+        title: "Education and training",
+        summary:
+          "Admissions, documentation, follow-up and communication across the learner journey.",
+        tags: ["Admissions", "Documentation", "Follow-up", "Communication"],
       },
     ],
     industriesFaq: [
       {
         question: "Does Tahona specialize in one sector?",
         answer:
-          "No. We work on internal operations. Some sectors have especially clear patterns, but the decision depends on each company's process, data, documents and tools.",
+          "No. We concentrate sector experience and current work in legal, logistics, and industry and traceability, then apply those patterns selectively in other contexts. The approach adapts to each sector's users, rules, data, constraints and validation points.",
       },
       {
         question: "What about regulated sectors?",
@@ -1999,124 +2111,154 @@ export const SITE_CONTENT = {
         id: "plataforma-documental-operativa",
         marker: "01",
         sector: "Legal",
-        title: "Document and operations platform",
-        summary:
-          "Design and implementation of an internal platform to coordinate document processes, information extraction, draft generation, human validation, repeatable tasks and operational tracking.",
+        title: "Legal documents connected to the matter",
+        challenge:
+          "Documents, matter context, repeat preparation, access rules, human review and traceability were fragmented across disconnected tools and steps.",
+        intervention:
+          "Tahona defined the process and architecture, then designed and built an internal platform connecting matter data, document intake and extraction, draft preparation, human checkpoints and task follow-up.",
+        enables: [
+          "Documents and data connected to the matter",
+          "Human validation before each step advances",
+          "Traceable versions, decisions and tasks",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Strategy and architecture",
+            hash: "#estrategia-arquitectura",
+          },
+          {
+            label: "Document processing and knowledge",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Custom software",
+            hash: "#herramientas-internas",
+          },
+        ],
         visualSrc: "/images/visual-case-legal-document-platform.png",
         visualAlt: "3D visual of a document platform",
-        bullets: [
-          "Document flows with states",
-          "Agentic system",
-          "Draft generation",
-          "Human validation first",
-          "Repeatable tasks and tracking",
-          "Change traceability",
-          "Operational base for internal documentation",
-        ],
-        tags: [
-          "Document processing",
-          "Internal tools",
-          "Knowledge bases",
-          "Human validation",
-        ],
       },
       {
-        id: "planificacion-logistica-reporting",
+        id: "planificacion-logistica",
+        legacyId: "planificacion-logistica-reporting",
         marker: "02",
         sector: "Logistics",
-        title: "Logistics planning platform",
-        summary:
-          "Platform for planning routes, importing operational data, coordinating events, reviewing logistics documentation and generating useful operational reporting.",
+        title: "Logistics planning under operational constraints",
+        challenge:
+          "Planning has to account for available capacity, time windows, routes, incidents and uneven operational data.",
+        intervention:
+          "Tahona defined the operating rules and architecture, then designed and built a planning interface with data import and validation, route review, reporting and integrations with existing tools.",
+        enables: [
+          "A plan that can be reviewed before execution",
+          "Explicit constraints, incidents and exceptions",
+          "Planning data and decisions connected to existing operational tools",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Discovery and definition",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Custom software",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integrations and platforms",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-logistics.png",
         visualAlt: "3D visual of logistics planning",
-        bullets: [
-          "Route optimization",
-          "Route planning",
-          "Operational data import",
-          "Event coordination",
-          "Document review",
-          "Operational reporting",
-          "Integration with existing tools",
-        ],
-        tags: [
-          "Process optimization",
-          "Integrations / platforms",
-          "Document processing",
-          "Reporting",
-        ],
       },
       {
         id: "base-conocimiento-empresarial",
         marker: "03",
         sector: "Cross-functional",
-        title: "Enterprise knowledge base",
-        summary:
-          "Agentic internal knowledge layer with document ingestion, processing, citable sources, metadata, permissions, evaluation, human review and integration with internal tools.",
+        title: "Internal knowledge with sources, permissions and evaluation",
+        challenge:
+          "Internal sources were fragmented, permissions varied by context, and answers still had to remain attributable and open to evaluation.",
+        intervention:
+          "Tahona defined the knowledge architecture, then designed and built a system for ingestion and normalization, AI-assisted retrieval with citations, permissions, evaluation and integration with internal tools.",
+        enables: [
+          "Answers accompanied by their sources",
+          "Access bounded by permissions and scope",
+          "Evaluation and review connected to internal tools",
+        ],
+        relatedCapabilities: [
+          {
+            label: "AI solutions and products",
+            hash: "#optimizacion-procesos",
+          },
+          {
+            label: "Document processing and knowledge",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Strategy and architecture",
+            hash: "#estrategia-arquitectura",
+          },
+        ],
         visualSrc: "/images/visual-case-enterprise-knowledge.png",
         visualAlt: "3D visual of an enterprise knowledge base",
-        bullets: [
-          "Document ingestion",
-          "Normalization and metadata",
-          "Citable sources",
-          "Permissions and scope",
-          "Response evaluation",
-          "Integration with internal tools",
-        ],
-        tags: [
-          "Knowledge bases",
-          "Document processing",
-          "Permissions",
-          "Traceability",
-        ],
       },
       {
-        id: "documentacion-calidad-trazabilidad",
+        id: "calidad-trazabilidad-appcc",
+        legacyId: "documentacion-calidad-trazabilidad",
         marker: "04",
         sector: "Industry",
-        title: "Documentation, quality and traceability platform for food operations",
-        summary:
-          "Workflow platform to organize documentation, validate information, maintain traceability and generate reporting in quality processes for food operations.",
+        title: "Food traceability from receipt to dispatch",
+        challenge:
+          "Reception, controls, lots, records and supporting evidence had to remain connected and traceable across bounded food-quality workflows.",
+        intervention:
+          "Tahona defined the process, designed the product workflows and built a documentation, validation and traceability system with integrations where the process requires them.",
+        enables: [
+          "Records connected from receipt through dispatch",
+          "Clear review points for each control",
+          "Evidence and reporting retrievable by lot and workflow",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Discovery and definition",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Custom software",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integrations and platforms",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-case-appcc-quality.png",
         visualAlt: "3D visual of industrial quality and traceability",
-        bullets: [
-          "Document processing",
-          "HACCP",
-          "Information validation",
-          "Process traceability",
-          "Quality reporting",
-          "Operational controls",
-          "Systems integration",
-        ],
-        tags: [
-          "Internal tools",
-          "Document processing",
-          "Process optimization",
-          "Traceability",
-        ],
       },
     ],
     workItems: [
       {
         id: "document-platform",
         sector: "Legal",
-        title: "Document and operations platform",
+        title: "Legal documents connected to the matter",
         description:
-          "Design and implementation of an internal tool to coordinate document processes, extract data from complex documents, generate drafts, support human validation, RPA, repeatable tasks and operational tracking.",
+          "An internal platform connecting matters, documents, drafts, human validation and task follow-up through one architecture.",
         tags: [
+          "Strategy and architecture",
           "Document processing",
-          "Human validation",
-          "Internal tasks",
-          "Tracking",
+          "Custom software",
         ],
         imageSrc: "/images/visual-case-legal-document-platform.png",
       },
       {
         id: "logistics-planning",
         sector: "Logistics",
-        title: "Logistics optimization platform",
+        title: "Logistics planning under operational constraints",
         description:
-          "Platform for planning routes, importing orders, coordinating events, reviewing logistics documentation and generating useful operational reporting.",
-        tags: ["Planning", "Route optimization", "Reporting"],
+          "A planning interface connecting constraints, operational data, route review and existing tools.",
+        tags: [
+          "Discovery and definition",
+          "Custom software",
+          "Integrations",
+        ],
         imageSrc: "/images/visual-logistics.png",
       },
     ],
@@ -2125,27 +2267,27 @@ export const SITE_CONTENT = {
     metadata: {
       home: {
         name: "Strona główna",
-        title: "Tahona | AI, produkty cyfrowe i oprogramowanie na miarę",
+        title: "Tahona | Partner technologiczny od strategii po wdrożenie",
         description:
-          "Partner technologiczny projektujący, tworzący i integrujący produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
+          "Partner technologiczny od strategii po wdrożenie: strategia, produkty cyfrowe, oprogramowanie na miarę, integracje i rozwiązania AI.",
       },
       services: {
         name: "Usługi",
-        title: "Usługi Tahona | Strategia, AI i rozwój produktu",
+        title: "Usługi Tahona | Strategia, AI, produkt i oprogramowanie",
         description:
           "Strategia technologiczna, sztuczna inteligencja, produkty cyfrowe, oprogramowanie na miarę i kompleksowe integracje.",
       },
       industries: {
         name: "Branże",
-        title: "Branże Tahona | Produkty cyfrowe, oprogramowanie i AI",
+        title: "Branże Tahona | Technologia dopasowana do kontekstu",
         description:
-          "Kompetencje produktowe, programistyczne i AI dopasowane do logistyki, przemysłu, prawa, ubezpieczeń, marketingu i zdrowia.",
+          "Wzorce branżowe w prawie, logistyce i przemyśle oraz ich zastosowanie w ubezpieczeniach, operacjach sprzedażowych i nieklinicznej ochronie zdrowia.",
       },
       cases: {
         name: "Przykłady",
         title: "Przykłady Tahona | Produkty i systemy dla realnych wyzwań",
         description:
-          "Zanonimizowane przykłady skoncentrowane na efektach: większej przejrzystości, lepszych decyzjach i usługach cyfrowych gotowych do rozwoju.",
+          "Cztery przykłady pokazujące wyzwanie, działania Tahona, połączone kompetencje i możliwości każdego produktu lub systemu.",
       },
       keywords:
         "partner technologiczny, produkty cyfrowe, oprogramowanie na miarę, rozwój AI, strategia technologiczna, integracje, architektura oprogramowania",
@@ -2242,9 +2384,8 @@ export const SITE_CONTENT = {
         eyebrow: "Czym się zajmujemy",
         title: "Strategia, produkt i technologia w jednym zespole.",
         description: [
-          "Prowadzimy cały cykl: poznajemy wyzwanie, definiujemy rozwiązanie, projektujemy doświadczenie, tworzymy technologię i integrujemy ją z biznesem.",
-          "Efektem może być produkt cyfrowy, oprogramowanie na miarę albo rozwiązanie AI. Technologię dobieramy do celu, użytkowników i kontekstu, a nie odwrotnie.",
-          "Nasze podejście to technologia szyta na miarę: każdy system powstaje wokół biznesu, jest weryfikowany z użytkownikami i przygotowany do dalszego rozwoju.",
+          "Łączymy doradztwo, produkt i inżynierię, aby przekładać otwarte wyzwania na działające rozwiązania. Możemy zacząć od definicji, zbudować produkt lub system, zintegrować go z firmą i dalej rozwijać w środowisku produkcyjnym.",
+          "Efektem może być produkt cyfrowy, oprogramowanie na miarę lub rozwiązanie AI. Gdy proces ma jasno określony zakres i mierzalny rezultat, możemy także przejąć realizację części pracy.",
         ],
         bullets: [
           "Diagnoza, definicja produktu i strategia technologiczna.",
@@ -2258,28 +2399,30 @@ export const SITE_CONTENT = {
         eyebrow: "Usługi",
         title: "Trzy kompetencje. Jeden partner technologiczny.",
         description:
-          "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Od pierwszej definicji po produkcję i dalszy rozwój systemu.",
+          "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Łączymy je według wyzwania i oczekiwanego rezultatu, od definicji po wdrożenie i dalszy rozwój.",
         ctaLabel: "Zobacz usługi",
       },
       industries: {
         eyebrow: "Branże",
         title: "Kompetencje technologiczne dopasowane do branży.",
         description:
-          "Procesy, użytkownicy, dane i ograniczenia są różne. Umiejętność definiowania, projektowania i budowania pozostaje ta sama.",
+          "Procesy, użytkownicy, dane i ograniczenia są różne. Zachowujemy ten sam zakres od strategii po wdrożenie, a każde rozwiązanie kierujemy na rezultat ważny w danym kontekście.",
+        primaryLabel: "Główne sektory",
+        secondaryLabel: "Inne sektory",
         ctaLabel: "Zobacz branże",
       },
       ourWork: {
         eyebrow: "Przykłady",
-        title: "Produkty i systemy nastawione na realne efekty.",
+        title: "Produkty i systemy zbudowane wokół realnych wyzwań.",
         description:
-          "Liczy się rezultat: większa przejrzystość pracy, trafniejsze decyzje i usługi cyfrowe, które mogą rozwijać się wraz z biznesem.",
+          "Zanonimizowane przykłady pokazują rozwiązany problem, zbudowany produkt lub system oraz sposób jego integracji i dalszego rozwoju.",
         ctaLabel: "Zobacz przykłady",
       },
       howWeWork: {
         eyebrow: "Jak pracujemy",
         title: "Partner od definicji po dalszy rozwój.",
         description:
-          "Bierzemy odpowiedzialność za cały cykl: strategię, produkt, architekturę, rozwój, integrację i ciągłe doskonalenie. Diagnoza wyznacza punkt startu; celem jest zbudowanie i rozwijanie rozwiązania.",
+          "Pracujemy od strategii po wdrożenie: łączymy produkt, architekturę, rozwój, integrację i ciągłe doskonalenie. Diagnoza wyznacza punkt startu; celem jest zbudowanie i rozwijanie rozwiązania.",
         steps: [
           {
             number: "01",
@@ -2307,51 +2450,53 @@ export const SITE_CONTENT = {
           },
           {
             number: "05",
-            title: "Uruchomienie i rozwój",
+            title: "Uruchomienie, obsługa i rozwój",
             description:
-              "Integrujemy, mierzymy, dokumentujemy i dalej rozwijamy system.",
+              "Integrujemy, mierzymy i dalej rozwijamy system. Gdy wymagają tego zakres i model współpracy, przejmujemy również uzgodnioną obsługę i zarządzanie wyjątkami.",
           },
         ],
       },
     },
     aiApplied: {
-      eyebrow: "Sztuczna inteligencja",
-      title: "Kompleksowe AI zintegrowane z produktami i procesami.",
+      eyebrow: "AI w praktyce",
+      title: "Możliwości rosną. Realna praca wymaga niezawodnych systemów.",
       description:
-        "Pracujemy od strategii i definicji przypadku użycia, przez dane, architekturę i budowę, po ewaluację oraz rozwój na produkcji. Tworzymy systemy AI będące częścią biznesu, a nie odizolowanym demo.",
-      lifecycle: {
-        ariaLabel: "Kompleksowy cykl tworzenia rozwiązania sztucznej inteligencji",
-        centerLabel: "AI end-to-end",
-        centerTitle: "System produkcyjny",
-        stages: [
-          {
-            label: "Strategia",
-            title: "Przypadek użycia i cel",
-            body: "Wartość, zakres, użytkownicy i kryteria sukcesu.",
-          },
-          {
-            label: "Podstawy",
-            title: "Dane i kontekst",
-            body: "Źródła, uprawnienia, jakość i wiedza biznesowa.",
-          },
-          {
-            label: "Inżynieria",
-            title: "Budowa i integracja",
-            body: "Modele, produkt, narzędzia i połączone systemy.",
-          },
-          {
-            label: "Działanie",
-            title: "Ewaluacja i rozwój",
-            body: "Testy, nadzór, metryki i ciągłe doskonalenie.",
-          },
-        ],
+        "Modele rozwiązują coraz dłuższe zadania programistyczne. W realnej działalności ta zdolność staje się użyteczna dopiero wtedy, gdy proces ma jasno określony zakres, jest połączony z danymi i narzędziami oraz podlega ewaluacji i nadzorowi.",
+      chart: {
+        ariaLabel:
+          "Wzrost długości zadań programistycznych wykonywanych przez modele AI z pięćdziesięcioprocentową skutecznością",
+        axisDateLabel: "Data premiery modelu",
+        axisDurationLabel: "Czas wykonania zadania przez człowieka",
+        caption:
+          "Estymacje p50 i przedziały ufności METR Time Horizon 1.1 dla wybranych modeli. Wykres nie mierzy automatyzacji procesu biznesowego.",
+        description:
+          "Publiczne estymacje p50 i przedziały ufności dla wybranych modeli state of the art, uporządkowane według daty premiery.",
+        scrollLabel: "Przesuń, aby zobaczyć cały wykres",
+        sourceLabel: "Źródło i metodologia",
+        title: "Długość zadań programistycznych wykonywanych z 50% skutecznością",
+        unreliableLabel:
+          "Pomiary powyżej 16 godzin są niewiarygodne przy obecnym zestawie zadań",
       },
+      principles: [
+        {
+          title: "Ograniczyć zakres pracy",
+          body: "Określić jednostkę pracy, granice, wyjątki i kryteria jakości.",
+        },
+        {
+          title: "Zintegrować kontekst",
+          body: "Połączyć dane, narzędzia, uprawnienia i śledzenie z realnym procesem.",
+        },
+        {
+          title: "Ewaluować i nadzorować",
+          body: "Mierzyć wyniki, analizować wyjątki i zachować odpowiedzialność człowieka.",
+        },
+      ],
     },
     servicesPage: {
       hero: {
-        titleLines: ["Kompleksowa strategia, AI i rozwój produktu."],
+        titleLines: ["Strategia, AI, produkt i oprogramowanie od początku do końca."],
         description:
-          "Jeden zespół definiuje, projektuje, tworzy, integruje i rozwija produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
+          "Tahona łączy strategię i architekturę, AI, produkt i oprogramowanie, aby definiować, tworzyć i integrować rozwiązania dla konkretnego rezultatu biznesowego.",
         primaryLabel: "Porozmawiajmy",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz kompetencje",
@@ -2362,16 +2507,17 @@ export const SITE_CONTENT = {
         title: "Trzy kompetencje. Jeden partner technologiczny.",
         description:
           "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Łączymy je wokół wyzwania, bez silosów i z góry narzuconych rozwiązań.",
+        linkLabel: "Zobacz usługi",
       },
       detailSection: {
         eyebrow: "Usługi szczegółowo",
         title: "Kompetencje do podejmowania decyzji, budowy i integracji.",
       },
-      examplesSection: {
-        eyebrow: "Co tworzymy",
-        title: "Produkty, systemy i możliwości dla realnych warunków.",
+      engagementSection: {
+        eyebrow: "Formy współpracy",
+        title: "Jak możemy współpracować.",
         description:
-          "Każde wdrożenie dopasowujemy do biznesu, użytkowników, danych i sposobu, w jaki rozwiązanie ma się rozwijać.",
+          "Współpraca może obejmować konkretny etap lub całą drogę, zależnie od wyzwania.",
       },
       faqSection: {
         eyebrow: "Pytania",
@@ -2381,23 +2527,25 @@ export const SITE_CONTENT = {
     },
     industriesPage: {
       hero: {
-        titleLines: ["Produkty cyfrowe, oprogramowanie i AI dla różnych sektorów."],
+        titleLines: ["Technologia dopasowana do kontekstu każdej branży."],
         description:
-          "Każda branża ma innych użytkowników, procesy, dane i ograniczenia. Dostosowujemy strategię, produkt, oprogramowanie i AI do realnego kontekstu biznesowego.",
+          "Reguły, dane i punkty kontroli różnią się zależnie od branży. Tahona łączy strategię, produkt, oprogramowanie i AI wokół rzeczywistego sposobu działania organizacji.",
         primaryLabel: "Umów pierwszą rozmowę",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",
         secondaryHref: "/pl/services/",
       },
       gridSection: {
-        eyebrow: "Branże",
-        title: "Sektory, z którymi pracujemy.",
+        eyebrow: "Inne sektory",
+        title: "Inne sektory, w których te wzorce mają zastosowanie.",
         description:
-          "Nie zamykamy się w jednej branży. Wspólny wzorzec to rozproszone informacje, powtarzalne zadania, dokumentacja i integracje między narzędziami.",
+          "Stosujemy te wzorce selektywnie w ubezpieczeniach, operacjach sprzedażowych, nieklinicznej ochronie zdrowia, usługach profesjonalnych, turystyce oraz edukacji i szkoleniach.",
       },
       detailSection: {
-        eyebrow: "Szczegóły",
-        title: "Jak wygląda praca w każdym sektorze.",
+        eyebrow: "Doświadczenie branżowe",
+        title: "Doświadczenie branżowe i aktywne kierunki prac.",
+        description:
+          "Trzy konteksty, w których znajomość procesu, ograniczeń i punktów kontroli stanowi centralną część pracy.",
         relatedServicesLabel: "Powiązane usługi",
       },
       faqSection: {
@@ -2410,7 +2558,7 @@ export const SITE_CONTENT = {
       hero: {
         titleLines: ["Produkty i systemy dla realnych wyzwań."],
         description:
-          "Zanonimizowane przykłady skoncentrowane na efektach: większej przejrzystości, lepszych decyzjach i bazie technologicznej gotowej do rozwoju wraz z biznesem.",
+          "Każdy przykład zaczyna się od konkretnej potrzeby i pokazuje działania Tahona, połączone kompetencje oraz możliwości systemu.",
         primaryLabel: "Umów pierwszą rozmowę",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",
@@ -2418,17 +2566,20 @@ export const SITE_CONTENT = {
       },
       section: {
         eyebrow: "Przykłady",
-        title: "Efekty dla realnych wyzwań.",
+        title: "Od wyzwania do systemu.",
         text:
-          "Produkty i systemy usprawniające pracę, decyzje i świadczenie usług.",
-        relatedAreasLabel: "Powiązane obszary",
+          "Cztery przykłady łączące definicję, architekturę, produkt, oprogramowanie i AI tam, gdzie wspiera cały system.",
+        challengeLabel: "Wyzwanie",
+        interventionLabel: "Działania Tahona",
+        enablesLabel: "Co umożliwia system",
+        relatedCapabilitiesLabel: "Powiązane kompetencje",
       },
     },
     contact: {
       eyebrow: "Kontakt",
-      title: "Porozmawiajmy o produkcie, systemie lub wyzwaniu technologicznym.",
+      title: "Porozmawiajmy o wyzwaniu, procesie lub produkcie.",
       description:
-        "Pierwsza rozmowa pozwala zrozumieć cel, punkt wyjścia i najbardziej użyteczny kolejny krok.",
+        "Nie trzeba przychodzić z gotowym rozwiązaniem technicznym. Pierwsza rozmowa pozwala zrozumieć cel, punkt wyjścia i najbardziej użyteczny kolejny krok.",
       sidebarEyebrow: "Kontakt",
       sidebarBody:
         "Analizujemy kontekst, cel i ograniczenia. Jeśli istnieje jasny kierunek działania, proponujemy najlepszy punkt startu.",
@@ -2439,7 +2590,7 @@ export const SITE_CONTENT = {
       phoneLabel: "Telefon",
       phoneHint: "Jeśli potrzebny jest konkretny start, wystarczy krótka rozmowa.",
       trustBadges: [
-        "Odpowiedź w ciągu 24 godzin roboczych",
+        "Jasna i konkretna odpowiedź",
         "Pierwszy obszar usprawnienia nazwany wprost",
         "Bez zobowiązań i presji sprzedażowej",
       ],
@@ -2448,18 +2599,18 @@ export const SITE_CONTENT = {
         "Wystarczą podstawy. Odpowiadamy z pierwszą oceną i najbardziej użytecznym następnym krokiem.",
       nameLabel: "Imię i nazwisko",
       namePlaceholder: "Imię i nazwisko",
-      detailsLabel: "Projekt, produkt lub wyzwanie",
+      detailsLabel: "Wyzwanie, proces lub produkt",
       detailsPlaceholder:
-        "Co należy zbudować lub usprawnić, co istnieje dziś i jaki rezultat ma zostać osiągnięty.",
+        "Co należy zbudować lub usprawnić, co istnieje dziś i jaki rezultat jest potrzebny.",
       privacyNote:
-        "Odpowiadamy w ciągu 24 godzin roboczych. Bez presji sprzedażowej: jeśli nie widzimy dobrego dopasowania, powiemy to wprost.",
+        "Bez presji sprzedażowej: jeśli nie widzimy dobrego dopasowania, powiemy to wprost.",
       submitLabel: "Umów pierwszą rozmowę",
       submittingLabel: "Wysyłanie...",
       closeLabel: "Zamknij",
       modalEyebrow: "Wiadomość odebrana",
       modalTitle: "Wiadomość odebrana",
       modalText:
-        "Przejrzymy ją i odpowiemy w ciągu 24 godzin roboczych z najbardziej użytecznym następnym krokiem.",
+        "Przejrzymy ją i odpowiemy z najbardziej użytecznym następnym krokiem.",
       modalEmailText:
         "Aby dodać więcej kontekstu e-mailem, napisz na hola@tahona.ai",
       mailCtaText: "hola@tahona.ai",
@@ -2467,7 +2618,7 @@ export const SITE_CONTENT = {
         nameShort: "Imię i nazwisko musi mieć co najmniej 2 znaki",
         nameLong: "Imię i nazwisko jest zbyt długie",
         emailInvalid: "Podaj poprawny adres e-mail",
-        detailsShort: "Opisz nieco szerzej projekt lub problem",
+        detailsShort: "Opisz nieco szerzej wyzwanie, proces lub produkt",
         detailsLong: "Wiadomość jest zbyt długa",
         submit: "Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.",
       },
@@ -2476,11 +2627,11 @@ export const SITE_CONTENT = {
       contactLabel: "Skontaktuj się z nami",
       copyright: "Wszelkie prawa zastrzeżone.",
       description:
-        "Partner technologiczny dla produktów cyfrowych, oprogramowania na miarę i rozwiązań AI.",
+        "Partner technologiczny od strategii po wdrożenie dla produktu, oprogramowania i AI.",
     },
     structuredData: {
       organizationDescription:
-        "Partner technologiczny w zakresie strategii, produktów cyfrowych, oprogramowania na miarę, sztucznej inteligencji i integracji.",
+        "Partner technologiczny od strategii po wdrożenie w zakresie produktów cyfrowych, oprogramowania na miarę, sztucznej inteligencji i integracji.",
       knowsAbout: [
         "strategia technologiczna",
         "rozwój produktów cyfrowych",
@@ -2492,12 +2643,14 @@ export const SITE_CONTENT = {
       serviceSchemaName:
         "Usługi strategii, sztucznej inteligencji, produktu i oprogramowania",
       serviceCatalogName: "Rodziny usług Tahona",
-      industryListName: "Sektory i wzorce operacyjne",
-      casesListName: "Zanonimizowane przykłady projektów operacyjnych",
+      primaryIndustryListName: "Doświadczenie branżowe i aktywne kierunki prac",
+      secondaryIndustryListName: "Inne sektory, w których te wzorce mają zastosowanie",
+      casesListName: "Przykłady produktów i systemów dla realnych wyzwań",
     },
     serviceFamilies: [
       {
-        id: "fundamentos",
+        id: "estrategia-arquitectura",
+        legacyId: "fundamentos",
         marker: "01",
         title: "Strategia i architektura",
         description:
@@ -2547,7 +2700,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "desarrollo-ia",
+        id: "inteligencia-artificial",
+        legacyId: "desarrollo-ia",
         marker: "02",
         title: "Sztuczna inteligencja",
         description:
@@ -2597,7 +2751,8 @@ export const SITE_CONTENT = {
         ],
       },
       {
-        id: "otros-desarrollos",
+        id: "producto-software",
+        legacyId: "otros-desarrollos",
         marker: "03",
         title: "Produkt i oprogramowanie",
         description:
@@ -2647,55 +2802,24 @@ export const SITE_CONTENT = {
         ],
       },
     ],
-    implementationExamples: [
+    engagementModes: [
       {
         marker: "01",
-        title: "Systemy wiedzy",
+        title: "Doradztwo i definicja",
         description:
-          "Ze źródłami, uprawnieniami, ewaluacją i integracją z produktami oraz procesami.",
-        className: "lg:col-span-3",
+          "Diagnoza, decyzje, architektura i plan działania. Taki zakres może stanowić kompletne, samodzielne zlecenie.",
       },
       {
         marker: "02",
-        title: "Produkty cyfrowe",
+        title: "Budowa produktu lub systemu",
         description:
-          "Doświadczenia i aplikacje projektowane wokół realnych użytkowników i rezultatów.",
-        className: "lg:col-span-3",
+          "Projektowanie, produkt, inżynieria, integracje i uruchomienie produkcyjne w ramach jednego zakresu.",
       },
       {
         marker: "03",
-        title: "Integracje",
+        title: "Uzgodniony rozwój i obsługa",
         description:
-          "Między Drive, CRM, ERP, arkuszami, raportowaniem i systemami wewnętrznymi.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "04",
-        title: "Przetwarzanie dokumentów",
-        description:
-          "Ekstrakcja, walidacja, klasyfikacja i przekazanie do człowieka w realnych przepływach.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "05",
-        title: "Agenci AI",
-        description:
-          "Dla zadań o jasno określonym zakresie, z granicami, kontrolowanymi narzędziami i śledzeniem działań.",
-        className: "lg:col-span-2",
-      },
-      {
-        marker: "06",
-        title: "Panele i raporty operacyjne",
-        description:
-          "Raportowanie zbudowane na realnych danych operacyjnych, nie na ręcznie składanych raportach.",
-        className: "lg:col-span-3",
-      },
-      {
-        marker: "07",
-        title: "Przepływ akceptacji",
-        description:
-          "Statusy, właściciele, alerty i rejestr dla procesów, które dziś zależą od ręcznego pilnowania.",
-        className: "lg:col-span-3",
+          "Utrzymanie, pomiar i doskonalenie. W przypadku procesów o jasno określonym zakresie i mierzalnym rezultacie, gdy uzasadniają to zakres i model współpracy, może obejmować uzgodnione zadania operacyjne i zarządzanie wyjątkami.",
       },
     ],
     servicesFaq: [
@@ -2705,9 +2829,14 @@ export const SITE_CONTENT = {
           "Nie. AI jest jedną z kluczowych kompetencji, ale wykorzystujemy je wtedy, gdy poprawia rozwiązanie. W innych przypadkach właściwą odpowiedzią jest produkt, oprogramowanie, integracja lub połączenie kilku kompetencji.",
       },
       {
-        question: "Czy Tahona może zrealizować produkt cyfrowy od początku do końca?",
+        question: "Czy Tahona realizuje wyłącznie kompletne projekty od początku do końca?",
         answer:
-          "Tak. Możemy poprowadzić strategię i definicję produktu, doświadczenie, architekturę, rozwój, integracje, uruchomienie i dalszą ewolucję.",
+          "Nie. Skoncentrowane doradztwo, architektura, integracja lub prace programistyczne mogą stanowić kompletne zlecenie. Możemy też połączyć kilka etapów, gdy wyzwanie wymaga pełnej drogi od definicji po wdrożenie.",
+      },
+      {
+        question: "Czy Tahona może obsługiwać część procesu?",
+        answer:
+          "Tylko w wybranych przypadkach. Proces musi mieć jasno określony zakres i mierzalny rezultat, a także jasne kryteria jakości, zasady nadzoru, obsługi wyjątków i model współpracy. W takim kontekście zakres może obejmować uzgodnione zadania operacyjne i zarządzanie wyjątkami.",
       },
       {
         question: "Czy rozwiązanie może działać z technologią już obecną w firmie?",
@@ -2727,169 +2856,186 @@ export const SITE_CONTENT = {
     ],
     industryItems: [
       {
-        id: "logistica",
-        marker: "01",
-        title: "Logistyka",
-        summary:
-          "Planowanie, optymalizacja tras, dokumentacja logistyczna, zdarzenia operacyjne, raportowanie i integracja z narzędziami operacyjnymi.",
-        description:
-          "W logistyce pojawiają się trasy, planowanie, zdarzenia, dokumentacja transportowa, dane operacyjne, raportowanie i koordynacja między narzędziami. Pracujemy nad wczytywaniem danych, optymalizacją operacyjną, optymalizacją tras, przetwarzaniem dokumentów, raportowaniem i integracją z istniejącymi systemami.",
-        visualSrc: "/images/visual-logistics.png",
-        visualAlt: "Wizualizacja 3D operacji logistycznych",
-        tags: ["Trasy", "Flota", "Dokumentacja", "Raportowanie"],
-        bullets: [
-          "Optymalizacja tras i planowanie",
-          "Dokumentacja logistyczna i przetwarzanie plików",
-          "Raportowanie operacyjne",
-          "Zarządzanie flotą",
-          "Zdarzenia operacyjne i śledzenie",
-          "Integracja z narzędziami, API i arkuszami",
-        ],
-        relatedServices: [
-          "Optymalizacja procesów",
-          "Optymalizacja tras",
-          "Narzędzia na miarę",
-          "Integracje / platformy",
-          "Przetwarzanie dokumentów",
-        ],
-      },
-      {
-        id: "industria",
-        marker: "02",
-        title: "Przemysł",
-        summary:
-          "Kontrola jakości, dokumentacja, identyfikowalność, procesy wewnętrzne, raportowanie i narzędzia do koordynacji pracy operacyjnej.",
-        description:
-          "W środowiskach przemysłowych i operacyjnych pojawiają się kontrole jakości, powtarzalna dokumentacja, identyfikowalność, koordynacja między zespołami i raportowanie. Pracujemy nad narzędziami wewnętrznymi, przepływami dokumentów, bazami wiedzy, integracjami i automatyzacją.",
-        visualSrc: "/images/visual-industry-manufacturing.png",
-        visualAlt: "Wizualizacja 3D operacji przemysłowej",
-        tags: ["Jakość", "Dokumentacja", "Identyfikowalność", "Raportowanie"],
-        bullets: [
-          "Jakość i dokumentacja",
-          "Zarządzanie stanami",
-          "Narzędzia wewnętrzne i integracje",
-          "Identyfikowalność procesów",
-          "Raportowanie operacyjne",
-          "HACCP jako wzorzec identyfikowalności",
-        ],
-        relatedServices: [
-          "Przetwarzanie dokumentów",
-          "Narzędzia wewnętrzne",
-          "Optymalizacja procesów",
-          "Integracje / platformy",
-        ],
-      },
-      {
         id: "legal",
-        marker: "03",
+        level: "primary",
+        marker: "01",
         title: "Prawo",
         summary:
-          "Przepływy dokumentów, generowanie i przegląd dokumentów, automatyzacja administracyjna i walidacja przez człowieka.",
+          "Dokumenty i sprawy objęte regułami dostępu, kontrolą człowieka oraz śledzeniem wersji, decyzji i zadań.",
         description:
-          "Wiele procesów prawnych i administracyjnych łączy dokumenty, dane, szablony, przegląd, komunikację i śledzenie. Możemy budować przepływy do generowania, przeglądu, klasyfikacji i koordynacji dokumentów bez usuwania punktów walidacji przez człowieka.",
+          "Praca prawna łączy dokumenty, sprawy, reguły dostępu i punkty kontroli, których nie można po prostu usunąć. Projektujemy systemy porządkujące pliki, przygotowujące informacje, koordynujące kontrolę człowieka oraz śledzące wersje, decyzje i zadania.",
         visualSrc: "/images/visual-industry-legal.png",
         visualAlt: "Wizualizacja 3D dokumentacji prawnej",
-        tags: ["Dokumenty", "Walidacja", "Przepływy", "Śledzenie statusów"],
+        tags: ["Sprawy", "Dokumenty", "Walidacja", "Śledzenie zmian"],
         bullets: [
-          "Generowanie i przegląd dokumentów",
-          "Przetwarzanie dokumentów",
-          "Rozliczenia i administracja",
-          "Narzędzia wewnętrzne do śledzenia",
-          "Przepływy administracyjne",
-          "Walidacja przez człowieka",
-          "Identyfikowalność przepływu",
+          "Sprawy, dokumenty i szablony",
+          "Ekstrakcja i przygotowanie informacji",
+          "Kontrola i walidacja przez człowieka",
+          "Uprawnienia i reguły dostępu",
+          "Śledzenie zadań i spraw",
+          "Śledzenie zmian i decyzji",
         ],
+        caseLink: {
+          hash: "#plataforma-documental-operativa",
+          label: "Zobacz przykład: Platforma dokumentowa i operacyjna",
+        },
         relatedServices: [
-          "Przetwarzanie dokumentów",
-          "Narzędzia wewnętrzne",
-          "Optymalizacja procesów",
-          "Bazy wiedzy",
+          {
+            hash: "#procesamiento-documental",
+            label: "Przetwarzanie dokumentów i wiedza",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Oprogramowanie na miarę",
+          },
+          {
+            hash: "#estrategia-arquitectura",
+            label: "Strategia i architektura",
+          },
+        ],
+      },
+      {
+        id: "logistica",
+        level: "primary",
+        marker: "02",
+        title: "Logistyka",
+        summary:
+          "Planowanie z uwzględnieniem ograniczeń, trasy, dane operacyjne oraz integracje narzędzi koordynujących realizację usług.",
+        description:
+          "Planowanie logistyczne zależy od rzeczywistych ograniczeń: pojemności, okien czasowych, tras, zdarzeń i dostępności danych. Praca łączy te reguły z informacjami operacyjnymi, obecnymi systemami i interfejsami, które pozwalają przeglądać i korygować plan.",
+        visualSrc: "/images/visual-logistics.png",
+        visualAlt: "Wizualizacja 3D operacji logistycznych",
+        tags: ["Planowanie", "Ograniczenia", "Trasy", "Integracje"],
+        bullets: [
+          "Planowanie tras i ładunków",
+          "Pojemność, okna czasowe i zdarzenia",
+          "Import i walidacja danych operacyjnych",
+          "Przegląd tras i wyjątków",
+          "Raportowanie wspierające koordynację usług",
+          "Integracja z API, arkuszami i obecnymi systemami",
+        ],
+        caseLink: {
+          hash: "#planificacion-logistica",
+          label: "Zobacz przykład: Platforma planowania logistycznego",
+        },
+        relatedServices: [
+          {
+            hash: "#consultoria-auditoria-operativa",
+            label: "Diagnoza i definicja",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Oprogramowanie na miarę",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integracje i platformy",
+          },
+        ],
+      },
+      {
+        id: "industria-trazabilidad",
+        legacyId: "industria",
+        level: "primary",
+        marker: "03",
+        cardTitle: "Przemysł",
+        title: "Przemysł i identyfikowalność",
+        summary:
+          "Kontrole jakości, partie i rejestry, dokumentacja oraz identyfikowalność w procesach operacyjnych o określonym zakresie.",
+        description:
+          "W przemyśle jakość opiera się na konkretnych kontrolach, partiach lub rejestrach, powtarzalnej dokumentacji i identyfikowalności łączącej każdą kontrolę ze źródłem. Budujemy narzędzia dla procesów o określonym zakresie, z jasnymi punktami walidacji i odpowiedzialnością. HACCP i bezpieczeństwo żywności są jednym ze szczególnych wzorców w tym kontekście.",
+        visualSrc: "/images/visual-industry-manufacturing.png",
+        visualAlt: "Wizualizacja 3D jakości i identyfikowalności przemysłowej",
+        tags: ["Jakość", "Partie i rejestry", "Dokumentacja", "Identyfikowalność"],
+        bullets: [
+          "Kontrole jakości i punkty przeglądu",
+          "Partie, rejestry i dowody",
+          "Powtarzalna dokumentacja",
+          "Identyfikowalność od źródła po zmianę i walidację",
+          "Procesy o określonym zakresie i jasnej odpowiedzialności",
+          "HACCP jako wzorzec jakości żywności",
+        ],
+        caseLink: {
+          hash: "#calidad-trazabilidad-appcc",
+          label: "Zobacz przykład: Jakość i identyfikowalność HACCP",
+        },
+        relatedServices: [
+          {
+            hash: "#procesamiento-documental",
+            label: "Przetwarzanie dokumentów i wiedza",
+          },
+          {
+            hash: "#herramientas-internas",
+            label: "Oprogramowanie na miarę",
+          },
+          {
+            hash: "#integraciones-plataformas-operativas",
+            label: "Integracje i platformy",
+          },
         ],
       },
       {
         id: "seguros",
+        level: "secondary",
         marker: "04",
         title: "Ubezpieczenia",
         summary:
-          "Pozyskiwanie, kwalifikacja, CRM, wyceny, dalszy kontakt, dokumentacja i raportowanie sprzedażowe.",
-        description:
-          "W ubezpieczeniach proces sprzedażowy zależy od pozyskiwania, kwalifikacji, dokumentacji, wycen, CRM, dalszego kontaktu i raportowania. Możemy połączyć te elementy narzędziami wewnętrznymi, nadzorowaną automatyzacją i czytelniejszymi przepływami informacji.",
-        visualSrc: "/images/visual-industry-insurance.png",
-        visualAlt: "Wizualizacja 3D operacji ubezpieczeniowych",
-        tags: ["Pozyskiwanie", "CRM", "Wyceny", "Raportowanie"],
-        bullets: [
-          "Pozyskiwanie i kwalifikacja",
-          "CRM i wyceny",
-          "Raportowanie i kontrola operacyjna",
-          "Dalszy kontakt sprzedażowy",
-          "Dokumentacja i przekazania",
-          "Automatyzacja nadzorowana",
-        ],
-        relatedServices: [
-          "Optymalizacja procesów",
-          "Integracje / platformy",
-          "Narzędzia wewnętrzne",
-          "Agenci AI",
-        ],
+          "Wyceny, dokumentacja, CRM, dalszy kontakt i przekazania wymagające jasnych reguł oraz kontroli człowieka.",
+        tags: ["Wyceny", "Dokumentacja", "CRM", "Kontrola"],
       },
       {
-        id: "marketing-growth",
+        id: "operaciones-comerciales",
+        legacyId: "marketing-growth",
+        level: "secondary",
         marker: "05",
-        title: "Marketing i sprzedaż",
+        title: "Operacje sprzedażowe",
         summary:
-          "Obsługa leadów, pozyskiwanie, kwalifikacja, raportowanie, CRM, narzędzia wewnętrzne i koordynacja sprzedażowa.",
-        description:
-          "Nie świadczymy usług agencji marketingowej. Nasze dopasowanie jest operacyjne: pozyskiwanie, obsługa leadów, kwalifikacja, CRM, raportowanie, narzędzia wewnętrzne i koordynacja kampanii lub procesów sprzedażowych.",
-        visualSrc: "/images/visual-industry-marketing.png",
-        visualAlt: "Wizualizacja 3D operacji marketingu i sprzedaży",
-        tags: ["Obsługa leadów", "Kwalifikacja", "CRM", "Raportowanie"],
-        bullets: [
-          "Pozyskiwanie i formularze",
-          "Automatyzacje",
-          "Raportowanie sprzedażowe",
-          "Obsługa leadów i kwalifikacja",
-          "Integracja z CRM i śledzenie",
-          "Narzędzia wewnętrzne",
-        ],
-        relatedServices: [
-          "Optymalizacja procesów",
-          "Integracje i platformy",
-          "Narzędzia wewnętrzne",
-          "Agenci AI",
-        ],
+          "Koordynacja pozyskiwania, kwalifikacji, CRM, raportowania i narzędzi wewnętrznych. Tahona nie świadczy usług agencji marketingowej.",
+        tags: ["Kwalifikacja", "CRM", "Raportowanie", "Koordynacja"],
       },
       {
-        id: "salud",
+        id: "salud-no-clinica",
+        legacyId: "salud",
+        level: "secondary",
         marker: "06",
-        title: "Zdrowie",
+        title: "Niekliniczne obszary ochrony zdrowia",
         summary:
-          "Wsparcie operacyjne, dokumentacja, wiedza wewnętrzna i systemy niekliniczne.",
-        description:
-          "W sektorze zdrowia pracujemy wyłącznie nad nieklinicznymi warstwami operacyjnymi: dokumentacją, wiedzą wewnętrzną, koordynacją, raportowaniem i wsparciem administracyjnym.",
-        visualSrc: "/images/visual-industry-health.png",
-        visualAlt: "Wizualizacja 3D nieklinicznych operacji zdrowotnych",
-        tags: ["Wsparcie", "Dokumentacja", "Wiedza", "PoC"],
-        bullets: [
-          "Dokumentacja operacyjna",
-          "Wiedza wewnętrzna",
-          "Koordynacja administracyjna",
-          "Systemy niekliniczne",
-          "Raportowanie wewnętrzne",
-          "Walidacja i przegląd przez człowieka",
-        ],
-        relatedServices: [
-          "Bazy wiedzy",
-          "Przetwarzanie dokumentów",
-          "Narzędzia wewnętrzne",
-          "Integracje / platformy",
-        ],
+          "Koordynacja administracyjna, dokumentacja, wiedza wewnętrzna, komunikacja i niekliniczne wsparcie operacyjne.",
+        tags: ["Administracja", "Dokumentacja", "Wiedza", "Komunikacja"],
+      },
+      {
+        id: "servicios-profesionales",
+        level: "secondary",
+        marker: "07",
+        title: "Usługi profesjonalne",
+        summary:
+          "Praca z klientami, wiedza ekspercka, dokumentacja i narzędzia wewnętrzne, które muszą dzielić kontekst bez utraty punktów kontroli.",
+        tags: ["Klienci", "Wiedza", "Dokumentacja", "Narzędzia"],
+      },
+      {
+        id: "viajes-turismo",
+        level: "secondary",
+        marker: "08",
+        title: "Podróże i turystyka",
+        summary:
+          "Sprzedaż, rezerwacje, dostawcy i operacje koordynowane między CRM, dokumentacją i systemami wewnętrznymi.",
+        tags: ["Rezerwacje", "CRM", "Dostawcy", "Operacje"],
+      },
+      {
+        id: "educacion-formacion",
+        level: "secondary",
+        marker: "09",
+        title: "Edukacja i szkolenia",
+        summary:
+          "Rekrutacja, dokumentacja, monitorowanie i komunikacja na całej ścieżce uczestnika.",
+        tags: ["Rekrutacja", "Dokumentacja", "Monitorowanie", "Komunikacja"],
       },
     ],
     industriesFaq: [
       {
         question: "Czy Tahona specjalizuje się w jednym sektorze?",
         answer:
-          "Nie. Pracujemy nad procesami wewnętrznymi. Niektóre sektory mają szczególnie czytelne wzorce, ale decyzja zależy od procesu, danych, dokumentów i narzędzi danej firmy.",
+          "Nie. Nasze doświadczenie sektorowe i kierunki prac koncentrują się na prawie, logistyce oraz przemyśle i identyfikowalności, a podobne wzorce stosujemy selektywnie w innych kontekstach. Podejście dostosowujemy do użytkowników, reguł, danych, ograniczeń i punktów kontroli właściwych dla danej branży.",
       },
       {
         question: "Co z sektorami regulowanymi?",
@@ -2922,125 +3068,154 @@ export const SITE_CONTENT = {
         id: "plataforma-documental-operativa",
         marker: "01",
         sector: "Prawo",
-        title: "Platforma dokumentowa i operacyjna",
-        summary:
-          "Projekt i wdrożenie platformy wewnętrznej do koordynowania procesów dokumentowych, ekstrakcji informacji, generowania szkiców, walidacji przez człowieka, powtarzalnych zadań i śledzenia statusów.",
+        title: "Dokumentacja prawna powiązana ze sprawą",
+        challenge:
+          "Dokumenty, kontekst sprawy, powtarzalne przygotowywanie materiałów, reguły dostępu, kontrola człowieka i śledzenie zmian były rozproszone między niepołączonymi narzędziami i etapami pracy.",
+        intervention:
+          "Tahona zdefiniowała proces i architekturę, a następnie zaprojektowała i zbudowała wewnętrzną platformę łączącą dane sprawy, przyjmowanie i ekstrakcję dokumentów, przygotowanie projektów, punkty kontroli człowieka oraz śledzenie zadań.",
+        enables: [
+          "Dokumenty i dane powiązane ze sprawą",
+          "Walidacja przez człowieka przed każdym kolejnym krokiem",
+          "Możliwe do prześledzenia wersje, decyzje i zadania",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Strategia i architektura",
+            hash: "#estrategia-arquitectura",
+          },
+          {
+            label: "Przetwarzanie dokumentów i wiedza",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Oprogramowanie na miarę",
+            hash: "#herramientas-internas",
+          },
+        ],
         visualSrc: "/images/visual-case-legal-document-platform.png",
         visualAlt: "Wizualizacja 3D platformy dokumentowej",
-        bullets: [
-          "Przepływy dokumentów ze statusami",
-          "System agentowy z nadzorem",
-          "Generowanie szkiców",
-          "Walidacja przez człowieka przed dalszym krokiem",
-          "Powtarzalne zadania i śledzenie statusów",
-          "Identyfikowalność zmian",
-          "Baza operacyjna dla dokumentacji wewnętrznej",
-        ],
-        tags: [
-          "Przetwarzanie dokumentów",
-          "Narzędzia wewnętrzne",
-          "Bazy wiedzy",
-          "Walidacja przez człowieka",
-        ],
       },
       {
-        id: "planificacion-logistica-reporting",
+        id: "planificacion-logistica",
+        legacyId: "planificacion-logistica-reporting",
         marker: "02",
         sector: "Logistyka",
-        title: "Platforma planowania logistycznego",
-        summary:
-          "Platforma do planowania tras, importu danych operacyjnych, koordynacji zdarzeń, przeglądu dokumentacji logistycznej i generowania użytecznego raportowania operacyjnego.",
+        title: "Planowanie logistyczne z uwzględnieniem ograniczeń operacyjnych",
+        challenge:
+          "Planowanie musi uwzględniać dostępne zasoby, okna czasowe, trasy, zdarzenia i nierówną jakość danych operacyjnych.",
+        intervention:
+          "Tahona zdefiniowała reguły operacyjne i architekturę, a następnie zaprojektowała i zbudowała interfejs planowania z importem i walidacją danych, przeglądem tras, raportowaniem oraz integracjami z istniejącymi narzędziami.",
+        enables: [
+          "Plan możliwy do sprawdzenia przed realizacją",
+          "Jawne ograniczenia, zdarzenia i wyjątki",
+          "Dane i decyzje planistyczne połączone z istniejącymi narzędziami operacyjnymi",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Diagnoza i definicja",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Oprogramowanie na miarę",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integracje i platformy",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-logistics.png",
         visualAlt: "Wizualizacja 3D planowania logistycznego",
-        bullets: [
-          "Optymalizacja tras",
-          "Planowanie tras",
-          "Import danych operacyjnych",
-          "Koordynacja zdarzeń",
-          "Przegląd dokumentów",
-          "Raportowanie operacyjne",
-          "Integracja z istniejącymi narzędziami",
-        ],
-        tags: [
-          "Optymalizacja procesów",
-          "Integracje / platformy",
-          "Przetwarzanie dokumentów",
-          "Raportowanie",
-        ],
       },
       {
         id: "base-conocimiento-empresarial",
         marker: "03",
         sector: "Przekrojowo",
-        title: "Firmowa baza wiedzy",
-        summary:
-          "Warstwa wiedzy wewnętrznej wspierana przez agentów, z wczytywaniem dokumentów, przetwarzaniem, cytowalnymi źródłami, metadanymi, uprawnieniami, ewaluacją, kontrolą człowieka i integracją z narzędziami wewnętrznymi.",
+        title: "Wiedza wewnętrzna ze źródłami, uprawnieniami i ewaluacją",
+        challenge:
+          "Źródła wewnętrzne były rozproszone, uprawnienia zależały od kontekstu, a odpowiedzi musiały pozostać przypisane do źródeł i możliwe do oceny.",
+        intervention:
+          "Tahona zdefiniowała architekturę wiedzy, a następnie zaprojektowała i zbudowała system obejmujący wczytywanie i normalizację, wyszukiwanie wspierane przez AI z cytowaniami, uprawnienia, ewaluację oraz integrację z narzędziami wewnętrznymi.",
+        enables: [
+          "Odpowiedzi wraz ze źródłami",
+          "Dostęp ograniczony przez uprawnienia i zakres",
+          "Ewaluacja i przegląd połączone z narzędziami wewnętrznymi",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Rozwiązania i produkty z AI",
+            hash: "#optimizacion-procesos",
+          },
+          {
+            label: "Przetwarzanie dokumentów i wiedza",
+            hash: "#procesamiento-documental",
+          },
+          {
+            label: "Strategia i architektura",
+            hash: "#estrategia-arquitectura",
+          },
+        ],
         visualSrc: "/images/visual-case-enterprise-knowledge.png",
         visualAlt: "Wizualizacja 3D firmowej bazy wiedzy",
-        bullets: [
-          "Wczytywanie dokumentów",
-          "Normalizacja i metadane",
-          "Cytowalne źródła",
-          "Uprawnienia i zakres",
-          "Ewaluacja odpowiedzi",
-          "Integracja z narzędziami wewnętrznymi",
-        ],
-        tags: [
-          "Bazy wiedzy",
-          "Przetwarzanie dokumentów",
-          "Uprawnienia",
-          "Identyfikowalność",
-        ],
       },
       {
-        id: "documentacion-calidad-trazabilidad",
+        id: "calidad-trazabilidad-appcc",
+        legacyId: "documentacion-calidad-trazabilidad",
         marker: "04",
         sector: "Przemysł",
-        title:
-          "Platforma dokumentacji, jakości i identyfikowalności dla operacji spożywczych",
-        summary:
-          "Platforma przepływów porządkująca dokumentację, walidująca informacje, utrzymująca identyfikowalność i generująca raportowanie w procesach jakości w operacjach spożywczych.",
+        title: "Identyfikowalność żywności od przyjęcia do wysyłki",
+        challenge:
+          "Przyjęcie, kontrole, partie, rejestry i materiały potwierdzające musiały zachować ciągłość i identyfikowalność w jasno określonych procesach jakości żywności.",
+        intervention:
+          "Tahona zdefiniowała proces, zaprojektowała przepływy produktu i zbudowała system dokumentacji, walidacji oraz identyfikowalności z integracjami tam, gdzie wymaga ich proces.",
+        enables: [
+          "Rejestry połączone od przyjęcia po wysyłkę",
+          "Jasne punkty przeglądu dla każdej kontroli",
+          "Dokumentacja i raportowanie dostępne według partii i przepływu",
+        ],
+        relatedCapabilities: [
+          {
+            label: "Diagnoza i definicja",
+            hash: "#consultoria-auditoria-operativa",
+          },
+          {
+            label: "Oprogramowanie na miarę",
+            hash: "#herramientas-internas",
+          },
+          {
+            label: "Integracje i platformy",
+            hash: "#integraciones-plataformas-operativas",
+          },
+        ],
         visualSrc: "/images/visual-case-appcc-quality.png",
         visualAlt: "Wizualizacja 3D jakości i identyfikowalności w przemyśle",
-        bullets: [
-          "Przetwarzanie dokumentów",
-          "HACCP",
-          "Walidacja informacji",
-          "Identyfikowalność procesów",
-          "Raportowanie jakości",
-          "Kontrole operacyjne",
-          "Integracja systemów",
-        ],
-        tags: [
-          "Narzędzia wewnętrzne",
-          "Przetwarzanie dokumentów",
-          "Optymalizacja procesów",
-          "Identyfikowalność",
-        ],
       },
     ],
     workItems: [
       {
         id: "document-platform",
         sector: "Prawo",
-        title: "Platforma dokumentowa i operacyjna",
+        title: "Dokumentacja prawna powiązana ze sprawą",
         description:
-          "Projekt i wdrożenie narzędzia wewnętrznego do koordynowania procesów dokumentowych, ekstrakcji danych ze złożonych dokumentów, generowania szkiców, walidacji przez człowieka, RPA, powtarzalnych zadań i śledzenia statusów.",
+          "Wewnętrzna platforma łącząca sprawy, dokumenty, projekty, kontrolę człowieka i śledzenie zadań we wspólnej architekturze.",
         tags: [
+          "Strategia i architektura",
           "Przetwarzanie dokumentów",
-          "Walidacja przez człowieka",
-          "Zadania wewnętrzne",
-          "Śledzenie statusów",
+          "Oprogramowanie na miarę",
         ],
         imageSrc: "/images/visual-case-legal-document-platform.png",
       },
       {
         id: "logistics-planning",
         sector: "Logistyka",
-        title: "Platforma optymalizacji logistycznej",
+        title: "Planowanie logistyczne z uwzględnieniem ograniczeń operacyjnych",
         description:
-          "Platforma do planowania tras, importu zamówień, koordynacji zdarzeń, przeglądu dokumentacji logistycznej i generowania użytecznego raportowania operacyjnego.",
-        tags: ["Planowanie", "Optymalizacja tras", "Raportowanie"],
+          "Interfejs planowania łączący ograniczenia, dane operacyjne, przegląd tras i istniejące narzędzia.",
+        tags: [
+          "Diagnoza i definicja",
+          "Oprogramowanie na miarę",
+          "Integracje",
+        ],
         imageSrc: "/images/visual-logistics.png",
       },
     ],
