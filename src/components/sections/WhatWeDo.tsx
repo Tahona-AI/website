@@ -51,17 +51,21 @@ export function WhatWeDo({
               ))}
             </div>
 
-            <ul className="mt-8 space-y-3">
-              {copy.bullets.map((item) => (
+            <ol className="mt-10 divide-y divide-gray-300/80 border-y border-gray-300/80">
+              {copy.bullets.map((item, index) => (
                 <li
-                  className="grid grid-cols-[0.75rem_1fr] gap-4 text-base leading-7 text-gray-600"
+                  className="group grid grid-cols-[1.75rem_1fr] items-baseline gap-3 py-4 text-base leading-7 text-gray-700"
                   key={item}
                 >
-                  <span className="mt-2.5 h-1.5 w-1.5 rounded-full bg-brand-600" />
-                  <span>{item}</span>
+                  <span className="text-sm font-semibold leading-7 text-brand-700">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none">
+                    {item}
+                  </span>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </FadeInView>
 

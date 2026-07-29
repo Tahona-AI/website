@@ -28,7 +28,7 @@ function readGeneratedRoute(locale, routeKey) {
 }
 
 describe("industries page contract", () => {
-  test("keeps three primary sectors and three secondary contexts", () => {
+  test("keeps three primary sectors and six secondary contexts", () => {
     const commercialOperationsTitles = {
       es: "Operaciones comerciales",
       en: "Commercial operations",
@@ -47,7 +47,7 @@ describe("industries page contract", () => {
       assert.equal(primaryItems.length, 3, `${locale} primary industry count`);
       assert.equal(
         secondaryItems.length,
-        3,
+        6,
         `${locale} secondary industry count`,
       );
       assert.equal(
@@ -122,7 +122,7 @@ describe("industries page contract", () => {
         );
         assert.equal(
           countMatches(industriesHtml, /data-industry-level="secondary"/g),
-          3,
+          6,
           `${locale} generated secondary cards`,
         );
         assert.match(

@@ -87,6 +87,7 @@ type IndustryItemBase = {
 
 export type PrimaryIndustryItem = IndustryItemBase & {
   readonly bullets: readonly string[];
+  readonly cardTitle?: string;
   readonly caseLink: IndustryLink;
   readonly description: string;
   readonly level: "primary";
@@ -105,6 +106,9 @@ type IndustryItems = readonly [
   PrimaryIndustryItem,
   PrimaryIndustryItem,
   PrimaryIndustryItem,
+  SecondaryIndustryItem,
+  SecondaryIndustryItem,
+  SecondaryIndustryItem,
   SecondaryIndustryItem,
   SecondaryIndustryItem,
   SecondaryIndustryItem,
@@ -156,18 +160,23 @@ type WorkItem = {
 
 type SiteContent = {
   readonly aiApplied: {
+    readonly chart: {
+      readonly ariaLabel: string;
+      readonly axisDateLabel: string;
+      readonly axisDurationLabel: string;
+      readonly caption: string;
+      readonly description: string;
+      readonly scrollLabel: string;
+      readonly sourceLabel: string;
+      readonly title: string;
+      readonly unreliableLabel: string;
+    };
     readonly description: string;
     readonly eyebrow: string;
-    readonly lifecycle: {
-      readonly ariaLabel: string;
-      readonly centerLabel: string;
-      readonly centerTitle: string;
-      readonly stages: readonly {
+    readonly principles: readonly {
         readonly body: string;
-        readonly label: string;
         readonly title: string;
       }[];
-    };
     readonly title: string;
   };
   readonly caseStudies: readonly CaseStudy[];
@@ -241,6 +250,8 @@ type SiteContent = {
       readonly ctaLabel: string;
       readonly description: string;
       readonly eyebrow: string;
+      readonly primaryLabel: string;
+      readonly secondaryLabel: string;
       readonly title: string;
     };
     readonly ourWork: {
@@ -481,6 +492,8 @@ export const SITE_CONTENT = {
         title: "Capacidad tecnológica adaptada a cada sector.",
         description:
           "Cambian los procesos, los usuarios, los datos y las restricciones. Mantenemos el mismo recorrido de principio a fin y orientamos cada solución al resultado que importa en ese contexto.",
+        primaryLabel: "Sectores principales",
+        secondaryLabel: "Otros sectores",
         ctaLabel: "Ver industrias",
       },
       ourWork: {
@@ -531,36 +544,38 @@ export const SITE_CONTENT = {
     },
     aiApplied: {
       eyebrow: "IA aplicada",
-      title: "De procesos complejos a sistemas que ejecutan el trabajo.",
+      title: "La capacidad avanza. El trabajo real exige sistemas fiables.",
       description:
-        "Cuando el proceso es acotado y medible, vamos más allá de construir la herramienta: integramos, operamos y mejoramos el sistema para que una parte del trabajo ocurra con trazabilidad y supervisión.",
-      lifecycle: {
-        ariaLabel: "Ciclo de un sistema que ejecuta trabajo con trazabilidad y supervisión",
-        centerLabel: "Proceso acotado",
-        centerTitle: "Ejecución trazable",
-        stages: [
-          {
-            label: "Resultado",
-            title: "Objetivo y límites",
-            body: "Unidad de trabajo, alcance, excepciones y criterios de calidad.",
-          },
-          {
-            label: "Fundamentos",
-            title: "Datos y contexto",
-            body: "Fuentes, permisos, reglas y conocimiento del negocio.",
-          },
-          {
-            label: "Construcción",
-            title: "Sistema e integración",
-            body: "Producto, IA, herramientas y sistemas conectados.",
-          },
-          {
-            label: "Operación",
-            title: "Supervisión y evolución",
-            body: "Evaluación, trazabilidad, gestión de excepciones y mejora continua.",
-          },
-        ],
+        "Los modelos ya resuelven tareas de software cada vez más largas. En una operación real, esa capacidad solo resulta útil cuando el proceso está acotado, conectado con datos y herramientas, evaluado y supervisado.",
+      chart: {
+        ariaLabel:
+          "Evolución del horizonte de tareas de software completadas por modelos de IA con un cincuenta por ciento de éxito",
+        axisDateLabel: "Fecha de lanzamiento del modelo",
+        axisDurationLabel: "Duración de la tarea para una persona",
+        caption:
+          "Estimaciones p50 e intervalos de METR Time Horizon 1.1 para una selección de modelos. La gráfica no mide la automatización de un proceso de negocio.",
+        description:
+          "Estimaciones públicas p50 e intervalos de confianza de una selección de modelos estado del arte, ordenados por fecha de lanzamiento.",
+        scrollLabel: "Desliza para explorar la gráfica",
+        sourceLabel: "Fuente y metodología",
+        title: "Duración de tareas de software completadas con un 50 % de éxito",
+        unreliableLabel:
+          "Las estimaciones por encima de 16 h no son fiables con la suite actual",
       },
+      principles: [
+        {
+          title: "Acotar el trabajo",
+          body: "Definir la unidad de trabajo, los límites, las excepciones y los criterios de calidad.",
+        },
+        {
+          title: "Integrar el contexto",
+          body: "Conectar datos, herramientas, permisos y trazabilidad con la operación real.",
+        },
+        {
+          title: "Evaluar y supervisar",
+          body: "Medir resultados, revisar excepciones y mantener responsables humanos.",
+        },
+      ],
     },
     servicesPage: {
       hero: {
@@ -606,10 +621,10 @@ export const SITE_CONTENT = {
         secondaryHref: "/services/",
       },
       gridSection: {
-        eyebrow: "Otros contextos",
-        title: "Otros contextos donde aplican estos patrones.",
+        eyebrow: "Otros sectores",
+        title: "Otros sectores donde aplican estos patrones.",
         description:
-          "Seguros, operaciones comerciales y salud no clínica comparten patrones de documentación, reglas, validación e integración que abordamos de forma selectiva según el contexto.",
+          "Aplicamos estos patrones de forma selectiva en seguros, operaciones comerciales, salud no clínica, servicios profesionales, viajes y turismo, y educación y formación.",
       },
       detailSection: {
         eyebrow: "Experiencia sectorial",
@@ -715,7 +730,7 @@ export const SITE_CONTENT = {
         "Servicios de estrategia, inteligencia artificial, producto y software",
       serviceCatalogName: "Familias de servicios Tahona",
       primaryIndustryListName: "Experiencia sectorial y líneas de trabajo activas",
-      secondaryIndustryListName: "Otros contextos donde aplican estos patrones",
+      secondaryIndustryListName: "Otros sectores donde aplican estos patrones",
       casesListName: "Casos de productos y sistemas sobre retos reales",
     },
     serviceFamilies: [
@@ -1009,6 +1024,7 @@ export const SITE_CONTENT = {
         legacyId: "industria",
         level: "primary",
         marker: "03",
+        cardTitle: "Industria",
         title: "Industria y trazabilidad",
         summary:
           "Controles de calidad, lotes y registros, documentación y trazabilidad dentro de flujos operativos acotados.",
@@ -1072,6 +1088,33 @@ export const SITE_CONTENT = {
         summary:
           "Coordinación administrativa, documentación, conocimiento interno, comunicación y soporte operativo no clínico.",
         tags: ["Administración", "Documentación", "Conocimiento", "Comunicación"],
+      },
+      {
+        id: "servicios-profesionales",
+        level: "secondary",
+        marker: "07",
+        title: "Servicios profesionales",
+        summary:
+          "Trabajo con clientes, conocimiento experto, documentación y herramientas internas que deben compartir contexto sin perder puntos de revisión.",
+        tags: ["Clientes", "Conocimiento", "Documentación", "Herramientas"],
+      },
+      {
+        id: "viajes-turismo",
+        level: "secondary",
+        marker: "08",
+        title: "Viajes y turismo",
+        summary:
+          "Venta, reservas, proveedores y operación coordinadas entre CRM, documentación y sistemas internos.",
+        tags: ["Reservas", "CRM", "Proveedores", "Operación"],
+      },
+      {
+        id: "educacion-formacion",
+        level: "secondary",
+        marker: "09",
+        title: "Educación y formación",
+        summary:
+          "Admisión, documentación, seguimiento y comunicación a lo largo del recorrido del alumno.",
+        tags: ["Admisión", "Documentación", "Seguimiento", "Comunicación"],
       },
     ],
     industriesFaq: [
@@ -1407,6 +1450,8 @@ export const SITE_CONTENT = {
         title: "Technology capabilities adapted to each sector.",
         description:
           "Processes, users, data and constraints change. We keep the same end-to-end journey and focus each solution on the outcome that matters in its context.",
+        primaryLabel: "Primary sectors",
+        secondaryLabel: "Other sectors",
         ctaLabel: "View industries",
       },
       ourWork: {
@@ -1457,36 +1502,38 @@ export const SITE_CONTENT = {
     },
     aiApplied: {
       eyebrow: "Applied AI",
-      title: "From complex processes to systems that do the work.",
+      title: "Capability is advancing. Real work demands reliable systems.",
       description:
-        "When the process is bounded and measurable, we go beyond building the tool: we integrate, operate and improve the system so that part of the work happens with traceability and oversight.",
-      lifecycle: {
-        ariaLabel: "Lifecycle of a system that performs work with traceability and oversight",
-        centerLabel: "Bounded process",
-        centerTitle: "Traceable execution",
-        stages: [
-          {
-            label: "Outcome",
-            title: "Goal and boundaries",
-            body: "Unit of work, scope, exceptions and quality criteria.",
-          },
-          {
-            label: "Foundations",
-            title: "Data and context",
-            body: "Sources, permissions, rules and business knowledge.",
-          },
-          {
-            label: "Build",
-            title: "System and integration",
-            body: "Product, AI, tools and connected systems.",
-          },
-          {
-            label: "Operations",
-            title: "Oversight and evolution",
-            body: "Evaluation, traceability, exception handling and continuous improvement.",
-          },
-        ],
+        "Models can already solve increasingly long software tasks. In a real operation, that capability only becomes useful when the process is bounded, connected to data and tools, evaluated and supervised.",
+      chart: {
+        ariaLabel:
+          "Growth in the length of software tasks completed by AI models with a fifty percent success rate",
+        axisDateLabel: "Model release date",
+        axisDurationLabel: "Human task duration",
+        caption:
+          "METR Time Horizon 1.1 p50 estimates and confidence intervals for a selection of models. This chart does not measure the automation of a business process.",
+        description:
+          "Public p50 estimates and confidence intervals for a selection of state-of-the-art models, ordered by release date.",
+        scrollLabel: "Swipe to explore the chart",
+        sourceLabel: "Source and methodology",
+        title: "Length of software tasks completed with a 50% success rate",
+        unreliableLabel:
+          "Measurements above 16 hours are unreliable with the current task suite",
       },
+      principles: [
+        {
+          title: "Bound the work",
+          body: "Define the unit of work, limits, exceptions and quality criteria.",
+        },
+        {
+          title: "Integrate the context",
+          body: "Connect data, tools, permissions and traceability to the real operation.",
+        },
+        {
+          title: "Evaluate and supervise",
+          body: "Measure outcomes, review exceptions and keep people accountable.",
+        },
+      ],
     },
     servicesPage: {
       hero: {
@@ -1532,10 +1579,10 @@ export const SITE_CONTENT = {
         secondaryHref: "/en/services/",
       },
       gridSection: {
-        eyebrow: "Other contexts",
-        title: "Other contexts where these patterns apply.",
+        eyebrow: "Other sectors",
+        title: "Other sectors where these patterns apply.",
         description:
-          "Insurance, commercial operations and non-clinical healthcare share documentation, rules, validation and integration patterns that we address selectively for each context.",
+          "We apply these patterns selectively across insurance, commercial operations, non-clinical healthcare, professional services, travel and tourism, and education and training.",
       },
       detailSection: {
         eyebrow: "Sector experience",
@@ -1640,7 +1687,7 @@ export const SITE_CONTENT = {
         "Strategy, artificial intelligence, product and software services",
       serviceCatalogName: "Tahona service families",
       primaryIndustryListName: "Sector experience and active workstreams",
-      secondaryIndustryListName: "Other contexts where these patterns apply",
+      secondaryIndustryListName: "Other sectors where these patterns apply",
       casesListName: "Product and system cases for real challenges",
     },
     serviceFamilies: [
@@ -1934,6 +1981,7 @@ export const SITE_CONTENT = {
         legacyId: "industria",
         level: "primary",
         marker: "03",
+        cardTitle: "Industry",
         title: "Industry and traceability",
         summary:
           "Quality controls, lots and records, documentation and traceability within bounded operational workflows.",
@@ -1997,6 +2045,33 @@ export const SITE_CONTENT = {
         summary:
           "Administrative coordination, documentation, internal knowledge, communication and non-clinical operational support.",
         tags: ["Administration", "Documentation", "Knowledge", "Communication"],
+      },
+      {
+        id: "servicios-profesionales",
+        level: "secondary",
+        marker: "07",
+        title: "Professional services",
+        summary:
+          "Client work, expert knowledge, documentation and internal tools that need to share context without losing review points.",
+        tags: ["Client work", "Knowledge", "Documentation", "Internal tools"],
+      },
+      {
+        id: "viajes-turismo",
+        level: "secondary",
+        marker: "08",
+        title: "Travel and tourism",
+        summary:
+          "Sales, bookings, suppliers and operations coordinated across CRM, documents and internal systems.",
+        tags: ["Bookings", "CRM", "Suppliers", "Operations"],
+      },
+      {
+        id: "educacion-formacion",
+        level: "secondary",
+        marker: "09",
+        title: "Education and training",
+        summary:
+          "Admissions, documentation, follow-up and communication across the learner journey.",
+        tags: ["Admissions", "Documentation", "Follow-up", "Communication"],
       },
     ],
     industriesFaq: [
@@ -2332,6 +2407,8 @@ export const SITE_CONTENT = {
         title: "Kompetencje technologiczne dopasowane do branży.",
         description:
           "Procesy, użytkownicy, dane i ograniczenia są różne. Zachowujemy ten sam zakres od strategii po wdrożenie, a każde rozwiązanie kierujemy na rezultat ważny w danym kontekście.",
+        primaryLabel: "Główne sektory",
+        secondaryLabel: "Inne sektory",
         ctaLabel: "Zobacz branże",
       },
       ourWork: {
@@ -2382,36 +2459,38 @@ export const SITE_CONTENT = {
     },
     aiApplied: {
       eyebrow: "AI w praktyce",
-      title: "Od złożonych procesów do systemów, które wykonują pracę.",
+      title: "Możliwości rosną. Realna praca wymaga niezawodnych systemów.",
       description:
-        "Gdy proces ma jasno określony zakres i mierzalny rezultat, wykraczamy poza samo zbudowanie narzędzia: integrujemy, obsługujemy i rozwijamy system, aby część pracy odbywała się pod nadzorem i w sposób możliwy do prześledzenia.",
-      lifecycle: {
-        ariaLabel: "Cykl systemu wykonującego pracę pod nadzorem i w sposób możliwy do prześledzenia",
-        centerLabel: "Określony proces",
-        centerTitle: "Praca pod nadzorem",
-        stages: [
-          {
-            label: "Rezultat",
-            title: "Cel i granice",
-            body: "Jednostka pracy, zakres, wyjątki i kryteria jakości.",
-          },
-          {
-            label: "Podstawy",
-            title: "Dane i kontekst",
-            body: "Źródła, uprawnienia, zasady i wiedza biznesowa.",
-          },
-          {
-            label: "Budowa",
-            title: "System i integracja",
-            body: "Produkt, AI, narzędzia i połączone systemy.",
-          },
-          {
-            label: "Obsługa",
-            title: "Nadzór i rozwój",
-            body: "Ewaluacja, śledzenie działań, obsługa wyjątków i ciągłe doskonalenie.",
-          },
-        ],
+        "Modele rozwiązują coraz dłuższe zadania programistyczne. W realnej działalności ta zdolność staje się użyteczna dopiero wtedy, gdy proces ma jasno określony zakres, jest połączony z danymi i narzędziami oraz podlega ewaluacji i nadzorowi.",
+      chart: {
+        ariaLabel:
+          "Wzrost długości zadań programistycznych wykonywanych przez modele AI z pięćdziesięcioprocentową skutecznością",
+        axisDateLabel: "Data premiery modelu",
+        axisDurationLabel: "Czas wykonania zadania przez człowieka",
+        caption:
+          "Estymacje p50 i przedziały ufności METR Time Horizon 1.1 dla wybranych modeli. Wykres nie mierzy automatyzacji procesu biznesowego.",
+        description:
+          "Publiczne estymacje p50 i przedziały ufności dla wybranych modeli state of the art, uporządkowane według daty premiery.",
+        scrollLabel: "Przesuń, aby zobaczyć cały wykres",
+        sourceLabel: "Źródło i metodologia",
+        title: "Długość zadań programistycznych wykonywanych z 50% skutecznością",
+        unreliableLabel:
+          "Pomiary powyżej 16 godzin są niewiarygodne przy obecnym zestawie zadań",
       },
+      principles: [
+        {
+          title: "Ograniczyć zakres pracy",
+          body: "Określić jednostkę pracy, granice, wyjątki i kryteria jakości.",
+        },
+        {
+          title: "Zintegrować kontekst",
+          body: "Połączyć dane, narzędzia, uprawnienia i śledzenie z realnym procesem.",
+        },
+        {
+          title: "Ewaluować i nadzorować",
+          body: "Mierzyć wyniki, analizować wyjątki i zachować odpowiedzialność człowieka.",
+        },
+      ],
     },
     servicesPage: {
       hero: {
@@ -2457,10 +2536,10 @@ export const SITE_CONTENT = {
         secondaryHref: "/pl/services/",
       },
       gridSection: {
-        eyebrow: "Inne konteksty",
-        title: "Inne obszary, w których te wzorce mają zastosowanie.",
+        eyebrow: "Inne sektory",
+        title: "Inne sektory, w których te wzorce mają zastosowanie.",
         description:
-          "Ubezpieczenia, operacje sprzedażowe i niekliniczna ochrona zdrowia łączą wzorce dokumentacji, reguł, kontroli i integracji, które stosujemy selektywnie, zależnie od kontekstu.",
+          "Stosujemy te wzorce selektywnie w ubezpieczeniach, operacjach sprzedażowych, nieklinicznej ochronie zdrowia, usługach profesjonalnych, turystyce oraz edukacji i szkoleniach.",
       },
       detailSection: {
         eyebrow: "Doświadczenie branżowe",
@@ -2565,7 +2644,7 @@ export const SITE_CONTENT = {
         "Usługi strategii, sztucznej inteligencji, produktu i oprogramowania",
       serviceCatalogName: "Rodziny usług Tahona",
       primaryIndustryListName: "Doświadczenie branżowe i aktywne kierunki prac",
-      secondaryIndustryListName: "Inne obszary zastosowania tych wzorców",
+      secondaryIndustryListName: "Inne sektory, w których te wzorce mają zastosowanie",
       casesListName: "Przykłady produktów i systemów dla realnych wyzwań",
     },
     serviceFamilies: [
@@ -2859,6 +2938,7 @@ export const SITE_CONTENT = {
         legacyId: "industria",
         level: "primary",
         marker: "03",
+        cardTitle: "Przemysł",
         title: "Przemysł i identyfikowalność",
         summary:
           "Kontrole jakości, partie i rejestry, dokumentacja oraz identyfikowalność w procesach operacyjnych o określonym zakresie.",
@@ -2922,6 +3002,33 @@ export const SITE_CONTENT = {
         summary:
           "Koordynacja administracyjna, dokumentacja, wiedza wewnętrzna, komunikacja i niekliniczne wsparcie operacyjne.",
         tags: ["Administracja", "Dokumentacja", "Wiedza", "Komunikacja"],
+      },
+      {
+        id: "servicios-profesionales",
+        level: "secondary",
+        marker: "07",
+        title: "Usługi profesjonalne",
+        summary:
+          "Praca z klientami, wiedza ekspercka, dokumentacja i narzędzia wewnętrzne, które muszą dzielić kontekst bez utraty punktów kontroli.",
+        tags: ["Klienci", "Wiedza", "Dokumentacja", "Narzędzia"],
+      },
+      {
+        id: "viajes-turismo",
+        level: "secondary",
+        marker: "08",
+        title: "Podróże i turystyka",
+        summary:
+          "Sprzedaż, rezerwacje, dostawcy i operacje koordynowane między CRM, dokumentacją i systemami wewnętrznymi.",
+        tags: ["Rezerwacje", "CRM", "Dostawcy", "Operacje"],
+      },
+      {
+        id: "educacion-formacion",
+        level: "secondary",
+        marker: "09",
+        title: "Edukacja i szkolenia",
+        summary:
+          "Rekrutacja, dokumentacja, monitorowanie i komunikacja na całej ścieżce uczestnika.",
+        tags: ["Rekrutacja", "Dokumentacja", "Monitorowanie", "Komunikacja"],
       },
     ],
     industriesFaq: [

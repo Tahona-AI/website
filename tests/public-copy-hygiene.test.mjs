@@ -43,6 +43,7 @@ const activePublicFiles = [
   "src/components/sections/Industries.tsx",
   "src/components/sections/OurWork.tsx",
   "src/components/sections/HowWeWork.tsx",
+  "src/data/metr-horizon.ts",
   "src/components/services/EngagementModes.astro",
   "src/components/services/ServiceDetailSections.astro",
   "src/components/services/ServicesFAQ.astro",
@@ -97,7 +98,7 @@ const hybridPositioningPatterns = {
     /estrategia y arquitectura/i,
     /inteligencia artificial/i,
     /producto y software/i,
-    /cuando el proceso es acotado y medible/i,
+    /esa capacidad solo resulta útil cuando el proceso está acotado/i,
     /cuando el alcance y el modelo de colaboración lo requieren/i,
   ],
   en: [
@@ -105,7 +106,7 @@ const hybridPositioningPatterns = {
     /strategy and architecture/i,
     /artificial intelligence/i,
     /product and software/i,
-    /when the process is bounded and measurable/i,
+    /that capability only becomes useful when the process is bounded/i,
     /when the scope and collaboration model require it/i,
   ],
   pl: [
@@ -113,7 +114,7 @@ const hybridPositioningPatterns = {
     /strategia i architektura/i,
     /sztuczna inteligencja/i,
     /produkt i oprogramowanie/i,
-    /gdy proces ma jasno określony zakres i mierzalny rezultat/i,
+    /ta zdolność staje się użyteczna dopiero wtedy, gdy proces ma jasno określony zakres/i,
     /gdy wymagają tego zakres i model współpracy/i,
   ],
 };
@@ -228,6 +229,18 @@ describe("public copy hygiene", () => {
     for (const pattern of forbiddenPublicCategoryPatterns) {
       assert.doesNotMatch(publicPositioningSource, pattern);
     }
+  });
+
+  test("applied AI evidence stays source-backed and explicitly limited", () => {
+    const i18nSource = readProjectFile("src/i18n/content.ts");
+    const dataSource = readProjectFile("src/data/metr-horizon.ts");
+
+    assert.match(i18nSource, /METR Time Horizon 1\.1/i);
+    assert.match(i18nSource, /no mide la automatización de un proceso de negocio/i);
+    assert.match(i18nSource, /por encima de 16 h no son fiables/i);
+    assert.match(dataSource, /https:\/\/metr\.org\/time-horizons\//);
+    assert.match(dataSource, /ciLowMinutes/);
+    assert.match(dataSource, /ciHighMinutes/);
   });
 
   test("homepage hero keeps the concise approved copy in every locale", () => {
