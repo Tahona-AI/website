@@ -9,6 +9,7 @@ import "@fontsource/geist-sans/700.css";
 import "@fontsource/geist-mono/400.css";
 import "@fontsource/geist-mono/500.css";
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import SEO from "../components/SEO.astro";
 import StructuredData from "../components/StructuredData.astro";
 import {
@@ -39,10 +40,45 @@ const {
   nofollow,
   pageKey = getRouteKeyFromPath(Astro.url.pathname),
 } = Astro.props;
+
+const pageWipeAnimation = {
+  forwards: {
+    old: {
+      name: "tahona-page-hold",
+      duration: "380ms",
+      easing: "linear",
+      fillMode: "both",
+    },
+    new: {
+      name: "tahona-page-wipe-in",
+      duration: "380ms",
+      easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+      fillMode: "both",
+    },
+  },
+  backwards: {
+    old: {
+      name: "tahona-page-hold",
+      duration: "380ms",
+      easing: "linear",
+      fillMode: "both",
+    },
+    new: {
+      name: "tahona-page-wipe-in",
+      duration: "380ms",
+      easing: "cubic-bezier(0.65, 0, 0.35, 1)",
+      fillMode: "both",
+    },
+  },
+};
 ---
 
 <!doctype html>
-<html lang={LOCALE_DETAILS[locale].htmlLang}>
+<html
+  lang={LOCALE_DETAILS[locale].htmlLang}
+  transition:name="root"
+  transition:animate={pageWipeAnimation}
+>
   <head>
     <meta charset="utf-8" />
 
@@ -71,8 +107,62 @@ const {
 
     <!-- Structured Data -->
     <StructuredData locale={locale} pageKey={pageKey} />
+    <ClientRouter />
   </head>
   <body class="font-body antialiased">
     <slot />
   </body>
 </html>
+
+<style is:global>
+  @property --tahona-wipe-front {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: -42%;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+
+  ::view-transition-new(root) {
+    z-index: 2;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 var(--tahona-wipe-front),
+      transparent calc(var(--tahona-wipe-front) + 42%),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      #000 0%,
+      #000 var(--tahona-wipe-front),
+      transparent calc(var(--tahona-wipe-front) + 42%),
+      transparent 100%
+    );
+  }
+
+  @keyframes tahona-page-hold {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes tahona-page-wipe-in {
+    from {
+      --tahona-wipe-front: -42%;
+    }
+    to {
+      --tahona-wipe-front: 100%;
+    }
+  }
+</style>

@@ -32,6 +32,19 @@ export function NavLink({
       )}
       href={item.href}
       onClick={(event) => {
+        if (
+          variant === "mobile" &&
+          event.button === 0 &&
+          !event.metaKey &&
+          !event.ctrlKey &&
+          !event.shiftKey &&
+          !event.altKey
+        ) {
+          event.preventDefault();
+          onSelect(item.href);
+          return;
+        }
+
         if (!shouldScrollCurrentPage) {
           return;
         }

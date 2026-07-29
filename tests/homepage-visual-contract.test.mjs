@@ -55,12 +55,14 @@ describe("homepage visual refinement contract", () => {
   test("centers one shared geometric FAQ icon in both accordions", () => {
     const servicesFaq = read("src/components/services/ServicesFAQ.astro");
     const industriesFaq = read("src/components/industries/IndustriesFAQ.astro");
+    const accordion = read("src/components/ui/FaqAccordion.astro");
     const icon = read("src/components/ui/FaqToggleIcon.astro");
 
     for (const faq of [servicesFaq, industriesFaq]) {
-      assert.match(faq, /FaqToggleIcon/);
+      assert.match(faq, /FaqAccordion/);
       assert.doesNotMatch(faq, />\s*\+\s*</);
     }
+    assert.match(accordion, /FaqToggleIcon/);
     assert.match(icon, /before:top-1\/2/);
     assert.match(icon, /before:-translate-y-1\/2/);
     assert.match(icon, /after:left-1\/2/);

@@ -1,0 +1,106 @@
+---
+import FaqToggleIcon from "@/components/ui/FaqToggleIcon.astro";
+
+type FaqItem = {
+  readonly answer: string;
+  readonly question: string;
+};
+
+interface Props {
+  items: readonly FaqItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="border-t border-gray-200" data-faq-list>
+  {items.map((item, index) => (
+    <details
+      class="group overflow-hidden border-b border-gray-200 py-6"
+      data-faq-item
+      open={index === 0}
+    >
+      <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-heading text-lg font-semibold text-gray-900 text-balance">
+        <span>{item.question}</span>
+        <FaqToggleIcon />
+      </summary>
+      <div data-faq-answer>
+        <p class="max-w-2xl pt-5 text-base leading-8 text-gray-600 text-pretty">
+          {item.answer}
+        </p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<script>
+  const FAQ_SELECTOR = "[data-faq-item]";
+  const ANSWER_SELECTOR = "[data-faq-answer]";
+  const SUMMARY_SELECTOR = ":scope > summary";
+  const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+  function initializeFaqAnimations() {
+    const reducedMotion = window.matchMedia(REDUCED_MOTION_QUERY);
+
+    document.querySelectorAll<HTMLDetailsElement>(FAQ_SELECTOR).forEach((item) => {
+      if (item.dataset.faqReady === "true") return;
+
+      const summary = item.querySelector<HTMLElement>(SUMMARY_SELECTOR);
+      const answer = item.querySelector<HTMLElement>(ANSWER_SELECTOR);
+      if (!summary || !answer) return;
+
+      item.dataset.faqReady = "true";
+      let isAnimating = false;
+
+      summary.addEventListener("click", (event) => {
+        if (reducedMotion.matches) return;
+
+        if (isAnimating) {
+          event.preventDefault();
+          return;
+        }
+
+        event.preventDefault();
+        isAnimating = true;
+
+        if (item.open) {
+          const animation = answer.animate(
+            [
+              { height: `${answer.scrollHeight}px`, opacity: 1, transform: "translateY(0)" },
+              { height: "0px", opacity: 0, transform: "translateY(-4px)" },
+            ],
+            { duration: 180, easing: "cubic-bezier(0.4, 0, 1, 1)" },
+          );
+
+          animation.addEventListener("finish", () => {
+            item.open = false;
+            isAnimating = false;
+          }, { once: true });
+          animation.addEventListener("cancel", () => {
+            isAnimating = false;
+          }, { once: true });
+          return;
+        }
+
+        item.open = true;
+        const animation = answer.animate(
+          [
+            { height: "0px", opacity: 0, transform: "translateY(-4px)" },
+            { height: `${answer.scrollHeight}px`, opacity: 1, transform: "translateY(0)" },
+          ],
+          { duration: 240, easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
+        );
+
+        animation.addEventListener("finish", () => {
+          isAnimating = false;
+        }, { once: true });
+        animation.addEventListener("cancel", () => {
+          isAnimating = false;
+        }, { once: true });
+      });
+    });
+  }
+
+  initializeFaqAnimations();
+  document.addEventListener("astro:page-load", initializeFaqAnimations);
+</script>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FocusEvent, MouseEvent } from "react";
 import { CaretDownIcon, ListIcon, XIcon } from "@phosphor-icons/react";
+import { navigate } from "astro:transitions/client";
 import { cn } from "@/lib/utils";
 import {
   getContactHref,
@@ -36,6 +37,16 @@ function isPlaceholderHref(href: string) {
   return href === "#";
 }
 
+function isUnmodifiedPrimaryClick(event: MouseEvent<HTMLAnchorElement>) {
+  return (
+    event.button === 0 &&
+    !event.metaKey &&
+    !event.ctrlKey &&
+    !event.shiftKey &&
+    !event.altKey
+  );
+}
+
 export function Navbar({
   initialPath = HOME_PATH,
   locale = DEFAULT_LOCALE,
@@ -48,9 +59,11 @@ export function Navbar({
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
   const [currentPath, setCurrentPath] = useState(initialPath || HOME_PATH);
+  const pendingNavigationRef = useRef<string | null>(null);
   const content = getContent(locale);
   const contactHref = getContactHref();
   const homeHref = getLocalizedPath(locale, "home");
+  const servicesHref = getLocalizedPath(locale, "services");
   const pageNavItems = getPageNavItems(locale);
 
   useEffect(() => {
@@ -80,7 +93,61 @@ export function Navbar({
     scrollToHash(href);
   };
 
-  const handlePlaceholderLinkClick = (
+  const handleServicesBlur = (event: FocusEvent<HTMLDivElement>) => {
+    const nextTarget = event.relatedTarget;
+    if (nextTarget instanceof Node && event.currentTarget.contains(nextTarget)) {
+      return;
+    }
+
+    setIsServicesMenuOpen(false);
+  };
+
+  const completePendingNavigation = () => {
+    const destination = pendingNavigationRef.current;
+    if (!destination) {
+      return;
+    }
+
+    pendingNavigationRef.current = null;
+    const nextUrl = new URL(destination, window.location.href);
+
+    if (
+      nextUrl.origin === window.location.origin &&
+      nextUrl.pathname === window.location.pathname
+    ) {
+      const nextRelativeUrl = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
+      const currentRelativeUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+      if (nextRelativeUrl !== currentRelativeUrl) {
+        window.history.pushState({}, "", nextRelativeUrl);
+      }
+
+      scrollToHash(nextUrl.hash || "#hero");
+      return;
+    }
+
+    navigate(destination);
+  };
+
+  const queueNavigation = (href: string) => {
+    pendingNavigationRef.current = href;
+  };
+
+  const handleServicesClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (!isUnmodifiedPrimaryClick(event)) {
+      return;
+    }
+
+    event.preventDefault();
+    queueNavigation(servicesHref);
+    setIsServicesMenuOpen(false);
+
+    if (!isServicesMenuOpen) {
+      window.requestAnimationFrame(completePendingNavigation);
+    }
+  };
+
+  const handleDesktopServicesMenuLinkClick = (
     event: MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
@@ -89,19 +156,44 @@ export function Navbar({
       return;
     }
 
-    if (href.startsWith("#")) {
-      event.preventDefault();
-      handleNavSelect(href);
-    }
-  };
-
-  const handleServicesBlur = (event: FocusEvent<HTMLDivElement>) => {
-    const nextTarget = event.relatedTarget;
-    if (nextTarget instanceof Node && event.currentTarget.contains(nextTarget)) {
+    if (!isUnmodifiedPrimaryClick(event)) {
       return;
     }
 
+    event.preventDefault();
+    queueNavigation(href);
     setIsServicesMenuOpen(false);
+  };
+
+  const handleMobileNavSelect = (href: string) => {
+    if (isPlaceholderHref(href)) {
+      return;
+    }
+
+    queueNavigation(href);
+    setIsMobileMenuOpen(false);
+    setIsMobileServicesOpen(false);
+
+    if (!isMobileMenuOpen) {
+      window.requestAnimationFrame(completePendingNavigation);
+    }
+  };
+
+  const handleMobileLinkClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    if (isPlaceholderHref(href)) {
+      event.preventDefault();
+      return;
+    }
+
+    if (!isUnmodifiedPrimaryClick(event)) {
+      return;
+    }
+
+    event.preventDefault();
+    handleMobileNavSelect(href);
   };
 
   const currentRouteKey = getRouteKeyFromPath(currentPath);
@@ -155,16 +247,16 @@ export function Navbar({
                 onMouseEnter={() => setIsServicesMenuOpen(true)}
                 onMouseLeave={() => setIsServicesMenuOpen(false)}
               >
-                <button
+                <a
                   aria-controls="services-mega-menu"
                   aria-expanded={isServicesMenuOpen}
                   className={cn(
                     "inline-flex items-center gap-1.5 border-b-2 border-transparent py-1 text-sm font-medium text-gray-600 transition-colors duration-200 hover:border-brand-700 hover:text-brand-800",
                     servicesIsActive && "border-brand-700 text-brand-800"
                   )}
-                  onClick={() => setIsServicesMenuOpen((isOpen) => !isOpen)}
+                  href={servicesHref}
+                  onClick={handleServicesClick}
                   onFocus={() => setIsServicesMenuOpen(true)}
-                  type="button"
                 >
                   <span>{content.navigation.servicesLabel}</span>
                   <CaretDownIcon
@@ -174,12 +266,13 @@ export function Navbar({
                       isServicesMenuOpen && "rotate-180"
                     )}
                   />
-                </button>
+                </a>
 
                 <ServicesMegaMenu
                   isOpen={isServicesMenuOpen}
                   locale={locale}
-                  onLinkClick={handlePlaceholderLinkClick}
+                  onExitComplete={completePendingNavigation}
+                  onLinkClick={handleDesktopServicesMenuLinkClick}
                 />
               </div>
 
@@ -238,8 +331,9 @@ export function Navbar({
         isServicesOpen={isMobileServicesOpen}
         locale={locale}
         onClose={() => setIsMobileMenuOpen(false)}
-        onNavSelect={handleNavSelect}
-        onServiceLinkClick={handlePlaceholderLinkClick}
+        onExitComplete={completePendingNavigation}
+        onNavSelect={handleMobileNavSelect}
+        onServiceLinkClick={handleMobileLinkClick}
         onServicesToggle={() => setIsMobileServicesOpen((isOpen) => !isOpen)}
       />
     </>
