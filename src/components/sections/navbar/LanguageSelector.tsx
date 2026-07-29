@@ -1,7 +1,11 @@
 import { useEffect, useId, useRef, useState } from "react";
-import type { KeyboardEvent as ReactKeyboardEvent } from "react";
+import type {
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent as ReactMouseEvent,
+} from "react";
 import { CaretDownIcon, CheckIcon } from "@phosphor-icons/react";
 import { AnimatePresence, motion } from "motion/react";
+import { navigate } from "astro:transitions/client";
 import { cn } from "@/lib/utils";
 import {
   getLanguageAlternates,
@@ -34,10 +38,15 @@ const MENU_CLASSES = {
 export function LanguageSelector({
   currentPath,
   label,
+  onNavigate,
   variant = "desktop",
 }: {
   readonly currentPath: string;
   readonly label: string;
+  readonly onNavigate?: (
+    event: ReactMouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => void;
   readonly variant?: LanguageSelectorVariant;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +54,7 @@ export function LanguageSelector({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const optionRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const pendingNavigationRef = useRef<string | null>(null);
   const currentLocale = getLocaleFromPath(currentPath);
   const routeKey = getRouteKeyFromPath(currentPath);
   const alternates = getLanguageAlternates(routeKey);
@@ -79,6 +89,46 @@ export function LanguageSelector({
   const openAndFocus = (index: number) => {
     setIsOpen(true);
     focusOption(index);
+  };
+
+  const completeLanguageNavigation = () => {
+    const destination = pendingNavigationRef.current;
+    if (!destination) return;
+
+    pendingNavigationRef.current = null;
+    navigate(destination);
+  };
+
+  const handleLanguageClick = (
+    event: ReactMouseEvent<HTMLAnchorElement>,
+    href: string,
+    isActive: boolean
+  ) => {
+    if (isActive) {
+      event.preventDefault();
+      setIsOpen(false);
+      return;
+    }
+
+    setIsOpen(false);
+
+    if (onNavigate) {
+      onNavigate(event, href);
+      return;
+    }
+
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    pendingNavigationRef.current = href;
   };
 
   const handleTriggerKeyDown = (
@@ -167,7 +217,7 @@ export function LanguageSelector({
         />
       </button>
 
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={completeLanguageNavigation}>
         {isOpen && (
           <motion.div
             animate={{ opacity: 1, y: 0 }}
@@ -201,7 +251,9 @@ export function LanguageSelector({
                     )}
                     href={alternate.pathname}
                     key={alternate.locale}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(event) =>
+                      handleLanguageClick(event, alternate.pathname, isActive)
+                    }
                     onKeyDown={(event) => handleOptionKeyDown(event, index)}
                     ref={(element) => {
                       optionRefs.current[index] = element;

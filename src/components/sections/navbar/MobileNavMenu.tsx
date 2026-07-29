@@ -21,6 +21,7 @@ export function MobileNavMenu({
   isServicesOpen,
   locale,
   onClose,
+  onExitComplete,
   onNavSelect,
   onServiceLinkClick,
   onServicesToggle,
@@ -30,6 +31,7 @@ export function MobileNavMenu({
   readonly isServicesOpen: boolean;
   readonly locale: Locale;
   readonly onClose: () => void;
+  readonly onExitComplete: () => void;
   readonly onNavSelect: (href: string) => void;
   readonly onServiceLinkClick: ServiceMenuLinkHandler;
   readonly onServicesToggle: () => void;
@@ -41,7 +43,7 @@ export function MobileNavMenu({
   const serviceMenuColumns = getServiceMenuColumns(locale);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={onExitComplete}>
       {isOpen && (
         <>
           <motion.button
@@ -57,6 +59,7 @@ export function MobileNavMenu({
           <motion.div
             animate={{ x: 0 }}
             className="fixed inset-y-0 right-0 z-50 w-80 max-w-[86vw] overflow-y-auto bg-white pt-[env(safe-area-inset-top)] shadow-xl md:hidden"
+            data-mobile-nav-panel
             exit={{ x: "100%" }}
             initial={{ x: "100%" }}
             transition={{ duration: 0.18, ease: "easeOut" }}
@@ -137,6 +140,7 @@ export function MobileNavMenu({
                 <LanguageSelector
                   currentPath={currentPath}
                   label={content.navigation.languageLabel}
+                  onNavigate={onServiceLinkClick}
                   variant="mobile"
                 />
               </div>

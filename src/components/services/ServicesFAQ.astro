@@ -1,6 +1,6 @@
 ---
 import { getServicesFaq } from "@/components/services/services-faq";
-import FaqToggleIcon from "@/components/ui/FaqToggleIcon.astro";
+import FaqAccordion from "@/components/ui/FaqAccordion.astro";
 import { getContent } from "@/i18n/content";
 import { DEFAULT_LOCALE } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
@@ -29,18 +29,6 @@ const copy = getContent(locale).servicesPage.faqSection;
       </p>
     </div>
 
-    <div class="border-t border-gray-200">
-      {servicesFaq.map((item, index) => (
-        <details class="group border-b border-gray-200 py-6" open={index === 0}>
-          <summary class="flex cursor-pointer list-none items-start justify-between gap-6 font-heading text-lg font-semibold text-gray-900 text-balance">
-            <span>{item.question}</span>
-            <FaqToggleIcon />
-          </summary>
-          <p class="mt-5 max-w-2xl text-base leading-8 text-gray-600 text-pretty">
-            {item.answer}
-          </p>
-        </details>
-      ))}
-    </div>
+    <FaqAccordion items={servicesFaq} />
   </div>
 </section>

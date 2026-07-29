@@ -12,10 +12,12 @@ import type { Locale } from "@/i18n/routing";
 export function ServicesMegaMenu({
   isOpen,
   locale,
+  onExitComplete,
   onLinkClick,
 }: {
   readonly isOpen: boolean;
   readonly locale: Locale;
+  readonly onExitComplete: () => void;
   readonly onLinkClick: ServiceMenuLinkHandler;
 }) {
   const navigation = getContent(locale).navigation;
@@ -23,7 +25,7 @@ export function ServicesMegaMenu({
   const servicesOverviewHref = getServicesOverviewHref(locale);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={onExitComplete}>
       {isOpen && (
         <motion.div
           animate={{ opacity: 1, y: 0 }}
