@@ -19,7 +19,7 @@ const WRAPPER_CLASSES = {
 
 const TRIGGER_CLASSES = {
   desktop:
-    "inline-flex h-10 min-w-[4.25rem] items-center justify-center gap-2 rounded-full border border-gray-200 bg-white/78 px-3 text-xs font-semibold text-gray-700 shadow-sm transition-[border-color,background-color,color,box-shadow] duration-200 hover:border-brand-200 hover:bg-brand-50/70 hover:text-brand-800",
+    "inline-flex h-10 min-w-[4.25rem] items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 text-xs font-semibold text-white/85 backdrop-blur-sm transition-[border-color,background-color,color,box-shadow] duration-200 hover:border-white/40 hover:bg-white/20 hover:text-white",
   mobile:
     "flex h-11 w-full items-center justify-between rounded-xl border border-gray-200 bg-white px-3.5 text-sm font-medium text-gray-700 shadow-sm transition-[border-color,background-color,color] duration-200 hover:border-brand-200 hover:bg-brand-50/60 hover:text-brand-800",
 } as const satisfies Record<LanguageSelectorVariant, string>;
@@ -150,7 +150,7 @@ export function LanguageSelector({
         type="button"
       >
         <span className="flex min-w-0 items-center gap-2.5">
-          <span className="font-mono text-[0.7rem] font-medium tracking-[0.08em] text-brand-700">
+          <span className="font-mono text-[0.7rem] font-medium tracking-[0.08em] text-white">
             {currentDetails.label}
           </span>
           {variant === "mobile" && (
@@ -160,7 +160,7 @@ export function LanguageSelector({
         <CaretDownIcon
           aria-hidden="true"
           className={cn(
-            "size-3.5 shrink-0 text-gray-500 transition-transform duration-200",
+            "size-3.5 shrink-0 text-white/70 transition-transform duration-200",
             isOpen && "rotate-180 text-brand-700"
           )}
           weight="bold"

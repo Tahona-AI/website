@@ -5,7 +5,7 @@ type NavLinkVariant = "desktop" | "mobile";
 
 const NAV_LINK_VARIANT_CLASSES = {
   desktop:
-    "py-1 text-sm text-gray-600 hover:border-brand-700 hover:text-brand-800",
+    "py-1 text-sm text-gray-700 hover:border-brand-700 hover:text-brand-800",
   mobile:
     "py-3 text-lg text-gray-700 hover:border-brand-700 hover:text-brand-800",
 } as const satisfies Record<NavLinkVariant, string>;

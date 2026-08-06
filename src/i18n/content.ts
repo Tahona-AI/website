@@ -457,9 +457,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["De la estrategia a la implementación."],
+        titleLines: ["De la estrategia", "a la implementación."],
         description:
-          "Tahona es el partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
+          "Tahona es el partner tecnológico para diseñar, construir e integrar software a medida y soluciones de IA.",
         primaryLabel: "Hablemos",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
@@ -470,7 +470,6 @@ export const SITE_CONTENT = {
         title: "Estrategia, producto y tecnología en un mismo equipo.",
         description: [
           "Unimos consultoría, producto e ingeniería para convertir retos abiertos en soluciones que funcionan. Podemos entrar desde la definición, construir el producto o sistema, integrarlo en el negocio y seguir evolucionándolo en producción.",
-          "El resultado puede ser un producto digital, software a medida o una solución de IA. En procesos acotados y medibles, también podemos asumir la ejecución de una parte del trabajo.",
         ],
         bullets: [
           "Diagnóstico, definición de producto y estrategia tecnológica.",
@@ -1428,7 +1427,6 @@ export const SITE_CONTENT = {
         title: "Strategy, product and technology in one team.",
         description: [
           "We bring consulting, product and engineering together to turn open-ended challenges into working solutions. We can join at definition, build the product or system, integrate it into the business and continue evolving it in production.",
-          "The outcome may be a digital product, custom software or an AI solution. When the process is bounded and measurable, we can also take on execution of part of the work.",
         ],
         bullets: [
           "Discovery, product definition and technology strategy.",
@@ -2385,7 +2383,6 @@ export const SITE_CONTENT = {
         title: "Strategia, produkt i technologia w jednym zespole.",
         description: [
           "Łączymy doradztwo, produkt i inżynierię, aby przekładać otwarte wyzwania na działające rozwiązania. Możemy zacząć od definicji, zbudować produkt lub system, zintegrować go z firmą i dalej rozwijać w środowisku produkcyjnym.",
-          "Efektem może być produkt cyfrowy, oprogramowanie na miarę lub rozwiązanie AI. Gdy proces ma jasno określony zakres i mierzalny rezultat, możemy także przejąć realizację części pracy.",
         ],
         bullets: [
           "Diagnoza, definicja produktu i strategia technologiczna.",

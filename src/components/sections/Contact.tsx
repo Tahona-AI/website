@@ -90,20 +90,18 @@ export function Contact({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-surface py-24" id="contacto">
-        <div className="section-fade-white-to-surface" />
-
+      <section className="relative overflow-hidden bg-[#1e4533] py-24" id="contacto">
         <div className="relative mx-auto max-w-7xl">
           <div className="relative z-20 px-6 sm:px-10 lg:px-16">
             <div>
-              <div className="inline-flex items-center gap-3 text-sm text-gray-500">
-                <span className="h-px w-10 bg-brand-300" />
-                <span className="font-medium text-gray-600">{copy.eyebrow}</span>
+              <div className="inline-flex items-center gap-3 text-sm text-white/70">
+                <span className="h-px w-10 bg-white/50" />
+                <span className="font-medium text-white/80">{copy.eyebrow}</span>
               </div>
-              <h2 className="mt-4 max-w-6xl font-heading text-3xl font-bold text-gray-900 text-balance sm:text-4xl md:text-5xl">
+              <h2 className="mt-4 max-w-6xl font-heading text-3xl font-bold text-white text-balance sm:text-4xl md:text-5xl">
                 {copy.title}
               </h2>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-gray-600 text-pretty md:text-lg">
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-white/75 text-pretty md:text-lg">
                 {copy.description}
               </p>
             </div>
