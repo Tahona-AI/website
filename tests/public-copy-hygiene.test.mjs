@@ -247,7 +247,7 @@ describe("public copy hygiene", () => {
     const i18nSource = readProjectFile("src/i18n/content.ts");
     const approvedHeroCopy = [
       "De la estrategia a la implementación.",
-      "Tahona es el partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
+      "Tahona es el partner tecnológico para diseñar, construir e integrar software a medida y soluciones de IA.",
       "From strategy to implementation.",
       "Tahona is the technology partner for designing, building and integrating digital products, custom software and AI solutions.",
       "Od strategii do wdrożenia.",

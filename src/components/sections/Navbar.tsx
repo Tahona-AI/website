@@ -16,7 +16,6 @@ import {
   getRouteKeyFromPath,
 } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
-import { LanguageSelector } from "@/components/sections/navbar/LanguageSelector";
 import { MobileNavMenu } from "@/components/sections/navbar/MobileNavMenu";
 import { NavLink } from "@/components/sections/navbar/NavLink";
 import { ServicesMegaMenu } from "@/components/sections/navbar/ServicesMegaMenu";
@@ -204,14 +203,14 @@ export function Navbar({
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 border-b border-gray-200/80 bg-white/94 pt-[env(safe-area-inset-top)] backdrop-blur-xl transition-shadow duration-200",
-          isScrolled && "shadow-[0_18px_40px_-30px_rgba(31,31,31,0.55)]"
+          "fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white pt-[env(safe-area-inset-top)] transition-shadow duration-300",
+          isScrolled && "shadow-[0_18px_40px_-30px_rgba(31,31,31,0.2)]"
         )}
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between md:h-20">
+          <div className="relative flex h-16 items-center justify-between md:h-20">
             <a
-              className="flex items-center gap-3"
+              className="flex items-center gap-3 transition-opacity hover:opacity-80"
               href={homeHref}
               onClick={(event) => {
                 if (!isHomePath) {
@@ -227,7 +226,7 @@ export function Navbar({
                 className="h-6 w-6 md:h-7 md:w-7"
                 decoding="async"
                 height={40}
-                src="/images/logos/tahona-favicon.svg"
+                src="/images/logos/tahona-mark-green.svg"
                 width={40}
               />
               <span className="font-heading text-xl font-bold text-gray-900">
@@ -235,7 +234,7 @@ export function Navbar({
               </span>
             </a>
 
-            <div className="hidden items-center gap-7 md:flex">
+            <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 md:flex">
               <NavLink
                 isActive={isHomePath}
                 item={pageNavItems[0]}
@@ -251,7 +250,7 @@ export function Navbar({
                   aria-controls="services-mega-menu"
                   aria-expanded={isServicesMenuOpen}
                   className={cn(
-                    "inline-flex items-center gap-1.5 border-b-2 border-transparent py-1 text-sm font-medium text-gray-600 transition-colors duration-200 hover:border-brand-700 hover:text-brand-800",
+                    "inline-flex items-center gap-1.5 border-b-2 border-transparent py-1 text-sm font-medium text-gray-700 transition-colors duration-200 hover:border-brand-700 hover:text-brand-800",
                     servicesIsActive && "border-brand-700 text-brand-800"
                   )}
                   href={servicesHref}
@@ -285,25 +284,21 @@ export function Navbar({
                 />
               ))}
 
-              <LanguageSelector
-                currentPath={currentPath}
-                label={content.navigation.languageLabel}
-              />
-
-              <a
-                className={cn(
-                  primaryCtaBaseClass,
-                  "min-h-10 min-w-36 justify-center rounded-full px-6 text-sm font-semibold"
-                )}
-                href={contactHref}
-                onClick={(event) => {
-                  event.preventDefault();
-                  handleNavSelect(contactHref);
-                }}
-              >
-                {content.navigation.contactLabel}
-              </a>
             </div>
+
+            <a
+              className={cn(
+                primaryCtaBaseClass,
+                "hidden min-h-10 min-w-36 justify-center rounded-full px-6 text-sm font-semibold md:inline-flex"
+              )}
+              href={contactHref}
+              onClick={(event) => {
+                event.preventDefault();
+                handleNavSelect(contactHref);
+              }}
+            >
+              {content.navigation.contactLabel}
+            </a>
 
             <button
               aria-expanded={isMobileMenuOpen}
