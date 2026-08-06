@@ -67,7 +67,7 @@ export function Hero({
           className="relative left-1/2 h-[52svh] min-h-[22rem] w-screen -translate-x-1/2 overflow-hidden sm:h-[58svh]"
         >
           <img
-            src="/images/fondo_olivo.png"
+            src="/images/fondo_olivo_singemini.png"
             alt="Paisaje mediterráneo con un olivo"
             className="h-full w-full object-cover object-[center_85%]"
           />
