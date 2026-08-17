@@ -210,41 +210,32 @@ export function Navbar({
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between md:h-20">
-            <div className="flex items-center gap-3">
-              <a
-                className="flex items-center gap-3 transition-opacity hover:opacity-80"
-                href={homeHref}
-                onClick={(event) => {
-                  if (!isHomePath) {
-                    return;
-                  }
+            <a
+              className="flex items-center gap-3 transition-opacity hover:opacity-80"
+              href={homeHref}
+              onClick={(event) => {
+                if (!isHomePath) {
+                  return;
+                }
 
-                  event.preventDefault();
-                  handleNavSelect("#hero");
-                }}
-              >
-                <img
-                  alt="Tahona"
-                  className="size-6 md:size-7"
-                  decoding="async"
-                  height={40}
-                  src="/images/logos/tahona-mark-green.svg"
-                  width={40}
-                />
-                <span className="font-heading text-xl font-bold text-gray-900">
-                  Tahona
-                </span>
-              </a>
+                event.preventDefault();
+                handleNavSelect("#hero");
+              }}
+            >
+              <img
+                alt="Tahona"
+                className="size-6 md:size-7"
+                decoding="async"
+                height={40}
+                src="/images/logos/tahona-mark-green.svg"
+                width={40}
+              />
+              <span className="font-heading text-xl font-bold text-gray-900">
+                Tahona
+              </span>
+            </a>
 
-              <div className="hidden md:block">
-                <LanguageSelector
-                  currentPath={currentPath}
-                  label={content.navigation.languageLabel}
-                />
-              </div>
-            </div>
-
-            <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 md:flex">
+            <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex">
               <NavLink
                 isActive={isHomePath}
                 item={pageNavItems[0]}
@@ -295,24 +286,31 @@ export function Navbar({
               ))}
             </div>
 
-            <a
-              className={cn(
-                primaryCtaBaseClass,
-                "hidden min-h-10 min-w-36 justify-center rounded-full px-6 text-sm font-semibold md:inline-flex"
-              )}
-              href={contactHref}
-              onClick={(event) => {
-                event.preventDefault();
-                handleNavSelect(contactHref);
-              }}
-            >
-              {content.navigation.contactLabel}
-            </a>
+            <div className="hidden items-center gap-3 lg:flex">
+              <a
+                className={cn(
+                  primaryCtaBaseClass,
+                  "min-h-10 min-w-36 justify-center rounded-full px-6 text-sm font-semibold"
+                )}
+                href={contactHref}
+                onClick={(event) => {
+                  event.preventDefault();
+                  handleNavSelect(contactHref);
+                }}
+              >
+                {content.navigation.contactLabel}
+              </a>
+
+              <LanguageSelector
+                currentPath={currentPath}
+                label={content.navigation.languageLabel}
+              />
+            </div>
 
             <button
               aria-expanded={isMobileMenuOpen}
               aria-label={content.navigation.openMenuLabel}
-              className="rounded-lg p-2 text-gray-700 transition-colors duration-200 hover:bg-gray-100 md:hidden"
+              className="rounded-lg p-2 text-gray-700 transition-colors duration-200 hover:bg-gray-100 lg:hidden"
               onClick={() => {
                 setIsMobileMenuOpen((isOpen) => !isOpen);
                 setIsServicesMenuOpen(false);

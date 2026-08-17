@@ -23,14 +23,14 @@ const WRAPPER_CLASSES = {
 
 const TRIGGER_CLASSES = {
   desktop:
-    "inline-flex h-10 min-w-[4.25rem] items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-3 text-xs font-semibold text-gray-700 shadow-sm transition-[border-color,background-color,color,box-shadow] duration-200 hover:border-brand-200 hover:bg-brand-50/70 hover:text-brand-800",
+    "inline-flex h-10 min-w-[4.25rem] cursor-pointer items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-3 text-xs font-semibold text-gray-700 shadow-sm transition-[border-color,background-color,color,box-shadow] duration-200 hover:border-brand-200 hover:bg-brand-50/70 hover:text-brand-800",
   mobile:
-    "flex h-11 w-full items-center justify-between rounded-xl border border-gray-200 bg-white px-3.5 text-sm font-medium text-gray-700 shadow-sm transition-[border-color,background-color,color] duration-200 hover:border-brand-200 hover:bg-brand-50/60 hover:text-brand-800",
+    "flex h-11 w-full cursor-pointer items-center justify-between rounded-xl border border-gray-200 bg-white px-3.5 text-sm font-medium text-gray-700 shadow-sm transition-[border-color,background-color,color] duration-200 hover:border-brand-200 hover:bg-brand-50/60 hover:text-brand-800",
 } as const satisfies Record<LanguageSelectorVariant, string>;
 
 const MENU_CLASSES = {
   desktop:
-    "absolute left-0 top-[calc(100%+0.5rem)] z-50 w-56 origin-top-left overflow-hidden rounded-2xl border border-gray-200/90 bg-white p-1.5 shadow-[0_24px_60px_-38px_rgba(31,31,31,0.55)]",
+    "absolute right-0 top-[calc(100%+0.5rem)] z-50 w-56 origin-top-right overflow-hidden rounded-2xl border border-gray-200/90 bg-white p-1.5 shadow-[0_24px_60px_-38px_rgba(31,31,31,0.55)]",
   mobile:
     "absolute inset-x-0 top-[calc(100%+0.5rem)] z-50 origin-top overflow-hidden rounded-2xl border border-gray-200/90 bg-white p-1.5 shadow-[0_24px_60px_-38px_rgba(31,31,31,0.55)]",
 } as const satisfies Record<LanguageSelectorVariant, string>;
