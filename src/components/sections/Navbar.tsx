@@ -16,6 +16,7 @@ import {
   getRouteKeyFromPath,
 } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
+import { LanguageSelector } from "@/components/sections/navbar/LanguageSelector";
 import { MobileNavMenu } from "@/components/sections/navbar/MobileNavMenu";
 import { NavLink } from "@/components/sections/navbar/NavLink";
 import { ServicesMegaMenu } from "@/components/sections/navbar/ServicesMegaMenu";
@@ -209,30 +210,39 @@ export function Navbar({
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between md:h-20">
-            <a
-              className="flex items-center gap-3 transition-opacity hover:opacity-80"
-              href={homeHref}
-              onClick={(event) => {
-                if (!isHomePath) {
-                  return;
-                }
+            <div className="flex items-center gap-3">
+              <a
+                className="flex items-center gap-3 transition-opacity hover:opacity-80"
+                href={homeHref}
+                onClick={(event) => {
+                  if (!isHomePath) {
+                    return;
+                  }
 
-                event.preventDefault();
-                handleNavSelect("#hero");
-              }}
-            >
-              <img
-                alt="Tahona"
-                className="h-6 w-6 md:h-7 md:w-7"
-                decoding="async"
-                height={40}
-                src="/images/logos/tahona-mark-green.svg"
-                width={40}
-              />
-              <span className="font-heading text-xl font-bold text-gray-900">
-                Tahona
-              </span>
-            </a>
+                  event.preventDefault();
+                  handleNavSelect("#hero");
+                }}
+              >
+                <img
+                  alt="Tahona"
+                  className="size-6 md:size-7"
+                  decoding="async"
+                  height={40}
+                  src="/images/logos/tahona-mark-green.svg"
+                  width={40}
+                />
+                <span className="font-heading text-xl font-bold text-gray-900">
+                  Tahona
+                </span>
+              </a>
+
+              <div className="hidden md:block">
+                <LanguageSelector
+                  currentPath={currentPath}
+                  label={content.navigation.languageLabel}
+                />
+              </div>
+            </div>
 
             <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 md:flex">
               <NavLink
@@ -283,7 +293,6 @@ export function Navbar({
                   onSelect={handleNavSelect}
                 />
               ))}
-
             </div>
 
             <a
