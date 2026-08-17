@@ -287,6 +287,11 @@ export function Navbar({
             </div>
 
             <div className="hidden items-center gap-3 lg:flex">
+              <LanguageSelector
+                currentPath={currentPath}
+                label={content.navigation.languageLabel}
+              />
+
               <a
                 className={cn(
                   primaryCtaBaseClass,
@@ -300,11 +305,6 @@ export function Navbar({
               >
                 {content.navigation.contactLabel}
               </a>
-
-              <LanguageSelector
-                currentPath={currentPath}
-                label={content.navigation.languageLabel}
-              />
             </div>
 
             <button
