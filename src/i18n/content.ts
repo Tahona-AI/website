@@ -393,26 +393,6 @@ export const SITE_CONTENT = {
       ],
       serviceColumns: [
         {
-          title: "Estrategia y arquitectura",
-          items: [
-            {
-              label: "Diagnóstico y definición",
-              description: "Contexto, objetivos, usuarios, procesos y oportunidades.",
-              href: "#consultoria-auditoria-operativa",
-            },
-            {
-              label: "Estrategia de producto y tecnología",
-              description: "Decisiones de producto, alcance y hoja de ruta.",
-              href: "#estrategia-tecnica-operativa",
-            },
-            {
-              label: "Arquitectura y hoja de ruta",
-              description: "Sistema, datos, integraciones, riesgos y evolución.",
-              href: "#bases-conocimiento-empresarial",
-            },
-          ],
-        },
-        {
           title: "Inteligencia artificial",
           items: [
             {
@@ -426,8 +406,8 @@ export const SITE_CONTENT = {
               href: "#agentes-ia",
             },
             {
-              label: "Documentos y conocimiento",
-              description: "Procesamiento documental y conocimiento con fuentes.",
+              label: "Conocimiento y productividad del equipo",
+              description: "El conocimiento de la empresa conectado, con permisos y agentes de trabajo.",
               href: "#procesamiento-documental",
             },
           ],
@@ -452,6 +432,26 @@ export const SITE_CONTENT = {
             },
           ],
         },
+        {
+          title: "Estrategia y arquitectura",
+          items: [
+            {
+              label: "Diagnóstico y definición",
+              description: "Contexto, objetivos, usuarios, procesos y oportunidades.",
+              href: "#consultoria-auditoria-operativa",
+            },
+            {
+              label: "Estrategia de producto y tecnología",
+              description: "Decisiones de producto, alcance y hoja de ruta.",
+              href: "#estrategia-tecnica-operativa",
+            },
+            {
+              label: "Arquitectura y hoja de ruta",
+              description: "Sistema, datos, integraciones, riesgos y evolución.",
+              href: "#bases-conocimiento-empresarial",
+            },
+          ],
+        },
 
       ],
     },
@@ -467,24 +467,23 @@ export const SITE_CONTENT = {
       },
       whatWeDo: {
         eyebrow: "Qué hacemos",
-        title: "Estrategia, producto y tecnología en un mismo equipo.",
+        title: "Construimos sistemas que el equipo usa cada día.",
         description: [
-          "Unimos consultoría, producto e ingeniería para convertir retos abiertos en soluciones que funcionan. Podemos entrar desde la definición, construir el producto o sistema, integrarlo en el negocio y seguir evolucionándolo en producción.",
-          "El resultado puede ser un producto digital, software a medida o una solución de IA. En procesos acotados y medibles, también podemos asumir la ejecución de una parte del trabajo.",
+          "Productos digitales, software a medida y soluciones de IA para operaciones reales. Lo que hacemos se nota en el trabajo diario de la empresa.",
+          "Definimos el resultado antes de empezar. Conectamos los datos y las herramientas que ya existen en la empresa. Añadimos revisión humana y trazabilidad donde el proceso lo exige.",
         ],
         bullets: [
-          "Diagnóstico, definición de producto y estrategia tecnológica.",
-          "Diseño y desarrollo de productos digitales.",
-          "Software a medida y plataformas internas.",
-          "Soluciones de IA integradas en productos y procesos.",
-          "Arquitectura, datos, integraciones y evolución técnica.",
+          "Productos y plataformas integrados en el negocio.",
+          "IA aplicada a procesos reales.",
+          "Documentos y conocimiento ordenados y consultables.",
+          "Cada decisión y cada cambio, trazable.",
         ],
       },
       services: {
         eyebrow: "Servicios",
         title: "Tres capacidades. Un único partner tecnológico.",
         description:
-          "Estrategia y arquitectura, inteligencia artificial, producto y software. Se combinan según el reto y el resultado esperado, desde la definición hasta producción y evolución.",
+          "Inteligencia artificial, producto y software, estrategia y arquitectura. Se combinan según el reto y el resultado esperado, desde la definición hasta producción y evolución.",
         ctaLabel: "Ver servicios",
       },
       industries: {
@@ -544,9 +543,9 @@ export const SITE_CONTENT = {
     },
     aiApplied: {
       eyebrow: "IA aplicada",
-      title: "La capacidad avanza. El trabajo real exige sistemas fiables.",
+      title: "Hace seis meses era caro o imposible. Hoy es viable.",
       description:
-        "Los modelos ya resuelven tareas de software cada vez más largas. En una operación real, esa capacidad solo resulta útil cuando el proceso está acotado, conectado con datos y herramientas, evaluado y supervisado.",
+        "La capacidad de los modelos crece y su precio cae. Lo que hace seis meses era caro o impensable hoy es viable para una empresa pequeña. El valor deja de estar en el modelo y pasa a estar en el contexto y en el oficio que lo sostienen.",
       chart: {
         ariaLabel:
           "Evolución del horizonte de tareas de software completadas por modelos de IA con un cincuenta por ciento de éxito",
@@ -564,24 +563,24 @@ export const SITE_CONTENT = {
       },
       principles: [
         {
-          title: "Acotar el trabajo",
-          body: "Definir la unidad de trabajo, los límites, las excepciones y los criterios de calidad.",
+          title: "Conectar el contexto",
+          body: "La información de la empresa, ordenada y con permisos. Es lo que cambia de una empresa a otra y lo que hace útil un modelo.",
         },
         {
-          title: "Integrar el contexto",
-          body: "Conectar datos, herramientas, permisos y trazabilidad con la operación real.",
+          title: "Trabajar con oficio",
+          body: "Sistemas acotados, revisados y trazables. La pieza bien construida alrededor del modelo es lo que se entrega.",
         },
         {
-          title: "Evaluar y supervisar",
-          body: "Medir resultados, revisar excepciones y mantener responsables humanos.",
+          title: "Medir y mejorar",
+          body: "Resultados evaluados con datos y evolución en producción. El sistema no termina el día del lanzamiento.",
         },
       ],
     },
     servicesPage: {
       hero: {
-        titleLines: ["Estrategia, IA, producto y software de principio a fin."],
+        titleLines: ["IA, producto, software y estrategia de principio a fin."],
         description:
-          "Tahona combina estrategia y arquitectura, IA, producto y software para definir, construir e integrar soluciones vinculadas a un resultado concreto.",
+          "Tahona combina IA, producto, software y estrategia para definir, construir e integrar soluciones vinculadas a un resultado concreto.",
         primaryLabel: "Hablemos",
         primaryHref: "#contacto",
         secondaryLabel: "Ver capacidades",
@@ -591,7 +590,7 @@ export const SITE_CONTENT = {
         eyebrow: "Capacidades",
         title: "Tres capacidades. Un único partner tecnológico.",
         description:
-          "Estrategia y arquitectura, inteligencia artificial, producto y software. Se combinan según el reto, sin silos ni soluciones predeterminadas.",
+          "Inteligencia artificial, producto y software, estrategia y arquitectura. Se combinan según el reto, sin silos ni soluciones predeterminadas.",
         linkLabel: "Ver servicios",
       },
       detailSection: {
@@ -735,9 +734,110 @@ export const SITE_CONTENT = {
     },
     serviceFamilies: [
       {
+        id: "inteligencia-artificial",
+        legacyId: "desarrollo-ia",
+        marker: "01",
+        title: "Inteligencia artificial",
+        description:
+          "Diseñamos e implementamos soluciones de IA sobre el contexto real de la empresa, con evaluación y supervisión.",
+        visualSrc: "/images/service2-illustration.png",
+        visualScaleClass: "scale-[1.1]",
+        services: [
+          {
+            id: "optimizacion-procesos",
+            title: "Soluciones y productos con IA",
+            menuLabel: "Soluciones de IA",
+            summary:
+              "Capacidades de IA integradas en productos y procesos con un resultado definido y medible.",
+            bullets: [
+              "IA integrada en productos y procesos",
+              "Resultado definido y medible desde el inicio",
+              "Calidad evaluada antes de producción",
+              "Supervisión durante la operación",
+            ],
+          },
+          {
+            id: "agentes-ia",
+            title: "Agentes y automatización",
+            menuLabel: "Agentes y automatización",
+            summary:
+              "Automatizamos procesos completos que hoy se hacen a mano, con documentos, datos y herramientas. Cada acción queda registrada y la revisión humana está integrada.",
+            bullets: [
+              "Procesos completos con documentos y datos",
+              "Lectura, extracción y clasificación automáticas",
+              "Trazabilidad de cada acción",
+              "Revisión humana integrada",
+            ],
+          },
+          {
+            id: "procesamiento-documental",
+            title: "Conocimiento y productividad del equipo",
+            menuLabel: "Documentos y conocimiento",
+            summary:
+              "Conectamos las fuentes de información de la empresa y las organizamos con permisos. Sobre esa base montamos los agentes de trabajo del día a día. Es una metodología y un know-how que se adapta a cada empresa.",
+            bullets: [
+              "El conocimiento de la empresa conectado y con permisos",
+              "Respuestas con su fuente en segundos",
+              "Agentes que ejecutan tareas con supervisión",
+            ],
+          },
+        ],
+      },
+      {
+        id: "producto-software",
+        legacyId: "otros-desarrollos",
+        marker: "02",
+        title: "Producto y software",
+        description:
+          "Diseñamos y desarrollamos productos digitales y software a medida, desde la definición hasta producción.",
+        visualSrc: "/images/service3-illustration.png",
+        visualScaleClass: "scale-[1.12]",
+        services: [
+          {
+            id: "herramientas-medida",
+            title: "Productos digitales",
+            menuLabel: "Productos digitales",
+            summary:
+              "Diseño y desarrollo de productos digitales completos, desde la propuesta y la experiencia hasta la tecnología que los hace funcionar.",
+            bullets: [
+              "Producto completo, de la definición al lanzamiento",
+              "Experiencia y flujos de usuario",
+              "Desarrollo frontend y backend",
+              "Evolución guiada por datos",
+            ],
+          },
+          {
+            id: "herramientas-internas",
+            title: "Software a medida",
+            menuLabel: "Software a medida",
+            summary:
+              "Aplicaciones y plataformas construidas alrededor del negocio, sus reglas, sus datos y sus necesidades reales.",
+            bullets: [
+              "Aplicaciones web y plataformas para la operación",
+              "Herramientas internas y backoffice",
+              "Paneles y reporting del día a día",
+              "Mantenimiento y evolución técnica",
+            ],
+          },
+          {
+            id: "integraciones-plataformas-operativas",
+            title: "Integraciones y plataformas",
+            menuLabel: "Integraciones y plataformas",
+            summary:
+              "Conexión entre productos, APIs, datos y herramientas para que la tecnología funcione como un sistema y no como piezas aisladas.",
+            bullets: [
+              "CRM, ERP y Drive conectados",
+              "Datos sincronizados sin trabajo manual",
+              "APIs y conectores para cada sistema",
+              "Monitorización y control de errores",
+            ],
+          },
+        ],
+      },
+      {
         id: "estrategia-arquitectura",
         legacyId: "fundamentos",
-        marker: "01",
+        marker: "03",
         title: "Estrategia y arquitectura",
         description:
           "Definimos qué construir, por qué y cómo llevarlo a una solución viable, integrada y preparada para evolucionar.",
@@ -749,12 +849,12 @@ export const SITE_CONTENT = {
             title: "Diagnóstico y definición",
             menuLabel: "Diagnóstico y definición",
             summary:
-              "Lectura estructurada del negocio, los usuarios, los procesos, los datos y la tecnología existente para convertir un reto abierto en una oportunidad concreta.",
+              "Lectura estructurada del negocio y su tecnología para convertir un reto abierto en una oportunidad concreta.",
             bullets: [
-              "Objetivos, usuarios y contexto",
-              "Procesos, datos y sistemas actuales",
-              "Oportunidades y restricciones",
-              "Criterios de éxito y siguientes pasos",
+              "Lectura clara de la situación real",
+              "Oportunidades prioritizadas",
+              "Riesgos y restricciones sobre la mesa",
+              "Un plan concreto para empezar",
             ],
           },
           {
@@ -775,114 +875,12 @@ export const SITE_CONTENT = {
             title: "Arquitectura y hoja de ruta",
             menuLabel: "Arquitectura",
             summary:
-              "Diseño de la arquitectura, los datos, las integraciones y el modelo de evolución que necesita la solución para funcionar a largo plazo.",
+              "Diseño de la arquitectura y el modelo de evolución que la solución necesita para funcionar a largo plazo.",
             bullets: [
               "Arquitectura de aplicación y datos",
               "Integraciones y dependencias",
-              "Seguridad, permisos y trazabilidad",
+              "Seguridad y trazabilidad desde el inicio",
               "Plan de entrega y evolución",
-            ],
-          },
-        ],
-      },
-      {
-        id: "inteligencia-artificial",
-        legacyId: "desarrollo-ia",
-        marker: "02",
-        title: "Inteligencia artificial",
-        description:
-          "Diseñamos e implementamos soluciones de IA con datos, contexto, evaluación, supervisión e integración real.",
-        visualSrc: "/images/service2-illustration.png",
-        visualScaleClass: "scale-[1.1]",
-        services: [
-          {
-            id: "optimizacion-procesos",
-            title: "Soluciones y productos con IA",
-            menuLabel: "Soluciones de IA",
-            summary:
-              "Capacidades de IA integradas en productos, servicios y procesos para resolver un caso de uso definido y medible.",
-            bullets: [
-              "Definición del caso de uso",
-              "Diseño de experiencia y comportamiento",
-              "Modelos, datos y contexto",
-              "Evaluación y puesta en producción",
-            ],
-          },
-          {
-            id: "agentes-ia",
-            title: "Agentes y automatización",
-            menuLabel: "Agentes y automatización",
-            summary:
-              "Sistemas capaces de consultar información, usar herramientas y ejecutar tareas acotadas con permisos, límites y supervisión.",
-            bullets: [
-              "Tareas, herramientas y permisos",
-              "Contexto y fuentes disponibles",
-              "Trazabilidad de acciones",
-              "Supervisión humana y escalado",
-            ],
-          },
-          {
-            id: "procesamiento-documental",
-            title: "Procesamiento documental y conocimiento",
-            menuLabel: "Documentos y conocimiento",
-            summary:
-              "Sistemas que transforman documentos y conocimiento disperso en información estructurada, consultable y útil para personas, productos y agentes.",
-            bullets: [
-              "Ingesta, extracción y normalización",
-              "Clasificación y validación",
-              "Fuentes, permisos y citas",
-              "Integración con productos y sistemas",
-            ],
-          },
-        ],
-      },
-      {
-        id: "producto-software",
-        legacyId: "otros-desarrollos",
-        marker: "03",
-        title: "Producto y software",
-        description:
-          "Diseñamos y desarrollamos productos digitales, aplicaciones y plataformas a medida desde la definición hasta producción.",
-        visualSrc: "/images/service3-illustration.png",
-        visualScaleClass: "scale-[1.12]",
-        services: [
-          {
-            id: "herramientas-medida",
-            title: "Productos digitales",
-            menuLabel: "Productos digitales",
-            summary:
-              "Diseño y desarrollo de productos digitales completos, desde la propuesta y la experiencia hasta la tecnología que los hace funcionar.",
-            bullets: [
-              "Definición y estrategia de producto",
-              "Experiencia y flujos de usuario",
-              "Desarrollo frontend y backend",
-              "Lanzamiento y evolución",
-            ],
-          },
-          {
-            id: "herramientas-internas",
-            title: "Software a medida",
-            menuLabel: "Software a medida",
-            summary:
-              "Aplicaciones y plataformas construidas alrededor del negocio, sus reglas, sus datos y sus necesidades reales.",
-            bullets: [
-              "Aplicaciones web y plataformas",
-              "Herramientas internas y backoffice",
-              "Paneles, workflows y reporting",
-              "Mantenimiento y evolución técnica",
-            ],
-          },
-          {
-            id: "integraciones-plataformas-operativas",
-            title: "Integraciones y plataformas",
-            menuLabel: "Integraciones y plataformas",
-            summary:
-              "Conexión entre productos, APIs, datos y herramientas para que la tecnología funcione como un sistema y no como piezas aisladas.",
-            bullets: [
-              "APIs y conectores",
-              "Sincronización y flujos de datos",
-              "Integración con CRM, ERP y Drive",
-              "Monitorización y control de errores",
             ],
           },
         ],
@@ -932,7 +930,7 @@ export const SITE_CONTENT = {
       {
         question: "¿Qué incluye una solución de IA completa?",
         answer:
-          "Caso de uso, datos y contexto, arquitectura, producto, modelos, evaluación, permisos, supervisión, integración y evolución en producción.",
+          "El reto concreto, los datos y el contexto, la arquitectura, el producto, los modelos, la evaluación, los permisos, la supervisión, la integración y la evolución en producción.",
       },
       {
         question: "¿Cómo se decide por dónde empezar?",
@@ -968,7 +966,7 @@ export const SITE_CONTENT = {
         relatedServices: [
           {
             hash: "#procesamiento-documental",
-            label: "Procesamiento documental y conocimiento",
+            label: "Conocimiento y productividad del equipo",
           },
           {
             hash: "#herramientas-internas",
@@ -1048,7 +1046,7 @@ export const SITE_CONTENT = {
         relatedServices: [
           {
             hash: "#procesamiento-documental",
-            label: "Procesamiento documental y conocimiento",
+            label: "Conocimiento y productividad del equipo",
           },
           {
             hash: "#herramientas-internas",
@@ -1170,7 +1168,7 @@ export const SITE_CONTENT = {
             hash: "#estrategia-arquitectura",
           },
           {
-            label: "Procesamiento documental y conocimiento",
+            label: "Conocimiento y productividad del equipo",
             hash: "#procesamiento-documental",
           },
           {
@@ -1233,7 +1231,7 @@ export const SITE_CONTENT = {
             hash: "#optimizacion-procesos",
           },
           {
-            label: "Procesamiento documental y conocimiento",
+            label: "Conocimiento y productividad del equipo",
             hash: "#procesamiento-documental",
           },
           {
@@ -1286,7 +1284,7 @@ export const SITE_CONTENT = {
           "Plataforma interna que conecta expedientes, documentos, borradores, validación humana y seguimiento sobre una arquitectura común.",
         tags: [
           "Estrategia y arquitectura",
-          "Procesamiento documental",
+          "Conocimiento y productividad",
           "Software a medida",
         ],
         imageSrc: "/images/visual-case-legal-document-platform.png",
@@ -1351,26 +1349,6 @@ export const SITE_CONTENT = {
       ],
       serviceColumns: [
         {
-          title: "Strategy and architecture",
-          items: [
-            {
-              label: "Discovery and definition",
-              description: "Context, goals, users, processes and opportunities.",
-              href: "#consultoria-auditoria-operativa",
-            },
-            {
-              label: "Product and technology strategy",
-              description: "Product decisions, scope and roadmap.",
-              href: "#estrategia-tecnica-operativa",
-            },
-            {
-              label: "Architecture and roadmap",
-              description: "Systems, data, integrations, risks and evolution.",
-              href: "#bases-conocimiento-empresarial",
-            },
-          ],
-        },
-        {
           title: "Artificial intelligence",
           items: [
             {
@@ -1384,8 +1362,8 @@ export const SITE_CONTENT = {
               href: "#agentes-ia",
             },
             {
-              label: "Documents and knowledge",
-              description: "Document processing and source-backed knowledge.",
+              label: "Knowledge and team productivity",
+              description: "Company knowledge connected, with permissions and work agents.",
               href: "#procesamiento-documental",
             },
           ],
@@ -1410,6 +1388,26 @@ export const SITE_CONTENT = {
             },
           ],
         },
+        {
+          title: "Strategy and architecture",
+          items: [
+            {
+              label: "Discovery and definition",
+              description: "Context, goals, users, processes and opportunities.",
+              href: "#consultoria-auditoria-operativa",
+            },
+            {
+              label: "Product and technology strategy",
+              description: "Product decisions, scope and roadmap.",
+              href: "#estrategia-tecnica-operativa",
+            },
+            {
+              label: "Architecture and roadmap",
+              description: "Systems, data, integrations, risks and evolution.",
+              href: "#bases-conocimiento-empresarial",
+            },
+          ],
+        },
 
       ],
     },
@@ -1425,24 +1423,23 @@ export const SITE_CONTENT = {
       },
       whatWeDo: {
         eyebrow: "What we do",
-        title: "Strategy, product and technology in one team.",
+        title: "We build systems the team uses every day.",
         description: [
-          "We bring consulting, product and engineering together to turn open-ended challenges into working solutions. We can join at definition, build the product or system, integrate it into the business and continue evolving it in production.",
-          "The outcome may be a digital product, custom software or an AI solution. When the process is bounded and measurable, we can also take on execution of part of the work.",
+          "Digital products, custom software and AI solutions for real operations. What we build shows up in the team's daily work.",
+          "We define the outcome before starting. We connect the data and tools already in the company. We add human review and traceability where the process requires it.",
         ],
         bullets: [
-          "Discovery, product definition and technology strategy.",
-          "Digital product design and development.",
-          "Custom software and internal platforms.",
-          "AI solutions embedded in products and processes.",
-          "Architecture, data, integrations and technical evolution.",
+          "Products and platforms integrated into the business.",
+          "AI applied to real processes.",
+          "Documents and knowledge organized and searchable.",
+          "Every decision and change traceable.",
         ],
       },
       services: {
         eyebrow: "Services",
         title: "Three capabilities. One technology partner.",
         description:
-          "Strategy and architecture, artificial intelligence, product and software. They combine around the challenge and expected outcome, from definition through production and evolution.",
+          "Artificial intelligence, product and software, strategy and architecture. They combine around the challenge and expected outcome, from definition through production and evolution.",
         ctaLabel: "View services",
       },
       industries: {
@@ -1502,9 +1499,9 @@ export const SITE_CONTENT = {
     },
     aiApplied: {
       eyebrow: "Applied AI",
-      title: "Capability is advancing. Real work demands reliable systems.",
+      title: "Six months ago this was expensive or impossible. Today it is viable.",
       description:
-        "Models can already solve increasingly long software tasks. In a real operation, that capability only becomes useful when the process is bounded, connected to data and tools, evaluated and supervised.",
+        "Model capability keeps growing and prices keep falling. What was expensive or unthinkable six months ago is now viable for a small company. The value moves from the model to the context and the craft around it.",
       chart: {
         ariaLabel:
           "Growth in the length of software tasks completed by AI models with a fifty percent success rate",
@@ -1522,24 +1519,24 @@ export const SITE_CONTENT = {
       },
       principles: [
         {
-          title: "Bound the work",
-          body: "Define the unit of work, limits, exceptions and quality criteria.",
+          title: "Connect the context",
+          body: "Company information, organized and with permissions. It differs from company to company, and it is what makes a model useful.",
         },
         {
-          title: "Integrate the context",
-          body: "Connect data, tools, permissions and traceability to the real operation.",
+          title: "Work with craft",
+          body: "Bounded systems, human review and traceability. The well-built piece around the model is what gets delivered.",
         },
         {
-          title: "Evaluate and supervise",
-          body: "Measure outcomes, review exceptions and keep people accountable.",
+          title: "Measure and improve",
+          body: "Outcomes evaluated with data and evolution in production. The system does not end on launch day.",
         },
       ],
     },
     servicesPage: {
       hero: {
-        titleLines: ["End-to-end strategy, AI, product and software."],
+        titleLines: ["AI, product, software and strategy, end to end."],
         description:
-          "Tahona brings strategy and architecture, AI, product and software together to define, build and integrate solutions around a concrete outcome.",
+          "Tahona brings AI, product, software and strategy together to define, build and integrate solutions around a concrete outcome.",
         primaryLabel: "Let's talk",
         primaryHref: "#contacto",
         secondaryLabel: "View capabilities",
@@ -1549,7 +1546,7 @@ export const SITE_CONTENT = {
         eyebrow: "Capabilities",
         title: "Three capabilities. One technology partner.",
         description:
-          "Strategy and architecture, artificial intelligence, product and software. Combined around the challenge, without silos or predetermined solutions.",
+          "Artificial intelligence, product and software, strategy and architecture. Combined around the challenge, without silos or predetermined solutions.",
         linkLabel: "View services",
       },
       detailSection: {
@@ -1692,9 +1689,110 @@ export const SITE_CONTENT = {
     },
     serviceFamilies: [
       {
+        id: "inteligencia-artificial",
+        legacyId: "desarrollo-ia",
+        marker: "01",
+        title: "Artificial intelligence",
+        description:
+          "We design and implement AI solutions on the real context of the business, with evaluation and supervision.",
+        visualSrc: "/images/service2-illustration.png",
+        visualScaleClass: "scale-[1.1]",
+        services: [
+          {
+            id: "optimizacion-procesos",
+            title: "AI solutions and products",
+            menuLabel: "AI solutions",
+            summary:
+              "AI capabilities embedded in products and processes with a defined and measurable outcome.",
+            bullets: [
+              "AI embedded in products and processes",
+              "Outcome defined and measurable from the start",
+              "Quality evaluated before production",
+              "Supervision during operation",
+            ],
+          },
+          {
+            id: "agentes-ia",
+            title: "Agents and automation",
+            menuLabel: "Agents and automation",
+            summary:
+              "We automate complete processes that are still done by hand, with documents, data and tools. Every action is logged and human review is part of the flow.",
+            bullets: [
+              "Complete processes with documents and data",
+              "Automatic reading, extraction and classification",
+              "Traceability of every action",
+              "Human review integrated",
+            ],
+          },
+          {
+            id: "procesamiento-documental",
+            title: "Knowledge and team productivity",
+            menuLabel: "Documents and knowledge",
+            summary:
+              "We connect the company's information sources and organize them with permissions. On top of that we build the work agents of the day to day. It is a methodology and know-how that adapts to each company.",
+            bullets: [
+              "Company knowledge connected and permissioned",
+              "Answers with their source in seconds",
+              "Agents that execute tasks with supervision",
+            ],
+          },
+        ],
+      },
+      {
+        id: "producto-software",
+        legacyId: "otros-desarrollos",
+        marker: "02",
+        title: "Product and software",
+        description:
+          "We design and develop digital products and custom software, from definition through production.",
+        visualSrc: "/images/service3-illustration.png",
+        visualScaleClass: "scale-[1.12]",
+        services: [
+          {
+            id: "herramientas-medida",
+            title: "Digital products",
+            menuLabel: "Digital products",
+            summary:
+              "Design and development of complete digital products, from proposition and experience through the technology that makes them work.",
+            bullets: [
+              "Complete product, from definition to launch",
+              "User experience and flows",
+              "Frontend and backend development",
+              "Data-driven evolution",
+            ],
+          },
+          {
+            id: "herramientas-internas",
+            title: "Custom software",
+            menuLabel: "Custom software",
+            summary:
+              "Applications and platforms built around the business, its rules, its data and its real needs.",
+            bullets: [
+              "Web applications and platforms for operations",
+              "Internal tools and back offices",
+              "Dashboards and reporting for the day to day",
+              "Maintenance and technical evolution",
+            ],
+          },
+          {
+            id: "integraciones-plataformas-operativas",
+            title: "Integrations and platforms",
+            menuLabel: "Integrations and platforms",
+            summary:
+              "Connections between products, APIs, data and tools so technology works as a system rather than isolated pieces.",
+            bullets: [
+              "CRM, ERP and Drive connected",
+              "Data synced without manual work",
+              "APIs and connectors for every system",
+              "Monitoring and error control",
+            ],
+          },
+        ],
+      },
+      {
         id: "estrategia-arquitectura",
         legacyId: "fundamentos",
-        marker: "01",
+        marker: "03",
         title: "Strategy and architecture",
         description:
           "We define what to build, why it matters and how to turn it into a viable, integrated solution prepared to evolve.",
@@ -1706,12 +1804,12 @@ export const SITE_CONTENT = {
             title: "Discovery and definition",
             menuLabel: "Discovery and definition",
             summary:
-              "A structured view of the business, users, processes, data and existing technology that turns an open challenge into a concrete opportunity.",
+              "A structured read of the business and its technology that turns an open challenge into a concrete opportunity.",
             bullets: [
-              "Goals, users and context",
-              "Current processes, data and systems",
-              "Opportunities and constraints",
-              "Success criteria and next steps",
+              "A clear read of the real situation",
+              "Prioritized opportunities",
+              "Risks and constraints on the table",
+              "A concrete plan to start",
             ],
           },
           {
@@ -1732,114 +1830,12 @@ export const SITE_CONTENT = {
             title: "Architecture and roadmap",
             menuLabel: "Architecture",
             summary:
-              "Design of the architecture, data, integrations and evolution model the solution needs to work over time.",
+              "Design of the architecture and the evolution model the solution needs to work over time.",
             bullets: [
               "Application and data architecture",
               "Integrations and dependencies",
-              "Security, permissions and traceability",
+              "Security and traceability from the start",
               "Delivery and evolution plan",
-            ],
-          },
-        ],
-      },
-      {
-        id: "inteligencia-artificial",
-        legacyId: "desarrollo-ia",
-        marker: "02",
-        title: "Artificial intelligence",
-        description:
-          "We design and implement AI solutions with data, context, evaluation, supervision and real integration.",
-        visualSrc: "/images/service2-illustration.png",
-        visualScaleClass: "scale-[1.1]",
-        services: [
-          {
-            id: "optimizacion-procesos",
-            title: "AI solutions and products",
-            menuLabel: "AI solutions",
-            summary:
-              "AI capabilities embedded in products, services and processes to solve a defined and measurable use case.",
-            bullets: [
-              "Use-case definition",
-              "Experience and behavior design",
-              "Models, data and context",
-              "Evaluation and production launch",
-            ],
-          },
-          {
-            id: "agentes-ia",
-            title: "Agents and automation",
-            menuLabel: "Agents and automation",
-            summary:
-              "Systems that retrieve information, use tools and execute bounded tasks with permissions, limits and supervision.",
-            bullets: [
-              "Tasks, tools and permissions",
-              "Available context and sources",
-              "Action traceability",
-              "Human supervision and escalation",
-            ],
-          },
-          {
-            id: "procesamiento-documental",
-            title: "Document processing and knowledge",
-            menuLabel: "Documents and knowledge",
-            summary:
-              "Systems that turn documents and scattered knowledge into structured, searchable information for people, products and agents.",
-            bullets: [
-              "Ingestion, extraction and normalization",
-              "Classification and validation",
-              "Sources, permissions and citations",
-              "Integration with products and systems",
-            ],
-          },
-        ],
-      },
-      {
-        id: "producto-software",
-        legacyId: "otros-desarrollos",
-        marker: "03",
-        title: "Product and software",
-        description:
-          "We design and develop digital products, applications and custom platforms from definition through production.",
-        visualSrc: "/images/service3-illustration.png",
-        visualScaleClass: "scale-[1.12]",
-        services: [
-          {
-            id: "herramientas-medida",
-            title: "Digital products",
-            menuLabel: "Digital products",
-            summary:
-              "Design and development of complete digital products, from proposition and experience through the technology that makes them work.",
-            bullets: [
-              "Product definition and strategy",
-              "User experience and flows",
-              "Frontend and backend development",
-              "Launch and evolution",
-            ],
-          },
-          {
-            id: "herramientas-internas",
-            title: "Custom software",
-            menuLabel: "Custom software",
-            summary:
-              "Applications and platforms built around the business, its rules, its data and its real needs.",
-            bullets: [
-              "Web applications and platforms",
-              "Internal tools and back offices",
-              "Dashboards, workflows and reporting",
-              "Maintenance and technical evolution",
-            ],
-          },
-          {
-            id: "integraciones-plataformas-operativas",
-            title: "Integrations and platforms",
-            menuLabel: "Integrations and platforms",
-            summary:
-              "Connections between products, APIs, data and tools so technology works as a system rather than isolated pieces.",
-            bullets: [
-              "APIs and connectors",
-              "Data synchronization and flows",
-              "CRM, ERP and Drive integration",
-              "Monitoring and error control",
             ],
           },
         ],
@@ -1889,7 +1885,7 @@ export const SITE_CONTENT = {
       {
         question: "What does a complete AI solution include?",
         answer:
-          "Use case, data and context, architecture, product, models, evaluation, permissions, supervision, integration and evolution in production.",
+          "The concrete challenge, data and context, architecture, product, models, evaluation, permissions, supervision, integration and evolution in production.",
       },
       {
         question: "How do we decide where to start?",
@@ -1925,7 +1921,7 @@ export const SITE_CONTENT = {
         relatedServices: [
           {
             hash: "#procesamiento-documental",
-            label: "Document processing and knowledge",
+            label: "Knowledge and team productivity",
           },
           {
             hash: "#herramientas-internas",
@@ -2005,7 +2001,7 @@ export const SITE_CONTENT = {
         relatedServices: [
           {
             hash: "#procesamiento-documental",
-            label: "Document processing and knowledge",
+            label: "Knowledge and team productivity",
           },
           {
             hash: "#herramientas-internas",
@@ -2127,7 +2123,7 @@ export const SITE_CONTENT = {
             hash: "#estrategia-arquitectura",
           },
           {
-            label: "Document processing and knowledge",
+            label: "Knowledge and team productivity",
             hash: "#procesamiento-documental",
           },
           {
@@ -2190,7 +2186,7 @@ export const SITE_CONTENT = {
             hash: "#optimizacion-procesos",
           },
           {
-            label: "Document processing and knowledge",
+            label: "Knowledge and team productivity",
             hash: "#procesamiento-documental",
           },
           {
@@ -2243,7 +2239,7 @@ export const SITE_CONTENT = {
           "An internal platform connecting matters, documents, drafts, human validation and task follow-up through one architecture.",
         tags: [
           "Strategy and architecture",
-          "Document processing",
+          "Knowledge and productivity",
           "Custom software",
         ],
         imageSrc: "/images/visual-case-legal-document-platform.png",
@@ -2308,26 +2304,6 @@ export const SITE_CONTENT = {
       ],
       serviceColumns: [
         {
-          title: "Strategia i architektura",
-          items: [
-            {
-              label: "Diagnoza i definicja",
-              description: "Kontekst, cele, użytkownicy, procesy i możliwości.",
-              href: "#consultoria-auditoria-operativa",
-            },
-            {
-              label: "Strategia produktu i technologii",
-              description: "Decyzje produktowe, zakres i plan działania.",
-              href: "#estrategia-tecnica-operativa",
-            },
-            {
-              label: "Architektura i plan działania",
-              description: "Systemy, dane, integracje, ryzyka i rozwój.",
-              href: "#bases-conocimiento-empresarial",
-            },
-          ],
-        },
-        {
           title: "Sztuczna inteligencja",
           items: [
             {
@@ -2341,8 +2317,8 @@ export const SITE_CONTENT = {
               href: "#agentes-ia",
             },
             {
-              label: "Dokumenty i wiedza",
-              description: "Przetwarzanie dokumentów i wiedza oparta na źródłach.",
+              label: "Wiedza i produktywność zespołu",
+              description: "Wiedza firmy połączona, z uprawnieniami i agentami roboczymi.",
               href: "#procesamiento-documental",
             },
           ],
@@ -2367,6 +2343,26 @@ export const SITE_CONTENT = {
             },
           ],
         },
+        {
+          title: "Strategia i architektura",
+          items: [
+            {
+              label: "Diagnoza i definicja",
+              description: "Kontekst, cele, użytkownicy, procesy i możliwości.",
+              href: "#consultoria-auditoria-operativa",
+            },
+            {
+              label: "Strategia produktu i technologii",
+              description: "Decyzje produktowe, zakres i plan działania.",
+              href: "#estrategia-tecnica-operativa",
+            },
+            {
+              label: "Architektura i plan działania",
+              description: "Systemy, dane, integracje, ryzyka i rozwój.",
+              href: "#bases-conocimiento-empresarial",
+            },
+          ],
+        },
 
       ],
     },
@@ -2382,24 +2378,23 @@ export const SITE_CONTENT = {
       },
       whatWeDo: {
         eyebrow: "Czym się zajmujemy",
-        title: "Strategia, produkt i technologia w jednym zespole.",
+        title: "Budujemy systemy, z których zespół korzysta codziennie.",
         description: [
-          "Łączymy doradztwo, produkt i inżynierię, aby przekładać otwarte wyzwania na działające rozwiązania. Możemy zacząć od definicji, zbudować produkt lub system, zintegrować go z firmą i dalej rozwijać w środowisku produkcyjnym.",
-          "Efektem może być produkt cyfrowy, oprogramowanie na miarę lub rozwiązanie AI. Gdy proces ma jasno określony zakres i mierzalny rezultat, możemy także przejąć realizację części pracy.",
+          "Produkty cyfrowe, oprogramowanie na miarę i rozwiązania AI dla realnych operacji. To, co budujemy, widać w codziennej pracy zespołu.",
+          "Określamy wynik przed rozpoczęciem. Łączymy dane i narzędzia, które już istnieją w firmie. Dodajemy kontrolę człowieka i śledzenie zmian tam, gdzie proces tego wymaga.",
         ],
         bullets: [
-          "Diagnoza, definicja produktu i strategia technologiczna.",
-          "Projektowanie i rozwój produktów cyfrowych.",
-          "Oprogramowanie na miarę i platformy wewnętrzne.",
-          "Rozwiązania AI wbudowane w produkty i procesy.",
-          "Architektura, dane, integracje i rozwój techniczny.",
+          "Produkty i platformy zintegrowane z biznesem.",
+          "AI zastosowana w realnych procesach.",
+          "Dokumenty i wiedza uporządkowane i łatwe do przeszukania.",
+          "Każda decyzja i każda zmiana możliwa do prześledzenia.",
         ],
       },
       services: {
         eyebrow: "Usługi",
         title: "Trzy kompetencje. Jeden partner technologiczny.",
         description:
-          "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Łączymy je według wyzwania i oczekiwanego rezultatu, od definicji po wdrożenie i dalszy rozwój.",
+          "Sztuczna inteligencja, produkt i oprogramowanie, strategia i architektura. Łączymy je według wyzwania i oczekiwanego rezultatu, od definicji po wdrożenie i dalszy rozwój.",
         ctaLabel: "Zobacz usługi",
       },
       industries: {
@@ -2459,9 +2454,9 @@ export const SITE_CONTENT = {
     },
     aiApplied: {
       eyebrow: "AI w praktyce",
-      title: "Możliwości rosną. Realna praca wymaga niezawodnych systemów.",
+      title: "Sześć miesięcy temu to było drogie lub niemożliwe. Dziś jest wykonalne.",
       description:
-        "Modele rozwiązują coraz dłuższe zadania programistyczne. W realnej działalności ta zdolność staje się użyteczna dopiero wtedy, gdy proces ma jasno określony zakres, jest połączony z danymi i narzędziami oraz podlega ewaluacji i nadzorowi.",
+        "Możliwości modeli rosną, a ich ceny spadają. To, co sześć miesięcy temu było drogie lub nie do pomyślenia, dziś jest wykonalne dla małej firmy. Wartość przenosi się z modelu na kontekst i na rzemiosło, które go otacza.",
       chart: {
         ariaLabel:
           "Wzrost długości zadań programistycznych wykonywanych przez modele AI z pięćdziesięcioprocentową skutecznością",
@@ -2479,24 +2474,24 @@ export const SITE_CONTENT = {
       },
       principles: [
         {
-          title: "Ograniczyć zakres pracy",
-          body: "Określić jednostkę pracy, granice, wyjątki i kryteria jakości.",
+          title: "Połącz kontekst",
+          body: "Informacje firmy uporządkowane i z uprawnieniami. To one odróżniają firmy od siebie i sprawiają, że model jest użyteczny.",
         },
         {
-          title: "Zintegrować kontekst",
-          body: "Połączyć dane, narzędzia, uprawnienia i śledzenie z realnym procesem.",
+          title: "Pracuj z rzemiosłem",
+          body: "Systemy o jasnym zakresie, z kontrolą człowieka i śledzeniem działań. Dostarczamy dobrze zbudowany element wokół modelu.",
         },
         {
-          title: "Ewaluować i nadzorować",
-          body: "Mierzyć wyniki, analizować wyjątki i zachować odpowiedzialność człowieka.",
+          title: "Mierz i ulepszaj",
+          body: "Wyniki oceniane na danych i rozwój w produkcji. System nie kończy się w dniu wdrożenia.",
         },
       ],
     },
     servicesPage: {
       hero: {
-        titleLines: ["Strategia, AI, produkt i oprogramowanie od początku do końca."],
+        titleLines: ["AI, produkt, oprogramowanie i strategia od początku do końca."],
         description:
-          "Tahona łączy strategię i architekturę, AI, produkt i oprogramowanie, aby definiować, tworzyć i integrować rozwiązania dla konkretnego rezultatu biznesowego.",
+          "Tahona łączy AI, produkt, oprogramowanie i strategię, aby definiować, tworzyć i integrować rozwiązania dla konkretnego rezultatu biznesowego.",
         primaryLabel: "Porozmawiajmy",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz kompetencje",
@@ -2506,7 +2501,7 @@ export const SITE_CONTENT = {
         eyebrow: "Kompetencje",
         title: "Trzy kompetencje. Jeden partner technologiczny.",
         description:
-          "Strategia i architektura, sztuczna inteligencja, produkt i oprogramowanie. Łączymy je wokół wyzwania, bez silosów i z góry narzuconych rozwiązań.",
+          "Sztuczna inteligencja, produkt i oprogramowanie, strategia i architektura. Łączymy je wokół wyzwania, bez silosów i z góry narzuconych rozwiązań.",
         linkLabel: "Zobacz usługi",
       },
       detailSection: {
@@ -2649,9 +2644,110 @@ export const SITE_CONTENT = {
     },
     serviceFamilies: [
       {
+        id: "inteligencia-artificial",
+        legacyId: "desarrollo-ia",
+        marker: "01",
+        title: "Sztuczna inteligencja",
+        description:
+          "Projektujemy i wdrażamy rozwiązania AI w oparciu o realny kontekst firmy, z ewaluacją i nadzorem.",
+        visualSrc: "/images/service2-illustration.png",
+        visualScaleClass: "scale-[1.1]",
+        services: [
+          {
+            id: "optimizacion-procesos",
+            title: "Rozwiązania i produkty z AI",
+            menuLabel: "Rozwiązania AI",
+            summary:
+              "Możliwości AI zintegrowane z produktami i procesami, z określonym i mierzalnym wynikiem.",
+            bullets: [
+              "AI zintegrowana z produktami i procesami",
+              "Wynik określony i mierzalny od początku",
+              "Jakość oceniana przed wdrożeniem",
+              "Nadzór podczas działania",
+            ],
+          },
+          {
+            id: "agentes-ia",
+            title: "Agenci i automatyzacja",
+            menuLabel: "Agenci i automatyzacja",
+            summary:
+              "Automatyzujemy całe procesy, które dziś wykonuje się ręcznie, z dokumentami, danymi i narzędziami. Każda akcja jest rejestrowana, a kontrola człowieka jest częścią procesu.",
+            bullets: [
+              "Całe procesy z dokumentami i danymi",
+              "Automatyczne czytanie, ekstrakcja i klasyfikacja",
+              "Śledzenie każdej akcji",
+              "Zintegrowana kontrola człowieka",
+            ],
+          },
+          {
+            id: "procesamiento-documental",
+            title: "Wiedza i produktywność zespołu",
+            menuLabel: "Dokumenty i wiedza",
+            summary:
+              "Łączymy źródła informacji firmy i porządkujemy je z uprawnieniami. Na tej podstawie budujemy agentów codziennej pracy. To metodologia i know-how, które dopasowują się do każdej firmy.",
+            bullets: [
+              "Wiedza firmy połączona i z uprawnieniami",
+              "Odpowiedzi ze źródłem w kilka sekund",
+              "Agenci wykonujący zadania pod nadzorem",
+            ],
+          },
+        ],
+      },
+      {
+        id: "producto-software",
+        legacyId: "otros-desarrollos",
+        marker: "02",
+        title: "Produkt i oprogramowanie",
+        description:
+          "Projektujemy i tworzymy produkty cyfrowe oraz oprogramowanie na miarę, od definicji po produkcję.",
+        visualSrc: "/images/service3-illustration.png",
+        visualScaleClass: "scale-[1.12]",
+        services: [
+          {
+            id: "herramientas-medida",
+            title: "Produkty cyfrowe",
+            menuLabel: "Produkty cyfrowe",
+            summary:
+              "Projektowanie i rozwój kompletnych produktów cyfrowych, od propozycji i doświadczenia po technologię, która je obsługuje.",
+            bullets: [
+              "Kompletny produkt, od definicji do wdrożenia",
+              "Doświadczenie i przepływy użytkownika",
+              "Rozwój frontend i backend",
+              "Ewolucja oparta na danych",
+            ],
+          },
+          {
+            id: "herramientas-internas",
+            title: "Oprogramowanie na miarę",
+            menuLabel: "Oprogramowanie na miarę",
+            summary:
+              "Aplikacje i platformy zbudowane wokół biznesu, jego reguł, danych i realnych potrzeb.",
+            bullets: [
+              "Aplikacje internetowe i platformy dla operacji",
+              "Narzędzia wewnętrzne i zaplecze operacyjne",
+              "Panele i raportowanie na co dzień",
+              "Utrzymanie i rozwój techniczny",
+            ],
+          },
+          {
+            id: "integraciones-plataformas-operativas",
+            title: "Integracje i platformy",
+            menuLabel: "Integracje i platformy",
+            summary:
+              "Połączenia między produktami, API, danymi i narzędziami, dzięki którym technologia działa jako jeden system, a nie zbiór osobnych elementów.",
+            bullets: [
+              "CRM, ERP i Drive połączone",
+              "Dane zsynchronizowane bez ręcznej pracy",
+              "API i łączniki dla każdego systemu",
+              "Monitorowanie i obsługa błędów",
+            ],
+          },
+        ],
+      },
+      {
         id: "estrategia-arquitectura",
         legacyId: "fundamentos",
-        marker: "01",
+        marker: "03",
         title: "Strategia i architektura",
         description:
           "Określamy, co zbudować, dlaczego i jak przełożyć to na wykonalne, zintegrowane rozwiązanie gotowe do rozwoju.",
@@ -2663,12 +2759,12 @@ export const SITE_CONTENT = {
             title: "Diagnoza i definicja",
             menuLabel: "Diagnoza i definicja",
             summary:
-              "Uporządkowane spojrzenie na biznes, użytkowników, procesy, dane i obecną technologię, które zmienia otwarte wyzwanie w konkretną możliwość.",
+              "Uporządkowane spojrzenie na firmę i jej technologię, które zmienia otwarte wyzwanie w konkretną możliwość.",
             bullets: [
-              "Cele, użytkownicy i kontekst",
-              "Obecne procesy, dane i systemy",
-              "Możliwości i ograniczenia",
-              "Kryteria sukcesu i kolejne kroki",
+              "Jasny obraz realnej sytuacji",
+              "Uszeregowane możliwości",
+              "Ryzyka i ograniczenia na stole",
+              "Konkretny plan na start",
             ],
           },
           {
@@ -2689,114 +2785,12 @@ export const SITE_CONTENT = {
             title: "Architektura i plan działania",
             menuLabel: "Architektura",
             summary:
-              "Projekt architektury, danych, integracji i modelu rozwoju potrzebnego, aby rozwiązanie działało w długim okresie.",
+              "Projekt architektury i modelu rozwoju, którego rozwiązanie potrzebuje, aby działać w długim okresie.",
             bullets: [
               "Architektura aplikacji i danych",
               "Integracje i zależności",
-              "Bezpieczeństwo, uprawnienia i śledzenie działań",
+              "Bezpieczeństwo i śledzenie od początku",
               "Plan dostarczania i rozwoju",
-            ],
-          },
-        ],
-      },
-      {
-        id: "inteligencia-artificial",
-        legacyId: "desarrollo-ia",
-        marker: "02",
-        title: "Sztuczna inteligencja",
-        description:
-          "Projektujemy i wdrażamy rozwiązania AI z danymi, kontekstem, ewaluacją, nadzorem i realną integracją.",
-        visualSrc: "/images/service2-illustration.png",
-        visualScaleClass: "scale-[1.1]",
-        services: [
-          {
-            id: "optimizacion-procesos",
-            title: "Rozwiązania i produkty z AI",
-            menuLabel: "Rozwiązania AI",
-            summary:
-              "Funkcje AI wbudowane w produkty, usługi i procesy, aby rozwiązać zdefiniowany i mierzalny przypadek użycia.",
-            bullets: [
-              "Definicja przypadku użycia",
-              "Projektowanie doświadczenia i zachowania",
-              "Modele, dane i kontekst",
-              "Ewaluacja i uruchomienie produkcyjne",
-            ],
-          },
-          {
-            id: "agentes-ia",
-            title: "Agenci i automatyzacja",
-            menuLabel: "Agenci i automatyzacja",
-            summary:
-              "Systemy, które wyszukują informacje, korzystają z narzędzi i wykonują zadania o określonym zakresie z uprawnieniami, ograniczeniami i nadzorem.",
-            bullets: [
-              "Zadania, narzędzia i uprawnienia",
-              "Dostępny kontekst i źródła",
-              "Śledzenie działań",
-              "Nadzór człowieka i eskalacja",
-            ],
-          },
-          {
-            id: "procesamiento-documental",
-            title: "Przetwarzanie dokumentów i wiedza",
-            menuLabel: "Dokumenty i wiedza",
-            summary:
-              "Systemy zmieniające dokumenty i rozproszoną wiedzę w uporządkowane, przeszukiwalne informacje dla ludzi, produktów i agentów.",
-            bullets: [
-              "Wczytywanie, ekstrakcja i normalizacja",
-              "Klasyfikacja i walidacja",
-              "Źródła, uprawnienia i cytowania",
-              "Integracja z produktami i systemami",
-            ],
-          },
-        ],
-      },
-      {
-        id: "producto-software",
-        legacyId: "otros-desarrollos",
-        marker: "03",
-        title: "Produkt i oprogramowanie",
-        description:
-          "Projektujemy i tworzymy produkty cyfrowe, aplikacje oraz platformy na miarę od definicji po produkcję.",
-        visualSrc: "/images/service3-illustration.png",
-        visualScaleClass: "scale-[1.12]",
-        services: [
-          {
-            id: "herramientas-medida",
-            title: "Produkty cyfrowe",
-            menuLabel: "Produkty cyfrowe",
-            summary:
-              "Projektowanie i rozwój kompletnych produktów cyfrowych, od propozycji i doświadczenia po technologię, która je obsługuje.",
-            bullets: [
-              "Definicja i strategia produktu",
-              "Doświadczenie i przepływy użytkownika",
-              "Rozwój frontend i backend",
-              "Uruchomienie i dalszy rozwój",
-            ],
-          },
-          {
-            id: "herramientas-internas",
-            title: "Oprogramowanie na miarę",
-            menuLabel: "Oprogramowanie na miarę",
-            summary:
-              "Aplikacje i platformy zbudowane wokół biznesu, jego reguł, danych i realnych potrzeb.",
-            bullets: [
-              "Aplikacje internetowe i platformy",
-              "Narzędzia wewnętrzne i zaplecze operacyjne",
-              "Panele, przepływy pracy i raportowanie",
-              "Utrzymanie i rozwój techniczny",
-            ],
-          },
-          {
-            id: "integraciones-plataformas-operativas",
-            title: "Integracje i platformy",
-            menuLabel: "Integracje i platformy",
-            summary:
-              "Połączenia między produktami, API, danymi i narzędziami, dzięki którym technologia działa jako jeden system, a nie zbiór osobnych elementów.",
-            bullets: [
-              "API i konektory",
-              "Synchronizacja i przepływy danych",
-              "Integracja z CRM, ERP i Drive",
-              "Monitorowanie i obsługa błędów",
             ],
           },
         ],
@@ -2846,7 +2840,7 @@ export const SITE_CONTENT = {
       {
         question: "Co obejmuje kompletne rozwiązanie AI?",
         answer:
-          "Przypadek użycia, dane i kontekst, architekturę, produkt, modele, ewaluację, uprawnienia, nadzór, integrację i rozwój na produkcji.",
+          "Konkretne wyzwanie, dane i kontekst, architekturę, produkt, modele, ewaluację, uprawnienia, nadzór, integrację i rozwój na produkcji.",
       },
       {
         question: "Jak ustalamy, od czego zacząć?",
@@ -2882,7 +2876,7 @@ export const SITE_CONTENT = {
         relatedServices: [
           {
             hash: "#procesamiento-documental",
-            label: "Przetwarzanie dokumentów i wiedza",
+            label: "Wiedza i produktywność zespołu",
           },
           {
             hash: "#herramientas-internas",
@@ -2962,7 +2956,7 @@ export const SITE_CONTENT = {
         relatedServices: [
           {
             hash: "#procesamiento-documental",
-            label: "Przetwarzanie dokumentów i wiedza",
+            label: "Wiedza i produktywność zespołu",
           },
           {
             hash: "#herramientas-internas",
@@ -3084,7 +3078,7 @@ export const SITE_CONTENT = {
             hash: "#estrategia-arquitectura",
           },
           {
-            label: "Przetwarzanie dokumentów i wiedza",
+            label: "Wiedza i produktywność zespołu",
             hash: "#procesamiento-documental",
           },
           {
@@ -3147,7 +3141,7 @@ export const SITE_CONTENT = {
             hash: "#optimizacion-procesos",
           },
           {
-            label: "Przetwarzanie dokumentów i wiedza",
+            label: "Wiedza i produktywność zespołu",
             hash: "#procesamiento-documental",
           },
           {
@@ -3200,7 +3194,7 @@ export const SITE_CONTENT = {
           "Wewnętrzna platforma łącząca sprawy, dokumenty, projekty, kontrolę człowieka i śledzenie zadań we wspólnej architekturze.",
         tags: [
           "Strategia i architektura",
-          "Przetwarzanie dokumentów",
+          "Wiedza i produktywność",
           "Oprogramowanie na miarę",
         ],
         imageSrc: "/images/visual-case-legal-document-platform.png",

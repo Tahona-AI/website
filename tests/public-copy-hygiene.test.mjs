@@ -98,7 +98,7 @@ const hybridPositioningPatterns = {
     /estrategia y arquitectura/i,
     /inteligencia artificial/i,
     /producto y software/i,
-    /esa capacidad solo resulta útil cuando el proceso está acotado/i,
+    /El valor deja de estar en el modelo y pasa a estar en el contexto y en el oficio que lo sostienen\./,
     /cuando el alcance y el modelo de colaboración lo requieren/i,
   ],
   en: [
@@ -106,7 +106,7 @@ const hybridPositioningPatterns = {
     /strategy and architecture/i,
     /artificial intelligence/i,
     /product and software/i,
-    /that capability only becomes useful when the process is bounded/i,
+    /The value moves from the model to the context and the craft around it\./,
     /when the scope and collaboration model require it/i,
   ],
   pl: [
@@ -114,7 +114,7 @@ const hybridPositioningPatterns = {
     /strategia i architektura/i,
     /sztuczna inteligencja/i,
     /produkt i oprogramowanie/i,
-    /ta zdolność staje się użyteczna dopiero wtedy, gdy proces ma jasno określony zakres/i,
+    /Wartość przenosi się z modelu na kontekst i na rzemiosło, które go otacza\./,
     /gdy wymagają tego zakres i model współpracy/i,
   ],
 };
@@ -452,15 +452,15 @@ describe("public copy hygiene", () => {
 
     assert.match(
       i18nSource,
-      /Estrategia, IA, producto y software de principio a fin\./,
+      /IA, producto, software y estrategia de principio a fin\./,
     );
     assert.match(
       i18nSource,
-      /End-to-end strategy, AI, product and software\./,
+      /AI, product, software and strategy, end to end\./,
     );
     assert.match(
       i18nSource,
-      /Strategia, AI, produkt i oprogramowanie od początku do końca\./,
+      /AI, produkt, oprogramowanie i strategia od początku do końca\./,
     );
 
     for (const modeTitle of [
