@@ -49,7 +49,7 @@ export function MobileNavMenu({
           <motion.button
             aria-label={content.navigation.closeMenuLabel}
             animate={{ opacity: 1 }}
-            className="fixed inset-0 z-40 bg-black/20 md:hidden"
+            className="fixed inset-0 z-40 bg-black/20 lg:hidden"
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             onClick={onClose}
@@ -58,13 +58,13 @@ export function MobileNavMenu({
           />
           <motion.div
             animate={{ x: 0 }}
-            className="fixed inset-y-0 right-0 z-50 w-80 max-w-[86vw] overflow-y-auto bg-white pt-[env(safe-area-inset-top)] shadow-xl md:hidden"
+            className="fixed inset-y-0 right-0 z-50 w-80 max-w-[86vw] overflow-y-auto bg-white pt-[env(safe-area-inset-top)] shadow-xl lg:hidden"
             data-mobile-nav-panel
             exit={{ x: "100%" }}
             initial={{ x: "100%" }}
             transition={{ duration: 0.18, ease: "easeOut" }}
           >
-            <div className="flex h-16 items-center justify-between border-b border-gray-200 px-4">
+            <div className="flex h-16 items-center justify-between border-b border-gray-200 px-4 md:h-20">
               <span className="font-heading text-lg font-bold text-gray-900">
                 {content.navigation.menuTitle}
               </span>

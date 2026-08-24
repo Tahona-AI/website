@@ -457,9 +457,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["De la estrategia a la implementación."],
+        titleLines: ["De la estrategia", "a la implementación."],
         description:
-          "Tahona es el partner tecnológico para diseñar, construir e integrar productos digitales, software a medida y soluciones de IA.",
+          "Tahona es el partner tecnológico para diseñar, construir e integrar software a medida y soluciones de IA.",
         primaryLabel: "Hablemos",
         primaryHref: "#contacto",
         secondaryLabel: "Ver servicios",
@@ -1413,9 +1413,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["From strategy to implementation."],
+        titleLines: ["From strategy", "to implementation."],
         description:
-          "Tahona is the technology partner for designing, building and integrating digital products, custom software and AI solutions.",
+          "Tahona is the technology partner for designing, building and integrating custom software and AI solutions.",
         primaryLabel: "Let's talk",
         primaryHref: "#contacto",
         secondaryLabel: "View services",
@@ -2368,9 +2368,9 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["Od strategii do wdrożenia."],
+        titleLines: ["Od strategii", "do wdrożenia."],
         description:
-          "Tahona to partner technologiczny, który projektuje, tworzy i integruje produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
+          "Tahona to partner technologiczny, który projektuje, tworzy i integruje oprogramowanie na miarę oraz rozwiązania AI.",
         primaryLabel: "Porozmawiajmy",
         primaryHref: "#contacto",
         secondaryLabel: "Zobacz usługi",

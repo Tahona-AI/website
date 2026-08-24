@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Die Grotesk";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/die-grotesk/DieGrotesk-Variable.woff2") format("woff2-variations");
+}
+
 @custom-variant dark (&:is(.dark *));
 
 .scrollbar-custom {
@@ -34,6 +42,7 @@
 @theme inline {
   /* Typography - Brand Fonts */
   --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-die-grotesk: "Die Grotesk", "Plus Jakarta Sans", system-ui, sans-serif;
   --font-body: "Geist Sans", system-ui, sans-serif;
   --font-sans: "Geist Sans", system-ui, sans-serif;
   --font-serif: Georgia, serif;
@@ -248,6 +257,10 @@
       );
   }
 
+  .font-die-grotesk {
+    font-family: var(--font-die-grotesk);
+    letter-spacing: -0.03em;
+  }
   .font-heading {
     font-family: var(--font-heading);
     letter-spacing: -0.02em;
