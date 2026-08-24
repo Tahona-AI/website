@@ -246,12 +246,15 @@ describe("public copy hygiene", () => {
   test("homepage hero keeps the concise approved copy in every locale", () => {
     const i18nSource = readProjectFile("src/i18n/content.ts");
     const approvedHeroCopy = [
-      "De la estrategia a la implementación.",
+      "De la estrategia",
+      "a la implementación.",
       "Tahona es el partner tecnológico para diseñar, construir e integrar software a medida y soluciones de IA.",
-      "From strategy to implementation.",
-      "Tahona is the technology partner for designing, building and integrating digital products, custom software and AI solutions.",
-      "Od strategii do wdrożenia.",
-      "Tahona to partner technologiczny, który projektuje, tworzy i integruje produkty cyfrowe, oprogramowanie na miarę oraz rozwiązania AI.",
+      "From strategy",
+      "to implementation.",
+      "Tahona is the technology partner for designing, building and integrating custom software and AI solutions.",
+      "Od strategii",
+      "do wdrożenia.",
+      "Tahona to partner technologiczny, który projektuje, tworzy i integruje oprogramowanie na miarę oraz rozwiązania AI.",
     ];
 
     for (const phrase of approvedHeroCopy) {
