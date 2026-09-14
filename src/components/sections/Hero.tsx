@@ -57,7 +57,7 @@ export function Hero({
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-white pt-16 md:pt-20"
+      className="relative overflow-hidden bg-white pt-16 md:pt-20 lg:min-h-dvh"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
