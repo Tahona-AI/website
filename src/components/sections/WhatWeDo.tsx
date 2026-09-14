@@ -7,15 +7,19 @@ import type { Locale } from "@/i18n/routing";
 
 function FlowDiagram() {
   return (
-    <div className="relative mx-auto min-h-[43rem] w-full max-w-[34rem]">
+    <div className="relative mx-auto w-full max-w-[34rem]">
       <div className="pointer-events-none absolute -inset-10 rounded-[2.75rem] bg-[radial-gradient(circle_at_8%_10%,rgba(45,106,79,0.08),transparent_32%),radial-gradient(circle_at_92%_90%,rgba(64,145,108,0.1),transparent_36%)] blur-xl" />
 
-      <div className="relative min-h-[43rem] overflow-hidden rounded-[2rem] border border-gray-200/75 bg-white shadow-[0_28px_80px_-52px_rgba(31,31,31,0.55)]">
+      <div className="relative overflow-hidden rounded-[2rem] border border-gray-200/75 bg-white shadow-[0_28px_80px_-52px_rgba(31,31,31,0.55)]">
         <img
-          src="/images/whatwedo-illustration.png"
+          src="/images/tahona-visual-1122.webp"
+          srcSet="/images/tahona-visual-1122.webp 1122w, /images/tahona-visual-2244.webp 2244w"
+          sizes="(min-width: 1024px) 544px, (min-width: 640px) min(544px, calc(100vw - 80px)), calc(100vw - 48px)"
+          width={1122}
+          height={1402}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-contain p-3 sm:p-5 lg:p-6"
+          className="block h-auto w-full"
           loading="lazy"
           decoding="async"
         />
