@@ -28,10 +28,13 @@ export function Hero({
   const resolvedDescription = description ?? homeHero.description;
   const resolvedPrimaryHref = primaryHref ?? homeHero.primaryHref;
   const resolvedPrimaryLabel = primaryLabel ?? homeHero.primaryLabel;
+  const compactSpanishTitle = locale === "es" && title === undefined;
   const resolvedTitle =
     title ??
-    homeHero.titleLines.map((line, index) => (
-      <span className={index > 0 ? "mt-3 block" : undefined} key={line}>
+    (compactSpanishTitle
+      ? homeHero.titleLines.join(" ").split(/ (?=para implementar IA)/)
+      : homeHero.titleLines).map((line, index) => (
+      <span className={compactSpanishTitle ? "block whitespace-nowrap" : index > 0 ? "mt-3 block" : undefined} key={line}>
         {line}
       </span>
     ));
@@ -64,7 +67,7 @@ export function Hero({
           initial={{ opacity: 0, scale: 1.02 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="relative left-1/2 h-[52svh] min-h-[22rem] w-screen -translate-x-1/2 overflow-hidden sm:h-[58svh]"
+          className={`relative left-1/2 h-[52svh] min-h-[22rem] w-screen -translate-x-1/2 overflow-hidden sm:h-[58svh] ${compactSpanishTitle ? "lg:h-[min(58svh,calc(100svh-18rem))] lg:min-h-0" : ""}`}
         >
           <img
             src="/images/fondo_olivo_singemini.png"
@@ -73,17 +76,17 @@ export function Hero({
           />
         </motion.div>
 
-        <div className="grid items-start gap-10 pt-6 pb-12 sm:pt-8 lg:grid-cols-2 lg:gap-20 lg:pt-2 lg:pb-14">
+        <div className={`grid items-start gap-10 pt-6 pb-12 sm:pt-8 lg:pt-2 lg:pb-14 ${compactSpanishTitle ? "lg:grid-cols-[3fr_2fr] lg:gap-16" : "lg:grid-cols-2 lg:gap-20"}`}>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="font-die-grotesk relative -left-2 mt-4 max-w-2xl text-[clamp(1.7rem,3.5vw,3.2rem)] font-medium leading-[1.22] tracking-[-0.03em] text-gray-900 sm:-left-3 lg:-left-8 lg:mt-8"
+            className={`font-die-grotesk relative mt-4 font-medium leading-[1.22] tracking-[-0.03em] text-gray-900 lg:mt-8 ${compactSpanishTitle ? "max-w-none text-[clamp(0.9rem,4.4vw,1.5rem)] lg:text-[clamp(1.5rem,2.1vw,2rem)]" : "-left-2 max-w-2xl text-[clamp(1.7rem,3.5vw,3.2rem)] sm:-left-3 lg:-left-8"}`}
           >
             {resolvedTitle}
           </motion.h1>
 
-          <div className="mt-4 flex flex-col ml-16 sm:ml-20 lg:mt-8 lg:ml-32 xl:ml-40">
+          <div className={`mt-4 ml-16 flex flex-col sm:ml-20 lg:mt-8 ${compactSpanishTitle ? "lg:ml-0" : "lg:ml-32 xl:ml-40"}`}>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
