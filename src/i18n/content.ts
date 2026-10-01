@@ -457,7 +457,7 @@ export const SITE_CONTENT = {
     },
     home: {
       hero: {
-        titleLines: ["De la estrategia", "a la implementación."],
+        titleLines: ["Cercanía, agilidad y confianza para implementar IA en tu empresa."],
         description:
           "Tahona es el partner tecnológico para diseñar, construir e integrar software a medida y soluciones de IA.",
         primaryLabel: "Hablemos",
