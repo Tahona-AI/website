@@ -1,0 +1,74 @@
+[
+  {
+    "src": "/images/corporate/photo-waves.webp",
+    "srcSet": "/images/corporate/photo-waves-960.webp 960w, /images/corporate/photo-waves.webp 1672w",
+    "width": 1672,
+    "height": 941,
+    "position": "center center",
+    "mobilePosition": "70% center",
+    "fit": "cover"
+  },
+  {
+    "src": "/images/corporate/photo-logistics.webp",
+    "srcSet": "/images/corporate/photo-logistics-960.webp 960w, /images/corporate/photo-logistics.webp 1672w",
+    "width": 1672,
+    "height": 941,
+    "position": "center center",
+    "mobilePosition": "69% center",
+    "fit": "cover"
+  },
+  {
+    "src": "/images/corporate/photo-city.webp",
+    "srcSet": "/images/corporate/photo-city-960.webp 960w, /images/corporate/photo-city.webp 3200w",
+    "width": 3200,
+    "height": 1800,
+    "position": "center center",
+    "mobilePosition": "64% center",
+    "fit": "cover"
+  },
+  {
+    "src": "/images/corporate/photo-nature.webp",
+    "srcSet": "/images/corporate/photo-nature-960.webp 960w, /images/corporate/photo-nature.webp 1672w",
+    "width": 1672,
+    "height": 941,
+    "position": "center center",
+    "mobilePosition": "72% center",
+    "fit": "cover"
+  },
+  {
+    "src": "/images/corporate/photo-technology.webp",
+    "srcSet": "/images/corporate/photo-technology-960.webp 960w, /images/corporate/photo-technology.webp 1672w",
+    "width": 1672,
+    "height": 941,
+    "position": "center center",
+    "mobilePosition": "64% center",
+    "fit": "cover"
+  },
+  {
+    "src": "/images/corporate/architecture-original.webp",
+    "srcSet": "/images/corporate/architecture-original-960.webp 960w, /images/corporate/architecture-original.webp 1800w",
+    "width": 1800,
+    "height": 2700,
+    "position": "center 43%",
+    "mobilePosition": "center 43%",
+    "fit": "cover"
+  },
+  {
+    "src": "/images/corporate/photo-space.webp",
+    "srcSet": "/images/corporate/photo-space-960.webp 960w, /images/corporate/photo-space.webp 3200w",
+    "width": 3200,
+    "height": 3200,
+    "position": "88% center",
+    "mobilePosition": "center center",
+    "fit": "contain"
+  },
+  {
+    "src": "/images/corporate/original-olive.webp",
+    "srcSet": "/images/corporate/original-olive-960.webp 960w, /images/corporate/original-olive.webp 1368w",
+    "width": 1368,
+    "height": 768,
+    "position": "center center",
+    "mobilePosition": "64% center",
+    "fit": "cover"
+  }
+]
