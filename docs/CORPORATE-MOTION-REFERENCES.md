@@ -28,3 +28,15 @@ La portada pública actual de Tahona referencia la imagen con el texto alternati
 - Inspección visual: un olivo de gran tamaño a la derecha, colinas mediterráneas y cielo azul; el tramado de puntos forma parte del propio archivo. No es la imagen de bosque `hero-clearing` de la primera prueba corporativa.
 
 Se reutiliza el recurso existente de Tahona a petición del usuario; las imágenes de otras consultoras son referencias de composición y movimiento y no se descargan para integrarlas en el sitio.
+
+## Gravedad localizada sobre la fotografía
+
+Referencias consultadas: [Creating a Bulge Distortion Effect with WebGL](https://tympanus.net/codrops/2023/06/28/creating-a-bulge-distortion-effect-with-webgl/) (Robin Payot / Codrops; documenta una aplicación en Upperquad) y [Mouse Flowmap Deformation with OGL](https://tympanus.net/codrops/2019/09/25/mouse-flowmap-deformation-with-ogl/) (Robin Delaporte / Codrops).
+
+Se adapta el desplazamiento local de textura con una atracción radial gaussiana, sin copiar la interfaz ni añadir librerías. Un canvas WebGL nativo de 528px comparte el campo y la cadencia de Mesh Flow; solo procesa el área del cursor y conserva la imagen original como fondo/fallback. Intensidad máxima aproximada de 24px, radio suavizado de 250px, entrada amortiguada de 130ms y relajación de 260ms. Respeta los encuadres cover/contain, el zoom y la opacidad del carrusel. Texto, botones y colores de marca permanecen estables. Se oculta en móvil y movimiento reducido; si WebGL no está disponible, sigue funcionando la malla 2D.
+
+## Tipografía fluida
+
+Referencia: [Flowmap Deformation, demo 3](https://tympanus.net/Development/FlowmapDeformation/index3.html), Robin Delaporte / Codrops. El movimiento de esta demo acumula velocidad local en un mapa que se disipa después; se adapta ese principio al titular de Tahona.
+
+El titular conserva su HTML, fuente, color, selección y semántica. Una pequeña textura vectorial de 128 columnas alimenta un filtro SVG de desplazamiento, con arrastre localizado de hasta 18px por eje y disipación de 190ms. Se comparte el bucle de Mesh Flow y se elimina el filtro al reposar. Sin nuevas dependencias. Activo en español, inglés y chino; desactivado en móvil, puntero táctil y movimiento reducido.

@@ -146,18 +146,12 @@ export interface CorporateCopy {
     emailPlaceholder: string;
     message: string;
     messagePlaceholder: string;
-    note: string;
-    review: string;
-    status: string;
+    send: string;
+    sending: string;
+    success: string;
+    error: string;
   };
-  footer: { tagline: string; top: string; copyright: string; local: string };
-  request: {
-    eyebrow: string;
-    title: string;
-    note: string;
-    back: string;
-    close: string;
-  };
+  footer: { tagline: string; top: string; copyright: string; location: string };
 }
 
 export const copy = {
@@ -194,7 +188,7 @@ export const copy = {
       description:
         "Conectamos estrategia, software e inteligencia artificial para resolver los retos de tu organización y abrir nuevas posibilidades de negocio.",
       cta: "Descubrir nuestras capacidades",
-      footnote: "VISIÓN ESTRATÉGICA. EJECUCIÓN CONCRETA.",
+      footnote: "CERCANÍA · AGILIDAD · CONFIANZA",
       about: "Conoce Tahona",
       carouselLabel: "Paisajes de Tahona",
       previous: "Imagen anterior",
@@ -516,22 +510,16 @@ export const copy = {
       emailPlaceholder: "nombre@empresa.com",
       message: "¿Cuál es el próximo reto?",
       messagePlaceholder: "Qué necesitas resolver y en qué contexto",
-      note: "Prueba local: puedes revisar la solicitud. Los datos no se envían ni se guardan.",
-      review: "Revisar solicitud",
-      status: "Solicitud revisada en local. No se ha enviado ningún dato.",
+      send: "Enviar mensaje",
+      sending: "Enviando…",
+      success: "Gracias por escribirnos. Nos pondremos en contacto contigo.",
+      error: "No hemos podido enviar el mensaje. Inténtalo de nuevo o escríbenos a hola@tahona.ai.",
     },
     footer: {
       tagline: "Estrategia. Tecnología.\nCercanía para avanzar.",
       top: "Volver al inicio",
       copyright: "Tahona AI. Todos los derechos reservados.",
-      local: "Prueba corporativa · Solo local",
-    },
-    request: {
-      eyebrow: "REVISIÓN DE SOLICITUD",
-      title: "Un primer paso\npara conocernos.",
-      note: "Esta es una simulación local. La solicitud no se ha enviado y los datos no se guardan.",
-      back: "Volver al formulario",
-      close: "Cerrar revisión",
+      location: "Madrid, España",
     },
   },
   en: {
@@ -567,7 +555,7 @@ export const copy = {
       description:
         "We bring strategy, software and artificial intelligence together to solve your organisation's challenges and open up new business opportunities.",
       cta: "Discover our capabilities",
-      footnote: "STRATEGIC THINKING. PRACTICAL DELIVERY.",
+      footnote: "CLOSENESS · AGILITY · TRUST",
       about: "Meet Tahona",
       carouselLabel: "Tahona landscapes",
       previous: "Previous image",
@@ -884,22 +872,16 @@ export const copy = {
       emailPlaceholder: "name@company.com",
       message: "What's the next challenge?",
       messagePlaceholder: "What you need to solve and the context behind it",
-      note: "Local preview: you can review your request. No data is sent or saved.",
-      review: "Review request",
-      status: "Request reviewed locally. No data has been sent.",
+      send: "Send message",
+      sending: "Sending…",
+      success: "Thank you for getting in touch. We will contact you soon.",
+      error: "We could not send your message. Please try again or email hola@tahona.ai.",
     },
     footer: {
       tagline: "Strategy. Technology.\nWorking closely to move forward.",
       top: "Back to top",
       copyright: "Tahona AI. All rights reserved.",
-      local: "Corporate preview · Local only",
-    },
-    request: {
-      eyebrow: "REQUEST REVIEW",
-      title: "A first step\nto get acquainted.",
-      note: "This is a local simulation. Your request has not been sent and no data is saved.",
-      back: "Back to the form",
-      close: "Close review",
+      location: "Madrid, Spain",
     },
   },
   zh: {
@@ -935,7 +917,7 @@ export const copy = {
       description:
         "结合战略、软件与人工智能，解决企业面临的挑战，发掘新的业务机会。",
       cta: "了解我们的专业能力",
-      footnote: "战略思考，务实落地。",
+      footnote: "亲近 · 敏捷 · 信任",
       about: "认识 Tahona",
       carouselLabel: "Tahona 风景轮播",
       previous: "上一张图片",
@@ -1234,22 +1216,16 @@ export const copy = {
       emailPlaceholder: "name@company.com",
       message: "下一步需要解决什么？",
       messagePlaceholder: "请描述需要解决的问题及相关背景",
-      note: "本地预览：你可以核对请求内容。数据不会发送或保存。",
-      review: "核对请求",
-      status: "已在本地核对请求，未发送任何数据。",
+      send: "发送消息",
+      sending: "正在发送…",
+      success: "感谢你的留言，我们会与你联系。",
+      error: "消息发送失败，请重试或发送邮件至 hola@tahona.ai。",
     },
     footer: {
       tagline: "战略。技术。\n并肩合作，共同前行。",
       top: "返回顶部",
       copyright: "Tahona AI. 保留所有权利。",
-      local: "企业网站预览 · 仅限本地",
-    },
-    request: {
-      eyebrow: "核对请求",
-      title: "迈出第一步，\n从彼此了解开始。",
-      note: "这是本地模拟。请求尚未发送，数据不会保存。",
-      back: "返回表单",
-      close: "关闭核对窗口",
+      location: "西班牙，马德里",
     },
   },
 } satisfies Record<Locale, CorporateCopy>;

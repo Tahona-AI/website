@@ -1,3 +1,5 @@
+import { initMeshFlow } from "./mesh-flow";
+
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 // Progressive enhancement: content remains visible when JavaScript is unavailable.
@@ -155,39 +157,58 @@ document.querySelectorAll<HTMLDialogElement>("dialog").forEach((dialog) => {
   dialog.addEventListener("close", () => {
     document.body.classList.remove("modal-open");
     lastDialogTriggers.get(dialog)?.focus({ preventScroll: true });
-    // Personal input is never persisted, sent to a webhook, or retained in the summary.
-    if (dialog.id === "solicitud")
-      document.querySelector("#request-summary")?.replaceChildren();
   });
 });
 
 const form = document.querySelector<HTMLFormElement>(".contact-form");
-const reviewButton = form?.querySelector<HTMLButtonElement>(
-  "button[type=submit]",
-);
-if (reviewButton) reviewButton.disabled = false;
-form?.addEventListener("submit", (event) => {
+const sendButton = form?.querySelector<HTMLButtonElement>("button[type=submit]");
+if (sendButton) sendButton.disabled = false;
+let submitting = false;
+form?.addEventListener("submit", async (event) => {
   event.preventDefault();
+  if (submitting || !sendButton) return;
+  form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>("input, textarea").forEach(field => {
+    field.value = field.value.trim();
+  });
   if (!form.reportValidity()) return;
-  const summary = document.querySelector("#request-summary");
-  const dialog = document.getElementById("solicitud");
-  if (!summary || !(dialog instanceof HTMLDialogElement)) return;
+  const status = form.querySelector<HTMLElement>(".form-status");
+  const label = sendButton.querySelector("[data-submit-label]");
   const data = new FormData(form);
-  summary.replaceChildren();
-  const labels: Array<[string, string]> = JSON.parse(
-    form.dataset.formLabels ?? "[]",
-  );
-  for (const [name, label] of labels) {
-    const term = document.createElement("dt");
-    const description = document.createElement("dd");
-    term.textContent = label;
-    description.textContent = String(data.get(name) ?? "").trim();
-    summary.append(term, description);
+  const body = new URLSearchParams();
+  body.set("name", String(data.get("name") ?? "").trim());
+  body.set("email", String(data.get("email") ?? "").trim());
+  body.set("details", `${form.dataset.companyLabel}: ${String(data.get("company") ?? "").trim()}\n\n${String(data.get("message") ?? "").trim()}`);
+  submitting = true;
+  sendButton.disabled = true;
+  form.setAttribute("aria-busy", "true");
+  if (label) label.textContent = form.dataset.sendingLabel ?? "";
+  if (status) status.textContent = "";
+  try {
+    // Same webhook and payload as the deployed site. Its no-cors response is opaque:
+    // completion confirms the network request, not the downstream email delivery.
+    const response = await fetch("https://n8n.tahona.ai/webhook/tahona-form", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
+    });
+    if (response.type !== "opaque" && !response.ok) throw new Error("Contact request failed");
+    if (status) {
+      status.dataset.state = "success";
+      status.textContent = form.dataset.successMessage ?? "";
+    }
+    form.reset();
+  } catch {
+    if (status) {
+      status.dataset.state = "error";
+      status.textContent = form.dataset.errorMessage ?? "";
+    }
+  } finally {
+    submitting = false;
+    sendButton.disabled = false;
+    form.removeAttribute("aria-busy");
+    if (label) label.textContent = form.dataset.sendLabel ?? "";
   }
-  const submit = form.querySelector<HTMLButtonElement>("button[type=submit]");
-  if (submit) openDialog(dialog, submit);
-  const status = form.querySelector(".form-status");
-  if (status) status.textContent = form.dataset.statusMessage ?? "";
 });
 
 // Keep the exact reading position across the three static language routes.
@@ -247,21 +268,10 @@ if (carousel) {
   const indicators = Array.from(
     carousel.querySelectorAll<HTMLButtonElement>("[data-slide-button]"),
   );
-  const pauseButton = carousel.querySelector<HTMLButtonElement>(
-    "[data-carousel-pause]",
-  );
-  const nextButton = carousel.querySelector<HTMLButtonElement>(
-    "[data-carousel-next]",
-  );
-  const previousButton = carousel.querySelector<HTMLButtonElement>(
-    "[data-carousel-prev]",
-  );
-  const smallScreen = window.matchMedia("(max-width: 767px)");
   let index = 0;
-  let paused = reducedMotion.matches || smallScreen.matches;
+  let paused = false;
   let hovered = false;
   let focused = false;
-  let explicitPlayback = false;
   let visible = true;
   let timer: ReturnType<typeof setTimeout> | undefined;
   let startedAt: number | undefined;
@@ -288,23 +298,13 @@ if (carousel) {
     }
     const playing =
       !paused &&
-      (explicitPlayback || (!hovered && !focused)) &&
+      !hovered &&
+      !focused &&
       visible &&
       !document.hidden &&
       !reducedMotion.matches;
     carousel!.dataset.playing = String(playing);
     carousel!.dataset.activeSlide = String(index + 1);
-    if (pauseButton) {
-      pauseButton.setAttribute(
-        "aria-label",
-        (paused ? carousel!.dataset.playLabel : carousel!.dataset.pauseLabel) ??
-          "",
-      );
-      pauseButton.setAttribute("aria-pressed", String(paused));
-      pauseButton.disabled = reducedMotion.matches;
-      const symbol = pauseButton.querySelector("[data-pause-symbol]");
-      if (symbol) symbol.textContent = paused ? "▶" : "Ⅱ";
-    }
     if (playing && slides.length > 1) {
       // Fetch only the next landscape, rather than all eight at page load.
       void prepareImage((index + 1) % slides.length)
@@ -323,10 +323,12 @@ if (carousel) {
     const turn = ++request;
     clearTimeout(timer);
     if (manual) {
-      paused = true;
-      explicitPlayback = false;
+      paused = false;
+      startedAt = undefined;
+      remainingMs = 9000;
     }
     if (next === index) {
+      if (manual) indicators[index]?.querySelector("span")?.getAnimations().forEach(animation => { animation.currentTime = 0; });
       updatePlayback();
       return;
     }
@@ -338,7 +340,6 @@ if (carousel) {
         if (turn !== request) return;
         // Keep the current landscape if a file cannot be decoded; never retry in a loop.
         paused = true;
-        explicitPlayback = false;
         updatePlayback();
         return;
       }
@@ -358,12 +359,8 @@ if (carousel) {
       indicators[i]?.setAttribute("aria-pressed", String(i === index));
     });
     const active = indicators[index];
-    const counter = carousel!.querySelector("[data-carousel-index]");
-    const name = carousel!.querySelector("[data-carousel-name]");
     const caption = carousel!.querySelector("[data-carousel-caption]");
     const status = carousel!.querySelector("[data-carousel-status]");
-    if (counter) counter.textContent = String(index + 1).padStart(2, "0");
-    if (name) name.textContent = active?.dataset.slideName ?? "";
     if (caption) caption.textContent = active?.dataset.slideCaption ?? "";
     if (manual && status)
       status.textContent = active?.getAttribute("aria-label") ?? "";
@@ -373,34 +370,20 @@ if (carousel) {
   indicators.forEach((button, i) =>
     button.addEventListener("click", () => void showSlide(i, true)),
   );
-  nextButton?.addEventListener(
-    "click",
-    () => void showSlide((index + 1) % slides.length, true),
-  );
-  previousButton?.addEventListener(
-    "click",
-    () => void showSlide((index - 1 + slides.length) % slides.length, true),
-  );
-  pauseButton?.addEventListener("click", () => {
-    paused = !paused;
-    // The explicit play action takes precedence over the button's own focus/hover.
-    explicitPlayback = !paused;
-    updatePlayback();
-  });
-  carousel.addEventListener("pointerenter", (event) => {
+  // Hovering the indicators pauses the timer; the photo itself stays automatic.
+  const navigation = carousel.querySelector<HTMLElement>(".carousel-navigation");
+  navigation?.addEventListener("pointerenter", (event) => {
     if (event.pointerType === "mouse") {
       hovered = true;
-      explicitPlayback = false;
       updatePlayback();
     }
   });
-  carousel.addEventListener("pointerleave", () => {
+  navigation?.addEventListener("pointerleave", () => {
     hovered = false;
     updatePlayback();
   });
   carousel.addEventListener("focusin", () => {
-    focused = true;
-    explicitPlayback = false;
+    focused = carousel.matches(":has(:focus-visible)");
     updatePlayback();
   });
   carousel.addEventListener("focusout", (event) => {
@@ -413,14 +396,7 @@ if (carousel) {
     }
   });
   document.addEventListener("visibilitychange", updatePlayback);
-  reducedMotion.addEventListener("change", () => {
-    if (reducedMotion.matches) paused = true;
-    updatePlayback();
-  });
-  smallScreen.addEventListener("change", () => {
-    if (smallScreen.matches) paused = true;
-    updatePlayback();
-  });
+  reducedMotion.addEventListener("change", updatePlayback);
   carousel
     .querySelector(".carousel-navigation")
     ?.addEventListener("keydown", (event) => {
@@ -469,3 +445,5 @@ if (carousel) {
   }
   updatePlayback();
 }
+
+if (carousel) initMeshFlow(carousel, reducedMotion);

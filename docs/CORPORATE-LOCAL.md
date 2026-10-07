@@ -2,7 +2,7 @@
 
 Investigación iniciada el 5 de octubre de 2026; revisión del 6 de octubre. Rama: `codex/pruebas-locales`.
 
-Propuesta exclusivamente local. No subir la rama, abrir una PR, fusionar, ejecutar GitHub Actions ni desplegar. El workflow y la configuración de publicación se mantienen intactos, junto con los cambios preexistentes del proyecto.
+Preparada para producción en la rama de pruebas. El usuario autoriza el push de esta rama, sin desplegar, fusionar, crear etiquetas ni ejecutar acciones de publicación. El workflow y la configuración de publicación se mantienen intactos, junto con los cambios preexistentes del proyecto.
 
 ## Fuentes de Tahona
 
@@ -42,7 +42,7 @@ Tres rutas estáticas completas, con selector visible en escritorio y móvil:
 - `/en/`: inglés.
 - `/zh/`: chino simplificado, con `lang="zh-CN"`.
 
-La traducción comprende navegación, contenido, metadatos, textos alternativos, etiquetas accesibles, diálogos y formulario, incluidos sus mensajes dinámicos. Al cambiar de idioma se conserva el ancla de la sección que se estaba leyendo. Los textos comparten estructura en `src/components/corporate/copy.ts`.
+La traducción comprende navegación, contenido, metadatos, textos alternativos, etiquetas accesibles, diálogos y formulario, incluidos sus mensajes dinámicos. Al cambiar de idioma se conservan las coordenadas de desplazamiento. Los textos comparten estructura en `src/components/corporate/copy.ts`.
 
 ## Imágenes y movimiento
 
@@ -65,19 +65,19 @@ Los créditos de krzhck / Unsplash y NASA / Apollo 17 aparecen en el pie y en la
 
 La antigua `architecture.jpg` y las tres imágenes generadas con dither de la versión 2 se conservan como recursos anteriores. No forman parte de las ocho imágenes activas.
 
-El carrusel propio mantiene el mensaje y las acciones estables. Cambia de imagen cada 9 segundos, con una disolución de 1,2 segundos y un zoom muy leve de 12 segundos. Incluye flechas, ocho indicadores generados desde la colección de imágenes, contador con total `08` y reproducción/pausa. La pausa detiene el tiempo restante, el progreso y el movimiento visual; también se interrumpe al interactuar y cuando la pestaña deja de estar visible.
+El carrusel propio mantiene el mensaje y las acciones estables. Cambia de imagen cada 9 segundos, con una disolución de 1,2 segundos y un zoom muy leve de 12 segundos. Incluye únicamente ocho líneas de progreso seleccionables; se han retirado el contador, el nombre de escena, las flechas y el control de reproducción. La pausa detiene el tiempo restante, el progreso y el movimiento visual; también se interrumpe al interactuar y cuando la pestaña deja de estar visible.
 
 Cada imagen tiene un encuadre específico para móvil. La Tierra se muestra completa con `contain`, sobre negro y hacia la derecha, dejando espacio para el titular. Se carga primero la portada y se prepara la siguiente imagen; las demás se descargan al avanzar, para reducir el peso inicial.
 
-En móvil comienza pausado. Con `prefers-reduced-motion`, la portada permanece quieta y las imágenes se pueden elegir manualmente. El resto de la página usa entradas discretas, revelado al desplazarse y transiciones entre industrias.
+En móvil también avanza automáticamente. Con `prefers-reduced-motion`, la portada permanece quieta y las imágenes se pueden elegir manualmente. El resto de la página usa entradas discretas, revelado al desplazarse y transiciones entre industrias.
 
 ## Funcionamiento local
 
 - Menús, navegación por anclas, capacidades y método desplegables, industrias con navegación de teclado.
 - Casos y perspectivas en diálogos con cierre, Escape y retorno del foco.
-- Formulario con validación y revisión local. No envía ni guarda datos, ni utiliza el webhook de producción. Los enlaces de correo abren el cliente del usuario.
+- Formulario con validación, bloqueo de envíos duplicados y estados de envío, éxito y error traducidos. Utiliza el mismo webhook de producción y las claves `name`, `email`, `details`; la organización se incluye en `details`. El formulario de producción usa `no-cors`, por lo que no se puede verificar desde el navegador la entrega final del correo. No se ha enviado una solicitud real durante las comprobaciones.
 - Fuentes, imágenes y logo locales; sin dependencias nuevas.
-- Metadatos `noindex, nofollow`.
+- Metadatos `index, follow`, canonical y hreflang absolutos para las tres rutas; tarjetas sociales.
 
 La portada original del checkout se conserva en `tmp/corporate/index.original.astro.txt`. Los componentes anteriores y sus modificaciones preexistentes se mantienen.
 
@@ -117,3 +117,23 @@ El cambio de idioma conserva las coordenadas exactas de scroll mediante un dato 
 La portada ocupa la altura visible menos la cabecera, con controles al pie y altura flexible cuando el contenido requiere más espacio en pantallas pequeñas. Se elimina la franja de tres mensajes posterior, aumenta AI a 13px y el footer pasa a gris oscuro #242627, con logo blanco y textos/enlaces de contraste claro.
 
 Verificado: cambios ES → EN → ZH → ES conservan el scroll (incluidos 2081px de lectura); la portada termina exactamente en el borde a 1366×768, 1440×810, 1920×1080 y 390×844. Sin desbordamiento horizontal. Construcción estática y diagnóstico Astro correctos (solo cuatro hints preexistentes). Todo permanece en local.
+
+### Mesh Flow sobre la portada
+
+Una malla local de puntos y curvas responde al cursor mediante un campo gaussiano de atracción suave. Se dibuja únicamente en un canvas de 528px alrededor del puntero, con resolución limitada a 1.5×, sin shaders ni dependencias nuevas. La fotografía, los textos y los controles permanecen estables. La malla es completamente transparente en reposo, se atenúa sobre enlaces/botones y desaparece al salir. El bucle se detiene cuando el cursor se estabiliza, al quedar fuera de pantalla o al ocultar la pestaña. Desactivada en móvil, puntero táctil y movimiento reducido. Componente compartido por español, inglés y chino.
+
+### Gravedad sobre las imágenes
+
+La fotografía también responde a la malla con una deformación local suave-media, inspirada en referencias públicas de Codrops. El desplazamiento utiliza WebGL nativo sobre un área pequeña, comparte un único bucle con la malla y mantiene intacto el archivo original. Sin dependencias nuevas ni cambios en el copy, las rutas o el despliegue. Activo en los tres idiomas, con fallback a la fotografía limpia y la malla 2D cuando WebGL no está disponible.
+
+### Fluidez en el titular
+
+El titular principal responde al paso del cursor con un mapa de velocidad localizado, inspirado en la demo 3 de Flowmap Deformation. Las letras se arrastran suavemente y recuperan su forma al detener el puntero. Se filtra el HTML real: no se sustituye por una imagen, se conservan tipografía, colores, selección y accesibilidad. Comparte el bucle de Mesh Flow; el filtro desaparece al disiparse el movimiento. Verificado en español, inglés y chino y desactivado en móvil. Construcción correcta y Astro sin errores ni advertencias (cuatro hints preexistentes).
+
+### Preparación para producción — 7 de octubre
+
+Se retiran los textos de simulación en los tres idiomas y el diálogo de revisión local. La integración de contacto se contrasta con `origin/main`: `https://n8n.tahona.ai/webhook/tahona-form`, POST URL-encoded y `no-cors`. El cambio manual de fotografía reinicia los nueve segundos; la reproducción se pausa sobre los indicadores, con foco de teclado, al ocultar la pestaña o al salir de pantalla. Se respeta movimiento reducido.
+
+El push a `codex/pruebas-locales` no publica: el workflow del checkout solo escucha `main`, y el actual de `origin/main` escucha etiquetas `v*`. No se modifica ningún workflow ni se crean etiquetas.
+
+Validación de esta preparación: compilación estática de las tres rutas correcta; Astro con cero errores y warnings, cuatro hints preexistentes. Formulario comprobado con envío simulado (payload, Unicode, validación, envíos duplicados y errores). Navegador: ocho líneas, selección manual seguida de avance automático, textos ES/EN/ZH y encaje exacto a 1366×768.
