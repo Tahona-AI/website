@@ -1,20 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import type { ChangeEvent, FormEvent } from "react";
 import { ContactForm } from "@/components/sections/contact/ContactForm";
 import { ContactModal } from "@/components/sections/contact/ContactModal";
 import { ContactSidebar } from "@/components/sections/contact/ContactSidebar";
-import {
-  CONTACT_WEBHOOK_URL,
-  EMPTY_CONTACT_FORM,
-  isFormField,
-  validateContactForm,
-} from "@/components/sections/contact-content";
-import type {
-  ContactFormData,
-  FormErrors,
-} from "@/components/sections/contact-content";
+import { useContactForm } from "@/components/sections/contact/useContactForm";
 import { getContent } from "@/i18n/content";
 import { DEFAULT_LOCALE } from "@/i18n/routing";
 import type { Locale } from "@/i18n/routing";
@@ -25,68 +14,15 @@ export function Contact({
   readonly locale?: Locale;
 }) {
   const copy = getContent(locale).contact;
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [formData, setFormData] =
-    useState<ContactFormData>(EMPTY_CONTACT_FORM);
-  const [showModal, setShowModal] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const newErrors = validateContactForm(formData, copy);
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    setIsSubmitting(true);
-    setErrors({});
-
-    try {
-      const formBody = new URLSearchParams();
-      formBody.append("name", formData.name);
-      formBody.append("email", formData.email);
-      formBody.append("details", formData.details);
-
-      await fetch(CONTACT_WEBHOOK_URL, {
-        body: formBody.toString(),
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        method: "POST",
-        mode: "no-cors",
-      });
-
-      setShowModal(true);
-      setFormData(EMPTY_CONTACT_FORM);
-    } catch (error) {
-      if (!(error instanceof Error)) {
-        setErrors({ submit: copy.errorMessages.submit });
-        return;
-      }
-
-      setErrors({ submit: copy.errorMessages.submit });
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
-  function handleInputChange(
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
-    const { name, value } = event.target;
-    if (!isFormField(name)) {
-      return;
-    }
-
-    setFormData((previous) => ({ ...previous, [name]: value }));
-
-    if (errors[name]) {
-      setErrors((previous) => ({ ...previous, [name]: undefined }));
-    }
-  }
+  const {
+    closeModal,
+    errors,
+    formData,
+    handleInputChange,
+    handleSubmit,
+    isSubmitting,
+    showModal,
+  } = useContactForm(copy);
 
   return (
     <>
@@ -109,6 +45,7 @@ export function Contact({
             <div className="mt-14 grid gap-14 lg:grid-cols-12 lg:gap-16">
               <ContactSidebar copy={copy} />
               <ContactForm
+                className="lg:col-span-7"
                 copy={copy}
                 errors={errors}
                 formData={formData}
@@ -122,7 +59,7 @@ export function Contact({
       </section>
 
       {showModal && (
-        <ContactModal copy={copy} onClose={() => setShowModal(false)} />
+        <ContactModal copy={copy} onClose={closeModal} />
       )}
     </>
   );

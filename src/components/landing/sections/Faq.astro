@@ -1,0 +1,52 @@
+---
+import { ArrowUpRightIcon, SectionHeading } from "@/components/landing/primitives";
+import { LANDING_SECTIONS, faq, sectionHref } from "@/components/landing/content";
+---
+
+<section id={LANDING_SECTIONS.faq} class="scroll-mt-20 bg-white py-24 lg:py-28">
+  <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.4fr] lg:gap-20 lg:px-8">
+    <div class="flex flex-col gap-10">
+      <SectionHeading {...faq.heading} />
+      <a
+        class="group relative flex flex-col gap-10 overflow-hidden rounded-[1.75rem] bg-brand-700 p-7 text-white shadow-[0_34px_80px_-46px_rgba(10,31,20,0.85)] transition-transform duration-300 hover:-translate-y-1 lg:max-w-sm"
+        data-reveal
+        href={sectionHref(faq.asideCta.section)}
+      >
+        <span class="dither-field absolute inset-0 opacity-25" aria-hidden="true"></span>
+        <span class="relative ml-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-brand-700 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+          <ArrowUpRightIcon />
+        </span>
+        <span class="relative">
+          <span class="block font-heading text-xl font-semibold">{faq.asideTitle}</span>
+          <span class="mt-2 block text-sm leading-6 text-white/75">{faq.asideBody}</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="border-t border-gray-200" data-reveal>
+      {
+        faq.items.map((item) => (
+          <details class="faq-item group border-b border-gray-200">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 font-heading text-lg font-semibold text-gray-900 marker:hidden">
+              {item.question}
+              <span
+                aria-hidden="true"
+                class="relative inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white transition-colors duration-200 group-open:border-brand-600 group-open:bg-brand-600"
+              >
+                <span class="absolute h-px w-3.5 bg-gray-700 group-open:bg-white" />
+                <span class="absolute h-3.5 w-px bg-gray-700 transition-transform duration-200 group-open:rotate-90 group-open:bg-white" />
+              </span>
+            </summary>
+            <p class="max-w-2xl pb-6 text-base leading-7 text-gray-600">{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
