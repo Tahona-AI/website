@@ -1,0 +1,74 @@
+---
+import { Eyebrow } from "@/components/landing/primitives";
+import { proof } from "@/components/landing/content";
+---
+
+<!--
+  Editorial figures: a two-weight statement and one row of numbers divided by
+  hairlines. Deliberately no cards; the numbers carry the section.
+-->
+<section class="relative bg-white py-20 lg:py-28" aria-labelledby="proof-statement">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div data-reveal>
+      <Eyebrow>{proof.eyebrow}</Eyebrow>
+      <p
+        id="proof-statement"
+        class="mt-6 max-w-5xl font-heading text-[clamp(1.75rem,3.6vw,3rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-balance"
+      >
+        <span class="text-gray-900">{proof.statementLead}</span>
+        <span class="text-gray-400">{proof.statementTail}</span>
+      </p>
+    </div>
+
+    <dl class="proof-row mt-16 grid border-t border-gray-200 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+      {
+        proof.kpis.map((kpi, index) => (
+          <div
+            class:list={[
+              "proof-cell flex flex-col-reverse justify-end gap-6 border-b border-gray-200 py-8 lg:border-b-0 lg:py-10",
+              // Hairline dividers: between the two columns on sm, between all four on lg.
+              index % 2 === 1 ? "sm:border-l sm:pl-6" : "sm:pr-6",
+              index > 0 && "lg:border-l lg:pl-6",
+            ]}
+            data-reveal
+            style={`--reveal-delay: ${index * 110}ms`}
+          >
+            <dt>
+              <span class="block text-base font-semibold text-gray-900">{kpi.label}</span>
+              <span class="mt-2 block max-w-[16rem] text-sm leading-6 text-gray-500">{kpi.detail}</span>
+            </dt>
+            <dd class="font-die-grotesk text-[clamp(3.5rem,6vw,5.5rem)] font-medium leading-[0.9] tracking-[-0.05em] text-gray-900 tabular-nums">
+              {"prefix" in kpi && <span class="text-brand-500">{kpi.prefix}</span>}
+              <span data-count={kpi.value}>{kpi.value}</span>
+              {"suffix" in kpi && <span class="text-brand-500">{kpi.suffix}</span>}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  /* Each figure gets a short green rule that draws in as it reveals. */
+  .proof-cell {
+    position: relative;
+  }
+
+  .proof-cell::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    height: 2px;
+    width: 3rem;
+    background: rgb(45, 106, 79);
+    transform-origin: left;
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 200ms);
+  }
+
+  :global(.reveal-ready) .proof-cell:not(:global(.is-visible))::before {
+    transform: scaleX(0);
+  }
+</style>

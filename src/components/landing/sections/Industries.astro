@@ -1,0 +1,20 @@
+---
+import { SectionHeading } from "@/components/landing/primitives";
+import { IndustriesTabs } from "@/components/landing/IndustriesTabs";
+import { LANDING_SECTIONS, industries } from "@/components/landing/content";
+---
+
+<section id={LANDING_SECTIONS.industries} class="scroll-mt-20 bg-white py-24 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <SectionHeading {...industries.heading} />
+
+    <div class="mt-12" data-reveal>
+      <IndustriesTabs client:visible />
+    </div>
+
+    <p class="mt-8 text-sm leading-6 text-gray-500" data-reveal>
+      <span class="font-semibold text-gray-700">{industries.otherLabel}</span>
+      {" "}{industries.others.join(", ")}.
+    </p>
+  </div>
+</section>

@@ -1,0 +1,84 @@
+---
+/**
+ * Single-page landing. Section order follows the narrative:
+ * what Tahona does → how it engages → proof → sectors → who → contact.
+ *
+ * Sections are static Astro by default; only the navbar, industries tabs and
+ * contact form hydrate. Scroll reveal and KPI counters are handled by the small
+ * inline script below instead of one React island per animated block.
+ */
+import Layout from "@/layouts/Layout.astro";
+import SkipLink from "@/components/SkipLink.astro";
+import { LandingNavbar } from "@/components/landing/LandingNavbar";
+import LandingHero from "@/components/landing/sections/LandingHero.astro";
+import Proof from "@/components/landing/sections/Proof.astro";
+import Capabilities from "@/components/landing/sections/Capabilities.astro";
+import Engagement from "@/components/landing/sections/Engagement.astro";
+import Cases from "@/components/landing/sections/Cases.astro";
+import Industries from "@/components/landing/sections/Industries.astro";
+import About from "@/components/landing/sections/About.astro";
+import Method from "@/components/landing/sections/Method.astro";
+import Team from "@/components/landing/sections/Team.astro";
+import Faq from "@/components/landing/sections/Faq.astro";
+import { LandingContact } from "@/components/landing/LandingContact";
+import LandingFooter from "@/components/landing/sections/LandingFooter.astro";
+---
+
+<Layout locale="es" pageKey="home">
+  <script is:inline>
+    // Hide [data-reveal] blocks before first paint; the module script reveals them.
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.add("reveal-ready");
+    }
+  </script>
+  <SkipLink locale="es" />
+  <LandingNavbar client:load />
+  <main id="main-content" class="relative flex min-h-screen flex-col overflow-x-clip">
+    <LandingHero />
+    <Proof />
+    <Capabilities />
+    <Engagement />
+    <Cases />
+    <Industries />
+    <About />
+    <Method />
+    <Team />
+    <Faq />
+    <LandingContact client:visible />
+  </main>
+  <LandingFooter />
+</Layout>
+
+<script>
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /** Counts a KPI up from 0 to its rendered value with an ease-out curve. */
+  function countUp(element: HTMLElement) {
+    const target = Number(element.dataset.count);
+    if (!Number.isFinite(target) || target === 0 || reduceMotion) return;
+    const duration = 1400;
+    const start = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      element.textContent = String(Math.round(target * eased));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    element.textContent = "0";
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting || !(entry.target instanceof HTMLElement)) continue;
+        entry.target.classList.add("is-visible");
+        entry.target.querySelectorAll<HTMLElement>("[data-count]").forEach(countUp);
+        observer.unobserve(entry.target);
+      }
+    },
+    { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+  );
+
+  document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
+</script>

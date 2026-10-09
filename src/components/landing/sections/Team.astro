@@ -1,0 +1,58 @@
+---
+import { SectionHeading, cardClass } from "@/components/landing/primitives";
+import { LANDING_SECTIONS, team } from "@/components/landing/content";
+import type { TeamMember } from "@/components/landing/content";
+
+// Widen from the literal content type so ready portraits can be swapped in later.
+const members: readonly TeamMember[] = team.items;
+---
+
+<section id={LANDING_SECTIONS.team} class="scroll-mt-20 bg-surface py-24 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <SectionHeading {...team.heading} />
+
+    <ul class="mt-14 grid gap-5 md:grid-cols-3">
+      {
+        members.map((member, index) => (
+          <li data-reveal style={`--reveal-delay: ${index * 100}ms`}>
+            <article class:list={[cardClass, "flex h-full flex-col p-6"]}>
+              <div class="flex items-center gap-4">
+                {member.portrait.kind === "ready" ? (
+                  <img
+                    alt={member.portrait.alt}
+                    class="h-16 w-16 shrink-0 rounded-full object-cover ring-4 ring-brand-50"
+                    loading="lazy"
+                    decoding="async"
+                    src={member.portrait.src}
+                  />
+                ) : (
+                  <div
+                    class="relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-50 ring-4 ring-white"
+                    data-visual-slot={member.portrait.slot}
+                    role="img"
+                    aria-label={`Foto pendiente de ${member.name}`}
+                  >
+                    <div class="dither-field-dense absolute inset-0 opacity-60" aria-hidden="true" />
+                    <span class="relative font-heading text-lg font-bold text-brand-700">{member.initials}</span>
+                  </div>
+                )}
+                <div class="min-w-0">
+                  <h3 class="font-heading text-lg font-semibold leading-snug text-gray-900">{member.name}</h3>
+                  <p class="mt-0.5 text-sm leading-5 text-brand-600">{member.focus}</p>
+                </div>
+              </div>
+              <ul class="mt-4 space-y-1.5 border-t border-gray-200/80 pt-4">
+                {member.background.map((line) => (
+                  <li class="flex items-start gap-2.5 text-[0.8125rem] leading-5 text-gray-600">
+                    <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-300" aria-hidden="true" />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

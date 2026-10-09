@@ -1,0 +1,58 @@
+---
+import { ArrowUpRightIcon, Eyebrow, VisualFrame } from "@/components/landing/primitives";
+import { LANDING_SECTIONS, about, sectionHref } from "@/components/landing/content";
+---
+
+<section id={LANDING_SECTIONS.about} class="scroll-mt-20 bg-surface py-24 lg:py-28">
+  <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-20 lg:px-8">
+    <div class="flex flex-col">
+      <div data-reveal>
+        <Eyebrow>{about.eyebrow}</Eyebrow>
+        <h2 class="mt-4 max-w-xl font-heading text-3xl font-semibold tracking-[-0.02em] text-gray-900 text-balance sm:text-4xl md:text-5xl">
+          {about.title}
+        </h2>
+        <p class="mt-6 max-w-xl text-lg leading-8 text-gray-700">{about.lead}</p>
+        <p class="mt-4 max-w-xl text-base leading-7 text-gray-500">{about.body}</p>
+      </div>
+
+      <ol class="mt-12 border-t border-gray-200">
+        {
+          about.principles.map((principle, index) => (
+            <li
+              class="grid grid-cols-[3rem_1fr] items-start gap-5 border-b border-gray-200 py-6"
+              data-reveal
+              style={`--reveal-delay: ${index * 90}ms`}
+            >
+              <span class="flex h-11 w-11 items-center justify-center rounded-full border border-brand-200 font-heading text-sm font-semibold text-brand-700">
+                {principle.numeral}
+              </span>
+              <div>
+                <h3 class="font-heading text-xl font-semibold text-gray-900">{principle.title}</h3>
+                <p class="mt-1 text-base leading-7 text-gray-600">{principle.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+
+    <figure
+      class="relative overflow-hidden rounded-[2rem] shadow-[0_40px_90px_-60px_rgba(10,31,20,0.6)] lg:sticky lg:top-28 lg:self-start"
+      data-reveal
+    >
+      <VisualFrame visual={about.visual} aspect="portrait" className="min-h-[26rem]" />
+      <figcaption class="absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-[1.25rem] border border-white/70 bg-white/88 px-5 py-4 backdrop-blur-md">
+        <span class="font-heading text-base font-semibold text-gray-900">{about.visualCaption}</span>
+        <a
+          class="group inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-brand-700 hover:text-brand-800"
+          href={sectionHref(about.visualCta.section)}
+        >
+          {about.visualCta.label}
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand-600 text-white transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+            <ArrowUpRightIcon />
+          </span>
+        </a>
+      </figcaption>
+    </figure>
+  </div>
+</section>
