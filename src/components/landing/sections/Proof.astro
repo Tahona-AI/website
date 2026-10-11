@@ -5,7 +5,7 @@ import { proof } from "@/components/landing/content";
 
 <!--
   Editorial figures: a two-weight statement and one row of numbers divided by
-  hairlines. Deliberately no cards; the numbers carry the section.
+  hairlines. Hover fills the cells with soft green, preserving the editorial row.
 -->
 <section class="relative bg-white py-20 lg:py-28" aria-labelledby="proof-statement">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -15,8 +15,8 @@ import { proof } from "@/components/landing/content";
         id="proof-statement"
         class="mt-6 max-w-5xl font-heading text-[clamp(1.75rem,3.6vw,3rem)] font-semibold leading-[1.15] tracking-[-0.025em] text-balance"
       >
-        <span class="text-gray-900">{proof.statementLead}</span>
-        <span class="text-gray-400">{proof.statementTail}</span>
+        <span class="proof-statement-lead text-gray-900">{proof.statementLead}</span>
+        <span class="proof-statement-tail text-gray-400">{proof.statementTail}</span>
       </p>
     </div>
 
@@ -25,22 +25,22 @@ import { proof } from "@/components/landing/content";
         proof.kpis.map((kpi, index) => (
           <div
             class:list={[
-              "proof-cell flex flex-col-reverse justify-end gap-6 border-b border-gray-200 py-8 lg:border-b-0 lg:py-10",
+              "proof-cell flex flex-col-reverse justify-end gap-6 border-b border-gray-200 px-5 py-8 sm:px-6 lg:border-b-0 lg:py-10",
               // Hairline dividers: between the two columns on sm, between all four on lg.
-              index % 2 === 1 ? "sm:border-l sm:pl-6" : "sm:pr-6",
-              index > 0 && "lg:border-l lg:pl-6",
+              index % 2 === 1 && "sm:border-l",
+              index > 0 && "lg:border-l",
             ]}
             data-reveal
             style={`--reveal-delay: ${index * 110}ms`}
           >
             <dt>
-              <span class="block text-base font-semibold text-gray-900">{kpi.label}</span>
-              <span class="mt-2 block max-w-[16rem] text-sm leading-6 text-gray-500">{kpi.detail}</span>
+              <span class="proof-label block text-base font-semibold text-gray-900">{kpi.label}</span>
+              <span class="proof-detail mt-2 block max-w-[16rem] text-sm leading-6 text-gray-500">{kpi.detail}</span>
             </dt>
             <dd class="font-die-grotesk text-[clamp(3.5rem,6vw,5.5rem)] font-medium leading-[0.9] tracking-[-0.05em] text-gray-900 tabular-nums">
-              {"prefix" in kpi && <span class="text-brand-500">{kpi.prefix}</span>}
+              {"prefix" in kpi && <span class="proof-accent text-brand-500">{kpi.prefix}</span>}
               <span data-count={kpi.value}>{kpi.value}</span>
-              {"suffix" in kpi && <span class="text-brand-500">{kpi.suffix}</span>}
+              {"suffix" in kpi && <span class="proof-accent text-brand-500">{kpi.suffix}</span>}
             </dd>
           </div>
         ))
@@ -50,9 +50,40 @@ import { proof } from "@/components/landing/content";
 </section>
 
 <style>
-  /* Each figure gets a short green rule that draws in as it reveals. */
+  .proof-statement-lead,
+  .proof-statement-tail {
+    transition: color 360ms ease, text-decoration-color 360ms ease;
+  }
+
+  .proof-statement-lead {
+    text-decoration: underline;
+    text-decoration-thickness: 0.055em;
+    text-underline-offset: 0.13em;
+    text-decoration-color: transparent;
+    text-decoration-skip-ink: auto;
+  }
+
   .proof-cell {
     position: relative;
+    isolation: isolate;
+    --cell-fill: var(--color-brand-100);
+    --cell-heading: var(--color-brand-800);
+    --cell-detail: var(--color-brand-600);
+    --cell-accent: var(--color-brand-500);
+    --cell-rule: var(--color-brand-500);
+  }
+
+  /* The fill is decorative; the figures remain real, selectable text. */
+  .proof-cell::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--cell-fill);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 360ms ease, transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .proof-cell::before {
@@ -61,14 +92,79 @@ import { proof } from "@/components/landing/content";
     top: -1px;
     left: 0;
     height: 2px;
-    width: 3rem;
-    background: rgb(45, 106, 79);
+    width: 100%;
+    background: var(--color-brand-500);
+    transform: scaleX(0.16);
     transform-origin: left;
-    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-    transition-delay: calc(var(--reveal-delay, 0ms) + 200ms);
+    transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1), background-color 360ms ease;
+  }
+
+  .proof-cell dt,
+  .proof-cell dd {
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), color 360ms ease;
+  }
+
+  .proof-cell dd {
+    transform-origin: left center;
+  }
+
+  .proof-label,
+  .proof-detail,
+  .proof-accent {
+    transition: color 360ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .proof-statement-lead:hover {
+      color: var(--color-brand-700);
+      text-decoration-color: var(--color-brand-200);
+    }
+
+    .proof-statement-tail:hover {
+      color: var(--color-brand-400);
+    }
+
+    .proof-cell:hover::after {
+      opacity: 1;
+      transform: none;
+    }
+
+    .proof-cell:hover::before {
+      background: var(--cell-rule);
+      transform: scaleX(1);
+    }
+
+    .proof-cell:hover dd {
+      color: var(--cell-heading);
+      transform: translateY(-5px) scale(1.025);
+    }
+
+    .proof-cell:hover dt {
+      transform: translateY(-2px);
+    }
+
+    .proof-cell:hover .proof-label { color: var(--cell-heading); }
+    .proof-cell:hover .proof-detail { color: var(--cell-detail); }
+    .proof-cell:hover .proof-accent { color: var(--cell-accent); }
   }
 
   :global(.reveal-ready) .proof-cell:not(:global(.is-visible))::before {
     transform: scaleX(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .proof-cell::before,
+    .proof-cell::after,
+    .proof-cell dt,
+    .proof-cell dd,
+    .proof-label,
+    .proof-detail,
+    .proof-accent,
+    .proof-statement-lead,
+    .proof-statement-tail { transition: none; }
+
+    .proof-cell::after,
+    .proof-cell:hover dd,
+    .proof-cell:hover dt { transform: none; }
   }
 </style>

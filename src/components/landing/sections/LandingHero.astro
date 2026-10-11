@@ -7,22 +7,25 @@ import { LANDING_SECTIONS, hero } from "@/components/landing/content";
   Full-viewport hero: the olive covers the whole first screen and a white wash
   from the left carries the copy, matching the closing CTA treatment.
 -->
-<section id={LANDING_SECTIONS.hero} class="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-white lg:items-center">
+<section id={LANDING_SECTIONS.hero} data-olive-hero class="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-white lg:items-center">
   <div class="hero-visual absolute inset-0 -z-10">
+    <div class="olive-scene absolute inset-0" data-olive-scene>
     <VisualFrame
       visual={hero.visual}
       aspect="fill"
       eager
       imageClassName="object-[72%_70%] lg:object-[center_75%]"
     />
+    </div>
     <div class="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/10 lg:bg-gradient-to-r lg:from-white lg:via-white/80 lg:to-transparent"></div>
     <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/70 to-transparent"></div>
   </div>
 
   <div class="mx-auto w-full max-w-7xl px-4 pb-14 pt-32 sm:px-6 lg:px-8 lg:py-32">
     <div class="max-w-2xl">
-      <p class="hero-enter text-sm font-semibold text-brand-600" style="--enter-delay: 100ms">{hero.eyebrow}</p>
+      <p data-hero-flow="small" class="hero-enter text-sm font-semibold text-brand-600" style="--enter-delay: 100ms">{hero.eyebrow}</p>
       <h1
+        data-hero-flow="title"
         class="hero-enter font-die-grotesk mt-5 text-[clamp(2.6rem,6.4vw,5.25rem)] font-medium leading-[1] tracking-[-0.04em] text-gray-900"
         style="--enter-delay: 180ms"
       >
@@ -30,6 +33,7 @@ import { LANDING_SECTIONS, hero } from "@/components/landing/content";
         <span class="block text-brand-600">{hero.titleAccent}</span>
       </h1>
       <p
+        data-hero-flow="copy"
         class="hero-enter font-die-grotesk mt-7 max-w-lg text-[clamp(1.05rem,1.45vw,1.25rem)] font-light leading-[1.5] text-gray-700"
         style="--enter-delay: 260ms"
       >
@@ -39,20 +43,99 @@ import { LANDING_SECTIONS, hero } from "@/components/landing/content";
         <CtaLink section={hero.primary.section}>{hero.primary.label}</CtaLink>
         <CtaLink section={hero.secondary.section} variant="secondary">{hero.secondary.label}</CtaLink>
       </div>
-      <ul class="hero-enter mt-12 flex flex-wrap gap-2" style="--enter-delay: 420ms" aria-label="Nuestro ADN">
-        {
-          hero.values.map((value) => (
-            <li class="rounded-full border border-brand-100 bg-white/80 px-4 py-1.5 text-sm font-semibold text-brand-700 backdrop-blur-md">
-              {value}
-            </li>
-          ))
-        }
-      </ul>
+      <p
+        class="hero-dna hero-enter mt-16 text-[clamp(1.15rem,2vw,1.7rem)] text-brand-700 lg:mt-20"
+        data-hero-flow="copy"
+        style="--enter-delay: 420ms"
+      >
+        {hero.dna}
+      </p>
     </div>
   </div>
+  <button type="button" class="olive-motion-toggle" data-olive-toggle data-hero-flow="small" hidden aria-label="Pausar movimiento del paisaje" aria-pressed="false" title="Pausar movimiento">
+    <svg class="olive-pause" width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+    <svg class="olive-play" width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="m7 4 9 6-9 6Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /></svg>
+  </button>
 </section>
 
+<script>
+  import { mountOliveScene } from "../olive-scene";
+  import { mountHeroFlow } from "../hero-flow";
+  let current: HTMLElement | null = null;
+  let cleanup: (() => void) | undefined;
+  function mount() {
+    const hero = document.querySelector<HTMLElement>("[data-olive-hero]");
+    if (hero === current) return;
+    cleanup?.();
+    current = hero;
+    if (hero) {
+      const cleanupOlive = mountOliveScene(hero);
+      const cleanupFlow = mountHeroFlow(hero);
+      cleanup = () => { cleanupFlow(); cleanupOlive(); };
+    } else cleanup = undefined;
+  }
+  document.addEventListener("astro:page-load", mount);
+  document.addEventListener("astro:before-swap", () => { cleanup?.(); cleanup = undefined; current = null; });
+  mount();
+</script>
+
 <style>
+  .hero-dna {
+    font-family: "Courier New", Courier, "Liberation Mono", monospace;
+    font-weight: 400;
+    font-synthesis: none;
+    letter-spacing: .035em;
+    word-spacing: .18em;
+    line-height: 1.65;
+  }
+  .olive-scene :global(.olive-canvas) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .olive-scene.is-animated :global(.olive-canvas) { opacity: 1; }
+  .hero-visual :global(.olive-dither-mesh) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 528px;
+    height: 528px;
+    pointer-events: none;
+    contain: strict;
+  }
+  .hero-visual :global(.olive-dither-mesh[hidden]) { display: none; }
+  .olive-motion-toggle {
+    position: absolute;
+    right: clamp(16px, 2.4vw, 40px);
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #28573426;
+    border-radius: 50%;
+    color: #285734;
+    background: #ffffffe0;
+    transition: background .2s, border-color .2s;
+    cursor: pointer;
+  }
+  .olive-motion-toggle[hidden], .olive-play { display: none; }
+  .olive-motion-toggle:hover { background: #fff; border-color: #28573470; }
+  .olive-motion-toggle:focus-visible { outline: 2px solid #285734; outline-offset: 4px; }
+  .olive-motion-toggle[aria-pressed="true"] .olive-play { display: block; }
+  .olive-motion-toggle[aria-pressed="true"] .olive-pause { display: none; }
+  @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+    [data-hero-flow] { filter: none !important; }
+    .hero-visual :global(.olive-dither-mesh) { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .olive-scene :global(.olive-canvas) { display: none; transition: none; }
+  }
+
   .hero-visual {
     animation: hero-visual-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
   }

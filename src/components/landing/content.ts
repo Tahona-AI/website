@@ -64,7 +64,7 @@ export const hero = {
     "Estrategia, producto, software e inteligencia artificial en un mismo equipo. De la primera decisión a la solución que se usa cada día.",
   primary: { label: "Hablemos de un reto", section: LANDING_SECTIONS.contact },
   secondary: { label: "Ver capacidades", section: LANDING_SECTIONS.capabilities },
-  values: ["Cercanía", "Agilidad", "Confianza"],
+  dna: "Cercanía. Agilidad. Confianza.",
   visual: {
     kind: "ready",
     src: "/images/landing/olive-dither-green.webp",
@@ -77,7 +77,7 @@ export const hero = {
   readonly description: string;
   readonly primary: NavItem;
   readonly secondary: NavItem;
-  readonly values: readonly string[];
+  readonly dna: string;
   readonly visual: Visual;
 };
 
