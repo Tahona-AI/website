@@ -767,10 +767,9 @@ export const team = {
       ],
       initials: "CG",
       portrait: {
-        kind: "pending",
-        slot: "team-carlos",
-        brief: "Retrato real de Carlos (foto, no dither)",
-        aspect: "portrait",
+        kind: "ready",
+        src: "/images/landing/team-carlos.webp",
+        alt: "Retrato de Carlos",
       },
     },
     {
@@ -783,10 +782,9 @@ export const team = {
       ],
       initials: "SG",
       portrait: {
-        kind: "pending",
-        slot: "team-sergio",
-        brief: "Retrato real de Sergio (foto, no dither)",
-        aspect: "portrait",
+        kind: "ready",
+        src: "/images/landing/team-sergio.webp",
+        alt: "Retrato de Sergio",
       },
     },
     {
@@ -799,10 +797,9 @@ export const team = {
       ],
       initials: "DK",
       portrait: {
-        kind: "pending",
-        slot: "team-daniel",
-        brief: "Retrato real de Daniel (foto, no dither)",
-        aspect: "portrait",
+        kind: "ready",
+        src: "/images/landing/team-daniel.webp",
+        alt: "Retrato de Daniel",
       },
     },
   ],
