@@ -1,0 +1,27 @@
+---
+import { CtaLink, Eyebrow } from "@/components/landing/primitives";
+import { CapabilitiesIndex } from "@/components/landing/CapabilitiesIndex";
+import { LANDING_SECTIONS, capabilities } from "@/components/landing/content";
+---
+
+<section id={LANDING_SECTIONS.capabilities} class="scroll-mt-20 bg-surface py-24 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between" data-reveal>
+      <div>
+        <Eyebrow>{capabilities.heading.eyebrow}</Eyebrow>
+        <h2 class="mt-4 max-w-4xl font-heading text-3xl font-semibold tracking-[-0.02em] text-balance sm:text-4xl md:text-5xl">
+          <span class="text-gray-900">{capabilities.heading.titleLead}</span>
+          <span class="text-gray-400">{capabilities.heading.titleMuted}</span>
+        </h2>
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-gray-500 text-pretty">{capabilities.heading.description}</p>
+      </div>
+      <div class="shrink-0">
+        <CtaLink section={LANDING_SECTIONS.contact}>{capabilities.ctaLabel}</CtaLink>
+      </div>
+    </div>
+
+    <div class="mt-14" data-reveal>
+      <CapabilitiesIndex client:visible />
+    </div>
+  </div>
+</section>

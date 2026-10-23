@@ -1,0 +1,41 @@
+---
+import { SectionHeading, VisualFrame } from "@/components/landing/primitives";
+import { LANDING_SECTIONS, method } from "@/components/landing/content";
+---
+
+<section id={LANDING_SECTIONS.method} class="scroll-mt-20 bg-white py-24 lg:py-28">
+  <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.1fr] lg:gap-20 lg:px-8">
+    <!-- Visual stays pinned while the steps scroll past (lg+). -->
+    <div class="order-2 lg:order-1">
+      <div
+        class="overflow-hidden rounded-[2rem] shadow-[0_40px_90px_-60px_rgba(10,31,20,0.6)] lg:sticky lg:top-28"
+        data-reveal
+      >
+        <VisualFrame visual={method.visual} aspect="portrait" className="lg:aspect-[4/5]" />
+      </div>
+    </div>
+
+    <div class="order-1 lg:order-2">
+      <SectionHeading {...method.heading} />
+      <ol class="mt-12 border-t border-gray-200">
+        {
+          method.steps.map((step, index) => (
+            <li
+              class="grid grid-cols-[3.5rem_1fr] gap-5 border-b border-gray-200 py-8 sm:grid-cols-[5rem_1fr]"
+              data-reveal
+              style={`--reveal-delay: ${index * 60}ms`}
+            >
+              <span class="font-die-grotesk text-4xl font-medium leading-none tracking-[-0.04em] text-brand-400 sm:text-5xl">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h3 class="font-heading text-xl font-semibold text-gray-900 sm:text-2xl">{step.title}</h3>
+                <p class="mt-2 max-w-lg text-base leading-7 text-gray-600">{step.description}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

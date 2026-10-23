@@ -1,0 +1,65 @@
+---
+import { LANDING_SECTIONS, footer, navigation, sectionHref } from "@/components/landing/content";
+
+const year = new Date().getFullYear();
+---
+
+<!--
+  Compact footer: one row of brand, sections and contact, then an oversized
+  wordmark that bleeds off the bottom edge as the closing gesture.
+-->
+<footer class="relative overflow-hidden bg-charcoal text-white">
+  <div class="mx-auto max-w-7xl px-4 pt-14 sm:px-6 lg:px-8">
+    <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div>
+        <a href={sectionHref(LANDING_SECTIONS.hero)} class="inline-flex items-center gap-3" aria-label={navigation.homeLabel}>
+          <img src="/images/logos/tahona-mark-green.svg" alt="" width="32" height="32" class="h-8 w-8" />
+          <span class="font-heading text-xl font-bold">Tahona</span>
+        </a>
+        <p class="mt-4 max-w-xs text-sm leading-6 text-gray-400">{footer.tagline}</p>
+      </div>
+
+      <nav aria-label={footer.navLabel}>
+        <p class="text-xs font-semibold uppercase tracking-[0.08em] text-gray-500">{footer.navLabel}</p>
+        <ul class="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 text-sm md:grid-cols-1">
+          {
+            navigation.items.map((item) => (
+              <li>
+                <a class="text-gray-300 transition-colors hover:text-white" href={sectionHref(item.section)}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.08em] text-gray-500">{footer.contactLabel}</p>
+        <a class="mt-4 inline-block text-sm font-medium text-brand-300 transition-colors hover:text-brand-200" href={`mailto:${footer.email}`}>
+          {footer.email}
+        </a>
+        <a
+          class="mt-6 flex w-fit items-center gap-2 text-sm text-gray-400 transition-colors hover:text-white"
+          href={sectionHref(LANDING_SECTIONS.hero)}
+        >
+          {footer.backToTop}
+          <svg aria-hidden="true" class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M12 19V5m-6 6 6-6 6 6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-gray-500 sm:flex-row sm:justify-between">
+      <p>© {year} Tahona. {footer.rights}</p>
+    </div>
+  </div>
+
+  <p
+    aria-hidden="true"
+    class="pointer-events-none mt-6 select-none text-center font-heading text-[clamp(5rem,20vw,15rem)] font-extrabold leading-[0.72] tracking-[-0.05em] text-white/[0.05]"
+  >
+    Tahona
+  </p>
+</footer>

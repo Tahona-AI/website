@@ -52,6 +52,7 @@ export function ContactForm({
   isSubmitting,
   onInputChange,
   onSubmit,
+  className,
 }: {
   readonly copy: ContactCopy;
   readonly errors: FormErrors;
@@ -61,14 +62,21 @@ export function ContactForm({
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   readonly onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  /** Placement and spacing overrides from the hosting section. */
+  readonly className?: string;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-white/75 bg-white/84 p-6 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md sm:p-8 lg:col-span-7 lg:p-10">
+    <div
+      className={cn(
+        "relative overflow-hidden rounded-[2rem] border border-white/75 bg-white/84 p-6 shadow-[0_30px_80px_-40px_rgba(31,31,31,0.45)] backdrop-blur-md sm:p-8 lg:p-10",
+        className
+      )}
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.92)_48%,rgba(240,247,243,0.78)_100%)]"
       />
-      <div className="relative z-10 mx-auto w-full max-w-3xl rounded-[1.75rem] bg-transparent p-5 sm:p-7">
+      <div className="relative z-10 mx-auto w-full max-w-3xl rounded-[1.75rem] bg-transparent p-3 @container sm:p-7">
         <div>
           <h3 className="font-heading text-[1.9rem] font-semibold tracking-[-0.03em] text-gray-900 sm:text-[2.15rem]">
             {copy.formTitle}
@@ -167,16 +175,16 @@ export function ContactForm({
             className="h-px w-full bg-gradient-to-r from-transparent via-[#cad5ce] to-transparent"
           />
 
-          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-sm text-sm leading-relaxed text-gray-600">
+          <div className="flex flex-col gap-5 @2xl:flex-row @2xl:items-end @2xl:justify-between">
+            <p className="max-w-sm text-sm leading-relaxed text-gray-600 @2xl:min-w-0 @2xl:flex-1">
               {copy.privacyNote}
             </p>
 
-            <div className="flex w-full flex-col gap-3 md:w-auto md:items-end">
+            <div className="flex w-full flex-col gap-3 @2xl:w-auto @2xl:items-end">
               <button
                 className={cn(
                   primaryCtaBaseClass,
-                  "min-h-12 w-full px-3 pl-5 text-sm font-semibold md:min-w-[292px]"
+                  "min-h-12 w-full px-3 pl-5 text-sm font-semibold @2xl:min-w-[292px]"
                 )}
                 disabled={isSubmitting}
                 type="submit"

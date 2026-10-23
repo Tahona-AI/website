@@ -1,0 +1,20 @@
+---
+import { CtaLink, SectionHeading } from "@/components/landing/primitives";
+import { CasesCarousel } from "@/components/landing/CasesCarousel";
+import { LANDING_SECTIONS, cases } from "@/components/landing/content";
+---
+
+<section id={LANDING_SECTIONS.cases} class="scroll-mt-20 bg-surface py-24 lg:py-28">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <SectionHeading {...cases.heading} />
+      <div data-reveal class="shrink-0">
+        <CtaLink section={LANDING_SECTIONS.contact} variant="secondary">{cases.ctaLabel}</CtaLink>
+      </div>
+    </div>
+
+    <div class="mt-12" data-reveal>
+      <CasesCarousel client:visible />
+    </div>
+  </div>
+</section>

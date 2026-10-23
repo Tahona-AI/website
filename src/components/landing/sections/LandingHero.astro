@@ -1,0 +1,86 @@
+---
+import { CtaLink, VisualFrame } from "@/components/landing/primitives";
+import { LANDING_SECTIONS, hero } from "@/components/landing/content";
+---
+
+<!--
+  Full-viewport hero: the olive covers the whole first screen and a white wash
+  from the left carries the copy, matching the closing CTA treatment.
+-->
+<section id={LANDING_SECTIONS.hero} class="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-white lg:items-center">
+  <div class="hero-visual absolute inset-0 -z-10">
+    <VisualFrame
+      visual={hero.visual}
+      aspect="fill"
+      eager
+      imageClassName="object-[72%_70%] lg:object-[center_75%]"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/10 lg:bg-gradient-to-r lg:from-white lg:via-white/80 lg:to-transparent"></div>
+    <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/70 to-transparent"></div>
+  </div>
+
+  <div class="mx-auto w-full max-w-7xl px-4 pb-14 pt-32 sm:px-6 lg:px-8 lg:py-32">
+    <div class="max-w-2xl">
+      <p class="hero-enter text-sm font-semibold text-brand-600" style="--enter-delay: 100ms">{hero.eyebrow}</p>
+      <h1
+        class="hero-enter font-die-grotesk mt-5 text-[clamp(2.6rem,6.4vw,5.25rem)] font-medium leading-[1] tracking-[-0.04em] text-gray-900"
+        style="--enter-delay: 180ms"
+      >
+        {hero.titleLead}
+        <span class="block text-brand-600">{hero.titleAccent}</span>
+      </h1>
+      <p
+        class="hero-enter font-die-grotesk mt-7 max-w-lg text-[clamp(1.05rem,1.45vw,1.25rem)] font-light leading-[1.5] text-gray-700"
+        style="--enter-delay: 260ms"
+      >
+        {hero.description}
+      </p>
+      <div class="hero-enter mt-9 flex flex-wrap items-center gap-3" style="--enter-delay: 340ms">
+        <CtaLink section={hero.primary.section}>{hero.primary.label}</CtaLink>
+        <CtaLink section={hero.secondary.section} variant="secondary">{hero.secondary.label}</CtaLink>
+      </div>
+      <ul class="hero-enter mt-12 flex flex-wrap gap-2" style="--enter-delay: 420ms" aria-label="Nuestro ADN">
+        {
+          hero.values.map((value) => (
+            <li class="rounded-full border border-brand-100 bg-white/80 px-4 py-1.5 text-sm font-semibold text-brand-700 backdrop-blur-md">
+              {value}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-visual {
+    animation: hero-visual-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-enter {
+    animation: hero-text-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+
+  @keyframes hero-visual-in {
+    from {
+      opacity: 0;
+      transform: scale(1.04);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes hero-text-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
