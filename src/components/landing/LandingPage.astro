@@ -19,6 +19,7 @@ import Industries from "@/components/landing/sections/Industries.astro";
 import About from "@/components/landing/sections/About.astro";
 import Method from "@/components/landing/sections/Method.astro";
 import Team from "@/components/landing/sections/Team.astro";
+import { TEAM_SECTION_VISIBLE } from "@/components/landing/content";
 import Faq from "@/components/landing/sections/Faq.astro";
 import { LandingContact } from "@/components/landing/LandingContact";
 import LandingFooter from "@/components/landing/sections/LandingFooter.astro";
@@ -42,7 +43,7 @@ import LandingFooter from "@/components/landing/sections/LandingFooter.astro";
     <Industries />
     <About />
     <Method />
-    <Team />
+    {TEAM_SECTION_VISIBLE && <Team />}
     <Faq />
     <LandingContact client:visible />
   </main>

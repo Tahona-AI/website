@@ -36,13 +36,16 @@ type SectionHeading = {
 
 type NavItem = { readonly label: string; readonly section: SectionId };
 
+/** Team section is hidden for now. Flip to restore the section, its nav link and the About CTA. */
+export const TEAM_SECTION_VISIBLE: boolean = false;
+
 export const navigation = {
   items: [
     { label: "Capacidades", section: LANDING_SECTIONS.capabilities },
     { label: "Colaboración", section: LANDING_SECTIONS.engagement },
     { label: "Casos", section: LANDING_SECTIONS.cases },
     { label: "Industrias", section: LANDING_SECTIONS.industries },
-    { label: "Equipo", section: LANDING_SECTIONS.team },
+    ...(TEAM_SECTION_VISIBLE ? [{ label: "Equipo", section: LANDING_SECTIONS.team }] : []),
   ],
   contactLabel: "Hablemos",
   openMenuLabel: "Abrir menú",
@@ -322,7 +325,9 @@ export const about = {
     alt: "Patio andaluz con arcos encalados y un naranjo, con textura dither verde",
   },
   visualCaption: "Cercanía, agilidad y confianza.",
-  visualCta: { label: "Conocer al equipo", section: LANDING_SECTIONS.team },
+  visualCta: TEAM_SECTION_VISIBLE
+    ? { label: "Conocer al equipo", section: LANDING_SECTIONS.team }
+    : null,
 } as const satisfies {
   readonly eyebrow: string;
   readonly title: string;
@@ -335,7 +340,7 @@ export const about = {
   }[];
   readonly visual: Visual;
   readonly visualCaption: string;
-  readonly visualCta: NavItem;
+  readonly visualCta: NavItem | null;
 };
 
 export const method = {
